@@ -7,8 +7,8 @@ services:
     volumes:
       - ./backend:/code
     ports:
-      - '8000:8000'
-    command: python manage.py runserver 0:8000
+      - '8001:8001'
+    command: python manage.py runserver 0:8001
   frontend:
     build:
       context: ./frontend
