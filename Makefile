@@ -17,3 +17,8 @@ build:
 .PHONY: delete-all
 delete-all:
 	docker-compose down --rmi all --volumes
+
+# フロントエンドのコンテナに入る
+.PHONY: front-sh
+front-sh:
+	docker-compose exec frontend bash
