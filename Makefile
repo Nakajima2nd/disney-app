@@ -12,3 +12,8 @@ down:
 .PHONY: build
 build:
 	docker-compose build --no-cache
+
+# すべてのコンテナとイメージを削除する
+.PHONY: delete-all
+delete-all:
+	bash scripts/delete_all_containers_and_images.sh
