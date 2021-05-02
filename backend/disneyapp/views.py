@@ -72,8 +72,8 @@ def spot_list_stub():
 
 def search_stab():
     route = {
-        "start-time": "10:00",
-        "goal-time": "17:30",
+        "start-time": "2021/5/1 10:00",
+        "goal-time": "2021/5/1 17:30",
         "subroute": [
             {
                 "start-spot-id": 0,
