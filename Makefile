@@ -16,4 +16,4 @@ build:
 # すべてのコンテナとイメージを削除する
 .PHONY: delete-all
 delete-all:
-	bash scripts/delete_all_containers_and_images.sh
+	docker-compose down --rmi all --volumes
