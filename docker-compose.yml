@@ -17,5 +17,5 @@ services:
       - ./frontend:/code
       - /code/node_modules
     ports:
-      - '3000:3000'
+      - '3001:3001'
     command: tail -f /dev/null
