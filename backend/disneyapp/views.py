@@ -74,7 +74,43 @@ def search_stab():
     route = {
         "start-time": "2021/5/1 10:00",
         "goal-time": "2021/5/1 17:30",
-        "subroute": [
+        "spots": [
+            {
+                "spot-id": 0,
+                "spot-name": "フォートレス・エクスプロレーション",
+                "lat": "35.62577595814663",
+                "lon": "139.88521622867762",
+                "type": "attraction",
+                "enable": True,
+                "wait-time": 30
+            },
+            {
+                "spot-id": 1,
+                "spot-name": "ヴェネツィアン・ゴンドラ",
+                "lat": "35.62609086477499",
+                "lon": "139.88796327515433",
+                "type": "attraction",
+                "enable": True,
+                "wait-time": 40
+            },
+            {
+                "spot-id": 38,
+                "spot-name": "レストラン櫻",
+                "lat": "35.62463665215171",
+                "lon": "139.88699008414704",
+                "type": "restaurant",
+                "enable": True,
+            },
+            {
+                "spot-id": 8,
+                "spot-name": "マクダックス・デパートメントストア",
+                "lat": "35.62508364370584",
+                "lon": "139.88749816160015",
+                "type": "shop",
+                "enable": True
+            }
+        ],
+        "subroutes": [
             {
                 "start-spot-id": 0,
                 "goal-spot-id": 1,
