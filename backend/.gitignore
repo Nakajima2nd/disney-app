@@ -156,3 +156,6 @@ Thumbs.db
 
 # pycharm
 .idea/
+
+# network data
+/data
