@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from static_data_manager import StaticDataManager
 import json
+import copy
 
 
 def spot_list(request):
@@ -16,7 +17,8 @@ def search(request):
 
 def edit_static_spots_data(spots_json_org):
     spots_obj = {}
-    for spot_data in spots_json_org:
+    spots_json_org_copied = copy.deepcopy(spots_json_org)
+    for spot_data in spots_json_org_copied:
         target_type = spot_data["type"]
         del [spot_data["type"]]
         del [spot_data["nearest_node_id"]]
