@@ -1,15 +1,30 @@
 from django.http import HttpResponse
+from static_data_manager import StaticDataManager
 import json
 
 
 def spot_list(request):
-    spots_json = spot_list_stub()
-    return HttpResponse(json.dumps(spots_json, indent=2))
+    # spots_json = spot_list_stub()
+    spots_json_org = StaticDataManager.get_spots()
+    return HttpResponse(json.dumps(edit_static_spots_data(spots_json_org), indent=2))
 
 
 def search(request):
     route_json = search_stab()
     return HttpResponse(json.dumps(route_json, indent=2))
+
+
+def edit_static_spots_data(spots_json_org):
+    spots_obj = {}
+    for spot_data in spots_json_org:
+        target_type = spot_data["type"]
+        del [spot_data["type"]]
+        del [spot_data["nearest_node_id"]]
+        if spots_obj.get(target_type):
+            spots_obj[target_type].append(spot_data)
+        else:
+            spots_obj[target_type] = [spot_data]
+    return spots_obj
 
 
 def spot_list_stub():
