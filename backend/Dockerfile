@@ -1,6 +1,6 @@
 FROM python:3
 ENV PYTHONUNBUFFERED 1
-ENV PYTHONPATH="/code/algorithm/"
+ENV PYTHONPATH="/code/disneyapp/"
 RUN mkdir /code
 WORKDIR /code
 ADD requirements.txt /code/

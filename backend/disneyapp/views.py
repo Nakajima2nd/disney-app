@@ -1,10 +1,14 @@
 from django.http import HttpResponse
+from static_data_manager import StaticDataManager
 import json
+import copy
 
 
 def spot_list(request):
-    spots_json = spot_list_stub()
-    return HttpResponse(json.dumps(spots_json, indent=2))
+    spots_json_org = StaticDataManager.get_spots()
+    spots_json_edited = edit_static_spots_data(spots_json_org)
+    spots_json_with_dummy_dynamic_data = add_dummy_dynamic_data(spots_json_edited)
+    return HttpResponse(json.dumps(spots_json_with_dummy_dynamic_data, indent=2))
 
 
 def search(request):
@@ -12,62 +16,31 @@ def search(request):
     return HttpResponse(json.dumps(route_json, indent=2))
 
 
-def spot_list_stub():
-    spots = {
-        "attractions": [
-            {
-                "spot_id": 0,
-                "name": "ソアリン：ファンタスティック・フライト",
-                "lat": "35.62753096260775",
-                "lon": "139.88570175371126",
-                "play-time": 10,
-                "wait-time": 60,
-                "enable": True
-            },
-            {
-                "spot_id": 1,
-                "name": "ディズニーシー・トランジットスチーマーライン（メディテレーニアンハーバー）",
-                "lat": "35.626573169189264",
-                "lon": "139.88593456101927",
-                "play-time": 20,
-                "wait-time": -1,
-                "enable": False
-            }
-        ],
-        "restaurants": [
-            {
-                "spot_id": 29,
-                "name": "カフェ・ポルトフィーノ",
-                "lat": "35.62695264833476",
-                "lon": "139.88714679981504",
-                "enable": True
-            },
-            {
-                "spot_id": 31,
-                "name": "ザンビーニ･ブラザーズ･リストランテ",
-                "lat": "35.627169846655995",
-                "lon": "139.8860085445333",
-                "enable": False
-            }
-        ],
-        "shops": [
-            {
-                "spot_id": 67,
-                "name": "イル・ポスティーノ・ステーショナリー",
-                "lat": "35.627053829792416",
-                "lon": "139.8864666793604",
-                "enable": True,
-            },
-            {
-                "spot_id": 68,
-                "name": "ヴァレンティーナズ・スウィート",
-                "lat": "35.62689230914014",
-                "lon": "139.88835381094933",
-                "enable": False
-            }
-        ]
-    }
-    return spots
+def edit_static_spots_data(spots_json_org):
+    spots_obj = {}
+    spots_json_org_copied = copy.deepcopy(spots_json_org)
+    for spot_data in spots_json_org_copied:
+        target_type = spot_data["type"]
+        del [spot_data["type"]]
+        del [spot_data["nearest_node_id"]]
+        if spot_data.get("play-time"):
+            spot_data["play-time"] = int(spot_data["play-time"])
+        if spots_obj.get(target_type):
+            spots_obj[target_type].append(spot_data)
+        else:
+            spots_obj[target_type] = [spot_data]
+    return spots_obj
+
+
+def add_dummy_dynamic_data(spots_json_edited):
+    spots_json_edited_copied = copy.deepcopy(spots_json_edited)
+    for key in spots_json_edited_copied.keys():
+        __spot_list = spots_json_edited_copied[key]
+        for spot in __spot_list:
+            if key == "attraction":
+                spot["wait-time"] = 60 # sec
+            spot["enable"] = True
+    return spots_json_edited_copied
 
 
 def search_stab():
