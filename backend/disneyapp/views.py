@@ -1,14 +1,13 @@
 from django.http import HttpResponse
-from static_data_manager import StaticDataManager
+from data_manager import get_combined_spot_data
 import json
 import copy
 
 
 def spot_list(request):
-    spots_json_org = StaticDataManager.get_spots()
+    spots_json_org = get_combined_spot_data()
     spots_json_edited = edit_static_spots_data(spots_json_org)
-    spots_json_with_dummy_dynamic_data = add_dummy_dynamic_data(spots_json_edited)
-    return HttpResponse(json.dumps(spots_json_with_dummy_dynamic_data, indent=2))
+    return HttpResponse(json.dumps(spots_json_edited, indent=2))
 
 
 def search(request):
@@ -30,17 +29,6 @@ def edit_static_spots_data(spots_json_org):
         else:
             spots_obj[target_type] = [spot_data]
     return spots_obj
-
-
-def add_dummy_dynamic_data(spots_json_edited):
-    spots_json_edited_copied = copy.deepcopy(spots_json_edited)
-    for key in spots_json_edited_copied.keys():
-        __spot_list = spots_json_edited_copied[key]
-        for spot in __spot_list:
-            if key == "attraction":
-                spot["wait-time"] = 60 # sec
-            spot["enable"] = True
-    return spots_json_edited_copied
 
 
 def search_stab():
