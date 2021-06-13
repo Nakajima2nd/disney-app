@@ -2,17 +2,21 @@ from django.http import HttpResponse
 from data_manager import get_combined_spot_data
 import json
 import copy
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 
+@api_view(["GET", "POST"])
 def spot_list(request):
     spots_json_org = get_combined_spot_data()
     spots_json_edited = edit_static_spots_data(spots_json_org)
-    return HttpResponse(json.dumps(spots_json_edited, indent=2))
+    return Response(json.dumps(spots_json_edited, indent=2))
 
 
+@api_view(["GET", "POST"])
 def search(request):
     route_json = search_stab()
-    return HttpResponse(json.dumps(route_json, indent=2))
+    return Response(json.dumps(route_json, indent=2))
 
 
 def edit_static_spots_data(spots_json_org):
