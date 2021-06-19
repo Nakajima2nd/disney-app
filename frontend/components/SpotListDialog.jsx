@@ -90,7 +90,7 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
     setEditing(newSpot)
   }
 
-  const spotList = JSON.parse(data)
+  const spotList = data
 
   return (
     <SpotDialog
