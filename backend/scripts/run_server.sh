@@ -2,7 +2,7 @@
 
 # fetch data
 rm -rf data
-wget https://github.com/igarashi339/disney-network/releases/download/1.1.0/data.zip
+wget https://github.com/igarashi339/disney-network/releases/download/1.2.0/data.zip
 unzip data.zip
 rm data*.zip
 
