@@ -22,11 +22,11 @@ class DynamicDataManager:
         req = urllib.request.Request(url)
         with urllib.request.urlopen(req) as res:
             raw_dict = json.loads(res.read())
-            cls.prev_fetch_data = DynamicDataManager.parse_raw_data(raw_dict)
+            cls.prev_fetch_data = DynamicDataManager.__parse_raw_data(raw_dict)
         return cls.prev_fetch_data
 
     @staticmethod
-    def parse_raw_data(raw_data_dict):
+    def __parse_raw_data(raw_data_dict):
         ret_dict = { "spots": {} }
         for key in raw_data_dict:
             if key == "timestamp":
@@ -48,6 +48,7 @@ class StaticDataManager:
     __nodes = []
     __links = []
     __spots = []
+    __all_spot_pair = []
 
     @classmethod
     def __load_nodes(cls):
@@ -68,6 +69,12 @@ class StaticDataManager:
             cls.__spots = json_data["spots"]
 
     @classmethod
+    def __load_all_spot_pair(cls):
+        with open("data/sea/all_spot_pair_routes.json", "r", encoding="utf-8") as f:
+            json_data = json.load(f)
+            cls.__cost_table = json_data["all_spot_pair_routes"]
+
+    @classmethod
     def get_nodes(cls):
         if not cls.__nodes:
             cls.__load_nodes()
@@ -85,17 +92,28 @@ class StaticDataManager:
             cls.__load_spots()
         return cls.__spots
 
+    @classmethod
+    def get_all_spot_pair(cls):
+        if not cls.__all_spot_pair:
+            cls.__load_all_spot_pair()
+        return cls.__all_spot_pair
 
-def get_combined_spot_data():
+
+class CombinedDatamanager:
     """
-    Spot情報について、静的情報を動的情報を組み合わせた情報を返却する。
+    静的情報と動的情報を組み合わせた情報を管理するクラス。
     """
-    static_data = StaticDataManager.get_spots()
-    dynamic_data = DynamicDataManager.fetch_latest_data()
-    for elem in static_data:
-        name = elem["name"]
-        if not dynamic_data["spots"].get(name):
-            continue
-        elem["enable"] = dynamic_data["spots"][name]["enable"]
-        elem["wait-time"] = dynamic_data["spots"][name]["wait-time"]
-    return static_data
+    @staticmethod
+    def get_combined_spot_data():
+        """
+        note: 動的情報の更新タイミングはDynamicDataManagerが管理するため、このクラスでは情報を保持せず毎回リストを計算する
+        """
+        static_data = StaticDataManager.get_spots()
+        dynamic_data = DynamicDataManager.fetch_latest_data()
+        for elem in static_data:
+            name = elem["name"]
+            if not dynamic_data["spots"].get(name):
+                continue
+            elem["enable"] = dynamic_data["spots"][name]["enable"]
+            elem["wait-time"] = dynamic_data["spots"][name]["wait-time"]
+        return static_data
