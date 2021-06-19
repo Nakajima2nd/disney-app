@@ -67,13 +67,14 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
   }
 
   const handleComplete = () => {
-    if (selected === -3) {
-      setStartSpot(editing)
-    }
-    else if (selected === -2) {
-      setGoalSpot(editing)
-    }
-    else if (selected === -1) {
+    // if (selected === -3) {
+    //   setStartSpot(editing)
+    // }
+    // else if (selected === -2) {
+    //   setGoalSpot(editing)
+    // }
+    // else if (selected === -1) {
+    if (selected === -1) {
       setSpots(append(editing))
     }
     else {
@@ -88,6 +89,13 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
       assoc('name', spot.name)
     )(editing)
     setEditing(newSpot)
+    if (selected === -1) {
+      setSpots(append(newSpot))
+    }
+    else {
+      setSpots(update(selected, newSpot, spots))
+    }
+    setOpen(false)
   }
 
   const spotList = data
@@ -134,7 +142,7 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
       </SpotDialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">キャンセル</Button>
-        <Button onClick={handleComplete} color="primary">{selected === -1 ? '追加' : '更新'}</Button>
+        {/* <Button onClick={handleComplete} color="primary">{selected === -1 ? '追加' : '更新'}</Button> */}
       </DialogActions>
     </SpotDialog>
   )
