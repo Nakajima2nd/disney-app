@@ -1,6 +1,4 @@
-from django.http import HttpResponse
-from data_manager import get_combined_spot_data
-import json
+from data_manager import CombinedDatamanager
 import copy
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -8,7 +6,7 @@ from rest_framework.decorators import api_view
 
 @api_view(["GET", "POST"])
 def spot_list(request):
-    spots_json_org = get_combined_spot_data()
+    spots_json_org = CombinedDatamanager.get_combined_spot_data()
     spots_json_edited = edit_static_spots_data(spots_json_org)
     return Response(spots_json_edited)
 
