@@ -10,13 +10,13 @@ from rest_framework.decorators import api_view
 def spot_list(request):
     spots_json_org = get_combined_spot_data()
     spots_json_edited = edit_static_spots_data(spots_json_org)
-    return Response(json.dumps(spots_json_edited, indent=2))
+    return Response(spots_json_edited)
 
 
 @api_view(["GET", "POST"])
 def search(request):
     route_json = search_stab()
-    return Response(json.dumps(route_json, indent=2))
+    return Response(route_json)
 
 
 def edit_static_spots_data(spots_json_org):
