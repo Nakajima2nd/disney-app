@@ -31,7 +31,7 @@ const ConditionDatePicker = styled(DatePicker)`
 `
 
 const ConditionTimePicker = styled(TimePicker)`
-  flex-basis: 20%;
+  flex-basis: 30%;
 `
 
 const ConditionTimeModeSelect = styled(TextField)`
@@ -55,16 +55,16 @@ const initialEditing = {
   stayTime: 0
 }
 
-const initialSpot = {
-  spotId: 102,
-  name: 'パークエントランス・ノース・チケットブース'
-}
+// const initialSpot = {
+//   spotId: 102,
+//   name: 'パークエントランス・ノース・チケットブース'
+// }
 
 const Home = () => {
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState({})
-  const [startSpot, setStartSpot] = useState(initialSpot)
-  const [goalSpot, setGoalSpot] = useState(initialSpot)
+  // const [startSpot, setStartSpot] = useState(initialSpot)
+  // const [goalSpot, setGoalSpot] = useState(initialSpot)
   const [spots, setSpots] = useState([])
   const [selected, setSelected] = useState(-1)
   const [date, setDate] = useState(new Date())
@@ -96,13 +96,13 @@ const Home = () => {
   return (
     <Wrap>
       <Text>回りたいスポットを入れてね</Text>
-      <SpotButton
+      {/* <SpotButton
         variant="outlined"
         color="primary"
         onClick={handleOpen(startSpot, -3)}
       >
         {startSpot.name}
-      </SpotButton>
+      </SpotButton> */}
       {spots.map((spot, index) =>
         <SpotButton
           key={index}
@@ -120,13 +120,13 @@ const Home = () => {
       >
         追加
       </PlusButton>
-      <SpotButton
+      {/* <SpotButton
         variant="outlined"
         color="primary"
         onClick={handleOpen(goalSpot, -2)}
       >
         {goalSpot.name}
-      </SpotButton>
+      </SpotButton> */}
       <SpotListDialog
         editing={editing}
         selected={selected}
@@ -136,11 +136,11 @@ const Home = () => {
         setOpen={setOpen}
         setSpots={setSpots}
         setIndex={setSelected}
-        setStartSpot={setStartSpot}
-        setGoalSpot={setGoalSpot}
+        // setStartSpot={setStartSpot}
+        // setGoalSpot={setGoalSpot}
       />
       <Condition>
-        <ConditionDatePicker
+        {/* <ConditionDatePicker
           margin="normal"
           label="日付"
           format="MM/dd"
@@ -148,7 +148,7 @@ const Home = () => {
           onChange={handleDate}
           okLabel="決定"
           cancelLabel="キャンセル"
-        />
+        /> */}
         <ConditionTimePicker
           margin="normal"
           label="時間"
