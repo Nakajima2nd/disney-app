@@ -1,5 +1,5 @@
 class Subroute:
-    def __int__(self):
+    def __init__(self):
         self.start_spot_id = -1
         self.goal_spot_id = -1
         self.start_time = ""
@@ -20,6 +20,7 @@ class Subroute:
         for coord in self.coords:
             pair = [ coord[0], coord[1] ]
             ret_dict["coords"].append(pair)
+        return ret_dict
 
 
 class TourSpot:
@@ -29,7 +30,7 @@ class TourSpot:
         self.lat = ""
         self.lon = ""
         self.type = ""
-        self.enable = True
+        self.play_time = -1 # sec
         self.wait_time = -1
 
     def to_dict(self):
@@ -39,13 +40,13 @@ class TourSpot:
         ret_dict["lat"] = self.lat
         ret_dict["lon"] = self.lon
         ret_dict["type"] = self.type
-        ret_dict["enable"] = self.enable
+        ret_dict["play-time"] = self.play_time
         ret_dict["wait-time"] = self.wait_time
         return ret_dict
 
 
 class Tour:
-    def __init__(self, travel_input, spot_order):
+    def __init__(self):
         self.start_time = ""  # hh:mm
         self.goal_time = ""   # hh:mm
         self.spots = []
@@ -62,6 +63,7 @@ class Tour:
         for subroute in self.subroutes:
             ret_dict["subroutes"].append(subroute.to_dict())
         return ret_dict
+
 
 class TravelInputSpot:
     def __init__(self):
@@ -97,7 +99,7 @@ class TravelInput:
         try:
             # hh:mm -> 秒数 への変換
             hh_str, mm_str = specified_time_str.split(":")
-            self.specified_time = int(hh_str) * 3600 + int(mm_str) + 60
+            self.specified_time = int(hh_str) * 3600 + int(mm_str) * 60
         except:
             self.error_message = "時間の形式が不正です。hh:mm形式で指定してください。"
 
