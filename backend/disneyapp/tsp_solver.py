@@ -134,6 +134,7 @@ class RandomTspSolver:
             subroute.goal_time = self.__sec_to_hhmm(current_time)
             current_time += self.spot_data_dict[spot_id]["play-time"]
             current_time += max(self.spot_data_dict[spot_id]["wait-time"] * 60, 0)  # note:待ち時間が-1の場合は0にする
+            # todo:形状点列を入れる
             subroute.coords = []
             tour.subroutes.append(subroute)
             del subroute
