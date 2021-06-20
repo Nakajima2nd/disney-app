@@ -72,7 +72,7 @@ class StaticDataManager:
     def __load_all_spot_pair(cls):
         with open("data/sea/all_spot_pair_routes.json", "r", encoding="utf-8") as f:
             json_data = json.load(f)
-            cls.__cost_table = json_data["all_spot_pair_routes"]
+            cls.__all_spot_pair = json_data["all_spot_pair_routes"]
 
     @classmethod
     def get_nodes(cls):

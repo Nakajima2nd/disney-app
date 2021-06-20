@@ -1,5 +1,7 @@
 from data_manager import CombinedDatamanager
-import copy
+from models import TravelInput
+from tsp_solver import RandomTspSolver
+import copy, json
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -11,10 +13,18 @@ def spot_list(request):
     return Response(spots_json_edited)
 
 
-@api_view(["GET", "POST"])
+@api_view(["POST"])
 def search(request):
-    route_json = search_stab()
-    return Response(route_json)
+    try:
+        json_data = json.loads(request.body)
+    except:
+        return Response("入力が不正です：Jsonのパースに失敗しました。")
+    travel_input = TravelInput(json_data)
+    if travel_input.error_message != "":
+        return Response("入力が不正です：" + travel_input.error_message)
+    tsp_solver = RandomTspSolver()
+    tour = tsp_solver.exec(travel_input)
+    return Response(tour.to_dict())
 
 
 def edit_static_spots_data(spots_json_org):
