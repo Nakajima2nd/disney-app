@@ -3,6 +3,19 @@ from models import Tour, TourSpot, Subroute, TravelInput
 import random, copy
 
 
+def sec_to_hhmm(sec):
+    """
+    秒からhh:mm形式の文字列に変換する。
+    """
+    hour = int(sec / 3600)
+    minute = int((sec - hour * 3600) / 60)
+    minute_str = str(minute)
+    if minute <= 9:
+        minute_str = "0" + minute_str
+    hhmm = str(hour) + ":" + minute_str
+    return hhmm
+
+
 class RandomTspSolver:
     TRY_TIMES = 1000  # 試行回数
 
@@ -16,9 +29,10 @@ class RandomTspSolver:
     }
 
     def __init__(self):
+        # todo: このへんのdictはsolverではなくdata_managerで持つほうが良い。要リファクタ
         self.spot_data_dict = RandomTspSolver.__make_spot_data_dict()
-        # org_spot_id, dst_spot_id -> distance
-        self.cost_table = RandomTspSolver.__make_cost_table()
+        self.cost_table = RandomTspSolver.__make_cost_table()  # org_spot_id, dst_spot_id -> distance
+        self.link_dict = RandomTspSolver.__make_link_dict()
 
     def exec(self, travel_input):
         """
@@ -74,6 +88,15 @@ class RandomTspSolver:
             }
         return cost_table
 
+    @staticmethod
+    def __make_link_dict():
+        link_list = StaticDataManager.get_links()
+        link_dict = {}
+        for link in link_list:
+            key = (int(link["org_node_id"]), int(link["dst_node_id"]))
+            link_dict[key] = link["coords"]
+        return link_dict
+
     def __eval_spot_list_order(self, spot_list):
         """
         巡回順の評価値を返す。現状、経路長だけで評価している。
@@ -108,7 +131,7 @@ class RandomTspSolver:
         巡回経路を出発側からTraceし、スポットの到着時刻などを算出する。
         """
         tour = Tour()
-        tour.start_time = self.__sec_to_hhmm(travel_input.specified_time)
+        tour.start_time = sec_to_hhmm(travel_input.specified_time)
         current_time = travel_input.specified_time
         for spot_id in spot_order:
             tour_spot = TourSpot()
@@ -126,19 +149,24 @@ class RandomTspSolver:
             subroute = Subroute()
             subroute.start_spot_id = spot_order[i - 1]
             subroute.goal_spot_id = spot_id
-            subroute.start_time = self.__sec_to_hhmm(current_time)
+            subroute.start_time = sec_to_hhmm(current_time)
             subroute.distance = int(self.cost_table[(subroute.start_spot_id, subroute.goal_spot_id)]["distance"])
             speed = RandomTspSolver.WALK_SPEED_DICT[travel_input.walk_speed]
             subroute.transit_time = int(float(subroute.distance) / speed)
             current_time += subroute.transit_time
-            subroute.goal_time = self.__sec_to_hhmm(current_time)
+            subroute.goal_time = sec_to_hhmm(current_time)
             current_time += self.spot_data_dict[spot_id]["play-time"]
             current_time += max(self.spot_data_dict[spot_id]["wait-time"] * 60, 0)  # note:待ち時間が-1の場合は0にする
-            # todo:形状点列を入れる
-            subroute.coords = []
+            node_list = self.cost_table[(subroute.start_spot_id, subroute.goal_spot_id)]["nodes"]
+            for i, dst_node_id in enumerate(node_list):
+                if i == 0:
+                    continue
+                org_node_id = node_list[i - 1]
+                coord_list = self.__node_pair_to_coords(org_node_id, dst_node_id)
+                subroute.coords.extend(coord_list)
             tour.subroutes.append(subroute)
             del subroute
-        tour.goal_time = self.__sec_to_hhmm(current_time)
+        tour.goal_time = sec_to_hhmm(current_time)
         return tour
 
     def __trace_from_back(self, travel_input, spot_order):
@@ -148,11 +176,15 @@ class RandomTspSolver:
         # todo: 実装する。とりあえずmode=startと同じ挙動にしておく。
         return self.__trace_from_front(travel_input, spot_order)
 
-    def __sec_to_hhmm(self, sec):
-        hour = int(sec / 3600)
-        minute = int((sec - hour * 3600) / 60)
-        minute_str = str(minute)
-        if minute <= 9:
-            minute_str = "0" + minute_str
-        hhmm = str(hour) + ":" + minute_str
-        return hhmm
+    def __node_pair_to_coords(self, org_node_id, dst_node_id):
+        """
+        2つのノードペアから形状点列を返す。
+
+        note: インプットのノードペアから成るリンクが存在しない場合、空リストを返す。
+        """
+        key = (org_node_id, dst_node_id)
+        if self.link_dict.get((org_node_id, dst_node_id)):
+            return self.link_dict[(org_node_id, dst_node_id)]
+        if self.link_dict.get(dst_node_id, org_node_id):
+            return list(reversed(self.link_dict[(dst_node_id, org_node_id)]))
+        return []
