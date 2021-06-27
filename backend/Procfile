@@ -1,2 +1,1 @@
-  release: chmod a+x ./scripts/fetch_data.sh && ./scripts/fetch_data.sh
   web: gunicorn config.wsgi

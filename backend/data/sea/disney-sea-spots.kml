@@ -1,0 +1,1931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="671">
+        <Style id="674">
+            <IconStyle id="675">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="676">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="679">
+            <IconStyle id="680">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="681">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="684">
+            <IconStyle id="685">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="686">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="689">
+            <IconStyle id="690">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="691">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="694">
+            <IconStyle id="695">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="696">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="699">
+            <IconStyle id="700">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="701">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="704">
+            <IconStyle id="705">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="706">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="709">
+            <IconStyle id="710">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="711">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="714">
+            <IconStyle id="715">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="716">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="719">
+            <IconStyle id="720">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="721">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="724">
+            <IconStyle id="725">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="726">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="729">
+            <IconStyle id="730">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="731">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="734">
+            <IconStyle id="735">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="736">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="739">
+            <IconStyle id="740">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="741">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="744">
+            <IconStyle id="745">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="746">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="749">
+            <IconStyle id="750">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="751">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="754">
+            <IconStyle id="755">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="756">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="759">
+            <IconStyle id="760">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="761">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="764">
+            <IconStyle id="765">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="766">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="769">
+            <IconStyle id="770">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="771">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="774">
+            <IconStyle id="775">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="776">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="779">
+            <IconStyle id="780">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="781">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="784">
+            <IconStyle id="785">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="786">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="789">
+            <IconStyle id="790">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="791">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="794">
+            <IconStyle id="795">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="796">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="799">
+            <IconStyle id="800">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="801">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="804">
+            <IconStyle id="805">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="806">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="809">
+            <IconStyle id="810">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="811">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="814">
+            <IconStyle id="815">
+                <color>ff00ffff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="816">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="819">
+            <IconStyle id="820">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="821">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="824">
+            <IconStyle id="825">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="826">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="829">
+            <IconStyle id="830">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="831">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="834">
+            <IconStyle id="835">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="836">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="839">
+            <IconStyle id="840">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="841">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="844">
+            <IconStyle id="845">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="846">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="849">
+            <IconStyle id="850">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="851">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="854">
+            <IconStyle id="855">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="856">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="859">
+            <IconStyle id="860">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="861">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="864">
+            <IconStyle id="865">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="866">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="869">
+            <IconStyle id="870">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="871">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="874">
+            <IconStyle id="875">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="876">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="879">
+            <IconStyle id="880">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="881">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="884">
+            <IconStyle id="885">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="886">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="889">
+            <IconStyle id="890">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="891">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="894">
+            <IconStyle id="895">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="896">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="899">
+            <IconStyle id="900">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="901">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="904">
+            <IconStyle id="905">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="906">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="909">
+            <IconStyle id="910">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="911">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="914">
+            <IconStyle id="915">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="916">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="919">
+            <IconStyle id="920">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="921">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="924">
+            <IconStyle id="925">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="926">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="929">
+            <IconStyle id="930">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="931">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="934">
+            <IconStyle id="935">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="936">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="939">
+            <IconStyle id="940">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="941">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="944">
+            <IconStyle id="945">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="946">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="949">
+            <IconStyle id="950">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="951">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="954">
+            <IconStyle id="955">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="956">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="959">
+            <IconStyle id="960">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="961">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="964">
+            <IconStyle id="965">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="966">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="969">
+            <IconStyle id="970">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="971">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="974">
+            <IconStyle id="975">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="976">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="979">
+            <IconStyle id="980">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="981">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="984">
+            <IconStyle id="985">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="986">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="989">
+            <IconStyle id="990">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="991">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="994">
+            <IconStyle id="995">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="996">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="999">
+            <IconStyle id="1000">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1001">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1004">
+            <IconStyle id="1005">
+                <color>ff008000</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1006">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1009">
+            <IconStyle id="1010">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1011">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1014">
+            <IconStyle id="1015">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1016">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1019">
+            <IconStyle id="1020">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1021">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1024">
+            <IconStyle id="1025">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1026">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1029">
+            <IconStyle id="1030">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1031">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1034">
+            <IconStyle id="1035">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1036">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1039">
+            <IconStyle id="1040">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1041">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1044">
+            <IconStyle id="1045">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1046">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1049">
+            <IconStyle id="1050">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1051">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1054">
+            <IconStyle id="1055">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1056">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1059">
+            <IconStyle id="1060">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1061">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1064">
+            <IconStyle id="1065">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1066">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1069">
+            <IconStyle id="1070">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1071">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1074">
+            <IconStyle id="1075">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1076">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1079">
+            <IconStyle id="1080">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1081">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1084">
+            <IconStyle id="1085">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1086">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1089">
+            <IconStyle id="1090">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1091">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1094">
+            <IconStyle id="1095">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1096">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1099">
+            <IconStyle id="1100">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1101">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1104">
+            <IconStyle id="1105">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1106">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1109">
+            <IconStyle id="1110">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1111">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1114">
+            <IconStyle id="1115">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1116">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1119">
+            <IconStyle id="1120">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1121">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1124">
+            <IconStyle id="1125">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1126">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1129">
+            <IconStyle id="1130">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1131">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1134">
+            <IconStyle id="1135">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1136">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1139">
+            <IconStyle id="1140">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1141">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1144">
+            <IconStyle id="1145">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1146">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1149">
+            <IconStyle id="1150">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1151">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1154">
+            <IconStyle id="1155">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1156">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1159">
+            <IconStyle id="1160">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1161">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1164">
+            <IconStyle id="1165">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1166">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1169">
+            <IconStyle id="1170">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1171">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1174">
+            <IconStyle id="1175">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1176">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1179">
+            <IconStyle id="1180">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1181">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1184">
+            <IconStyle id="1185">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1186">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1189">
+            <IconStyle id="1190">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1191">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1194">
+            <IconStyle id="1195">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1196">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1199">
+            <IconStyle id="1200">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1201">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1204">
+            <IconStyle id="1205">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1206">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Placemark id="673">
+            <name>ソアリン：ファンタスティック・フライト</name>
+            <styleUrl>#674</styleUrl>
+            <Point id="672">
+                <coordinates>139.88570175371126,35.62753096260775,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="678">
+            <name>ディズニーシー・トランジットスチーマーライン（メディテレーニアンハーバー）</name>
+            <styleUrl>#679</styleUrl>
+            <Point id="677">
+                <coordinates>139.88593456101927,35.626573169189264,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="683">
+            <name>フォートレス・エクスプロレーション</name>
+            <styleUrl>#684</styleUrl>
+            <Point id="682">
+                <coordinates>139.88521622867762,35.62577595814663,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="688">
+            <name>ヴェネツィアン・ゴンドラ</name>
+            <styleUrl>#689</styleUrl>
+            <Point id="687">
+                <coordinates>139.88796327515433,35.62609086477499,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="693">
+            <name>タートル・トーク</name>
+            <styleUrl>#694</styleUrl>
+            <Point id="692">
+                <coordinates>139.88726518210083,35.62334375031604,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="698">
+            <name>タワー・オブ・テラー</name>
+            <styleUrl>#699</styleUrl>
+            <Point id="697">
+                <coordinates>139.88828835075003,35.62391248028388,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="703">
+            <name>ディズニーシー・エレクトリックレールウェイ（アメリカンウォーターフロント）</name>
+            <styleUrl>#704</styleUrl>
+            <Point id="702">
+                <coordinates>139.88775091735545,35.62491145456335,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="708">
+            <name>ディズニーシー・トランジットスチーマーライン（アメリカンウォーターフロント）</name>
+            <styleUrl>#709</styleUrl>
+            <Point id="707">
+                <coordinates>139.88569672120138,35.62420292517226,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="713">
+            <name>トイ・ストーリー・マニア！</name>
+            <styleUrl>#714</styleUrl>
+            <Point id="712">
+                <coordinates>139.8889301319155,35.62477700583167,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="718">
+            <name>ビッグシティ・ヴィークル</name>
+            <styleUrl>#719</styleUrl>
+            <Point id="717">
+                <coordinates>139.88706200880483,35.62439387470845,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="723">
+            <name>アクアトピア</name>
+            <styleUrl>#724</styleUrl>
+            <Point id="722">
+                <coordinates>139.88349606906613,35.62468589551906,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="728">
+            <name>ディズニーシー・エレクトリックレールウェイ（ポートディスカバリー）</name>
+            <styleUrl>#729</styleUrl>
+            <Point id="727">
+                <coordinates>139.88309169515944,35.62539074665123,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="733">
+            <name>ニモ＆フレンズ・シーライダー</name>
+            <styleUrl>#734</styleUrl>
+            <Point id="732">
+                <coordinates>139.88251554646882,35.62494825695022,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="738">
+            <name>インディ・ジョーンズ・アドベンチャー： クリスタルスカルの魔宮</name>
+            <styleUrl>#739</styleUrl>
+            <Point id="737">
+                <coordinates>139.8809767843943,35.6263737631128,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="743">
+            <name>ディズニーシー・トランジットスチーマーライン（ロストリバーデルタ）</name>
+            <styleUrl>#744</styleUrl>
+            <Point id="742">
+                <coordinates>139.8819008279609,35.62673965820737,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="748">
+            <name>レイジングスピリッツ</name>
+            <styleUrl>#749</styleUrl>
+            <Point id="747">
+                <coordinates>139.88080457814263,35.627722226399435,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="753">
+            <name>キャラバンカルーセル</name>
+            <styleUrl>#754</styleUrl>
+            <Point id="752">
+                <coordinates>139.88333969788812,35.62817027479872,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="758">
+            <name>ジャスミンのフライングカーペット</name>
+            <styleUrl>#759</styleUrl>
+            <Point id="757">
+                <coordinates>139.88110064513887,35.62835033507712,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="763">
+            <name>シンドバッド・ストーリーブック・ヴォヤッジ</name>
+            <styleUrl>#764</styleUrl>
+            <Point id="762">
+                <coordinates>139.8814498574758,35.628507999414445,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="768">
+            <name>マジックランプシアター</name>
+            <styleUrl>#769</styleUrl>
+            <Point id="767">
+                <coordinates>139.88306798035555,35.628433782867795,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="773">
+            <name>アリエルのプレイグラウンド</name>
+            <styleUrl>#774</styleUrl>
+            <Point id="772">
+                <coordinates>139.8833172765092,35.62679154348968,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="778">
+            <name>ジャンピン・ジェリーフィッシュ</name>
+            <styleUrl>#779</styleUrl>
+            <Point id="777">
+                <coordinates>139.88340256425997,35.626514238390236,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="783">
+            <name>スカットルのスクーター</name>
+            <styleUrl>#784</styleUrl>
+            <Point id="782">
+                <coordinates>139.88321567037846,35.62726987355347,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="788">
+            <name>フランダーのフライングフィッシュコースター</name>
+            <styleUrl>#789</styleUrl>
+            <Point id="787">
+                <coordinates>139.88224597144833,35.627035483426376,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="793">
+            <name>ブローフィッシュ・バルーンレース</name>
+            <styleUrl>#794</styleUrl>
+            <Point id="792">
+                <coordinates>139.88290367341438,35.626468454526325,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="798">
+            <name>マーメイドラグーンシアター</name>
+            <styleUrl>#799</styleUrl>
+            <Point id="797">
+                <coordinates>139.88271825269382,35.62640700722643,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="803">
+            <name>ワールプール</name>
+            <styleUrl>#804</styleUrl>
+            <Point id="802">
+                <coordinates>139.88312897895753,35.626673391618006,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="808">
+            <name>海底2万マイル</name>
+            <styleUrl>#809</styleUrl>
+            <Point id="807">
+                <coordinates>139.88461075873784,35.62641929875694,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="813">
+            <name>センター・オブ・ジ・アース</name>
+            <styleUrl>#814</styleUrl>
+            <Point id="812">
+                <coordinates>139.88453268519172,35.62591270174353,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="818">
+            <name>カフェ・ポルトフィーノ</name>
+            <styleUrl>#819</styleUrl>
+            <Point id="817">
+                <coordinates>139.88714679981504,35.62695264833476,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="823">
+            <name>ゴンドリエ・スナック</name>
+            <styleUrl>#824</styleUrl>
+            <Point id="822">
+                <coordinates>139.88730258806373,35.625966268892086,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="828">
+            <name>ザンビーニ･ブラザーズ･リストランテ</name>
+            <styleUrl>#829</styleUrl>
+            <Point id="827">
+                <coordinates>139.8860085445333,35.627169846655995,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="833">
+            <name>マゼランズ</name>
+            <styleUrl>#834</styleUrl>
+            <Point id="832">
+                <coordinates>139.88528718994823,35.62593079188322,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="838">
+            <name>マゼランズ・ラウンジ</name>
+            <styleUrl>#839</styleUrl>
+            <Point id="837">
+                <coordinates>139.88533479915824,35.62591171513723,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="843">
+            <name>マンマ・ビスコッティーズ・ベーカリー</name>
+            <styleUrl>#844</styleUrl>
+            <Point id="842">
+                <coordinates>139.88761556530423,35.627031123601206,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="848">
+            <name>リストランテ・ディ・カナレット</name>
+            <styleUrl>#849</styleUrl>
+            <Point id="847">
+                <coordinates>139.8878840659662,35.6256768376592,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="853">
+            <name>リフレスコス</name>
+            <styleUrl>#854</styleUrl>
+            <Point id="852">
+                <coordinates>139.88498528406274,35.625922848537776,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="858">
+            <name>S.S.コロンビア・ダイニングルーム</name>
+            <styleUrl>#859</styleUrl>
+            <Point id="857">
+                <coordinates>139.88722275593676,35.62336259993873,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="863">
+            <name>ケープコッド・クックオフ</name>
+            <styleUrl>#864</styleUrl>
+            <Point id="862">
+                <coordinates>139.88510562868893,35.62454246535265,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="868">
+            <name>ケープコッド・コンフェクション</name>
+            <styleUrl>#869</styleUrl>
+            <Point id="867">
+                <coordinates>139.8849652703674,35.62455907346721,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="873">
+            <name>ドックサイドダイナー</name>
+            <styleUrl>#874</styleUrl>
+            <Point id="872">
+                <coordinates>139.88760165630976,35.62377706755055,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="878">
+            <name>テディ・ルーズヴェルト・ラウンジ</name>
+            <styleUrl>#879</styleUrl>
+            <Point id="877">
+                <coordinates>139.887249490907,35.62340244500671,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="883">
+            <name>デランシー・ケータリング</name>
+            <styleUrl>#884</styleUrl>
+            <Point id="882">
+                <coordinates>139.8875073792503,35.62486059009338,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="888">
+            <name>ニューヨーク・デリ</name>
+            <styleUrl>#889</styleUrl>
+            <Point id="887">
+                <coordinates>139.8878674000761,35.625360255196206,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="893">
+            <name>バーナクル・ビルズ</name>
+            <styleUrl>#894</styleUrl>
+            <Point id="892">
+                <coordinates>139.88680246759344,35.624057270334205,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="898">
+            <name>ハイタイド・トリート</name>
+            <styleUrl>#899</styleUrl>
+            <Point id="897">
+                <coordinates>139.88435859423043,35.624982684284234,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="903">
+            <name>ハドソンリバー・ハーベスト</name>
+            <styleUrl>#904</styleUrl>
+            <Point id="902">
+                <coordinates>139.88736299869663,35.623791799452526,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="908">
+            <name>パパダキス・フレッシュフルーツ</name>
+            <styleUrl>#909</styleUrl>
+            <Point id="907">
+                <coordinates>139.88698791986826,35.6241067916498,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="913">
+            <name>リバティ・ランディング・ダイナー</name>
+            <styleUrl>#914</styleUrl>
+            <Point id="912">
+                <coordinates>139.88702237925037,35.62453805491093,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="918">
+            <name>レストラン櫻</name>
+            <styleUrl>#919</styleUrl>
+            <Point id="917">
+                <coordinates>139.88706780260532,35.624750388158205,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="923">
+            <name>レストラン櫻 テラス席</name>
+            <styleUrl>#924</styleUrl>
+            <Point id="922">
+                <coordinates>139.88699008414704,35.62463665215171,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="928">
+            <name>シーサイドスナック</name>
+            <styleUrl>#929</styleUrl>
+            <Point id="927">
+                <coordinates>139.88407739704098,35.624226490084894,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="933">
+            <name>ブリーズウェイ・バイツ</name>
+            <styleUrl>#934</styleUrl>
+            <Point id="932">
+                <coordinates>139.8832934499238,35.62557288181555,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="938">
+            <name>ベイサイド・テイクアウト</name>
+            <styleUrl>#939</styleUrl>
+            <Point id="937">
+                <coordinates>139.88303017036733,35.62534787349407,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="943">
+            <name>ホライズンベイ・レストラン</name>
+            <styleUrl>#944</styleUrl>
+            <Point id="942">
+                <coordinates>139.88332197925132,35.625329434540184,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="948">
+            <name>エクスペディション・イート</name>
+            <styleUrl>#949</styleUrl>
+            <Point id="947">
+                <coordinates>139.88147863907696,35.62655199342709,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="953">
+            <name>トロピック・アルズ</name>
+            <styleUrl>#954</styleUrl>
+            <Point id="952">
+                <coordinates>139.88214863509043,35.62733398487032,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="958">
+            <name>ミゲルズ・エルドラド・キャンティーナ</name>
+            <styleUrl>#959</styleUrl>
+            <Point id="957">
+                <coordinates>139.88221841668994,35.62635353687072,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="963">
+            <name>ユカタン・ベースキャンプ・グリル</name>
+            <styleUrl>#964</styleUrl>
+            <Point id="962">
+                <coordinates>139.8807422907195,35.62685932680087,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="968">
+            <name>ロストリバークックハウス</name>
+            <styleUrl>#969</styleUrl>
+            <Point id="967">
+                <coordinates>139.88129555984574,35.627528730257204,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="973">
+            <name>オープンセサミ</name>
+            <styleUrl>#974</styleUrl>
+            <Point id="972">
+                <coordinates>139.8818056970414,35.628332835176884,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="978">
+            <name>カスバ・フードコート</name>
+            <styleUrl>#979</styleUrl>
+            <Point id="977">
+                <coordinates>139.88271758423892,35.628467652267155,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="983">
+            <name>サルタンズ・オアシス</name>
+            <styleUrl>#984</styleUrl>
+            <Point id="982">
+                <coordinates>139.88205571876244,35.62806195659733,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="988">
+            <name>セバスチャンのカリプソキッチン</name>
+            <styleUrl>#989</styleUrl>
+            <Point id="987">
+                <coordinates>139.88250134014066,35.626576161868144,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="993">
+            <name>ヴォルケイニア・レストラン</name>
+            <styleUrl>#994</styleUrl>
+            <Point id="992">
+                <coordinates>139.8843650691074,35.626687726652065,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="998">
+            <name>ノーチラスギャレー</name>
+            <styleUrl>#999</styleUrl>
+            <Point id="997">
+                <coordinates>139.88424979704135,35.6262659901122,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1003">
+            <name>リフレッシュメント・ステーション</name>
+            <styleUrl>#1004</styleUrl>
+            <Point id="1002">
+                <coordinates>139.8838738970412,35.62654293516153,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1008">
+            <name>イル・ポスティーノ・ステーショナリー</name>
+            <styleUrl>#1009</styleUrl>
+            <Point id="1007">
+                <coordinates>139.8864666793604,35.627053829792416,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1013">
+            <name>ヴァレンティーナズ・スウィート</name>
+            <styleUrl>#1014</styleUrl>
+            <Point id="1012">
+                <coordinates>139.88835381094933,35.62689230914014,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1018">
+            <name>ヴィラ・ドナルド・ホームショップ</name>
+            <styleUrl>#1019</styleUrl>
+            <Point id="1017">
+                <coordinates>139.88740088518182,35.626212786779085,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1023">
+            <name>ヴェネツィアン・カーニバル・マーケット</name>
+            <styleUrl>#1024</styleUrl>
+            <Point id="1022">
+                <coordinates>139.88757496709434,35.626337270308056,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1028">
+            <name>エンポーリオ</name>
+            <styleUrl>#1029</styleUrl>
+            <Point id="1027">
+                <coordinates>139.88788725437888,35.62690536565524,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1033">
+            <name>ガッレリーア・ディズニー</name>
+            <styleUrl>#1034</styleUrl>
+            <Point id="1032">
+                <coordinates>139.8884136892084,35.62671446795919,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1038">
+            <name>スプレンディード</name>
+            <styleUrl>#1039</styleUrl>
+            <Point id="1037">
+                <coordinates>139.88785306090304,35.62657375882438,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1043">
+            <name>ピッコロメルカート</name>
+            <styleUrl>#1044</styleUrl>
+            <Point id="1042">
+                <coordinates>139.88760179728777,35.62685455442086,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1048">
+            <name>フィガロズ・クロージアー</name>
+            <styleUrl>#1049</styleUrl>
+            <Point id="1047">
+                <coordinates>139.8880709872984,35.62654965539287,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1053">
+            <name>フォトグラフィカ</name>
+            <styleUrl>#1054</styleUrl>
+            <Point id="1052">
+                <coordinates>139.8885987434835,35.62668337182324,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1058">
+            <name>ベッラ・ミンニ・コレクション</name>
+            <styleUrl>#1059</styleUrl>
+            <Point id="1057">
+                <coordinates>139.88659347207502,35.62708041807728,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1063">
+            <name>マーチャント・オブ・ヴェニス・コンフェクション</name>
+            <styleUrl>#1064</styleUrl>
+            <Point id="1062">
+                <coordinates>139.88783629286553,35.62643965005653,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1068">
+            <name>ミラマーレ</name>
+            <styleUrl>#1069</styleUrl>
+            <Point id="1067">
+                <coordinates>139.88680208614412,35.62697708019846,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1073">
+            <name>リメンブランツェ</name>
+            <styleUrl>#1074</styleUrl>
+            <Point id="1072">
+                <coordinates>139.88613344087182,35.62518935048507,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1078">
+            <name>アーント・ペグズ・ヴィレッジストア</name>
+            <styleUrl>#1079</styleUrl>
+            <Point id="1077">
+                <coordinates>139.88455212560146,35.62451924491055,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1083">
+            <name>スチームボート・ミッキーズ</name>
+            <styleUrl>#1084</styleUrl>
+            <Point id="1082">
+                <coordinates>139.88711099647574,35.62501049638865,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1088">
+            <name>スリンキー・ドッグのギフトトロリー</name>
+            <styleUrl>#1089</styleUrl>
+            <Point id="1087">
+                <coordinates>139.88863096648507,35.62468223963672,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1093">
+            <name>タワー・オブ・テラー・メモラビリア</name>
+            <styleUrl>#1094</styleUrl>
+            <Point id="1092">
+                <coordinates>139.8880629781352,35.623904604027395,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1098">
+            <name>ニュージーズ・ノヴェルティ</name>
+            <styleUrl>#1099</styleUrl>
+            <Point id="1097">
+                <coordinates>139.8873323461311,35.624554730269516,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1103">
+            <name>マクダックス・デパートメントストア</name>
+            <styleUrl>#1104</styleUrl>
+            <Point id="1102">
+                <coordinates>139.88749816160015,35.62508364370584,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1108">
+            <name>スカイウォッチャー・スーヴェニア</name>
+            <styleUrl>#1109</styleUrl>
+            <Point id="1107">
+                <coordinates>139.8819793769745,35.62548210888883,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1113">
+            <name>ディスカバリーギフト</name>
+            <styleUrl>#1114</styleUrl>
+            <Point id="1112">
+                <coordinates>139.88328215942215,35.62505605408059,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1118">
+            <name>エクスペディション・フォトアーカイヴ</name>
+            <styleUrl>#1119</styleUrl>
+            <Point id="1117">
+                <coordinates>139.88113534998413,35.62674376338182,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1123">
+            <name>ペドラーズ・アウトポスト</name>
+            <styleUrl>#1124</styleUrl>
+            <Point id="1122">
+                <coordinates>139.88123911760607,35.6267657690279,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1128">
+            <name>ルックアウト・トレーダー</name>
+            <styleUrl>#1129</styleUrl>
+            <Point id="1127">
+                <coordinates>139.8814682737277,35.62694452524924,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1133">
+            <name>ロストリバーアウトフィッター</name>
+            <styleUrl>#1134</styleUrl>
+            <Point id="1132">
+                <coordinates>139.88222003262334,35.62677443516585,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1138">
+            <name>アグラバーマーケットプレイス</name>
+            <styleUrl>#1139</styleUrl>
+            <Point id="1137">
+                <coordinates>139.88262954350137,35.628112961698555,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1143">
+            <name>アブーズ・バザール</name>
+            <styleUrl>#1144</styleUrl>
+            <Point id="1142">
+                <coordinates>139.88234041804847,35.62811056149167,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1148">
+            <name>キス・デ・ガール・ファッション</name>
+            <styleUrl>#1149</styleUrl>
+            <Point id="1147">
+                <coordinates>139.88252646975775,35.62700723497052,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1153">
+            <name>グロットフォト＆ギフト</name>
+            <styleUrl>#1154</styleUrl>
+            <Point id="1152">
+                <coordinates>139.88382750432524,35.62746485770061,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1158">
+            <name>シータートル・スーヴェニア</name>
+            <styleUrl>#1159</styleUrl>
+            <Point id="1157">
+                <coordinates>139.88372426073525,35.62703183626786,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1163">
+            <name>スリーピーホエール・ショップ</name>
+            <styleUrl>#1164</styleUrl>
+            <Point id="1162">
+                <coordinates>139.8826014298775,35.62669513695009,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1168">
+            <name>マーメイドトレジャー</name>
+            <styleUrl>#1169</styleUrl>
+            <Point id="1167">
+                <coordinates>139.882564338146,35.626900580215036,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1173">
+            <name>マーメイドメモリー</name>
+            <styleUrl>#1174</styleUrl>
+            <Point id="1172">
+                <coordinates>139.8830465204795,35.62722882470246,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1178">
+            <name>ノーチラスギフト</name>
+            <styleUrl>#1179</styleUrl>
+            <Point id="1177">
+                <coordinates>139.88401990748127,35.626211716413074,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1183">
+            <name>パークエントランス・ノース・チケットブース</name>
+            <styleUrl>#1184</styleUrl>
+            <Point id="1182">
+                <coordinates>139.88856278451385,35.6276852325185,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1188">
+            <name>パークエントランス・サウス・チケットブース</name>
+            <styleUrl>#1189</styleUrl>
+            <Point id="1187">
+                <coordinates>139.88994325030163,35.626630558175975,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1193">
+            <name>アクアスフィア</name>
+            <styleUrl>#1194</styleUrl>
+            <Point id="1192">
+                <coordinates>139.88911531873848,35.627009703489286,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1198">
+            <name>ディズニーシー・プラザ</name>
+            <styleUrl>#1199</styleUrl>
+            <Point id="1197">
+                <coordinates>139.88897013253737,35.62696701859257,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1203">
+            <name>ミッキー広場</name>
+            <styleUrl>#1204</styleUrl>
+            <Point id="1202">
+                <coordinates>139.88737282135511,35.626591296757205,0.0</coordinates>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>
