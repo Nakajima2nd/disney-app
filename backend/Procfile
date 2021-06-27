@@ -1,0 +1,2 @@
+  release: ./scripts/fetch_data.sh
+  web: gunicorn config.wsgi
