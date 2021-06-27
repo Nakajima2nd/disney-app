@@ -39,7 +39,8 @@ const SpotDialogContent = styled(DialogContent)`
 `
 
 // todo envファイルに書く
-const API_URL = 'http://localhost:8001/spot/list'
+// const API_URL = 'http://localhost:8001/spot/list'
+const API_URL = 'https://disney-app-api.herokuapp.com/spot/list'
 
 const fetcher = async (url) => {
   const res = await axios.get(url)
