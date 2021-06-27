@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-q8q=8!fvzj5up54!twyw1m6ia$ucjmyds&&y-(ti@r3#%vctd(
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "disney-app-api.herokuapp.com/"
+    "disney-app-api.herokuapp.com"
 ]
 
 
