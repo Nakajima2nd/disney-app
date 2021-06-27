@@ -1,6 +1,6 @@
-from data_manager import CombinedDatamanager
-from models import TravelInput
-from tsp_solver import RandomTspSolver
+from disneyapp.data_manager import CombinedDatamanager
+from disneyapp.models import TravelInput
+from disneyapp.tsp_solver import RandomTspSolver
 import copy, json
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
