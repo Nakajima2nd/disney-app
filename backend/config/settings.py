@@ -13,7 +13,9 @@ SECRET_KEY = 'django-insecure-q8q=8!fvzj5up54!twyw1m6ia$ucjmyds&&y-(ti@r3#%vctd(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "disney-app-api.herokuapp.com/"
+]
 
 
 # Application definition
