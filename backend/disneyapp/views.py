@@ -9,7 +9,8 @@ from rest_framework.decorators import api_view
 @api_view(["GET", "POST"])
 def spot_list(request):
     spots_json_org = CombinedDatamanager.get_combined_spot_data()
-    spots_json_edited = edit_static_spots_data(spots_json_org)
+    filtered_spot_list = filter_unuse_spots(spots_json_org)
+    spots_json_edited = edit_static_spots_data(filtered_spot_list)
     return Response(spots_json_edited)
 
 
@@ -27,7 +28,32 @@ def search(request):
     return Response(tour.to_dict())
 
 
+def filter_unuse_spots(org_spot_list):
+    """
+    不要なスポットを削除する。
+    """
+    filter_spots = [
+        # 乗り場と降り場が異なるアトラクションはのぞく
+        "ディズニーシー・トランジットスチーマーライン（メディテレーニアンハーバー）",
+        "ディズニーシー・エレクトリックレールウェイ（アメリカンウォーターフロント）",
+        "ディズニーシー・トランジットスチーマーライン（アメリカンウォーターフロント）",
+        "ディズニーシー・エレクトリックレールウェイ（ポートディスカバリー）",
+        "ディズニーシー・トランジットスチーマーライン（ロストリバーデルタ）",
+        # play-timeが存在しないアトラクションはのぞく
+        "フォートレス・エクスプロレーション",
+        "アリエルのプレイグラウンド"
+    ]
+    filtered_spot_list = []
+    for org_spot in org_spot_list:
+        if org_spot["name"] not in filter_spots:
+            filtered_spot_list.append(org_spot)
+    return filtered_spot_list
+
+
 def edit_static_spots_data(spots_json_org):
+    """
+    フロントエンドの仕様に合わせてtypeをキーにしたdictに編集する。
+    """
     spots_obj = {}
     spots_json_org_copied = copy.deepcopy(spots_json_org)
     for spot_data in spots_json_org_copied:
