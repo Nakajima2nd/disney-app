@@ -1,5 +1,5 @@
-from data_manager import StaticDataManager, CombinedDatamanager
-from models import Tour, TourSpot, Subroute, TravelInput
+from disneyapp.data_manager import StaticDataManager, CombinedDatamanager
+from disneyapp.models import Tour, TourSpot, Subroute, TravelInput
 import random, copy
 
 
