@@ -1,3 +1,5 @@
+from disneyapp.data_manager import StaticDataManager
+
 class Subroute:
     def __init__(self):
         self.start_spot_id = -1
@@ -130,6 +132,9 @@ class TravelInput:
                 travel_input_spot.spot_id = int(spot["spot-id"])
             except:
                 self.error_message = "spot-idには整数を指定してください。"
+                return
+            if not StaticDataManager.is_exist_spot_id(travel_input_spot.spot_id):
+                self.error_message = "spot-idに存在しないスポットID(" + str(travel_input_spot.spot_id) + ")が指定されています。"
                 return
             if json_data.get("stay-time"):
                 try:

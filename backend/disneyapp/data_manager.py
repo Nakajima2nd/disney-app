@@ -14,6 +14,9 @@ class DynamicDataManager:
     @classmethod
     def fetch_latest_data(cls):
         current_time = int(time.time())
+        # 前回データ取得時から5分以内であれば前回取得データを使いまわす
+        if current_time - cls.prev_fetch_time < 300:
+            return cls.prev_fetch_data
         cls.prev_fetch_time = current_time
         url = DynamicDataManager.GAS_URL + "?mode=latest"
         req = urllib.request.Request(url)
@@ -95,6 +98,14 @@ class StaticDataManager:
         if not cls.__all_spot_pair:
             cls.__load_all_spot_pair()
         return cls.__all_spot_pair
+
+    @classmethod
+    def is_exist_spot_id(cls, target_id):
+        spots = cls.get_spots()
+        for spot in spots:
+            if target_id == spot["spot_id"]:
+                return True
+        return False
 
 
 class CombinedDatamanager:
