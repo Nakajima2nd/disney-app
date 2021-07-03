@@ -7,7 +7,7 @@ class DynamicDataManager:
     """
     待ち時間や運営中/停止中などの動的情報を管理するクラス。
     """
-    GAS_URL = "https://script.google.com/macros/s/AKfycbzMWNM6QB2lgqFGcsyWHHvTinbNitmh2OmEPaXce8j8z6ufFf8mzojztc1nnj4nooF1jA/exec"
+    GAS_URL = "https://script.google.com/macros/s/AKfycbxb7eif10mJTk8yweLmabtNBomRph2H-9E7phD8fv2WQiIgmwjmzHQTF2FXQu5eF737Ng/exec"
     prev_fetch_time = 0
     prev_fetch_data = {}
 
@@ -29,10 +29,11 @@ class DynamicDataManager:
             if key == "timestamp":
                 ret_dict[key] = raw_data_dict[key]
             else:
-                enable_str, wait_time = raw_data_dict[key].split(",")
+                enable_str, standby_pass_status, wait_time = raw_data_dict[key].split(",")
                 enable = True if enable_str == "運営中" else False
                 ret_dict["spots"][key] = {
                     "enable": enable,
+                    "sp_status": standby_pass_status,
                     "wait-time": int(wait_time)
                 }
         return ret_dict
@@ -113,4 +114,5 @@ class CombinedDatamanager:
                 continue
             elem["enable"] = dynamic_data["spots"][name]["enable"]
             elem["wait-time"] = dynamic_data["spots"][name]["wait-time"]
+            elem["sp_status"] = dynamic_data["spots"][name]["sp_status"]
         return static_data
