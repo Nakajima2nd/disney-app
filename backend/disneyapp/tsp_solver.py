@@ -20,12 +20,10 @@ class RandomTspSolver:
     TRY_TIMES = 1000  # 試行回数
 
     # 歩くスピード [m/s]
-    # https://touringr.com/matome/5173/
-    # todo:要調整
     WALK_SPEED_DICT = {
-        "slow": 1.00,
-        "normal": 1.22,
-        "fast": 1.5
+        "slow": 0.85,
+        "normal": 1.00,
+        "fast": 1.15
     }
 
     def __init__(self):
@@ -53,10 +51,11 @@ class RandomTspSolver:
         current_best_tour = None
         for count in range(RandomTspSolver.TRY_TIMES):
             current_tour = random.sample(base_tour, len(base_tour))
-            score = self.__eval_spot_list_order(current_tour)
+            current_tour_with_od = [travel_input.start_spot_id] + current_tour + [travel_input.goal_spot_id]
+            score = self.__eval_spot_list_order(current_tour_with_od)
             if score < current_best_score:
                 current_best_score = score
-                current_best_tour = copy.deepcopy(current_tour)
+                current_best_tour = copy.deepcopy(current_tour_with_od)
         return self.__build_tour(travel_input, current_best_tour)
 
 
@@ -113,26 +112,30 @@ class RandomTspSolver:
     def __build_tour(self, travel_input, spot_order):
         """
         巡回探索の入出力を受け取り、返却情報を構築する。
+        """
+        tour = self.__trace_from_front(travel_input, spot_order)
+        self.__set_subroute_coordinates(tour)
+        self.__set_spot(spot_order, tour)
+        return tour
 
-        Parameter:
-        ----------
-        travel_input : TravelInput
-            巡回経路探索の入力情報。
-        spot_order : array-like(int)
-            スポットIDのリスト。最適巡回順にソート済。
+    def __set_subroute_coordinates(self, tour):
         """
-        if travel_input.time_mode == "start":
-            return self.__trace_from_front(travel_input, spot_order)
-        else:
-            return self.__trace_from_back(travel_input, spot_order)
+        Tourオブジェクトの個別経路の形状点列を設定する。
+        """
+        subroutes = tour.subroutes
+        for subroute in subroutes:
+            node_list = self.cost_table[(subroute.start_spot_id, subroute.goal_spot_id)]["nodes"]
+            for i, dst_node_id in enumerate(node_list):
+                if i == 0:
+                    continue
+                org_node_id = node_list[i - 1]
+                coord_list = self.__node_pair_to_coords(org_node_id, dst_node_id)
+                subroute.coords.extend(coord_list)
 
-    def __trace_from_front(self, travel_input, spot_order):
+    def __set_spot(self, spot_order, tour):
         """
-        巡回経路を出発側からTraceし、スポットの到着時刻などを算出する。
+        Tourオブジェクトのスポット情報を設定する。
         """
-        tour = Tour()
-        tour.start_time = sec_to_hhmm(travel_input.specified_time)
-        current_time = travel_input.specified_time
         for spot_id in spot_order:
             tour_spot = TourSpot()
             tour_spot.spot_id = spot_id
@@ -143,6 +146,14 @@ class RandomTspSolver:
             tour_spot.wait_time = self.spot_data_dict[spot_id]["wait-time"]
             tour_spot.play_time = self.spot_data_dict[spot_id]["play-time"]
             tour.spots.append(tour_spot)
+
+    def __trace_from_front(self, travel_input, spot_order):
+        """
+        巡回経路を出発側からTraceし、スポットの到着時刻などを算出する。
+        """
+        tour = Tour()
+        tour.start_time = sec_to_hhmm(travel_input.specified_time)
+        current_time = travel_input.specified_time
         for i, spot_id in enumerate(spot_order):
             if i == 0:
                 continue
@@ -157,24 +168,10 @@ class RandomTspSolver:
             subroute.goal_time = sec_to_hhmm(current_time)
             current_time += self.spot_data_dict[spot_id]["play-time"]
             current_time += max(self.spot_data_dict[spot_id]["wait-time"] * 60, 0)  # note:待ち時間が-1の場合は0にする
-            node_list = self.cost_table[(subroute.start_spot_id, subroute.goal_spot_id)]["nodes"]
-            for i, dst_node_id in enumerate(node_list):
-                if i == 0:
-                    continue
-                org_node_id = node_list[i - 1]
-                coord_list = self.__node_pair_to_coords(org_node_id, dst_node_id)
-                subroute.coords.extend(coord_list)
             tour.subroutes.append(subroute)
             del subroute
         tour.goal_time = sec_to_hhmm(current_time)
         return tour
-
-    def __trace_from_back(self, travel_input, spot_order):
-        """
-        巡回経路をゴール側からTraceし、スポットの到着時刻などを算出する。
-        """
-        # todo: 実装する。とりあえずmode=startと同じ挙動にしておく。
-        return self.__trace_from_front(travel_input, spot_order)
 
     def __node_pair_to_coords(self, org_node_id, dst_node_id):
         """

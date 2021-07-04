@@ -195,7 +195,7 @@ class TravelInput:
             try:
                 # hh:mm -> 秒数 への変換
                 hh_str, mm_str = spot_json["desired-arrival-time"].split(":")
-                self.specified_time = int(hh_str) * 3600 + int(mm_str) * 60
+                travel_input_spot.desired_arrival_time = int(hh_str) * 3600 + int(mm_str) * 60
             except:
                 self.error_message = "時間の形式が不正です。hh:mm形式で指定してください。"
                 return None
