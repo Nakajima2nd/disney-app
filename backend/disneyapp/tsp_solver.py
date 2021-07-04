@@ -149,25 +149,39 @@ class RandomTspSolver:
 
     def __trace_from_front(self, travel_input, spot_order):
         """
-        巡回経路を出発側からTraceし、スポットの到着時刻などを算出する。
+        巡回経路を出発側からTraceし、スポットの到着時刻を算出する。
         """
         tour = Tour()
         tour.start_time = sec_to_hhmm(travel_input.specified_time)
         current_time = travel_input.specified_time
-        for i, spot_id in enumerate(spot_order):
+        for i, dst_spot_id in enumerate(spot_order):
             if i == 0:
                 continue
             subroute = Subroute()
+
+            # 個別経路のorg, dstのスポットIDを設定
             subroute.start_spot_id = spot_order[i - 1]
-            subroute.goal_spot_id = spot_id
+            subroute.goal_spot_id = dst_spot_id
             subroute.start_time = sec_to_hhmm(current_time)
+
+            # orgスポットからdstスポットに移動する
             subroute.distance = int(self.cost_table[(subroute.start_spot_id, subroute.goal_spot_id)]["distance"])
             speed = RandomTspSolver.WALK_SPEED_DICT[travel_input.walk_speed]
             subroute.transit_time = int(float(subroute.distance) / speed)
             current_time += subroute.transit_time
+            # note: 目的地に到着希望時刻が設定されている & 到着希望時刻より前に到着した場合は、到着希望時刻まで待機する
+            desired_arrival_time = -1
+            for spot in travel_input.spots:
+                if spot.spot_id == dst_spot_id:
+                    desired_arrival_time = spot.desired_arrival_time
+            if desired_arrival_time != -1:
+                current_time = max(current_time, desired_arrival_time)
             subroute.goal_time = sec_to_hhmm(current_time)
-            current_time += self.spot_data_dict[spot_id]["play-time"]
-            current_time += max(self.spot_data_dict[spot_id]["wait-time"] * 60, 0)  # note:待ち時間が-1の場合は0にする
+
+            # dstスポットのイベントを消化するまでの時間を計測
+            current_time += max(self.spot_data_dict[dst_spot_id]["wait-time"] * 60, 0)  # note:待ち時間が-1の場合は0にする
+            current_time += self.spot_data_dict[dst_spot_id]["play-time"]
+            # current_time += goal_spot_info.stay_time if goal_spot_info.stay_time != -1 else 0
             tour.subroutes.append(subroute)
             del subroute
         tour.goal_time = sec_to_hhmm(current_time)

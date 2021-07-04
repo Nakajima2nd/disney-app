@@ -71,15 +71,14 @@ class Tour:
 class TravelInputSpot:
     def __init__(self):
         self.spot_id = -1
-        self.desired_arrival_time = 0  # 00:00 からの経過秒数
+        self.desired_arrival_time = -1  # 00:00 からの経過秒数
         self.stay_time = -1  # [秒]
-        self.specified_wait_time = 0  # [秒]
 
 
 class TravelInput:
     def __init__(self, json_data):
         self.time_mode = ""
-        self.specified_time = 0  # 00:00からの経過秒数
+        self.specified_time = -1  # 00:00からの経過秒数
         self.walk_speed = ""
         self.start_spot_id = -1
         self.goal_spot_id = -1
@@ -184,11 +183,13 @@ class TravelInput:
         if not StaticDataManager.is_exist_spot_id(travel_input_spot.spot_id):
             self.error_message = "spot-idに存在しないスポットID(" + str(travel_input_spot.spot_id) + ")が指定されています。"
             return None
+        # todo: 開始時刻が指定されているスポットの場合、desired-arrival-timeにその値を詰める
 
         spot_type = StaticDataManager.get_spot_attr(travel_input_spot.spot_id)["type"]
 
         # desired-arrival-time
         if spot_json.get("desired-arrival-time"):
+            # todo: 開始時刻が指定されているスポットの場合エラーにする
             if spot_type not in ["attraction", "greeting", "restaurant", "place"]:
                 self.error_message = "desired-arrival-timeを指定できるのは、attraction/greeting/restaurant/placeのいずれかのみです。"
                 return None
@@ -217,7 +218,8 @@ class TravelInput:
                 self.error_message = "specified-wait-timeを指定できるのはshowのみです。"
                 return None
             try:
-                travel_input_spot.specified_wait_time = int(spot_json["specified-wait-time"]) * 60
+                # note: 指定された待ち時間の分だけ到着希望時刻を早める
+                travel_input_spot.desired_arrival_time -= int(spot_json["specified-wait-time"]) * 60
             except:
                 self.error_message = "specified-wait-timeには整数を指定してください。"
                 return None
@@ -232,8 +234,8 @@ class TravelInput:
             self.error_message = "spotsが存在しません。"
             return False
         spots = json_data["spots"]
-        if len(spots) < 3:
-            self.error_message = "spotsの要素数は3つ以上指定してください。"
+        if len(spots) == 0:
+            self.error_message = "spotsの要素数は1つ以上指定してください。"
             return False
         for spot_json in spots:
             if not (travel_input_spot := self.__init_spot(spot_json)):
