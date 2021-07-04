@@ -9,6 +9,8 @@ class Subroute:
         self.goal_time = ""
         self.distance = -1
         self.transit_time = -1
+        # 目的地の到着希望時刻を破っている場合True
+        self.violate_goal_desired_arrival_time = False
         self.coords = []
 
     def to_dict(self):
@@ -183,13 +185,13 @@ class TravelInput:
         if not StaticDataManager.is_exist_spot_id(travel_input_spot.spot_id):
             self.error_message = "spot-idに存在しないスポットID(" + str(travel_input_spot.spot_id) + ")が指定されています。"
             return None
-        # todo: 開始時刻が指定されているスポットの場合、desired-arrival-timeにその値を詰める
+        # todo: showの場合、desired-arrival-timeにその値を詰める
 
         spot_type = StaticDataManager.get_spot_attr(travel_input_spot.spot_id)["type"]
 
         # desired-arrival-time
         if spot_json.get("desired-arrival-time"):
-            # todo: 開始時刻が指定されているスポットの場合エラーにする
+            # todo: showの場合エラーにする
             if spot_type not in ["attraction", "greeting", "restaurant", "place"]:
                 self.error_message = "desired-arrival-timeを指定できるのは、attraction/greeting/restaurant/placeのいずれかのみです。"
                 return None

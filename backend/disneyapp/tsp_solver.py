@@ -52,7 +52,8 @@ class RandomTspSolver:
         for count in range(RandomTspSolver.TRY_TIMES):
             current_tour = random.sample(base_tour, len(base_tour))
             current_tour_with_od = [travel_input.start_spot_id] + current_tour + [travel_input.goal_spot_id]
-            score = self.__eval_spot_list_order(current_tour_with_od)
+            tour = self.__trace_from_front(travel_input, current_tour_with_od)
+            score = self.__eval_spot_list_order(tour)
             if score < current_best_score:
                 current_best_score = score
                 current_best_tour = copy.deepcopy(current_tour_with_od)
@@ -96,18 +97,17 @@ class RandomTspSolver:
             link_dict[key] = link["coords"]
         return link_dict
 
-    def __eval_spot_list_order(self, spot_list):
+    def __eval_spot_list_order(self, tour):
         """
-        巡回順の評価値を返す。現状、経路長だけで評価している。
+        巡回順の評価値を返す。
         """
-        # todo: 到着時刻範囲などのペナルティコストも盛る
-        distance = 0
-        for i, current_spot in enumerate(spot_list):
-            if i == 0:
-                continue
-            prev_spot = spot_list[i-1]
-            distance += self.cost_table[(prev_spot, current_spot)]["distance"]
-        return distance
+        hh_str, mm_str = tour.goal_time.split(":")
+        score = int(hh_str) * 3600 + int(mm_str) * 60
+        # 到着希望時刻を1つ破るごとに2時間のペナルティ
+        for subroute in tour.subroutes:
+            if subroute.violate_goal_desired_arrival_time:
+                score += 3600 * 2
+        return score
 
     def __build_tour(self, travel_input, spot_order):
         """
@@ -171,17 +171,20 @@ class RandomTspSolver:
             current_time += subroute.transit_time
             # note: 目的地に到着希望時刻が設定されている & 到着希望時刻より前に到着した場合は、到着希望時刻まで待機する
             desired_arrival_time = -1
+            stay_time = -1
             for spot in travel_input.spots:
                 if spot.spot_id == dst_spot_id:
                     desired_arrival_time = spot.desired_arrival_time
+                    stay_time = spot.stay_time
             if desired_arrival_time != -1:
+                subroute.violate_goal_desired_arrival_time = (current_time - desired_arrival_time > 0)
                 current_time = max(current_time, desired_arrival_time)
             subroute.goal_time = sec_to_hhmm(current_time)
 
             # dstスポットのイベントを消化するまでの時間を計測
             current_time += max(self.spot_data_dict[dst_spot_id]["wait-time"] * 60, 0)  # note:待ち時間が-1の場合は0にする
             current_time += self.spot_data_dict[dst_spot_id]["play-time"]
-            # current_time += goal_spot_info.stay_time if goal_spot_info.stay_time != -1 else 0
+            current_time += stay_time if stay_time != -1 else 0
             tour.subroutes.append(subroute)
             del subroute
         tour.goal_time = sec_to_hhmm(current_time)
