@@ -1178,6 +1178,61 @@
                 </Icon>
             </IconStyle>
         </Style>
+        <Style id="1209">
+            <IconStyle id="1210">
+                <color>ffb469ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1211">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1214">
+            <IconStyle id="1215">
+                <color>ffb469ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1216">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1219">
+            <IconStyle id="1220">
+                <color>ffb469ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1221">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1224">
+            <IconStyle id="1225">
+                <color>ffb469ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1226">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="1229">
+            <IconStyle id="1230">
+                <color>ffb469ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="1231">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
         <Placemark id="673">
             <name>ソアリン：ファンタスティック・フライト</name>
             <styleUrl>#674</styleUrl>
@@ -1925,6 +1980,41 @@
             <styleUrl>#1204</styleUrl>
             <Point id="1202">
                 <coordinates>139.88737282135511,35.626591296757205,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1208">
+            <name>ミッキー＆フレンズのハーバーグリーティング</name>
+            <styleUrl>#1209</styleUrl>
+            <Point id="1207">
+                <coordinates>139.88737282135511,35.626591296757205,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1213">
+            <name>ビッグバンドビート～ア・スペシャルトリート～</name>
+            <styleUrl>#1214</styleUrl>
+            <Point id="1212">
+                <coordinates>139.88824637236533,35.62484764083992,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1218">
+            <name>ディズニー・ライト・ザ・ナイト</name>
+            <styleUrl>#1219</styleUrl>
+            <Point id="1217">
+                <coordinates>139.88737282135511,35.626591296757205,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1223">
+            <name>マイ・フレンド・ダッフィー</name>
+            <styleUrl>#1224</styleUrl>
+            <Point id="1222">
+                <coordinates>139.88491178287993,35.62454488725738,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1228">
+            <name>ソング・オブ・ミラージュ</name>
+            <styleUrl>#1229</styleUrl>
+            <Point id="1227">
+                <coordinates>139.88223858921663,35.625848533170725,0.0</coordinates>
             </Point>
         </Placemark>
     </Document>
