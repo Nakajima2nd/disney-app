@@ -68,24 +68,12 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
   const { data: spotList, error, mutate } = useSWR(API_URL, fetcher)
   const [keyword, setKeyword] = useState('')
   const [tab, setTab] = useState(0)
-  const [control, setControl] = useState(0)
-  const [switches, setSwitches] = useState({
-    desiredArrivalTime: false,
-    stayTime: false,
-    specifiedWaitTime: false
-  })
 
   if (error) return <Error />
   if (!spotList) return <Loading />
 
   const handleClose = () => {
     setOpen(false)
-    setTimeout(setControl(0), 2000)
-    setTimeout(setSwitches({
-      desiredArrivalTime: false,
-      stayTime: false,
-      specifiedWaitTime: false
-    }), 2000)
   }
 
   // todo: 日本語未確定の状態では絞り込みは行わなくしたい
@@ -98,20 +86,20 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
   }
 
   const handleSwitches = (event) => {
-    setSwitches(assoc(event.target.name, event.target.checked, switches))
+    setEditing(assoc(event.target.name, event.target.checked, editing))
   }
 
   const handleClickSpot = (spot) => (event) => {
     const newSpot = pipe(
       assoc('spotId', spot.spot_id),
-      assoc('name', spot.name)
+      assoc('name', spot.name),
+      assoc('step', 1)
     )(editing)
     setEditing(newSpot)
-    setControl(1)
   }
 
   const handleBack = () => {
-    setControl(0)
+    setEditing(assoc('step', 0, editing))
   }
 
   const handleDesiredArrivalTime = (date) => {
@@ -127,11 +115,16 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
   }
 
   const handleComplete = () => {
+    const newSpot = pipe(
+      assoc('desiredArrivalTime', editing.checkedDesiredArrivalTime ? editing.desiredArrivalTime : null),
+      assoc('stayTime', editing.checkedStayTime ? editing.stayTime : ''),
+      assoc('specifiedWaitTime', editing.checkedSpecifiedWaitTime ? editing.specifiedWaitTime : '')
+    )(editing)
     if (selected === -1) {
-      setSpots(append(editing))
+      setSpots(append(newSpot))
     }
     else {
-      setSpots(update(selected, editing, spots))
+      setSpots(update(selected, newSpot, spots))
     }
     handleClose()
   }
@@ -149,7 +142,7 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
         </CloseButton>
       </DialogHead>
       <SpotDialogContent>
-        {control === 0 &&
+        {editing.step === 0 &&
           <SpotSelect
             keyword={keyword}
             handleKeyword={handleKeyword}
@@ -160,20 +153,19 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
             handleClickSpot={handleClickSpot}
           />
         }
-        {control === 1 &&
+        {editing.step === 1 &&
           <ConditionInput
             handleDesiredArrivalTime={handleDesiredArrivalTime}
             handleStayTime={handleStayTime}
             handleSpecifiedWaitTime={handleSpecifiedWaitTime}
             tab={tab}
             editing={editing}
-            switches={switches}
             handleSwitches={handleSwitches}
           />
         }
       </SpotDialogContent>
       <DialogActions>
-        {control === 1 && <>
+        {editing.step === 1 && <>
           <Button onClick={handleBack} color="primary">もどる</Button>
           <Button onClick={handleComplete} color="primary">決定</Button>
         </>}
@@ -212,15 +204,15 @@ const SpotSelect = ({ keyword, handleKeyword, tab, handleTab, spotList, editing,
   </>)
 }
 
-const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecifiedWaitTime, tab, editing, switches, handleSwitches }) => {
+const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecifiedWaitTime, tab, editing, handleSwitches }) => {
   return (<>
     <Text>{editing.name}</Text>
     {(tab === 0 || tab === 1 || tab === 3) && <>
       <ConditionSwitch
-        control={<Switch checked={switches.desiredArrivalTime} color="primary" onChange={handleSwitches} name="desiredArrivalTime" />}
+        control={<Switch checked={editing.checkedDesiredArrivalTime} color="primary" onChange={handleSwitches} name="checkedDesiredArrivalTime" />}
         label={<Text color="textSecondary">到着希望時間を指定する</Text>}
       />
-      <Collapse in={switches.desiredArrivalTime}>
+      <Collapse in={editing.checkedDesiredArrivalTime}>
         <DesiredArrivalTimePicker
           margin="normal"
           label="到着希望時間"
@@ -235,10 +227,10 @@ const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecif
     </>}
     {(tab === 1 || tab === 2) && <>
       <ConditionSwitch
-        control={<Switch checked={switches.stayTime} color="primary" onChange={handleSwitches} name="stayTime" />}
+        control={<Switch checked={editing.checkedStayTime} color="primary" onChange={handleSwitches} name="checkedStayTime" />}
         label={<Text color="textSecondary">滞在時間を指定する</Text>}
       />
-      <Collapse in={switches.stayTime}>
+      <Collapse in={editing.checkedStayTime}>
         <StayTimeSelect
           label="滞在時間"
           value={editing.stayTime}
@@ -254,10 +246,10 @@ const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecif
     </>}
     {tab === 4 && <>
       <ConditionSwitch
-        control={<Switch checked={switches.specifiedWaitTime} color="primary" onChange={handleSwitches} name="specifiedWaitTime" />}
+        control={<Switch checked={editing.checkedSpecifiedWaitTime} color="primary" onChange={handleSwitches} name="checkedSpecifiedWaitTime" />}
         label={<Text color="textSecondary">待ち時間を指定する</Text>}
       />
-      <Collapse in={switches.specifiedWaitTime}>
+      <Collapse in={editing.checkedSpecifiedWaitTime}>
         <SpecifiedWaitTimeSelect
           label="指定待ち時間"
           value={editing.specifiedWaitTime}

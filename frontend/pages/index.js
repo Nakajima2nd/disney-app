@@ -67,7 +67,11 @@ const initialEditing = {
   name: '',
   desiredArrivalTime: null,
   stayTime: '',
-  specifiedWaitTime: ''
+  specifiedWaitTime: '',
+  checkedDesiredArrivalTime: false,
+  checkedStayTime: false,
+  checkedSpecifiedWaitTime: false,
+  step: 0
 }
 
 const Home = () => {
