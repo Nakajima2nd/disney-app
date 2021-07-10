@@ -1,8 +1,11 @@
 import styled from 'styled-components'
-import { Box, Button, MenuItem, TextField, Typography } from '@material-ui/core'
+import { Box, Button, IconButton, MenuItem, TextField, Typography } from '@material-ui/core'
+import { Close } from '@material-ui/icons'
 import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
-import { DatePicker, TimePicker } from '@material-ui/pickers';
+import { TimePicker } from '@material-ui/pickers';
+import Link from 'next/link'
+import { remove } from 'ramda'
 
 const Wrap = styled(Box)`
   display: flex;
@@ -14,6 +17,7 @@ const Text = styled(Typography)`
 
 const SpotButton = styled(Button)`
   margin: 16px 0 0;
+  flex-grow: 1;
 `
 
 const PlusButton = styled(Button)`
@@ -24,10 +28,6 @@ const Condition = styled(Box)`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-`
-
-const ConditionDatePicker = styled(DatePicker)`
-  flex-basis: 20%;
 `
 
 const ConditionTimePicker = styled(TimePicker)`
@@ -48,23 +48,31 @@ const SearchButton = styled(Button)`
   margin: 16px 0 0;
 `
 
+const Spot = styled(Box)`
+  display: flex;
+  position: relative;
+`
+
+const DeleteButton = styled(IconButton)`
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  margin: 8px 0 0;
+  padding: 8px;
+`
+
 const initialEditing = {
   spotId: null,
   name: '',
   desiredArrivalTime: null,
-  stayTime: 0
+  stayTime: '',
+  specifiedWaitTime: ''
 }
-
-// const initialSpot = {
-//   spotId: 102,
-//   name: 'パークエントランス・ノース・チケットブース'
-// }
 
 const Home = () => {
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState({})
-  // const [startSpot, setStartSpot] = useState(initialSpot)
-  // const [goalSpot, setGoalSpot] = useState(initialSpot)
   const [spots, setSpots] = useState([])
   const [selected, setSelected] = useState(-1)
   const [date, setDate] = useState(new Date())
@@ -89,29 +97,31 @@ const Home = () => {
     setWalkSpeed(event.target.value)
   }
 
+  const handleDelete = (index) => (event) => {
+    console.log('del')
+    setSpots(remove(index, 1, spots))
+  }
+
   const handleSearch = () => {
-    console.log('検索')
+    console.log(spots)
   }
 
   return (
     <Wrap>
       <Text>回りたいスポットを入れてね</Text>
-      {/* <SpotButton
-        variant="outlined"
-        color="primary"
-        onClick={handleOpen(startSpot, -3)}
-      >
-        {startSpot.name}
-      </SpotButton> */}
       {spots.map((spot, index) =>
-        <SpotButton
-          key={index}
-          variant="outlined"
-          color="primary"
-          onClick={handleOpen(spot, index)}
-        >
-          {spot.name}
-        </SpotButton>
+        <Spot key={index}>
+          <SpotButton
+            variant="outlined"
+            color="primary"
+            onClick={handleOpen(spot, index)}
+          >
+            {spot.name}
+          </SpotButton>
+          <DeleteButton onClick={handleDelete(index)}>
+            <Close />
+          </DeleteButton>
+        </Spot>
       )}
       <PlusButton
         variant="outlined"
@@ -120,13 +130,6 @@ const Home = () => {
       >
         追加
       </PlusButton>
-      {/* <SpotButton
-        variant="outlined"
-        color="primary"
-        onClick={handleOpen(goalSpot, -2)}
-      >
-        {goalSpot.name}
-      </SpotButton> */}
       <SpotListDialog
         editing={editing}
         selected={selected}
@@ -136,19 +139,8 @@ const Home = () => {
         setOpen={setOpen}
         setSpots={setSpots}
         setIndex={setSelected}
-        // setStartSpot={setStartSpot}
-        // setGoalSpot={setGoalSpot}
       />
       <Condition>
-        {/* <ConditionDatePicker
-          margin="normal"
-          label="日付"
-          format="MM/dd"
-          value={date}
-          onChange={handleDate}
-          okLabel="決定"
-          cancelLabel="キャンセル"
-        /> */}
         <ConditionTimePicker
           margin="normal"
           label="時間"
@@ -178,13 +170,20 @@ const Home = () => {
           <MenuItem value="fast">はやい</MenuItem>
         </ConditionWalkSpeedSelect>
       </Condition>
-      <SearchButton
-        onClick={handleSearch}
-        variant="contained"
-        color="primary"
+      <Link
+        href={{
+          pathname: '/search',
+          query: encodeURI(JSON.stringify(spots))
+        }}
       >
-        検索
-      </SearchButton>
+        <SearchButton
+          onClick={handleSearch}
+          variant="contained"
+          color="primary"
+        >
+          検索
+        </SearchButton>
+      </Link>
     </Wrap>
   )
 }
