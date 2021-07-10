@@ -101,11 +101,26 @@ class StaticDataManager:
 
     @classmethod
     def is_exist_spot_id(cls, target_id):
+        """
+        存在するスポットIDかどうか判定する。存在する場合はTrueを返す。
+        """
         spots = cls.get_spots()
         for spot in spots:
             if target_id == spot["spot_id"]:
                 return True
         return False
+
+    @classmethod
+    def get_spot_attr(cls, target_id):
+        """
+        スポットIDを指定して、そのスポットの情報をdict出返す。
+        存在しないスポットを指定された場合はNoneを返す。
+        """
+        spots = cls.get_spots()
+        for spot in spots:
+            if target_id == spot["spot_id"]:
+                return spot
+        return None
 
 
 class CombinedDatamanager:
