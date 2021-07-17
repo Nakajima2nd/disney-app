@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, IconButton, MenuItem, Switch, Tabs, Tab, TextField, Typography, List, ListItem, ListItemText, Collapse } from '@material-ui/core'
-import { Close, Restaurant, SportsTennis, AccessibilityNew, ShoppingCart } from '@material-ui/icons'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, IconButton, MenuItem, Switch, Tabs, Tab, TextField, Typography, List, ListItem, ListItemText, Collapse, InputAdornment } from '@material-ui/core'
+import { Close, Restaurant, SportsTennis, AccessibilityNew, ShoppingCart, Search } from '@material-ui/icons'
 import { TimePicker } from '@material-ui/pickers';
 import { useState } from 'react'
 import useSWR from 'swr'
 import axios from 'axios'
-import { append, assoc, pipe, update } from 'ramda'
+import { append, assoc, dissoc, pipe, update } from 'ramda'
 import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
 
@@ -148,7 +148,7 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
             handleKeyword={handleKeyword}
             tab={tab}
             handleTab={handleTab}
-            spotList={spotList}
+            spotList={dissoc('place', spotList)}
             editing={editing}
             handleClickSpot={handleClickSpot}
           />
@@ -169,7 +169,6 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
           <Button onClick={handleBack} color="primary">もどる</Button>
           <Button onClick={handleComplete} color="primary">決定</Button>
         </>}
-        <Button onClick={handleClose} color="primary">キャンセル</Button>
       </DialogActions>
     </SpotDialog>
   )
@@ -181,7 +180,13 @@ const SpotSelect = ({ keyword, handleKeyword, tab, handleTab, spotList, editing,
       value={keyword}
       onChange={handleKeyword}
       fullWidth
-    />
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <Search />
+          </InputAdornment>
+        ),
+      }} />
     <SpotTabs
       value={tab}
       onChange={handleTab}
@@ -193,7 +198,7 @@ const SpotSelect = ({ keyword, handleKeyword, tab, handleTab, spotList, editing,
       <SpotTab icon={<SportsTennis />} label="アトラクション" />
       <SpotTab icon={<Restaurant />} label="レストラン" />
       <SpotTab icon={<ShoppingCart />} label="ショップ" />
-      <SpotTab icon={<AccessibilityNew />} label="スポット" />
+      {/* <SpotTab icon={<AccessibilityNew />} label="スポット" /> */}
     </SpotTabs>
     <SpotList
       obj={spotList[Object.keys(spotList)[tab]]}
@@ -205,17 +210,28 @@ const SpotSelect = ({ keyword, handleKeyword, tab, handleTab, spotList, editing,
 }
 
 const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecifiedWaitTime, tab, editing, handleSwitches }) => {
+  const switchLabels = [
+    'スタンバイパスを使用する',
+    '入店時刻を指定する',
+    '到着時刻を指定する'
+  ]
+  const desiredArrivalTimeLabels = [
+    'スタンバイパス指定時刻',
+    '入店時刻',
+    '到着時刻'
+  ]
+
   return (<>
     <Text>{editing.name}</Text>
     {(tab === 0 || tab === 1 || tab === 3) && <>
       <ConditionSwitch
         control={<Switch checked={editing.checkedDesiredArrivalTime} color="primary" onChange={handleSwitches} name="checkedDesiredArrivalTime" />}
-        label={<Text color="textSecondary">到着希望時間を指定する</Text>}
+        label={<Text color="textSecondary">{switchLabels[tab]}</Text>}
       />
       <Collapse in={editing.checkedDesiredArrivalTime}>
         <DesiredArrivalTimePicker
           margin="normal"
-          label="到着希望時間"
+          label={desiredArrivalTimeLabels[tab]}
           format="HH:mm"
           value={editing.desiredArrivalTime}
           onChange={handleDesiredArrivalTime}
