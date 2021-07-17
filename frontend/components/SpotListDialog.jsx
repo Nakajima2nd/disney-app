@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, MenuItem, Tabs, Tab, TextField, Typography, List, ListItem, ListItemText } from '@material-ui/core'
-import { Close, Restaurant, SportsTennis, AccessibilityNew, ShoppingCart } from '@material-ui/icons'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, IconButton, MenuItem, Switch, Tabs, Tab, TextField, Typography, List, ListItem, ListItemText, Collapse, InputAdornment } from '@material-ui/core'
+import { Close, Restaurant, SportsTennis, AccessibilityNew, ShoppingCart, Search } from '@material-ui/icons'
 import { TimePicker } from '@material-ui/pickers';
 import { useState } from 'react'
 import useSWR from 'swr'
 import axios from 'axios'
-import { append, assoc, pipe, update } from 'ramda'
+import { append, assoc, dissoc, pipe, update } from 'ramda'
 import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
 
@@ -43,13 +43,18 @@ const Text = styled(Typography)`
 `
 
 const DesiredArrivalTimePicker = styled(TimePicker)`
+  margin: 0;
 `
 
 const StayTimeSelect = styled(TextField)`
-  margin: 16px 0 8px;
+  margin: 0;
 `
 const SpecifiedWaitTimeSelect = styled(TextField)`
-  margin: 16px 0 8px;
+  margin: 0;
+`
+
+const ConditionSwitch = styled(FormControlLabel)`
+  margin-top: 24px;
 `
 
 const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/spot/list'
@@ -63,13 +68,12 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
   const { data: spotList, error, mutate } = useSWR(API_URL, fetcher)
   const [keyword, setKeyword] = useState('')
   const [tab, setTab] = useState(0)
-  const [control, setControl] = useState(0)
+
   if (error) return <Error />
   if (!spotList) return <Loading />
 
   const handleClose = () => {
     setOpen(false)
-    setTimeout(setControl(0), 1000)
   }
 
   // todo: 日本語未確定の状態では絞り込みは行わなくしたい
@@ -81,17 +85,21 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
     setTab(value)
   }
 
+  const handleSwitches = (event) => {
+    setEditing(assoc(event.target.name, event.target.checked, editing))
+  }
+
   const handleClickSpot = (spot) => (event) => {
     const newSpot = pipe(
       assoc('spotId', spot.spot_id),
-      assoc('name', spot.name)
+      assoc('name', spot.name),
+      assoc('step', 1)
     )(editing)
     setEditing(newSpot)
-    setControl(1)
   }
 
   const handleBack = () => {
-    setControl(0)
+    setEditing(assoc('step', 0, editing))
   }
 
   const handleDesiredArrivalTime = (date) => {
@@ -107,11 +115,16 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
   }
 
   const handleComplete = () => {
+    const newSpot = pipe(
+      assoc('desiredArrivalTime', editing.checkedDesiredArrivalTime ? editing.desiredArrivalTime : null),
+      assoc('stayTime', editing.checkedStayTime ? editing.stayTime : ''),
+      assoc('specifiedWaitTime', editing.checkedSpecifiedWaitTime ? editing.specifiedWaitTime : '')
+    )(editing)
     if (selected === -1) {
-      setSpots(append(editing))
+      setSpots(append(newSpot))
     }
     else {
-      setSpots(update(selected, editing, spots))
+      setSpots(update(selected, newSpot, spots))
     }
     handleClose()
   }
@@ -129,33 +142,33 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
         </CloseButton>
       </DialogHead>
       <SpotDialogContent>
-        {control === 0 &&
+        {editing.step === 0 &&
           <SpotSelect
             keyword={keyword}
             handleKeyword={handleKeyword}
             tab={tab}
             handleTab={handleTab}
-            spotList={spotList}
+            spotList={dissoc('place', spotList)}
             editing={editing}
             handleClickSpot={handleClickSpot}
           />
         }
-        {control === 1 &&
+        {editing.step === 1 &&
           <ConditionInput
             handleDesiredArrivalTime={handleDesiredArrivalTime}
             handleStayTime={handleStayTime}
             handleSpecifiedWaitTime={handleSpecifiedWaitTime}
             tab={tab}
             editing={editing}
+            handleSwitches={handleSwitches}
           />
         }
       </SpotDialogContent>
       <DialogActions>
-        {control === 1 && <>
+        {editing.step === 1 && <>
           <Button onClick={handleBack} color="primary">もどる</Button>
           <Button onClick={handleComplete} color="primary">決定</Button>
         </>}
-        <Button onClick={handleClose} color="primary">キャンセル</Button>
       </DialogActions>
     </SpotDialog>
   )
@@ -167,7 +180,13 @@ const SpotSelect = ({ keyword, handleKeyword, tab, handleTab, spotList, editing,
       value={keyword}
       onChange={handleKeyword}
       fullWidth
-    />
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <Search />
+          </InputAdornment>
+        ),
+      }} />
     <SpotTabs
       value={tab}
       onChange={handleTab}
@@ -179,7 +198,7 @@ const SpotSelect = ({ keyword, handleKeyword, tab, handleTab, spotList, editing,
       <SpotTab icon={<SportsTennis />} label="アトラクション" />
       <SpotTab icon={<Restaurant />} label="レストラン" />
       <SpotTab icon={<ShoppingCart />} label="ショップ" />
-      <SpotTab icon={<AccessibilityNew />} label="スポット" />
+      {/* <SpotTab icon={<AccessibilityNew />} label="スポット" /> */}
     </SpotTabs>
     <SpotList
       obj={spotList[Object.keys(spotList)[tab]]}
@@ -190,47 +209,76 @@ const SpotSelect = ({ keyword, handleKeyword, tab, handleTab, spotList, editing,
   </>)
 }
 
-const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecifiedWaitTime, tab, editing }) => {
+const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecifiedWaitTime, tab, editing, handleSwitches }) => {
+  const switchLabels = [
+    'スタンバイパスを使用する',
+    '入店時刻を指定する',
+    '到着時刻を指定する'
+  ]
+  const desiredArrivalTimeLabels = [
+    'スタンバイパス指定時刻',
+    '入店時刻',
+    '到着時刻'
+  ]
+
   return (<>
     <Text>{editing.name}</Text>
-    {(tab === 0 || tab === 1 || tab === 3) &&
-      <DesiredArrivalTimePicker
-        margin="normal"
-        label="到着希望時間"
-        format="HH:mm"
-        value={editing.desiredArrivalTime}
-        onChange={handleDesiredArrivalTime}
-        okLabel="決定"
-        cancelLabel="キャンセル"
-        fullWidth
+    {(tab === 0 || tab === 1 || tab === 3) && <>
+      <ConditionSwitch
+        control={<Switch checked={editing.checkedDesiredArrivalTime} color="primary" onChange={handleSwitches} name="checkedDesiredArrivalTime" />}
+        label={<Text color="textSecondary">{switchLabels[tab]}</Text>}
       />
-    }
-    {(tab === 1 || tab === 2) &&
-      <StayTimeSelect
-        label="滞在時間"
-        value={editing.stayTime}
-        onChange={handleStayTime}
-        select
-        fullWidth
-      >
-        <MenuItem value="10">10分</MenuItem>
-        <MenuItem value="30">30分</MenuItem>
-        <MenuItem value="60">60分</MenuItem>
-      </StayTimeSelect>
-    }
-    {tab === 4 &&
-      <SpecifiedWaitTimeSelect
-        label="指定待ち時間"
-        value={editing.specifiedWaitTime}
-        onChange={handleSpecifiedWaitTime}
-        select
-        fullWidth
-      >
-        <MenuItem value="10">10分</MenuItem>
-        <MenuItem value="30">30分</MenuItem>
-        <MenuItem value="60">60分</MenuItem>
-      </SpecifiedWaitTimeSelect>
-    }
+      <Collapse in={editing.checkedDesiredArrivalTime}>
+        <DesiredArrivalTimePicker
+          margin="normal"
+          label={desiredArrivalTimeLabels[tab]}
+          format="HH:mm"
+          value={editing.desiredArrivalTime}
+          onChange={handleDesiredArrivalTime}
+          okLabel="決定"
+          cancelLabel="キャンセル"
+          fullWidth
+        />
+      </Collapse>
+    </>}
+    {(tab === 1 || tab === 2) && <>
+      <ConditionSwitch
+        control={<Switch checked={editing.checkedStayTime} color="primary" onChange={handleSwitches} name="checkedStayTime" />}
+        label={<Text color="textSecondary">滞在時間を指定する</Text>}
+      />
+      <Collapse in={editing.checkedStayTime}>
+        <StayTimeSelect
+          label="滞在時間"
+          value={editing.stayTime}
+          onChange={handleStayTime}
+          select
+          fullWidth
+        >
+          <MenuItem value="10">10分</MenuItem>
+          <MenuItem value="30">30分</MenuItem>
+          <MenuItem value="60">60分</MenuItem>
+        </StayTimeSelect>
+      </Collapse>
+    </>}
+    {tab === 4 && <>
+      <ConditionSwitch
+        control={<Switch checked={editing.checkedSpecifiedWaitTime} color="primary" onChange={handleSwitches} name="checkedSpecifiedWaitTime" />}
+        label={<Text color="textSecondary">待ち時間を指定する</Text>}
+      />
+      <Collapse in={editing.checkedSpecifiedWaitTime}>
+        <SpecifiedWaitTimeSelect
+          label="指定待ち時間"
+          value={editing.specifiedWaitTime}
+          onChange={handleSpecifiedWaitTime}
+          select
+          fullWidth
+        >
+          <MenuItem value="10">10分</MenuItem>
+          <MenuItem value="30">30分</MenuItem>
+          <MenuItem value="60">60分</MenuItem>
+        </SpecifiedWaitTimeSelect>
+      </Collapse>
+    </>}
   </>)
 }
 

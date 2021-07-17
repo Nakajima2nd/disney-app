@@ -6,6 +6,7 @@ import { SpotListDialog } from '../components/SpotListDialog'
 import { TimePicker } from '@material-ui/pickers';
 import Link from 'next/link'
 import { remove } from 'ramda'
+import { toKebabCaseObject } from '../utils'
 
 const Wrap = styled(Box)`
   display: flex;
@@ -67,7 +68,11 @@ const initialEditing = {
   name: '',
   desiredArrivalTime: null,
   stayTime: '',
-  specifiedWaitTime: ''
+  specifiedWaitTime: '',
+  checkedDesiredArrivalTime: false,
+  checkedStayTime: false,
+  checkedSpecifiedWaitTime: false,
+  step: 0
 }
 
 const Home = () => {
@@ -75,7 +80,7 @@ const Home = () => {
   const [editing, setEditing] = useState({})
   const [spots, setSpots] = useState([])
   const [selected, setSelected] = useState(-1)
-  const [date, setDate] = useState(new Date())
+  const [specifiedTime, setSpecifiedTime] = useState(new Date())
   const [timeMode, setTimeMode] = useState('start')
   const [walkSpeed, setWalkSpeed] = useState('normal')
 
@@ -85,8 +90,8 @@ const Home = () => {
     setOpen(true)
   }
 
-  const handleDate = (date) => {
-    setDate(date);
+  const handleSpecifiedTime = (date) => {
+    setSpecifiedTime(date);
   }
 
   const handleTimeMode = (event) => {
@@ -103,7 +108,6 @@ const Home = () => {
   }
 
   const handleSearch = () => {
-    console.log(spots)
   }
 
   return (
@@ -145,8 +149,8 @@ const Home = () => {
           margin="normal"
           label="時間"
           format="HH:mm"
-          value={date}
-          onChange={handleDate}
+          value={specifiedTime}
+          onChange={handleSpecifiedTime}
           okLabel="決定"
           cancelLabel="キャンセル"
         />
@@ -173,7 +177,16 @@ const Home = () => {
       <Link
         href={{
           pathname: '/search',
-          query: encodeURI(JSON.stringify(spots))
+          query: {
+            param: encodeURI(JSON.stringify(toKebabCaseObject({
+              timeMode: timeMode,
+              specifiedTime: specifiedTime.toLocaleTimeString().substring(0, 5),
+              walkSpeed: walkSpeed,
+              startSpotId: 103,
+              goalSpotId: 103,
+              spots: spots
+            })))
+          }
         }}
       >
         <SearchButton
@@ -184,7 +197,7 @@ const Home = () => {
           検索
         </SearchButton>
       </Link>
-    </Wrap>
+    </Wrap >
   )
 }
 
