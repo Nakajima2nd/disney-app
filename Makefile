@@ -22,3 +22,8 @@ delete-all:
 .PHONY: front-sh
 front-sh:
 	docker-compose exec frontend bash
+
+# nodemodulesを手元にコピーする(エディターの補完を効かせるため)
+.PHONY: copy
+copy:
+	sudo docker cp disney-app_frontend_1:/code/node_modules ./frontend/
