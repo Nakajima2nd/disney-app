@@ -60,7 +60,7 @@ def edit_static_spots_data(spots_json_org):
     for spot_data in spots_json_org_copied:
         target_type = spot_data["type"]
         del [spot_data["type"]]
-        del [spot_data["nearest_node_id"]]
+        del [spot_data["nearest-node-id"]]
         if spot_data.get("play-time"):
             spot_data["play-time"] = int(spot_data["play-time"])
         if spots_obj.get(target_type):

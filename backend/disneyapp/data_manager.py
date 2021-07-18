@@ -36,7 +36,7 @@ class DynamicDataManager:
                 enable = True if enable_str == "運営中" else False
                 ret_dict["spots"][key] = {
                     "enable": enable,
-                    "sp_status": standby_pass_status,
+                    "sp-status": standby_pass_status,
                     "wait-time": int(wait_time)
                 }
         return ret_dict
@@ -106,7 +106,7 @@ class StaticDataManager:
         """
         spots = cls.get_spots()
         for spot in spots:
-            if target_id == spot["spot_id"]:
+            if target_id == spot["spot-id"]:
                 return True
         return False
 
@@ -118,7 +118,7 @@ class StaticDataManager:
         """
         spots = cls.get_spots()
         for spot in spots:
-            if target_id == spot["spot_id"]:
+            if target_id == spot["spot-id"]:
                 return spot
         return None
 
@@ -140,5 +140,5 @@ class CombinedDatamanager:
                 continue
             elem["enable"] = dynamic_data["spots"][name]["enable"]
             elem["wait-time"] = dynamic_data["spots"][name]["wait-time"]
-            elem["sp_status"] = dynamic_data["spots"][name]["sp_status"]
+            elem["sp-status"] = dynamic_data["spots"][name]["sp-status"]
         return static_data
