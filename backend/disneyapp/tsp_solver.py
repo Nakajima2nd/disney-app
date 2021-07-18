@@ -65,7 +65,7 @@ class RandomTspSolver:
         combined_spot_data = CombinedDatamanager.get_combined_spot_data()
         spot_data_dict = {}
         for spot_data in combined_spot_data:
-            spot_data_dict[int(spot_data["spot_id"])] = {
+            spot_data_dict[int(spot_data["spot-id"])] = {
                 "play-time": int(spot_data["play-time"]) if spot_data.get("play-time") else 0,
                 "wait-time": int(spot_data["wait-time"]) if spot_data.get("wait-time") else 0,
                 "name": spot_data["name"],
@@ -80,7 +80,7 @@ class RandomTspSolver:
         all_spot_pair_list = StaticDataManager.get_all_spot_pair()
         cost_table = {}
         for spot_pair in all_spot_pair_list:
-            key = (spot_pair["org_spot_id"], spot_pair["dst_spot_id"])
+            key = (spot_pair["org-spot-id"], spot_pair["dst-spot-id"])
             node_list = spot_pair["nodes"]
             cost_table[key] = {
                 "distance": spot_pair["distance"],
@@ -93,7 +93,7 @@ class RandomTspSolver:
         link_list = StaticDataManager.get_links()
         link_dict = {}
         for link in link_list:
-            key = (int(link["org_node_id"]), int(link["dst_node_id"]))
+            key = (int(link["org-node-id"]), int(link["dst-node-id"]))
             link_dict[key] = link["coords"]
         return link_dict
 
