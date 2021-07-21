@@ -2,13 +2,10 @@ import styled from 'styled-components'
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, IconButton, MenuItem, Switch, Tabs, Tab, TextField, Typography, List, ListItem, ListItemText, Collapse, InputAdornment } from '@material-ui/core'
 import { Close, Restaurant, SportsTennis, AccessibilityNew, ShoppingCart, Search } from '@material-ui/icons'
 import { TimePicker } from '@material-ui/pickers';
-import { useState } from 'react'
-import useSWR from 'swr'
-import axios from 'axios'
 import { append, assoc, dissoc, pipe, update } from 'ramda'
 import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
-import { toCamelCaseObject } from '../utils';
+import { useGetSpotList } from '../hooks'
 
 // todo: 画面サイズによってダイアログの横幅を調節
 const SpotDialog = styled(Dialog)`
@@ -58,20 +55,12 @@ const ConditionSwitch = styled(FormControlLabel)`
   margin-top: 24px;
 `
 
-const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/spot/list'
-
-const fetcher = async (url) => {
-  const res = await axios.get(url)
-  return res.data
-}
-
 export const SpotListDialog = ({ editing, selected, open, spots, setEditing, setOpen, setSpots }) => {
-  const { data, error, mutate } = useSWR(API_URL, fetcher)
+  const { spotList, error, mutate } = useGetSpotList()
 
   if (error) return <Error />
-  if (!data) return <Loading />
+  if (!spotList) return <Loading />
 
-  const spotList = toCamelCaseObject(data)
   const handleClose = () => {
     setOpen(false)
   }
