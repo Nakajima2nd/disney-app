@@ -192,8 +192,8 @@ class TravelInput:
         # desired-arrival-time
         if spot_json.get("desired-arrival-time"):
             # todo: showの場合エラーにする
-            if spot_type not in ["attraction", "greeting", "restaurant", "place"]:
-                self.error_message = "desired-arrival-timeを指定できるのは、attraction/greeting/restaurant/placeのいずれかのみです。"
+            if spot_type not in ["attraction", "greeting", "restaurant", "place", "show"]:
+                self.error_message = "desired-arrival-timeを指定できるのは、attraction/greeting/restaurant/place/showのいずれかのみです。"
                 return None
             try:
                 # hh:mm -> 秒数 への変換
