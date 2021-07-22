@@ -1148,6 +1148,72 @@
             "nearest-node-id": 65,
             "play-time": "1800",
             "url": "https://www.tokyodisneyresort.jp/tds/show/detail/927/"
+        },
+        {
+            "spot-id": 112,
+            "name": "ヴィレッジ・グリーティングプレイス",
+            "short-name": "ヴィレッジ・グリーティングプレイス",
+            "lat": "35.62410452165671",
+            "lon": "139.88563214950267",
+            "type": "greeting",
+            "nearest-node-id": 51,
+            "play-time": "180",
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/905/"
+        },
+        {
+            "spot-id": 113,
+            "name": "ドックサイドステージ（キャラクターグリーティング）",
+            "short-name": "ドックサイドステージ",
+            "lat": "35.62363420865239",
+            "lon": "139.886931289538",
+            "type": "greeting",
+            "nearest-node-id": 100,
+            "play-time": "180",
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/270/"
+        },
+        {
+            "spot-id": 114,
+            "name": "“サルードス・アミーゴス！”グリーティングドック",
+            "short-name": "サルードス・アミーゴス！",
+            "lat": "35.626410442370045",
+            "lon": "139.8822065159945",
+            "type": "greeting",
+            "nearest-node-id": 86,
+            "play-time": "180",
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/904/"
+        },
+        {
+            "spot-id": 115,
+            "name": "ミッキー＆フレンズ・グリーティングトレイル（ミッキー）",
+            "short-name": "グリーティングトレイル（ミッキー）",
+            "lat": "35.625854419808654",
+            "lon": "139.8812056245969",
+            "type": "greeting",
+            "nearest-node-id": 72,
+            "play-time": "180",
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/901/"
+        },
+        {
+            "spot-id": 116,
+            "name": "ミッキー＆フレンズ・グリーティングトレイル（ミニー）",
+            "short-name": "グリーティングトレイル（ミニー）",
+            "lat": "35.625854419808654",
+            "lon": "139.8812056245969",
+            "type": "greeting",
+            "nearest-node-id": 72,
+            "play-time": "180",
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/902/"
+        },
+        {
+            "spot-id": 117,
+            "name": "マーメイドラグーンシアター（キャラクターグリーティング）",
+            "short-name": "マーメイドラグーンシアター",
+            "lat": "35.62640223074321",
+            "lon": "139.88271777395298",
+            "type": "greeting",
+            "nearest-node-id": 140,
+            "play-time": "180",
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/272/"
         }
     ]
 }
