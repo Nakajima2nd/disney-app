@@ -37,6 +37,7 @@ const Search = () => {
   const router = useRouter()
   const param = router.query.param
   const { searchResult, error, mutate } = useGetSearchResult(param)
+  console.log(searchResult)
   if (error) return <Error />
   if (!searchResult) return <Loading />
 

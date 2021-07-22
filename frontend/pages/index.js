@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
 import { TimePicker } from '@material-ui/pickers';
 import { assoc, remove } from 'ramda'
-import { toKebabCaseObject } from '../utils'
+import { formatDateTime, toKebabCaseObject } from '../utils'
 import { useRouter } from 'next/router'
 
 const Wrap = styled(Box)`
@@ -124,7 +124,7 @@ const Home = () => {
           return assoc(cur, spot[cur], acc)
         }
         else if (spot[cur]) {
-          return assoc(cur, cur === 'desiredArrivalTime' ? spot[cur].toLocaleTimeString().substring(0, toLocaleTimeString().substring.length - 3) : spot[cur], acc)
+          return assoc(cur, cur === 'desiredArrivalTime' ? formatDateTime(spot[cur]) : spot[cur], acc)
         }
         else {
           return acc
@@ -139,7 +139,7 @@ const Home = () => {
       query: {
         param: encodeURI(JSON.stringify(toKebabCaseObject({
           timeMode: timeMode,
-          specifiedTime: specifiedTime.toLocaleTimeString().substring(0, specifiedTime.toLocaleTimeString().length - 3),
+          specifiedTime: formatDateTime(specifiedTime),
           walkSpeed: walkSpeed,
           startSpotId: 103,
           goalSpotId: 103,
