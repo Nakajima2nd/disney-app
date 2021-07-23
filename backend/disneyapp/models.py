@@ -137,7 +137,7 @@ class TravelInput:
         """
         start_spot_idを初期化する。初期化に失敗した場合はFalseを返す。
         """
-        if not json_data.get("start-spot-id"):
+        if json_data.get("start-spot-id") == None:
             self.error_message = "start-spot-idが存在しません。"
             return False
         try:
@@ -154,7 +154,7 @@ class TravelInput:
         """
         goal_spot_idを初期化する。初期化に失敗した場合はFalseを返す。
         """
-        if not json_data.get("goal-spot-id"):
+        if json_data.get("goal-spot-id") == None:
             self.error_message = "goal-spot-idが存在しません。"
             return False
         try:
@@ -173,7 +173,7 @@ class TravelInput:
         生成に失敗した場合はNoneを返す。
         """
         # spot-id
-        if not spot_json.get("spot-id"):
+        if spot_json.get("spot-id") == None:
             self.error_message = "spot-idの存在しないspotが存在します。"
             return None
         travel_input_spot = TravelInputSpot()
@@ -185,15 +185,13 @@ class TravelInput:
         if not StaticDataManager.is_exist_spot_id(travel_input_spot.spot_id):
             self.error_message = "spot-idに存在しないスポットID(" + str(travel_input_spot.spot_id) + ")が指定されています。"
             return None
-        # todo: showの場合、desired-arrival-timeにその値を詰める
 
         spot_type = StaticDataManager.get_spot_attr(travel_input_spot.spot_id)["type"]
 
         # desired-arrival-time
         if spot_json.get("desired-arrival-time"):
-            # todo: showの場合エラーにする
-            if spot_type not in ["attraction", "greeting", "restaurant", "place"]:
-                self.error_message = "desired-arrival-timeを指定できるのは、attraction/greeting/restaurant/placeのいずれかのみです。"
+            if spot_type not in ["attraction", "greeting", "restaurant", "place", "show"]:
+                self.error_message = "desired-arrival-timeを指定できるのは、attraction/greeting/restaurant/place/showのいずれかのみです。"
                 return None
             try:
                 # hh:mm -> 秒数 への変換
@@ -232,14 +230,17 @@ class TravelInput:
         """
         spotsを初期化する。初期化に失敗した場合はFalseを返す。
         """
-        if not json_data.get("spots"):
+        if json_data.get("spots") == None:
             self.error_message = "spotsが存在しません。"
             return False
         spots = json_data["spots"]
         if len(spots) == 0:
             self.error_message = "spotsの要素数は1つ以上指定してください。"
             return False
-        for spot_json in spots:
+        for i, spot_json in enumerate(spots):
+            if spot_json.get("spot-id") == None:
+                self.error_message = str(i) + "番目のspotにspot-idが存在しません。"
+                return False
             if not (travel_input_spot := self.__init_spot(spot_json)):
                 return False
             self.spots.append(travel_input_spot)

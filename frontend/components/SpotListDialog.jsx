@@ -2,12 +2,10 @@ import styled from 'styled-components'
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, IconButton, MenuItem, Switch, Tabs, Tab, TextField, Typography, List, ListItem, ListItemText, Collapse, InputAdornment } from '@material-ui/core'
 import { Close, Restaurant, SportsTennis, AccessibilityNew, ShoppingCart, Search } from '@material-ui/icons'
 import { TimePicker } from '@material-ui/pickers';
-import { useState } from 'react'
-import useSWR from 'swr'
-import axios from 'axios'
 import { append, assoc, dissoc, pipe, update } from 'ramda'
 import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
+import { useGetSpotList } from '../hooks'
 
 // todo: 画面サイズによってダイアログの横幅を調節
 const SpotDialog = styled(Dialog)`
@@ -57,17 +55,8 @@ const ConditionSwitch = styled(FormControlLabel)`
   margin-top: 24px;
 `
 
-const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/spot/list'
-
-const fetcher = async (url) => {
-  const res = await axios.get(url)
-  return res.data
-}
-
 export const SpotListDialog = ({ editing, selected, open, spots, setEditing, setOpen, setSpots }) => {
-  const { data: spotList, error, mutate } = useSWR(API_URL, fetcher)
-  const [keyword, setKeyword] = useState('')
-  const [tab, setTab] = useState(0)
+  const { spotList, error, mutate } = useGetSpotList()
 
   if (error) return <Error />
   if (!spotList) return <Loading />
@@ -78,11 +67,11 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
 
   // todo: 日本語未確定の状態では絞り込みは行わなくしたい
   const handleKeyword = (event) => {
-    setKeyword(event.target.value)
+    setEditing(assoc('keyword', event.target.value, editing))
   }
 
   const handleTab = (event, value) => {
-    setTab(value)
+    setEditing(assoc('tab', value, editing))
   }
 
   const handleSwitches = (event) => {
@@ -91,8 +80,9 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
 
   const handleClickSpot = (spot) => (event) => {
     const newSpot = pipe(
-      assoc('spotId', spot.spot_id),
+      assoc('spotId', spot.spotId),
       assoc('name', spot.name),
+      assoc('startTime', spot.startTime),
       assoc('step', 1)
     )(editing)
     setEditing(newSpot)
@@ -116,7 +106,7 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
 
   const handleComplete = () => {
     const newSpot = pipe(
-      assoc('desiredArrivalTime', editing.checkedDesiredArrivalTime ? editing.desiredArrivalTime : null),
+      assoc('desiredArrivalTime', editing.startTime ? editing.startTime : editing.checkedDesiredArrivalTime ? editing.desiredArrivalTime : null),
       assoc('stayTime', editing.checkedStayTime ? editing.stayTime : ''),
       assoc('specifiedWaitTime', editing.checkedSpecifiedWaitTime ? editing.specifiedWaitTime : '')
     )(editing)
@@ -144,9 +134,7 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
       <SpotDialogContent>
         {editing.step === 0 &&
           <SpotSelect
-            keyword={keyword}
             handleKeyword={handleKeyword}
-            tab={tab}
             handleTab={handleTab}
             spotList={dissoc('place', spotList)}
             editing={editing}
@@ -158,7 +146,6 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
             handleDesiredArrivalTime={handleDesiredArrivalTime}
             handleStayTime={handleStayTime}
             handleSpecifiedWaitTime={handleSpecifiedWaitTime}
-            tab={tab}
             editing={editing}
             handleSwitches={handleSwitches}
           />
@@ -174,10 +161,10 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
   )
 }
 
-const SpotSelect = ({ keyword, handleKeyword, tab, handleTab, spotList, editing, handleClickSpot }) => {
+const SpotSelect = ({ handleKeyword, handleTab, spotList, editing, handleClickSpot }) => {
   return (<>
     <TextField
-      value={keyword}
+      value={editing.keyword}
       onChange={handleKeyword}
       fullWidth
       InputProps={{
@@ -188,7 +175,7 @@ const SpotSelect = ({ keyword, handleKeyword, tab, handleTab, spotList, editing,
         ),
       }} />
     <SpotTabs
-      value={tab}
+      value={editing.tab}
       onChange={handleTab}
       variant="scrollable"
       indicatorColor="primary"
@@ -198,18 +185,17 @@ const SpotSelect = ({ keyword, handleKeyword, tab, handleTab, spotList, editing,
       <SpotTab icon={<SportsTennis />} label="アトラクション" />
       <SpotTab icon={<Restaurant />} label="レストラン" />
       <SpotTab icon={<ShoppingCart />} label="ショップ" />
-      {/* <SpotTab icon={<AccessibilityNew />} label="スポット" /> */}
+      <SpotTab icon={<AccessibilityNew />} label="ショー" />
     </SpotTabs>
     <SpotList
-      obj={spotList[Object.keys(spotList)[tab]]}
+      obj={spotList[Object.keys(spotList)[editing.tab]]}
       editing={editing}
-      keyword={keyword}
       handleClickSpot={handleClickSpot}
     />
   </>)
 }
 
-const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecifiedWaitTime, tab, editing, handleSwitches }) => {
+const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecifiedWaitTime, editing, handleSwitches }) => {
   const switchLabels = [
     'スタンバイパスを使用する',
     '入店時刻を指定する',
@@ -223,15 +209,15 @@ const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecif
 
   return (<>
     <Text>{editing.name}</Text>
-    {(tab === 0 || tab === 1 || tab === 3) && <>
+    {(editing.tab === 0 || editing.tab === 1 || editing.tab === 4) && <>
       <ConditionSwitch
         control={<Switch checked={editing.checkedDesiredArrivalTime} color="primary" onChange={handleSwitches} name="checkedDesiredArrivalTime" />}
-        label={<Text color="textSecondary">{switchLabels[tab]}</Text>}
+        label={<Text color="textSecondary">{switchLabels[editing.tab]}</Text>}
       />
       <Collapse in={editing.checkedDesiredArrivalTime}>
         <DesiredArrivalTimePicker
           margin="normal"
-          label={desiredArrivalTimeLabels[tab]}
+          label={desiredArrivalTimeLabels[editing.tab]}
           format="HH:mm"
           value={editing.desiredArrivalTime}
           onChange={handleDesiredArrivalTime}
@@ -241,7 +227,7 @@ const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecif
         />
       </Collapse>
     </>}
-    {(tab === 1 || tab === 2) && <>
+    {(editing.tab === 1 || editing.tab === 2) && <>
       <ConditionSwitch
         control={<Switch checked={editing.checkedStayTime} color="primary" onChange={handleSwitches} name="checkedStayTime" />}
         label={<Text color="textSecondary">滞在時間を指定する</Text>}
@@ -260,14 +246,14 @@ const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecif
         </StayTimeSelect>
       </Collapse>
     </>}
-    {tab === 4 && <>
+    {editing.tab === 3 && <>
       <ConditionSwitch
         control={<Switch checked={editing.checkedSpecifiedWaitTime} color="primary" onChange={handleSwitches} name="checkedSpecifiedWaitTime" />}
-        label={<Text color="textSecondary">待ち時間を指定する</Text>}
+        label={<Text color="textSecondary">余裕をもって到着する</Text>}
       />
       <Collapse in={editing.checkedSpecifiedWaitTime}>
         <SpecifiedWaitTimeSelect
-          label="指定待ち時間"
+          label="分前に到着"
           value={editing.specifiedWaitTime}
           onChange={handleSpecifiedWaitTime}
           select
@@ -282,15 +268,15 @@ const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecif
   </>)
 }
 
-const SpotList = ({ obj, editing, keyword, handleClickSpot }) => {
+const SpotList = ({ obj, editing, handleClickSpot }) => {
   return (
     <CustomList>
-      {obj.filter(spot => spot.name.indexOf(keyword) > -1).map((spot, index) => (
+      {obj.filter(spot => spot.name.indexOf(editing.keyword) > -1).map((spot, index) => (
         <ListItem
           key={index}
           button
           onClick={handleClickSpot(spot)}
-          selected={editing.spotId === spot.spot_id}
+          selected={editing.name === spot.name}
         >
           <ListItemText primary={spot.name} />
         </ListItem>

@@ -39,3 +39,12 @@ export const toCamelCaseObject = (obj) => {
     }, {})
   }
 }
+
+export const formatDateTime = (date) => {
+  if (Object.prototype.toString.call(date).slice(8, -1) === 'Date') {
+    return date.toLocaleTimeString().substring(0, date.toLocaleTimeString().length - 3)
+  }
+  else {
+    return date
+  }
+}

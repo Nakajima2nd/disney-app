@@ -2,11 +2,9 @@ import styled from 'styled-components'
 import { Box, Typography } from '@material-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
-import axios from 'axios'
-import { toCamelCaseObject } from '../../utils'
 import { Error } from '../../components/Error'
 import { Loading } from '../../components/Loading'
+import { useGetSearchResult } from '../../hooks'
 
 const Text = styled(Typography)`
 `
@@ -35,21 +33,13 @@ const Distance = styled(Typography)`
   text-align: center;  
 `
 
-const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/search'
-
-const fetcher = async (url, param) => {
-  const body = JSON.parse(decodeURI(param))
-  const res = await axios.post(url, body)
-  return res.data
-}
-
 const Search = () => {
   const router = useRouter()
   const param = router.query.param
-  const { data, error, mutate } = useSWR(param ? API_URL : null, (url) => fetcher(url, param))
+  const { searchResult, error, mutate } = useGetSearchResult(param)
+  console.log(searchResult)
   if (error) return <Error />
-  if (!data) return <Loading />
-  const searchResult = toCamelCaseObject(data)
+  if (!searchResult) return <Loading />
 
   return (<>
     <Link href="/">もどる</Link>

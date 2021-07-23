@@ -4,9 +4,9 @@ import { Close } from '@material-ui/icons'
 import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
 import { TimePicker } from '@material-ui/pickers';
-import Link from 'next/link'
-import { remove } from 'ramda'
-import { toKebabCaseObject } from '../utils'
+import { assoc, remove } from 'ramda'
+import { formatDateTime, toKebabCaseObject } from '../utils'
+import { useRouter } from 'next/router'
 
 const Wrap = styled(Box)`
   display: flex;
@@ -67,13 +67,23 @@ const initialEditing = {
   spotId: null,
   name: '',
   desiredArrivalTime: null,
+  startTime: null,
   stayTime: '',
   specifiedWaitTime: '',
   checkedDesiredArrivalTime: false,
   checkedStayTime: false,
   checkedSpecifiedWaitTime: false,
-  step: 0
+  step: 0,
+  tab: 0,
+  keyword: ''
 }
+
+const spotInterface = [
+  'spotId',
+  'desiredArrivalTime',
+  'stayTime',
+  'specifiedWaitTime'
+]
 
 const Home = () => {
   const [open, setOpen] = useState(false)
@@ -83,6 +93,7 @@ const Home = () => {
   const [specifiedTime, setSpecifiedTime] = useState(new Date())
   const [timeMode, setTimeMode] = useState('start')
   const [walkSpeed, setWalkSpeed] = useState('normal')
+  const router = useRouter()
 
   const handleOpen = (spot, index) => () => {
     setEditing(spot)
@@ -103,11 +114,39 @@ const Home = () => {
   }
 
   const handleDelete = (index) => (event) => {
-    console.log('del')
     setSpots(remove(index, 1, spots))
   }
 
+  const modifySpots = (spots) => {
+    return spots.map(spot => {
+      return Object.keys(spot).filter(key => spotInterface.includes(key)).reduce((acc, cur) => {
+        if (cur === 'spotId') {
+          return assoc(cur, spot[cur], acc)
+        }
+        else if (spot[cur]) {
+          return assoc(cur, cur === 'desiredArrivalTime' ? formatDateTime(spot[cur]) : spot[cur], acc)
+        }
+        else {
+          return acc
+        }
+      }, {})
+    })
+  }
+
   const handleSearch = () => {
+    router.push({
+      pathname: '/search',
+      query: {
+        param: encodeURI(JSON.stringify(toKebabCaseObject({
+          timeMode: timeMode,
+          specifiedTime: formatDateTime(specifiedTime),
+          walkSpeed: walkSpeed,
+          startSpotId: 103,
+          goalSpotId: 103,
+          spots: modifySpots(spots)
+        })))
+      }
+    })
   }
 
   return (
@@ -171,33 +210,17 @@ const Home = () => {
         >
           <MenuItem value="slow">ゆっくり</MenuItem>
           <MenuItem value="normal">ふつう</MenuItem>
-          <MenuItem value="fast">はやい</MenuItem>
+          <MenuItem value="fast">せかせか</MenuItem>
         </ConditionWalkSpeedSelect>
       </Condition>
-      <Link
-        href={{
-          pathname: '/search',
-          query: {
-            param: encodeURI(JSON.stringify(toKebabCaseObject({
-              timeMode: timeMode,
-              specifiedTime: specifiedTime.toLocaleTimeString().substring(0, 5),
-              walkSpeed: walkSpeed,
-              startSpotId: 103,
-              goalSpotId: 103,
-              spots: spots
-            })))
-          }
-        }}
+      <SearchButton
+        onClick={handleSearch}
+        variant="contained"
+        color="primary"
       >
-        <SearchButton
-          onClick={handleSearch}
-          variant="contained"
-          color="primary"
-        >
-          検索
-        </SearchButton>
-      </Link>
-    </Wrap >
+        検索
+      </SearchButton>
+    </Wrap>
   )
 }
 
