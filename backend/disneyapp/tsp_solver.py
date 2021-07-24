@@ -28,7 +28,7 @@ class RandomTspSolver:
 
     def __init__(self):
         # todo: このへんのdictはsolverではなくdata_managerで持つほうが良い。要リファクタ
-        self.spot_data_dict = RandomTspSolver.__make_spot_data_dict()
+        self.spot_data_dict = {}
         self.cost_table = RandomTspSolver.__make_cost_table()  # org_spot_id, dst_spot_id -> distance
         self.link_dict = RandomTspSolver.__make_link_dict()
 
@@ -46,6 +46,7 @@ class RandomTspSolver:
         tour : Tour
             巡回探索の出力オブジェクト。
         """
+        self.spot_data_dict = RandomTspSolver.__make_spot_data_dict(travel_input.wait_time_mode)
         base_tour = [ travel_input_spot.spot_id for travel_input_spot in travel_input.spots ]
         current_best_score = 9999999999999
         current_best_tour = None
@@ -61,11 +62,21 @@ class RandomTspSolver:
 
 
     @staticmethod
-    def __make_spot_data_dict():
+    def __make_spot_data_dict(wait_time_mode):
+        """
+        巡回経路探索で用いるSpotデータを初期化する。
+
+        Parameter
+        ---------
+        wait_time_mode : string
+            待ち時間情報種別。
+                real -> リアルタイム待ち時間
+                mean -> 平均待ち時間
+        """
         combined_spot_data = CombinedDatamanager.get_combined_spot_data()
         spot_data_dict = {}
         for spot_data in combined_spot_data:
-            spot_data_dict[int(spot_data["spot-id"])] = {
+            spot_data_elem = {
                 "play-time": int(spot_data["play-time"]) if spot_data.get("play-time") else 0,
                 "wait-time": int(spot_data["wait-time"]) if spot_data.get("wait-time") else 0,
                 "name": spot_data["name"],
@@ -73,6 +84,12 @@ class RandomTspSolver:
                 "lon": spot_data["lon"],
                 "type": spot_data["type"]
             }
+            # 待ち時間情報種別によってwait-timeに入れる値を切り替える
+            if wait_time_mode == "real":
+                spot_data_elem["wait-time"] = int(spot_data["wait-time"]) if spot_data.get("wait-time") else 0
+            else:
+                spot_data_elem["wait-time"] = int(spot_data["mean-wait-time"]) if spot_data.get("mean-wait-time") else 0
+            spot_data_dict[int(spot_data["spot-id"])] = spot_data_elem
         return spot_data_dict
 
     @staticmethod
