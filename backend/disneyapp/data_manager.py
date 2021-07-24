@@ -7,7 +7,7 @@ class DynamicDataManager:
     """
     待ち時間や運営中/停止中などの動的情報を管理するクラス。
     """
-    GAS_URL = "https://script.google.com/macros/s/AKfycbxb7eif10mJTk8yweLmabtNBomRph2H-9E7phD8fv2WQiIgmwjmzHQTF2FXQu5eF737Ng/exec"
+    GAS_URL = "https://script.google.com/macros/s/AKfycbzp6KOj4D2OsnmKf1pdMnKxYn-TpPtVhGjM9h2ImW1L5KsQWf51YLFVLHAVx3Cbu4DF0A/exec"
     prev_fetch_time = 0
     prev_fetch_data = {}
 
@@ -18,7 +18,7 @@ class DynamicDataManager:
         if current_time - cls.prev_fetch_time < 300:
             return cls.prev_fetch_data
         cls.prev_fetch_time = current_time
-        url = DynamicDataManager.GAS_URL + "?mode=latest"
+        url = DynamicDataManager.GAS_URL
         req = urllib.request.Request(url)
         with urllib.request.urlopen(req) as res:
             raw_dict = json.loads(res.read())
@@ -32,12 +32,17 @@ class DynamicDataManager:
             if key == "timestamp":
                 ret_dict[key] = raw_data_dict[key]
             else:
-                enable_str, standby_pass_status, wait_time = raw_data_dict[key].split(",")
+                splited_list = raw_data_dict[key].split(",")
+                enable_str = splited_list[0]
+                standby_pass_status = splited_list[1]
+                wait_time = splited_list[2]
+                mean_wait_time = splited_list[3]
                 enable = True if enable_str == "運営中" else False
                 ret_dict["spots"][key] = {
                     "enable": enable,
                     "sp-status": standby_pass_status,
-                    "wait-time": int(wait_time)
+                    "wait-time": int(wait_time),
+                    "mean-wait-time": int(mean_wait_time)
                 }
         return ret_dict
 
@@ -140,5 +145,6 @@ class CombinedDatamanager:
                 continue
             elem["enable"] = dynamic_data["spots"][name]["enable"]
             elem["wait-time"] = dynamic_data["spots"][name]["wait-time"]
+            elem["mean-wait-time"] = dynamic_data["spots"][name]["mean-wait-time"]
             elem["sp-status"] = dynamic_data["spots"][name]["sp-status"]
         return static_data
