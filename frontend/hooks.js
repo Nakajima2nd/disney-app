@@ -20,18 +20,22 @@ export const useGetSpotList = () => {
 
 
 export const useGetSearchResult = (param) => {
-  const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/search'
-  const fetcher = async (url, param) => {
+  try {
+    const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/search'
     const body = JSON.parse(decodeURI(param))
-    const res = await axios.post(url, body)
-    return res.data
+    const fetcher = async (url, body) => {
+      const res = await axios.post(url, body)
+      return res.data
+    }
+    const { data, error } = useSWR(param ? API_URL : null, (url) => fetcher(url, body))
+    return {
+      searchResult: data ? toCamelCaseObject(data) : data,
+      error: error ? error.response.data.message : error
+    }
   }
-
-  const { data, error, mutate } = useSWR(param ? API_URL : null, (url) => fetcher(url, param))
-
-  return {
-    searchResult: data ? toCamelCaseObject(data) : data,
-    error: error,
-    mutate: mutate
+  catch (e) {
+    return {
+      error: 'URLが不正です。'
+    }
   }
 }
