@@ -4,6 +4,7 @@ from disneyapp.tsp_solver import RandomTspSolver
 import copy, json
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import status
 
 
 @api_view(["GET", "POST"])
@@ -20,10 +21,10 @@ def search(request):
     try:
         json_data = json.loads(request.body)
     except:
-        return Response("入力が不正です：Jsonのパースに失敗しました。")
+        return Response({"message": "入力が不正です。Jsonのパースに失敗しました。"}, status=status.HTTP_400_BAD_REQUEST)
     travel_input = TravelInput(json_data)
     if travel_input.error_message != "":
-        return Response("入力が不正です：" + travel_input.error_message)
+        return Response({"message": "入力が不正です。" + travel_input.error_message}, status=status.HTTP_400_BAD_REQUEST)
     tsp_solver = RandomTspSolver()
     tour = tsp_solver.exec(travel_input)
     return Response(tour.to_dict())
