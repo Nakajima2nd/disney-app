@@ -9,6 +9,10 @@ import { useGetSearchResult } from '../../hooks'
 const Text = styled(Typography)`
 `
 
+const ErrorText = styled(Typography)`
+  margin: 16px 0 0 0;
+`
+
 const Overview = styled(Typography)`
   margin: 16px 0 0 0;
 `
@@ -36,9 +40,11 @@ const Distance = styled(Typography)`
 const Search = () => {
   const router = useRouter()
   const param = router.query.param
-  const { searchResult, error, mutate } = useGetSearchResult(param)
-  console.log(searchResult)
-  if (error) return <Error />
+  const { searchResult, error } = useGetSearchResult(param)
+  if (error) return <>
+    <Link href="/">もどる</Link>
+    <ErrorText>{error}</ErrorText>
+  </>
   if (!searchResult) return <Loading />
 
   return (<>
