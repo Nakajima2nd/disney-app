@@ -50,8 +50,8 @@ class RandomTspSolver:
         base_tour = [ travel_input_spot.spot_id for travel_input_spot in travel_input.spots ]
         current_best_score = 9999999999999
         current_best_tour = None
+        random.seed(1)
         for count in range(RandomTspSolver.TRY_TIMES):
-            random.seed(1)
             current_tour = random.sample(base_tour, len(base_tour))
             current_tour_with_od = [travel_input.start_spot_id] + current_tour + [travel_input.goal_spot_id]
             tour = self.__trace_from_front(travel_input, current_tour_with_od)
@@ -59,6 +59,9 @@ class RandomTspSolver:
             if score < current_best_score:
                 current_best_score = score
                 current_best_tour = copy.deepcopy(current_tour_with_od)
+        if score > 3600 * 24:
+            # 時刻制約を満たす巡回経路が見つからない場合はNoneを返す
+            return None
         return self.__build_tour(travel_input, current_best_tour)
 
 
@@ -121,10 +124,10 @@ class RandomTspSolver:
         """
         hh_str, mm_str = tour.goal_time.split(":")
         score = int(hh_str) * 3600 + int(mm_str) * 60
-        # 到着希望時刻を1つ破るごとに2時間のペナルティ
+        # 到着希望時刻を1つ破るごとに24時間のペナルティ
         for subroute in tour.subroutes:
             if subroute.violate_goal_desired_arrival_time:
-                score += 3600 * 2
+                score += 3600 * 24
         return score
 
     def __build_tour(self, travel_input, spot_order):

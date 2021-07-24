@@ -19,15 +19,20 @@ def spot_list(request):
 @api_view(["POST"])
 def search(request):
     try:
-        json_data = json.loads(request.body)
+        try:
+            json_data = json.loads(request.body)
+        except:
+            return Response({"message": "入力が不正です。Jsonのパースに失敗しました。"}, status=status.HTTP_400_BAD_REQUEST)
+        travel_input = TravelInput(json_data)
+        if travel_input.error_message != "":
+            return Response({"message": "入力が不正です。" + travel_input.error_message}, status=status.HTTP_400_BAD_REQUEST)
+        tsp_solver = RandomTspSolver()
+        tour = tsp_solver.exec(travel_input)
+        if not tour:
+            return Response({"message": "すべての時刻制約を満たす経路が見つかりませんでした。"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(tour.to_dict())
     except:
-        return Response({"message": "入力が不正です。Jsonのパースに失敗しました。"}, status=status.HTTP_400_BAD_REQUEST)
-    travel_input = TravelInput(json_data)
-    if travel_input.error_message != "":
-        return Response({"message": "入力が不正です。" + travel_input.error_message}, status=status.HTTP_400_BAD_REQUEST)
-    tsp_solver = RandomTspSolver()
-    tour = tsp_solver.exec(travel_input)
-    return Response(tour.to_dict())
+        return Response({"message": "バックエンドサーバで予期せぬエラーが発生しました。"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 def filter_unuse_spots(org_spot_list):
