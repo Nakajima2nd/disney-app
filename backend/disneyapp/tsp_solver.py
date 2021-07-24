@@ -51,6 +51,7 @@ class RandomTspSolver:
         current_best_score = 9999999999999
         current_best_tour = None
         for count in range(RandomTspSolver.TRY_TIMES):
+            random.seed(1)
             current_tour = random.sample(base_tour, len(base_tour))
             current_tour_with_od = [travel_input.start_spot_id] + current_tour + [travel_input.goal_spot_id]
             tour = self.__trace_from_front(travel_input, current_tour_with_od)
