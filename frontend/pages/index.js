@@ -32,16 +32,16 @@ const Condition = styled(Box)`
 `
 
 const ConditionTimePicker = styled(TimePicker)`
-  flex-basis: 30%;
+  flex-basis: 15%;
 `
 
-const ConditionTimeModeSelect = styled(TextField)`
-  flex-basis: 30%;
+const ConditionWaitTimeModeSelect = styled(TextField)`
+  flex-basis: 55%;
   margin: 16px 0 8px;
 `
 
 const ConditionWalkSpeedSelect = styled(TextField)`
-  flex-basis: 30%;
+  flex-basis: 28%;
   margin: 16px 0 8px;
 `
 
@@ -91,7 +91,7 @@ const Home = () => {
   const [spots, setSpots] = useState([])
   const [selected, setSelected] = useState(-1)
   const [specifiedTime, setSpecifiedTime] = useState(new Date())
-  const [timeMode, setTimeMode] = useState('start')
+  const [waitTimeMode, setWaitTimeMode] = useState('real')
   const [walkSpeed, setWalkSpeed] = useState('normal')
   const router = useRouter()
 
@@ -105,8 +105,8 @@ const Home = () => {
     setSpecifiedTime(date);
   }
 
-  const handleTimeMode = (event) => {
-    setTimeMode(event.target.value)
+  const handleWaitTimeMode = (event) => {
+    setWaitTimeMode(event.target.value)
   }
 
   const handleWalkSpeed = (event) => {
@@ -138,7 +138,7 @@ const Home = () => {
       pathname: '/search',
       query: {
         param: encodeURI(JSON.stringify(toKebabCaseObject({
-          timeMode: timeMode,
+          waitTimeMode: waitTimeMode,
           specifiedTime: formatDateTime(specifiedTime),
           walkSpeed: walkSpeed,
           startSpotId: 103,
@@ -193,15 +193,15 @@ const Home = () => {
           okLabel="決定"
           cancelLabel="キャンセル"
         />
-        <ConditionTimeModeSelect
-          label="出発/到着"
-          value={timeMode}
-          onChange={handleTimeMode}
+        <ConditionWaitTimeModeSelect
+          label="待ち時間"
+          value={waitTimeMode}
+          onChange={handleWaitTimeMode}
           select
         >
-          <MenuItem value="start">出発</MenuItem>
-          <MenuItem value="end">到着</MenuItem>
-        </ConditionTimeModeSelect>
+          <MenuItem value="real">リアルタイム待ち時間</MenuItem>
+          <MenuItem value="mean">平均待ち時間</MenuItem>
+        </ConditionWaitTimeModeSelect>
         <ConditionWalkSpeedSelect
           label="歩く速度"
           value={walkSpeed}
