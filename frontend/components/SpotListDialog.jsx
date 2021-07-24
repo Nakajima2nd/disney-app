@@ -279,7 +279,7 @@ const SpotList = ({ obj, editing, handleClickSpot }) => {
           onClick={handleClickSpot(spot)}
           selected={editing.name === spot.name}
         >
-          <ListItemText primary={spot.name} />
+          <ListItemText primary={spot.shortName} />
         </ListItem>
       ))}
     </CustomList>
