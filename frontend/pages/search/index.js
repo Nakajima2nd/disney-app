@@ -55,7 +55,7 @@ const Search = () => {
           <Text>{index > 0 && searchResult.subroutes[index - 1].goalTime + '着'}</Text>
           <Text>{index < searchResult.subroutes.length && searchResult.subroutes[index].startTime + '発'}</Text>
         </Timetable>
-        <Text>{spot.spotName}</Text>
+        <Text>{spot.shortSpotName}</Text>
         <WaitTime>{spot.waitTime + '分待ち'}</WaitTime>
       </Spot>
       <Distance>{index < searchResult.subroutes.length && searchResult.subroutes[index].distance + 'm'}</Distance>
