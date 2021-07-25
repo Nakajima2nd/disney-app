@@ -84,6 +84,7 @@ class RandomTspSolver:
                 "play-time": int(spot_data["play-time"]) if spot_data.get("play-time") else 0,
                 "wait-time": int(spot_data["wait-time"]) if spot_data.get("wait-time") else 0,
                 "name": spot_data["name"],
+                "short-name": spot_data["short-name"],
                 "lat": spot_data["lat"],
                 "lon": spot_data["lon"],
                 "type": spot_data["type"]
@@ -161,6 +162,7 @@ class RandomTspSolver:
             tour_spot = TourSpot()
             tour_spot.spot_id = spot_id
             tour_spot.spot_name = self.spot_data_dict[spot_id]["name"]
+            tour_spot.spot_short_name = self.spot_data_dict[spot_id]["short-name"]
             tour_spot.lat = self.spot_data_dict[spot_id]["lat"]
             tour_spot.lon = self.spot_data_dict[spot_id]["lon"]
             tour_spot.type = self.spot_data_dict[spot_id]["type"]

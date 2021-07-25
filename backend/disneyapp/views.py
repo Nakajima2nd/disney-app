@@ -97,6 +97,7 @@ def add_show_dynamic_data_stub(spots_json):
         for show_time in show_time_list:
             show_copied = copy.deepcopy(show)
             show_copied["name"] += ("(" + show_time + ")")
+            show_copied["short-name"] += ("(" + show_time + ")")
             show_copied["start-time"] = show_time
             new_show_list.append(show_copied)
     spots_json["show"] = new_show_list
