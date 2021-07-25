@@ -32,6 +32,7 @@ class TourSpot:
     def __init__(self):
         self.spot_id = -1
         self.spot_name = ""
+        self.spot_short_name = ""
         self.lat = ""
         self.lon = ""
         self.type = ""
@@ -42,6 +43,7 @@ class TourSpot:
         ret_dict = dict()
         ret_dict["spot-id"] = self.spot_id
         ret_dict["spot-name"] = self.spot_name
+        ret_dict["short-spot-name"] = self.spot_short_name
         ret_dict["lat"] = self.lat
         ret_dict["lon"] = self.lon
         ret_dict["type"] = self.type
