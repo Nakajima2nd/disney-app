@@ -77,6 +77,7 @@ class TravelInputSpot:
         self.spot_id = -1
         self.desired_arrival_time = -1  # 00:00 からの経過秒数
         self.stay_time = -1  # [秒]
+        self.specified_wait_time = 0
 
 
 class TravelInput:
@@ -237,6 +238,7 @@ class TravelInput:
             try:
                 # note: 指定された待ち時間の分だけ到着希望時刻を早める
                 travel_input_spot.desired_arrival_time -= int(spot_json["specified-wait-time"]) * 60
+                travel_input_spot.specified_wait_time = int(spot_json["specified-wait-time"]) * 60
             except:
                 self.error_message = "specified-wait-timeには整数を指定してください。"
                 return None
