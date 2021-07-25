@@ -66,6 +66,7 @@ const DeleteButton = styled(IconButton)`
 const initialEditing = {
   spotId: null,
   name: '',
+  shortName: '',
   desiredArrivalTime: null,
   startTime: null,
   stayTime: '',
@@ -159,7 +160,7 @@ const Home = () => {
             color="primary"
             onClick={handleOpen(spot, index)}
           >
-            {spot.name}
+            {spot.shortName}
           </SpotButton>
           <DeleteButton onClick={handleDelete(index)}>
             <Close />

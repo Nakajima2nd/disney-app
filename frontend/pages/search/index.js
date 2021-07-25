@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Box, Typography } from '@material-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Error } from '../../components/Error'
 import { Loading } from '../../components/Loading'
 import { useGetSearchResult } from '../../hooks'
 

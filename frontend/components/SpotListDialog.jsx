@@ -82,6 +82,7 @@ export const SpotListDialog = ({ editing, selected, open, spots, setEditing, set
     const newSpot = pipe(
       assoc('spotId', spot.spotId),
       assoc('name', spot.name),
+      assoc('shortName', spot.shortName),
       assoc('startTime', spot.startTime),
       assoc('step', 1)
     )(editing)
@@ -278,7 +279,7 @@ const SpotList = ({ obj, editing, handleClickSpot }) => {
           onClick={handleClickSpot(spot)}
           selected={editing.name === spot.name}
         >
-          <ListItemText primary={spot.name} />
+          <ListItemText primary={spot.shortName} />
         </ListItem>
       ))}
     </CustomList>
