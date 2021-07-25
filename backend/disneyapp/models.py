@@ -243,6 +243,18 @@ class TravelInput:
 
         return travel_input_spot
 
+    @staticmethod
+    def __is_duplicate_spot(spots):
+        """
+        同じスポットが複数回指定されている場合Trueを返す。
+        """
+        spot_set = set()
+        for spot in spots:
+            if spot.spot_id in spot_set:
+                return True
+            spot_set.add(spot.spot_id)
+        return False
+
     def __init_spots(self, json_data):
         """
         spotsを初期化する。初期化に失敗した場合はFalseを返す。
@@ -261,6 +273,9 @@ class TravelInput:
             if not (travel_input_spot := self.__init_spot(spot_json)):
                 return False
             self.spots.append(travel_input_spot)
+        if TravelInput.__is_duplicate_spot(self.spots):
+            self.error_message = "同じスポットが複数回指定されています。"
+            return False
         return True
 
     def init_by_json(self, json_data):
