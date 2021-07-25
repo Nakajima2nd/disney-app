@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, IconButton, MenuItem, Switch, Tabs, Tab, TextField, Typography, List, ListItem, ListItemText, Collapse, InputAdornment } from '@material-ui/core'
-import { Close, Restaurant, SportsTennis, AccessibilityNew, ShoppingCart, Search } from '@material-ui/icons'
+import { Close, Restaurant, SportsTennis, AccessibilityNew, ShoppingCart, Search, Mood } from '@material-ui/icons'
 import { TimePicker } from '@material-ui/pickers';
 import { append, assoc, dissoc, pipe, update } from 'ramda'
 import { Error } from '../components/Error'
@@ -187,6 +187,7 @@ const SpotSelect = ({ handleKeyword, handleTab, spotList, editing, handleClickSp
       <SpotTab icon={<Restaurant />} label="レストラン" />
       <SpotTab icon={<ShoppingCart />} label="ショップ" />
       <SpotTab icon={<AccessibilityNew />} label="ショー" />
+      <SpotTab icon={<Mood />} label="グリーティング" />
     </SpotTabs>
     <SpotList
       obj={spotList[Object.keys(spotList)[editing.tab]]}
@@ -197,16 +198,16 @@ const SpotSelect = ({ handleKeyword, handleTab, spotList, editing, handleClickSp
 }
 
 const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecifiedWaitTime, editing, handleSwitches }) => {
-  const switchLabels = [
-    'スタンバイパスを使用する',
-    '入店時刻を指定する',
-    '到着時刻を指定する'
-  ]
-  const desiredArrivalTimeLabels = [
-    'スタンバイパス指定時刻',
-    '入店時刻',
-    '到着時刻'
-  ]
+  const switchLabels = {
+    0: 'スタンバイパスを使用する',
+    1: '入店時刻を指定する',
+    4: '到着時刻を指定する'
+  }
+  const inputLables = {
+    0: 'スタンバイパス指定時刻',
+    1: '入店時刻',
+    4: '到着時刻'
+  }
 
   return (<>
     <Text>{editing.name}</Text>
@@ -218,7 +219,7 @@ const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecif
       <Collapse in={editing.checkedDesiredArrivalTime}>
         <DesiredArrivalTimePicker
           margin="normal"
-          label={desiredArrivalTimeLabels[editing.tab]}
+          label={inputLables[editing.tab]}
           format="HH:mm"
           value={editing.desiredArrivalTime}
           onChange={handleDesiredArrivalTime}
