@@ -170,6 +170,18 @@ class RandomTspSolver:
             tour_spot.play_time = self.spot_data_dict[spot_id]["play-time"]
             tour.spots.append(tour_spot)
 
+    @staticmethod
+    def __find_target_spot_from_travel_input(travel_input, target_spot_id):
+        """
+        travel_inputから指定されたspot_idのスポットを検索して返す。
+        指定されたspot_idが存在しない場合はNoneを返す。
+        """
+        spots = travel_input.spots
+        for spot in spots:
+            if spot.spot_id == target_spot_id:
+                return spot
+        return None
+
     def __trace_from_front(self, travel_input, spot_order):
         """
         巡回経路を出発側からTraceし、スポットの到着時刻を算出する。
@@ -206,6 +218,8 @@ class RandomTspSolver:
 
             # dstスポットのイベントを消化するまでの時間を計測
             current_time += max(self.spot_data_dict[dst_spot_id]["wait-time"] * 60, 0)  # note:待ち時間が-1の場合は0にする
+            dst_spot = RandomTspSolver.__find_target_spot_from_travel_input(travel_input, dst_spot_id)
+            current_time += dst_spot.specified_wait_time if dst_spot else 0
             current_time += self.spot_data_dict[dst_spot_id]["play-time"]
             current_time += stay_time if stay_time != -1 else 0
             tour.subroutes.append(subroute)
