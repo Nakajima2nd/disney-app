@@ -47,8 +47,6 @@ export const SpotList = ({ obj, editing, handleClickSpot }) => {
           {editing.tab === 0 && <>
             <ListItemText primary={spot.shortName} />
             <WaitTimeContainer>
-              {!spot.enable && <Typography color="textSecondary" variant="caption">ただいま</Typography>}
-              {spot.enable && spot.waitTime < 0 && <Typography color="textSecondary" variant="caption">ただいま</Typography>}
               {spot.enable && spot.waitTime >= 0 && <Typography color="textSecondary" variant="caption">待ち時間</Typography>}
               <AvatarContainer>
                 {!spot.enable && <DisableAvatar>休止</DisableAvatar>}
