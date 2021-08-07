@@ -7,6 +7,8 @@ import { TimePicker } from '@material-ui/pickers';
 import { assoc, remove } from 'ramda'
 import { formatDateTime, toKebabCaseObject } from '../utils'
 import { useRouter } from 'next/router'
+import { useGetSpotList } from '../hooks'
+import { Loading } from '../components/Loading'
 
 const Wrap = styled(Box)`
   display: flex;
@@ -95,7 +97,10 @@ const Home = () => {
   const [waitTimeMode, setWaitTimeMode] = useState('real')
   const [walkSpeed, setWalkSpeed] = useState('normal')
   const router = useRouter()
+  const { spotList, error } = useGetSpotList()
 
+  if (error) return <Text>{error}</Text>
+  if (!spotList) return <Loading />
   const handleOpen = (spot, index) => () => {
     setEditing(spot)
     setSelected(index)
@@ -175,6 +180,7 @@ const Home = () => {
         追加
       </PlusButton>
       <SpotListDialog
+        spotList={spotList}
         editing={editing}
         selected={selected}
         open={open}
