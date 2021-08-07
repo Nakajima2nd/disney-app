@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, IconButton, MenuItem, Switch, Tabs, Tab, TextField, Typography, List, ListItem, ListItemText, Collapse, InputAdornment } from '@material-ui/core'
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, IconButton, MenuItem, Switch, Tabs, Tab, TextField, Typography, List, ListItem, ListItemAvatar, ListItemText, Collapse, InputAdornment } from '@material-ui/core'
 import { Close, Restaurant, SportsTennis, AccessibilityNew, ShoppingCart, Search, Mood } from '@material-ui/icons'
 import { TimePicker } from '@material-ui/pickers';
 import { append, assoc, dissoc, pipe, update } from 'ramda'
@@ -53,6 +53,31 @@ const SpecifiedWaitTimeSelect = styled(TextField)`
 
 const ConditionSwitch = styled(FormControlLabel)`
   margin-top: 24px;
+`
+
+const CustomListItem = styled(ListItem)`
+  display: flex;
+`
+
+const EnableAvatar = styled(Avatar)`
+  color: white;
+  background-color: darksalmon;
+`
+
+const DisableAvatar = styled(Avatar)`
+  color: white;
+  background-color: lightgray;
+  font-size: 1rem;
+`
+
+const WaitTimeContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`
+
+const AvatarContainer = styled(Box)`
+  display: flex;
+  align-items: flex-end;
 `
 
 export const SpotListDialog = ({ editing, selected, open, spots, setEditing, setOpen, setSpots }) => {
@@ -274,14 +299,31 @@ const SpotList = ({ obj, editing, handleClickSpot }) => {
   return (
     <CustomList>
       {obj.filter(spot => spot.name.indexOf(editing.keyword) > -1).map((spot, index) => (
-        <ListItem
+        <CustomListItem
           key={index}
           button
           onClick={handleClickSpot(spot)}
           selected={editing.name === spot.name}
         >
-          <ListItemText primary={spot.shortName} />
-        </ListItem>
+          {/* {editing.tab === 0 && <ListItemText primary={spot.shortName} secondary={'ただいま' + (spot.enable ? ((spot.waitTime < 0 ? '準備中' : (spot.waitTime + '分待ち')) + '（平均' + spot.meanWaitTime + '分）') : '休止中')} />} */}
+          {editing.tab === 0 && <>
+            <ListItemText primary={spot.shortName} />
+            <WaitTimeContainer>
+              {!spot.enable && <Typography color="textSecondary" variant="caption">ただいま</Typography>}
+              {spot.enable && spot.waitTime < 0 && <Typography color="textSecondary" variant="caption">ただいま</Typography>}
+              {spot.enable && spot.waitTime >= 0 && <Typography color="textSecondary" variant="caption">待ち時間</Typography>}
+              <AvatarContainer>
+                {!spot.enable && <DisableAvatar>休止</DisableAvatar>}
+                {spot.enable && spot.waitTime < 0 && <DisableAvatar>準備</DisableAvatar>}
+                {spot.enable && spot.waitTime >= 0 && <EnableAvatar>{spot.waitTime}</EnableAvatar>}
+                {(!spot.enable || spot.waitTime < 0) && <Typography color="textSecondary" variant="caption">中</Typography>}
+                {spot.enable && spot.waitTime >= 0 && <Typography color="textSecondary" variant="caption">分</Typography>}
+              </AvatarContainer>
+              {spot.meanWaitTime >= 0 && <Typography color="textSecondary" variant="caption">{'平均' + spot.meanWaitTime + '分'}</Typography>}
+            </WaitTimeContainer>
+          </>}
+          {editing.tab !== 0 && <ListItemText primary={spot.shortName} />}
+        </CustomListItem>
       ))}
     </CustomList>
   )
