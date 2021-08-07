@@ -1,41 +1,55 @@
 import axios from 'axios'
-import useSWR from "swr"
+import { useEffect, useState } from 'react';
 import { toCamelCaseObject } from './utils';
 
 export const useGetSpotList = () => {
-  const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/spot/list'
-  const fetcher = async (url) => {
-    const res = await axios.get(url)
-    return res.data
+  const [spotList, setSpotList] = useState()
+  const [error, setError] = useState()
+  const fetch = async () => {
+    try {
+      const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/spot/list'
+      const res = await axios.get(API_URL)
+      setSpotList(toCamelCaseObject(res.data))
+    } catch (error) {
+      setError(error)
+    }
   }
-
-  const { data, error, mutate } = useSWR(API_URL, fetcher)
-
+  useEffect(() => {
+    if (!spotList && !error) {
+      fetch()
+    }
+  })
   return {
-    spotList: data ? toCamelCaseObject(data) : data,
-    error: error,
-    mutate: mutate
+    spotList: spotList,
+    error: error
   }
 }
 
-
 export const useGetSearchResult = (param) => {
-  try {
-    const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/search'
-    const body = JSON.parse(decodeURI(param))
-    const fetcher = async (url, body) => {
-      const res = await axios.post(url, body)
-      return res.data
-    }
-    const { data, error } = useSWR(param ? API_URL : null, (url) => fetcher(url, body))
-    return {
-      searchResult: data ? toCamelCaseObject(data) : data,
-      error: error ? error.response.data.message : error
+  const [searchResult, setSearchResult] = useState()
+  const [error, setError] = useState()
+  const fetch = async () => {
+    try {
+      const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/search'
+      const body = JSON.parse(decodeURI(param))
+      const res = await axios.post(API_URL, body)
+      setSearchResult(toCamelCaseObject(res.data))
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message)
+      }
+      else {
+        setError('入力が不正です')
+      }
     }
   }
-  catch (e) {
-    return {
-      error: 'URLが不正です。'
+  useEffect(() => {
+    if (!searchResult && !error) {
+      fetch()
     }
+  })
+  return {
+    searchResult: searchResult,
+    error: error
   }
 }

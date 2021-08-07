@@ -18,12 +18,7 @@ const CloseButton = styled(IconButton)`
 const SpotDialogContent = styled(DialogContent)`
 `
 
-export const SpotListDialog = ({ editing, selected, open, spots, setEditing, setOpen, setSpots }) => {
-  const { spotList, error, mutate } = useGetSpotList()
-
-  if (error) return <Error />
-  if (!spotList) return <Loading />
-
+export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEditing, setOpen, setSpots }) => {
   const handleClose = () => {
     setOpen(false)
   }

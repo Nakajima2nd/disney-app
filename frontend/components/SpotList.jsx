@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Avatar, Box, Typography, List, ListItem, ListItemText, Divider } from '@material-ui/core'
+import { Fragment } from 'react'
 
 const CustomList = styled(List)`
   height: calc(100% - 32px - 16px - 72px);
@@ -37,7 +38,7 @@ export const SpotList = ({ obj, editing, handleClickSpot }) => {
   const filterdSpots = obj.filter(spot => spot.name.indexOf(editing.keyword) > -1)
   return (
     <CustomList>
-      {filterdSpots.map((spot, index) => <>
+      {filterdSpots.map((spot, index) => <Fragment key={index}>
         <CustomListItem
           key={index}
           button
@@ -61,7 +62,7 @@ export const SpotList = ({ obj, editing, handleClickSpot }) => {
           {editing.tab !== 0 && <ListItemText primary={spot.shortName} />}
         </CustomListItem>
         <Divider />
-      </>)}
+      </Fragment>)}
     </CustomList>
   )
 }
