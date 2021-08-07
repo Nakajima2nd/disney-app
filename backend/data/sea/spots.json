@@ -7,9 +7,11 @@
             "lat": "35.62753096260775",
             "lon": "139.88570175371126",
             "type": "attraction",
-            "nearest-node-id": 8,
             "play-time": "300",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/219/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/219/",
+            "area": "メディテレーニアンハーバー",
+            "speed-thrill": "false",
+            "nearest-node-id": 8
         },
         {
             "spot-id": 1,
@@ -18,9 +20,11 @@
             "lat": "35.626573169189264",
             "lon": "139.88593456101927",
             "type": "attraction",
-            "nearest-node-id": 10,
             "play-time": "420",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/227/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/227/",
+            "area": "メディテレーニアンハーバー",
+            "speed-thrill": "false",
+            "nearest-node-id": 10
         },
         {
             "spot-id": 2,
@@ -29,8 +33,10 @@
             "lat": "35.62577595814663",
             "lon": "139.88521622867762",
             "type": "attraction",
-            "nearest-node-id": 45,
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/244/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/244/",
+            "area": "メディテレーニアンハーバー",
+            "speed-thrill": "false",
+            "nearest-node-id": 45
         },
         {
             "spot-id": 3,
@@ -39,9 +45,11 @@
             "lat": "35.62609086477499",
             "lon": "139.88796327515433",
             "type": "attraction",
-            "nearest-node-id": 21,
             "play-time": "690",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/230/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/230/",
+            "area": "メディテレーニアンハーバー",
+            "speed-thrill": "false",
+            "nearest-node-id": 21
         },
         {
             "spot-id": 4,
@@ -50,9 +58,11 @@
             "lat": "35.62334375031604",
             "lon": "139.88726518210083",
             "type": "attraction",
-            "nearest-node-id": 100,
             "play-time": "1800",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/246/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/246/",
+            "area": "アメリカンウォーターフロント",
+            "speed-thrill": "false",
+            "nearest-node-id": 100
         },
         {
             "spot-id": 5,
@@ -61,9 +71,11 @@
             "lat": "35.62391248028388",
             "lon": "139.88828835075003",
             "type": "attraction",
-            "nearest-node-id": 36,
             "play-time": "120",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/243/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/243/",
+            "area": "アメリカンウォーターフロント",
+            "speed-thrill": "true",
+            "nearest-node-id": 36
         },
         {
             "spot-id": 6,
@@ -72,9 +84,11 @@
             "lat": "35.62491145456335",
             "lon": "139.88775091735545",
             "type": "attraction",
-            "nearest-node-id": 25,
             "play-time": "150",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/232/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/232/",
+            "area": "アメリカンウォーターフロント",
+            "speed-thrill": "false",
+            "nearest-node-id": 25
         },
         {
             "spot-id": 7,
@@ -83,9 +97,11 @@
             "lat": "35.62420292517226",
             "lon": "139.88569672120138",
             "type": "attraction",
-            "nearest-node-id": 51,
             "play-time": "780",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/228/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/228/",
+            "area": "アメリカンウォーターフロント",
+            "speed-thrill": "false",
+            "nearest-node-id": 51
         },
         {
             "spot-id": 8,
@@ -94,9 +110,11 @@
             "lat": "35.62477700583167",
             "lon": "139.8889301319155",
             "type": "attraction",
-            "nearest-node-id": 28,
             "play-time": "420",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/218/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/218/",
+            "area": "アメリカンウォーターフロント",
+            "speed-thrill": "false",
+            "nearest-node-id": 28
         },
         {
             "spot-id": 9,
@@ -105,9 +123,11 @@
             "lat": "35.62439387470845",
             "lon": "139.88706200880483",
             "type": "attraction",
-            "nearest-node-id": 37,
             "play-time": "600",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/233/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/233/",
+            "area": "アメリカンウォーターフロント",
+            "speed-thrill": "false",
+            "nearest-node-id": 37
         },
         {
             "spot-id": 10,
@@ -116,9 +136,11 @@
             "lat": "35.62468589551906",
             "lon": "139.88349606906613",
             "type": "attraction",
-            "nearest-node-id": 60,
             "play-time": "150",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/234/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/234/",
+            "area": "ポートディスカバリー",
+            "speed-thrill": "false",
+            "nearest-node-id": 60
         },
         {
             "spot-id": 11,
@@ -127,9 +149,11 @@
             "lat": "35.62539074665123",
             "lon": "139.88309169515944",
             "type": "attraction",
-            "nearest-node-id": 62,
             "play-time": "150",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/231/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/231/",
+            "area": "ポートディスカバリー",
+            "speed-thrill": "false",
+            "nearest-node-id": 62
         },
         {
             "spot-id": 12,
@@ -138,9 +162,11 @@
             "lat": "35.62494825695022",
             "lon": "139.88251554646882",
             "type": "attraction",
-            "nearest-node-id": 64,
             "play-time": "300",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/247/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/247/",
+            "area": "ポートディスカバリー",
+            "speed-thrill": "false",
+            "nearest-node-id": 64
         },
         {
             "spot-id": 13,
@@ -149,9 +175,11 @@
             "lat": "35.6263737631128",
             "lon": "139.8809767843943",
             "type": "attraction",
-            "nearest-node-id": 75,
             "play-time": "180",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/222/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/222/",
+            "area": "ロストリバーデルタ",
+            "speed-thrill": "true",
+            "nearest-node-id": 75
         },
         {
             "spot-id": 14,
@@ -160,9 +188,11 @@
             "lat": "35.62673965820737",
             "lon": "139.8819008279609",
             "type": "attraction",
-            "nearest-node-id": 86,
             "play-time": "360",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/229/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/229/",
+            "area": "ロストリバーデルタ",
+            "speed-thrill": "false",
+            "nearest-node-id": 86
         },
         {
             "spot-id": 15,
@@ -171,9 +201,11 @@
             "lat": "35.627722226399435",
             "lon": "139.88080457814263",
             "type": "attraction",
-            "nearest-node-id": 78,
             "play-time": "90",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/242/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/242/",
+            "area": "ロストリバーデルタ",
+            "speed-thrill": "true",
+            "nearest-node-id": 78
         },
         {
             "spot-id": 16,
@@ -182,9 +214,11 @@
             "lat": "35.62817027479872",
             "lon": "139.88333969788812",
             "type": "attraction",
-            "nearest-node-id": 70,
             "play-time": "150",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/236/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/236/",
+            "area": "アラビアンコースト",
+            "speed-thrill": "false",
+            "nearest-node-id": 70
         },
         {
             "spot-id": 17,
@@ -193,9 +227,11 @@
             "lat": "35.62835033507712",
             "lon": "139.88110064513887",
             "type": "attraction",
-            "nearest-node-id": 89,
             "play-time": "90",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/220/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/220/",
+            "area": "アラビアンコースト",
+            "speed-thrill": "false",
+            "nearest-node-id": 89
         },
         {
             "spot-id": 18,
@@ -204,9 +240,11 @@
             "lat": "35.628507999414445",
             "lon": "139.8814498574758",
             "type": "attraction",
-            "nearest-node-id": 88,
             "play-time": "600",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/235/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/235/",
+            "area": "アラビアンコースト",
+            "speed-thrill": "false",
+            "nearest-node-id": 88
         },
         {
             "spot-id": 19,
@@ -215,9 +253,11 @@
             "lat": "35.628433782867795",
             "lon": "139.88306798035555",
             "type": "attraction",
-            "nearest-node-id": 71,
             "play-time": "1380",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/226/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/226/",
+            "area": "アラビアンコースト",
+            "speed-thrill": "false",
+            "nearest-node-id": 71
         },
         {
             "spot-id": 20,
@@ -226,8 +266,10 @@
             "lat": "35.62679154348968",
             "lon": "139.8833172765092",
             "type": "attraction",
-            "nearest-node-id": 91,
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/202/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/202/",
+            "area": "マーメイドラグーン",
+            "speed-thrill": "false",
+            "nearest-node-id": 91
         },
         {
             "spot-id": 21,
@@ -236,9 +278,11 @@
             "lat": "35.626514238390236",
             "lon": "139.88340256425997",
             "type": "attraction",
-            "nearest-node-id": 94,
             "play-time": "60",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/239/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/239/",
+            "area": "マーメイドラグーン",
+            "speed-thrill": "false",
+            "nearest-node-id": 94
         },
         {
             "spot-id": 22,
@@ -247,9 +291,11 @@
             "lat": "35.62726987355347",
             "lon": "139.88321567037846",
             "type": "attraction",
-            "nearest-node-id": 97,
             "play-time": "90",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/238/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/238/",
+            "area": "マーメイドラグーン",
+            "speed-thrill": "false",
+            "nearest-node-id": 97
         },
         {
             "spot-id": 23,
@@ -258,9 +304,11 @@
             "lat": "35.627035483426376",
             "lon": "139.88224597144833",
             "type": "attraction",
-            "nearest-node-id": 82,
             "play-time": "60",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/237/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/237/",
+            "area": "マーメイドラグーン",
+            "speed-thrill": "true",
+            "nearest-node-id": 82
         },
         {
             "spot-id": 24,
@@ -269,9 +317,11 @@
             "lat": "35.626468454526325",
             "lon": "139.88290367341438",
             "type": "attraction",
-            "nearest-node-id": 96,
             "play-time": "90",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/240/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/240/",
+            "area": "マーメイドラグーン",
+            "speed-thrill": "false",
+            "nearest-node-id": 96
         },
         {
             "spot-id": 25,
@@ -280,9 +330,11 @@
             "lat": "35.62640700722643",
             "lon": "139.88271825269382",
             "type": "attraction",
-            "nearest-node-id": 140,
             "play-time": "840",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/221/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/221/",
+            "area": "マーメイドラグーン",
+            "speed-thrill": "false",
+            "nearest-node-id": 140
         },
         {
             "spot-id": 26,
@@ -291,9 +343,11 @@
             "lat": "35.626673391618006",
             "lon": "139.88312897895753",
             "type": "attraction",
-            "nearest-node-id": 93,
             "play-time": "90",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/241/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/241/",
+            "area": "マーメイドラグーン",
+            "speed-thrill": "false",
+            "nearest-node-id": 93
         },
         {
             "spot-id": 27,
@@ -302,9 +356,11 @@
             "lat": "35.62641929875694",
             "lon": "139.88461075873784",
             "type": "attraction",
-            "nearest-node-id": 14,
             "play-time": "300",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/224/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/224/",
+            "area": "ミステリアスアイランド",
+            "speed-thrill": "false",
+            "nearest-node-id": 14
         },
         {
             "spot-id": 28,
@@ -313,9 +369,11 @@
             "lat": "35.62591270174353",
             "lon": "139.88453268519172",
             "type": "attraction",
-            "nearest-node-id": 99,
             "play-time": "180",
-            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/223/"
+            "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/223/",
+            "area": "ミステリアスアイランド",
+            "speed-thrill": "true",
+            "nearest-node-id": 99
         },
         {
             "spot-id": 29,
@@ -324,8 +382,19 @@
             "lat": "35.62695264833476",
             "lon": "139.88714679981504",
             "type": "restaurant",
-            "nearest-node-id": 118,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/400/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/400/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/400/",
+            "can-reserve": "false",
+            "area": "メディテレーニアンハーバー",
+            "menu-type": [
+                "イタリアン",
+                "パスタ",
+                "ロティサリーチキン"
+            ],
+            "budget-day": "1,200～2,200円",
+            "budget-night": "1,200～2,200円",
+            "seats": "570",
+            "nearest-node-id": 118
         },
         {
             "spot-id": 30,
@@ -334,8 +403,18 @@
             "lat": "35.625966268892086",
             "lon": "139.88730258806373",
             "type": "restaurant",
-            "nearest-node-id": 31,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/411/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/411/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/411/",
+            "can-reserve": "false",
+            "area": "メディテレーニアンハーバー",
+            "menu-type": [
+                "ドリンク",
+                "スウィーツ"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "120",
+            "nearest-node-id": 31
         },
         {
             "spot-id": 31,
@@ -344,8 +423,19 @@
             "lat": "35.627169846655995",
             "lon": "139.8860085445333",
             "type": "restaurant",
-            "nearest-node-id": 11,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/403/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/403/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/403/",
+            "can-reserve": "false",
+            "area": "メディテレーニアンハーバー",
+            "menu-type": [
+                "イタリアン",
+                "パスタ",
+                "ピッツァ"
+            ],
+            "budget-day": "1,200円～2,200円",
+            "budget-night": "1,200円～2,200円",
+            "seats": "840",
+            "nearest-node-id": 11
         },
         {
             "spot-id": 32,
@@ -354,8 +444,18 @@
             "lat": "35.62593079188322",
             "lon": "139.88528718994823",
             "type": "restaurant",
-            "nearest-node-id": 122,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/412/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/412/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/412/",
+            "can-reserve": "true",
+            "area": "メディテレーニアンハーバー",
+            "menu-type": [
+                "コース料理",
+                "ワイン"
+            ],
+            "budget-day": "3,700円～",
+            "budget-night": "5,800円～",
+            "seats": "200",
+            "nearest-node-id": 122
         },
         {
             "spot-id": 33,
@@ -364,8 +464,18 @@
             "lat": "35.62591171513723",
             "lon": "139.88533479915824",
             "type": "restaurant",
-            "nearest-node-id": 122,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/415/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/415/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/415/",
+            "can-reserve": "false",
+            "area": "メディテレーニアンハーバー",
+            "menu-type": [
+                "オードブル",
+                "カクテル"
+            ],
+            "budget-day": "1,200～2,200円",
+            "budget-night": "1,200～2,200円",
+            "seats": "70",
+            "nearest-node-id": 122
         },
         {
             "spot-id": 34,
@@ -374,8 +484,18 @@
             "lat": "35.627031123601206",
             "lon": "139.88761556530423",
             "type": "restaurant",
-            "nearest-node-id": 114,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/401/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/401/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/401/",
+            "can-reserve": "false",
+            "area": "メディテレーニアンハーバー",
+            "menu-type": [
+                "パン",
+                "スウィーツ"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "150",
+            "nearest-node-id": 114
         },
         {
             "spot-id": 35,
@@ -384,8 +504,19 @@
             "lat": "35.6256768376592",
             "lon": "139.8878840659662",
             "type": "restaurant",
-            "nearest-node-id": 22,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/401/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/408/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/408/",
+            "can-reserve": "true",
+            "area": "メディテレーニアンハーバー",
+            "menu-type": [
+                "イタリアン",
+                "パスタ料理",
+                "窯焼きピッツァ"
+            ],
+            "budget-day": "2,200円～",
+            "budget-night": "2,200円～",
+            "seats": "220",
+            "nearest-node-id": 22
         },
         {
             "spot-id": 36,
@@ -394,8 +525,17 @@
             "lat": "35.625922848537776",
             "lon": "139.88498528406274",
             "type": "restaurant",
-            "nearest-node-id": 120,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/416/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/416/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/416/",
+            "can-reserve": "false",
+            "area": "メディテレーニアンハーバー",
+            "menu-type": [
+                "ターキーレッグ"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "90",
+            "nearest-node-id": 120
         },
         {
             "spot-id": 37,
@@ -404,8 +544,19 @@
             "lat": "35.62336259993873",
             "lon": "139.88722275593676",
             "type": "restaurant",
-            "nearest-node-id": 100,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/425/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/425/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/425/",
+            "can-reserve": "true",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "セットメニュー",
+                "ローストビーフ",
+                "ワイン"
+            ],
+            "budget-day": "3,700円～",
+            "budget-night": "3,700円～",
+            "seats": "190",
+            "nearest-node-id": 100
         },
         {
             "spot-id": 38,
@@ -414,8 +565,17 @@
             "lat": "35.62454246535265",
             "lon": "139.88510562868893",
             "type": "restaurant",
-            "nearest-node-id": 127,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/446/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/446/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/446/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "ハンバーガー"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "860",
+            "nearest-node-id": 127
         },
         {
             "spot-id": 39,
@@ -424,8 +584,19 @@
             "lat": "35.62455907346721",
             "lon": "139.8849652703674",
             "type": "restaurant",
-            "nearest-node-id": 125,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/448/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/448/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/448/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "スウィーツ",
+                "ドリンク",
+                "ダッフィー"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "None",
+            "nearest-node-id": 125
         },
         {
             "spot-id": 40,
@@ -434,8 +605,19 @@
             "lat": "35.62377706755055",
             "lon": "139.88760165630976",
             "type": "restaurant",
-            "nearest-node-id": 38,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/441/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/441/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/441/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "ドリア",
+                "サンドウィッチ",
+                "フライドチキン"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "470",
+            "nearest-node-id": 38
         },
         {
             "spot-id": 41,
@@ -444,8 +626,19 @@
             "lat": "35.62340244500671",
             "lon": "139.887249490907",
             "type": "restaurant",
-            "nearest-node-id": 100,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/429/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/429/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/429/",
+            "can-reserve": "true",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "サンドウィッチ",
+                "生ビール",
+                "カクテル"
+            ],
+            "budget-day": "1,200～2,200円",
+            "budget-night": "1,200～2,200円",
+            "seats": "110",
+            "nearest-node-id": 100
         },
         {
             "spot-id": 42,
@@ -454,8 +647,17 @@
             "lat": "35.62486059009338",
             "lon": "139.8875073792503",
             "type": "restaurant",
-            "nearest-node-id": 33,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/423/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/423/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/423/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "ホットドック"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "None",
+            "nearest-node-id": 33
         },
         {
             "spot-id": 43,
@@ -464,8 +666,17 @@
             "lat": "35.625360255196206",
             "lon": "139.8878674000761",
             "type": "restaurant",
-            "nearest-node-id": 24,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/422/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/422/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/422/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "サンドウィッチ"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "560",
+            "nearest-node-id": 24
         },
         {
             "spot-id": 44,
@@ -474,8 +685,18 @@
             "lat": "35.624057270334205",
             "lon": "139.88680246759344",
             "type": "restaurant",
-            "nearest-node-id": 41,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/430/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/430/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/430/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "骨付きソーセージ",
+                "ビール"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "None",
+            "nearest-node-id": 41
         },
         {
             "spot-id": 45,
@@ -484,8 +705,17 @@
             "lat": "35.624982684284234",
             "lon": "139.88435859423043",
             "type": "restaurant",
-            "nearest-node-id": 50,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/449/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/449/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/449/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "チュロス"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "None",
+            "nearest-node-id": 50
         },
         {
             "spot-id": 46,
@@ -494,8 +724,18 @@
             "lat": "35.623791799452526",
             "lon": "139.88736299869663",
             "type": "restaurant",
-            "nearest-node-id": 38,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/498/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/498/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/498/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "ベイクドポテト",
+                "季節のメニュー"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "40",
+            "nearest-node-id": 38
         },
         {
             "spot-id": 47,
@@ -504,8 +744,17 @@
             "lat": "35.6241067916498",
             "lon": "139.88698791986826",
             "type": "restaurant",
-            "nearest-node-id": 41,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/440/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/440/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/440/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "フルーツカップ"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "None",
+            "nearest-node-id": 41
         },
         {
             "spot-id": 48,
@@ -514,6 +763,16 @@
             "lat": "35.62453805491093",
             "lon": "139.88702237925037",
             "type": "restaurant",
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/435/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/435/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "シェイプアイス"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "None",
             "nearest-node-id": 37
         },
         {
@@ -523,8 +782,18 @@
             "lat": "35.624750388158205",
             "lon": "139.88706780260532",
             "type": "restaurant",
-            "nearest-node-id": 33,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/435/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/432/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/432/",
+            "can-reserve": "true",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "和食",
+                "天ぷら"
+            ],
+            "budget-day": "2,200円～",
+            "budget-night": "2,200円～",
+            "seats": "260",
+            "nearest-node-id": 33
         },
         {
             "spot-id": 50,
@@ -533,8 +802,18 @@
             "lat": "35.62463665215171",
             "lon": "139.88699008414704",
             "type": "restaurant",
-            "nearest-node-id": 37,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/436/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/436/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/436/",
+            "can-reserve": "false",
+            "area": "アメリカンウォーターフロント",
+            "menu-type": [
+                "スナック",
+                "ビール"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "40",
+            "nearest-node-id": 37
         },
         {
             "spot-id": 51,
@@ -543,8 +822,17 @@
             "lat": "35.624226490084894",
             "lon": "139.88407739704098",
             "type": "restaurant",
-            "nearest-node-id": 56,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/450/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/450/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/450/",
+            "can-reserve": "false",
+            "area": "ポートディスカバリー",
+            "menu-type": [
+                "うきわまん"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "30",
+            "nearest-node-id": 56
         },
         {
             "spot-id": 52,
@@ -553,8 +841,17 @@
             "lat": "35.62557288181555",
             "lon": "139.8832934499238",
             "type": "restaurant",
-            "nearest-node-id": 49,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/454/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/454/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/454/",
+            "can-reserve": "false",
+            "area": "ポートディスカバリー",
+            "menu-type": [
+                "フライドピザ"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "20",
+            "nearest-node-id": 49
         },
         {
             "spot-id": 53,
@@ -563,8 +860,18 @@
             "lat": "35.62534787349407",
             "lon": "139.88303017036733",
             "type": "restaurant",
-            "nearest-node-id": 62,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/453/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/453/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/453/",
+            "can-reserve": "false",
+            "area": "ポートディスカバリー",
+            "menu-type": [
+                "スナック",
+                "ビール"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "80",
+            "nearest-node-id": 62
         },
         {
             "spot-id": 54,
@@ -573,8 +880,18 @@
             "lat": "35.625329434540184",
             "lon": "139.88332197925132",
             "type": "restaurant",
-            "nearest-node-id": 62,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/451/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/451/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/451/",
+            "can-reserve": "true",
+            "area": "ポートディスカバリー",
+            "menu-type": [
+                "グリルドビーフ",
+                "アントレ"
+            ],
+            "budget-day": "1,200～2,200円",
+            "budget-night": "1,200～2,200円",
+            "seats": "500",
+            "nearest-node-id": 62
         },
         {
             "spot-id": 55,
@@ -583,8 +900,17 @@
             "lat": "35.62655199342709",
             "lon": "139.88147863907696",
             "type": "restaurant",
-            "nearest-node-id": 76,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/460/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/460/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/460/",
+            "can-reserve": "false",
+            "area": "ロストリバーデルタ",
+            "menu-type": [
+                "ソーセージドッグ"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "None",
+            "nearest-node-id": 76
         },
         {
             "spot-id": 56,
@@ -593,8 +919,17 @@
             "lat": "35.62733398487032",
             "lon": "139.88214863509043",
             "type": "restaurant",
-            "nearest-node-id": 79,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/457/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/457/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/457/",
+            "can-reserve": "false",
+            "area": "ロストリバーデルタ",
+            "menu-type": [
+                "スナック"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "30",
+            "nearest-node-id": 79
         },
         {
             "spot-id": 57,
@@ -603,8 +938,17 @@
             "lat": "35.62635353687072",
             "lon": "139.88221841668994",
             "type": "restaurant",
-            "nearest-node-id": 86,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/456/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/456/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/456/",
+            "can-reserve": "false",
+            "area": "ロストリバーデルタ",
+            "menu-type": [
+                "メキシコ料理"
+            ],
+            "budget-day": "1,200円～2,200円",
+            "budget-night": "1,200円～2,200円",
+            "seats": "620",
+            "nearest-node-id": 86
         },
         {
             "spot-id": 58,
@@ -613,8 +957,20 @@
             "lat": "35.62685932680087",
             "lon": "139.8807422907195",
             "type": "restaurant",
-            "nearest-node-id": 137,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/459/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/459/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/459/",
+            "can-reserve": "false",
+            "area": "ロストリバーデルタ",
+            "menu-type": [
+                "ポーク",
+                "チキン",
+                "サーモン",
+                "グリル"
+            ],
+            "budget-day": "1,200～2,200円",
+            "budget-night": "1,200～2,200円",
+            "seats": "700",
+            "nearest-node-id": 137
         },
         {
             "spot-id": 59,
@@ -623,8 +979,17 @@
             "lat": "35.627528730257204",
             "lon": "139.88129555984574",
             "type": "restaurant",
-            "nearest-node-id": 78,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/461/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/461/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/461/",
+            "can-reserve": "false",
+            "area": "ロストリバーデルタ",
+            "menu-type": [
+                "ターキーレッグ"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "30",
+            "nearest-node-id": 78
         },
         {
             "spot-id": 60,
@@ -633,8 +998,17 @@
             "lat": "35.628332835176884",
             "lon": "139.8818056970414",
             "type": "restaurant",
-            "nearest-node-id": 68,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/465/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/465/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/465/",
+            "can-reserve": "false",
+            "area": "アラビアンコースト",
+            "menu-type": [
+                "チュロス"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "None",
+            "nearest-node-id": 68
         },
         {
             "spot-id": 61,
@@ -643,8 +1017,17 @@
             "lat": "35.628467652267155",
             "lon": "139.88271758423892",
             "type": "restaurant",
-            "nearest-node-id": 129,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/463/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/463/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/463/",
+            "can-reserve": "false",
+            "area": "アラビアンコースト",
+            "menu-type": [
+                "カレー"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "930",
+            "nearest-node-id": 129
         },
         {
             "spot-id": 62,
@@ -653,8 +1036,18 @@
             "lat": "35.62806195659733",
             "lon": "139.88205571876244",
             "type": "restaurant",
-            "nearest-node-id": 68,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/464/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/464/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/464/",
+            "can-reserve": "false",
+            "area": "アラビアンコースト",
+            "menu-type": [
+                "スナック",
+                "アイス"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "160",
+            "nearest-node-id": 68
         },
         {
             "spot-id": 63,
@@ -663,8 +1056,17 @@
             "lat": "35.626576161868144",
             "lon": "139.88250134014066",
             "type": "restaurant",
-            "nearest-node-id": 0,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/468/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/468/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/468/",
+            "can-reserve": "false",
+            "area": "マーメイドラグーン",
+            "menu-type": [
+                "ピザ"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "580",
+            "nearest-node-id": 0
         },
         {
             "spot-id": 64,
@@ -673,8 +1075,19 @@
             "lat": "35.626687726652065",
             "lon": "139.8843650691074",
             "type": "restaurant",
-            "nearest-node-id": 48,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/418/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/418/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/418/",
+            "can-reserve": "false",
+            "area": "ミステリアスアイランド",
+            "menu-type": [
+                "中華料理",
+                "チャーハン",
+                "点心"
+            ],
+            "budget-day": "1,200～2,200円",
+            "budget-night": "1,200～2,200円",
+            "seats": "610",
+            "nearest-node-id": 48
         },
         {
             "spot-id": 65,
@@ -683,8 +1096,17 @@
             "lat": "35.6262659901122",
             "lon": "139.88424979704135",
             "type": "restaurant",
-            "nearest-node-id": 47,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/421/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/421/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/421/",
+            "can-reserve": "false",
+            "area": "ミステリアスアイランド",
+            "menu-type": [
+                "スナック"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "140",
+            "nearest-node-id": 47
         },
         {
             "spot-id": 66,
@@ -693,8 +1115,17 @@
             "lat": "35.62654293516153",
             "lon": "139.8838738970412",
             "type": "restaurant",
-            "nearest-node-id": 48,
-            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/419/"
+            "url": "https://www.tokyodisneyresort.jp/tds/restaurant/detail/419/",
+            "menu-url": "https://www.tokyodisneyresort.jp/tds/restaurant/menu/419/",
+            "can-reserve": "false",
+            "area": "ミステリアスアイランド",
+            "menu-type": [
+                "チュロス"
+            ],
+            "budget-day": "～1,200円",
+            "budget-night": "～1,200円",
+            "seats": "None",
+            "nearest-node-id": 48
         },
         {
             "spot-id": 67,
@@ -703,8 +1134,9 @@
             "lat": "35.627053829792416",
             "lon": "139.8864666793604",
             "type": "shop",
-            "nearest-node-id": 117,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/604/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/604/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 117
         },
         {
             "spot-id": 68,
@@ -713,8 +1145,9 @@
             "lat": "35.62689230914014",
             "lon": "139.88835381094933",
             "type": "shop",
-            "nearest-node-id": 6,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/600/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/600/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 6
         },
         {
             "spot-id": 69,
@@ -723,8 +1156,9 @@
             "lat": "35.626212786779085",
             "lon": "139.88740088518182",
             "type": "shop",
-            "nearest-node-id": 30,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/616/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/616/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 30
         },
         {
             "spot-id": 70,
@@ -733,8 +1167,9 @@
             "lat": "35.626337270308056",
             "lon": "139.88757496709434",
             "type": "shop",
-            "nearest-node-id": 30,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/615/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/615/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 30
         },
         {
             "spot-id": 71,
@@ -743,8 +1178,9 @@
             "lat": "35.62690536565524",
             "lon": "139.88788725437888",
             "type": "shop",
-            "nearest-node-id": 113,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/601/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/601/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 113
         },
         {
             "spot-id": 72,
@@ -753,8 +1189,9 @@
             "lat": "35.62671446795919",
             "lon": "139.8884136892084",
             "type": "shop",
-            "nearest-node-id": 6,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/611/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/611/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 6
         },
         {
             "spot-id": 73,
@@ -763,8 +1200,9 @@
             "lat": "35.62657375882438",
             "lon": "139.88785306090304",
             "type": "shop",
-            "nearest-node-id": 17,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/613/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/613/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 17
         },
         {
             "spot-id": 74,
@@ -773,8 +1211,9 @@
             "lat": "35.62685455442086",
             "lon": "139.88760179728777",
             "type": "shop",
-            "nearest-node-id": 112,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/602/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/602/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 112
         },
         {
             "spot-id": 75,
@@ -783,8 +1222,9 @@
             "lat": "35.62654965539287",
             "lon": "139.8880709872984",
             "type": "shop",
-            "nearest-node-id": 6,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/612/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/612/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 6
         },
         {
             "spot-id": 76,
@@ -793,8 +1233,9 @@
             "lat": "35.62668337182324",
             "lon": "139.8885987434835",
             "type": "shop",
-            "nearest-node-id": 3,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/608/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/608/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 3
         },
         {
             "spot-id": 77,
@@ -803,8 +1244,9 @@
             "lat": "35.62708041807728",
             "lon": "139.88659347207502",
             "type": "shop",
-            "nearest-node-id": 117,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/605/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/605/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 117
         },
         {
             "spot-id": 78,
@@ -813,8 +1255,9 @@
             "lat": "35.62643965005653",
             "lon": "139.88783629286553",
             "type": "shop",
-            "nearest-node-id": 19,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/614/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/614/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 19
         },
         {
             "spot-id": 79,
@@ -823,8 +1266,9 @@
             "lat": "35.62697708019846",
             "lon": "139.88680208614412",
             "type": "shop",
-            "nearest-node-id": 118,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/606/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/606/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 118
         },
         {
             "spot-id": 80,
@@ -833,8 +1277,9 @@
             "lat": "35.62518935048507",
             "lon": "139.88613344087182",
             "type": "shop",
-            "nearest-node-id": 55,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/617/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/617/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 55
         },
         {
             "spot-id": 81,
@@ -843,8 +1288,9 @@
             "lat": "35.62451924491055",
             "lon": "139.88455212560146",
             "type": "shop",
-            "nearest-node-id": 123,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/629/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/629/",
+            "area": "アメリカンウォーターフロント",
+            "nearest-node-id": 123
         },
         {
             "spot-id": 82,
@@ -853,8 +1299,9 @@
             "lat": "35.62501049638865",
             "lon": "139.88711099647574",
             "type": "shop",
-            "nearest-node-id": 33,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/622/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/622/",
+            "area": "アメリカンウォーターフロント",
+            "nearest-node-id": 33
         },
         {
             "spot-id": 83,
@@ -863,8 +1310,9 @@
             "lat": "35.62468223963672",
             "lon": "139.88863096648507",
             "type": "shop",
-            "nearest-node-id": 29,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/618/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/618/",
+            "area": "アメリカンウォーターフロント",
+            "nearest-node-id": 29
         },
         {
             "spot-id": 84,
@@ -873,8 +1321,9 @@
             "lat": "35.623904604027395",
             "lon": "139.8880629781352",
             "type": "shop",
-            "nearest-node-id": 36,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/624/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/624/",
+            "area": "アメリカンウォーターフロント",
+            "nearest-node-id": 36
         },
         {
             "spot-id": 85,
@@ -883,8 +1332,9 @@
             "lat": "35.624554730269516",
             "lon": "139.8873323461311",
             "type": "shop",
-            "nearest-node-id": 33,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/623/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/623/",
+            "area": "アメリカンウォーターフロント",
+            "nearest-node-id": 33
         },
         {
             "spot-id": 86,
@@ -893,8 +1343,9 @@
             "lat": "35.62508364370584",
             "lon": "139.88749816160015",
             "type": "shop",
-            "nearest-node-id": 24,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/621/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/621/",
+            "area": "アメリカンウォーターフロント",
+            "nearest-node-id": 24
         },
         {
             "spot-id": 87,
@@ -903,8 +1354,9 @@
             "lat": "35.62548210888883",
             "lon": "139.8819793769745",
             "type": "shop",
-            "nearest-node-id": 58,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/631/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/631/",
+            "area": "ポートディスカバリー",
+            "nearest-node-id": 58
         },
         {
             "spot-id": 88,
@@ -913,8 +1365,9 @@
             "lat": "35.62505605408059",
             "lon": "139.88328215942215",
             "type": "shop",
-            "nearest-node-id": 59,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/630/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/630/",
+            "area": "ポートディスカバリー",
+            "nearest-node-id": 59
         },
         {
             "spot-id": 89,
@@ -923,8 +1376,9 @@
             "lat": "35.62674376338182",
             "lon": "139.88113534998413",
             "type": "shop",
-            "nearest-node-id": 137,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/648/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/648/",
+            "area": "ロストリバーデルタ",
+            "nearest-node-id": 137
         },
         {
             "spot-id": 90,
@@ -933,8 +1387,9 @@
             "lat": "35.6267657690279",
             "lon": "139.88123911760607",
             "type": "shop",
-            "nearest-node-id": 137,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/644/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/644/",
+            "area": "ロストリバーデルタ",
+            "nearest-node-id": 137
         },
         {
             "spot-id": 91,
@@ -943,8 +1398,9 @@
             "lat": "35.62694452524924",
             "lon": "139.8814682737277",
             "type": "shop",
-            "nearest-node-id": 138,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/647/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/647/",
+            "area": "ロストリバーデルタ",
+            "nearest-node-id": 138
         },
         {
             "spot-id": 92,
@@ -953,8 +1409,9 @@
             "lat": "35.62677443516585",
             "lon": "139.88222003262334",
             "type": "shop",
-            "nearest-node-id": 110,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/645/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/645/",
+            "area": "ロストリバーデルタ",
+            "nearest-node-id": 110
         },
         {
             "spot-id": 93,
@@ -963,8 +1420,9 @@
             "lat": "35.628112961698555",
             "lon": "139.88262954350137",
             "type": "shop",
-            "nearest-node-id": 132,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/641/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/641/",
+            "area": "アラビアンコースト",
+            "nearest-node-id": 132
         },
         {
             "spot-id": 94,
@@ -973,8 +1431,9 @@
             "lat": "35.62811056149167",
             "lon": "139.88234041804847",
             "type": "shop",
-            "nearest-node-id": 135,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/650/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/650/",
+            "area": "アラビアンコースト",
+            "nearest-node-id": 135
         },
         {
             "spot-id": 95,
@@ -983,8 +1442,9 @@
             "lat": "35.62700723497052",
             "lon": "139.88252646975775",
             "type": "shop",
-            "nearest-node-id": 82,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/637/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/637/",
+            "area": "マーメイドラグーン",
+            "nearest-node-id": 82
         },
         {
             "spot-id": 96,
@@ -993,8 +1453,9 @@
             "lat": "35.62746485770061",
             "lon": "139.88382750432524",
             "type": "shop",
-            "nearest-node-id": 109,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/638/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/638/",
+            "area": "マーメイドラグーン",
+            "nearest-node-id": 109
         },
         {
             "spot-id": 97,
@@ -1003,8 +1464,9 @@
             "lat": "35.62703183626786",
             "lon": "139.88372426073525",
             "type": "shop",
-            "nearest-node-id": 16,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/640/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/640/",
+            "area": "マーメイドラグーン",
+            "nearest-node-id": 16
         },
         {
             "spot-id": 98,
@@ -1013,8 +1475,9 @@
             "lat": "35.62669513695009",
             "lon": "139.8826014298775",
             "type": "shop",
-            "nearest-node-id": 0,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/633/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/633/",
+            "area": "マーメイドラグーン",
+            "nearest-node-id": 0
         },
         {
             "spot-id": 99,
@@ -1023,8 +1486,9 @@
             "lat": "35.626900580215036",
             "lon": "139.882564338146",
             "type": "shop",
-            "nearest-node-id": 82,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/636/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/636/",
+            "area": "マーメイドラグーン",
+            "nearest-node-id": 82
         },
         {
             "spot-id": 100,
@@ -1033,8 +1497,9 @@
             "lat": "35.62722882470246",
             "lon": "139.8830465204795",
             "type": "shop",
-            "nearest-node-id": 97,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/639/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/639/",
+            "area": "マーメイドラグーン",
+            "nearest-node-id": 97
         },
         {
             "spot-id": 101,
@@ -1043,28 +1508,31 @@
             "lat": "35.626211716413074",
             "lon": "139.88401990748127",
             "type": "shop",
-            "nearest-node-id": 47,
-            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/632/"
+            "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/632/",
+            "area": "ミステリアスアイランド",
+            "nearest-node-id": 47
         },
         {
             "spot-id": 102,
             "name": "パークエントランス・ノース・チケットブース",
-            "short-name": "エントランス(北)",
+            "short-name": "ノースエントランス",
             "lat": "35.6276852325185",
             "lon": "139.88856278451385",
             "type": "place",
-            "nearest-node-id": 106,
-            "url": "https://www.tokyodisneyresort.jp/tds/service/detail/041/"
+            "url": "https://www.tokyodisneyresort.jp/tds/service/detail/041/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 106
         },
         {
             "spot-id": 103,
             "name": "パークエントランス・サウス・チケットブース",
-            "short-name": "エントランス(南)",
+            "short-name": "サウスエントランス",
             "lat": "35.626630558175975",
             "lon": "139.88994325030163",
             "type": "place",
-            "nearest-node-id": 107,
-            "url": "https://www.tokyodisneyresort.jp/tds/service/detail/041/"
+            "url": "https://www.tokyodisneyresort.jp/tds/service/detail/041/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 107
         },
         {
             "spot-id": 104,
@@ -1073,6 +1541,7 @@
             "lat": "35.627009703489286",
             "lon": "139.88911531873848",
             "type": "place",
+            "area": "メディテレーニアンハーバー",
             "nearest-node-id": 4
         },
         {
@@ -1082,8 +1551,9 @@
             "lat": "35.62696701859257",
             "lon": "139.88897013253737",
             "type": "place",
-            "nearest-node-id": 3,
-            "url": "https://www.tokyodisneyresort.jp/dream/photo/character/tds_disneysea-plaza.html"
+            "url": "https://www.tokyodisneyresort.jp/dream/photo/character/tds_disneysea-plaza.html",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 3
         },
         {
             "spot-id": 106,
@@ -1092,6 +1562,7 @@
             "lat": "35.626591296757205",
             "lon": "139.88737282135511",
             "type": "place",
+            "area": "メディテレーニアンハーバー",
             "nearest-node-id": 108
         },
         {
@@ -1101,9 +1572,10 @@
             "lat": "35.626591296757205",
             "lon": "139.88737282135511",
             "type": "show",
-            "nearest-node-id": 108,
             "play-time": "600",
-            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/265/"
+            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/265/",
+            "area": "メディテレーニアンハーバー",
+            "nearest-node-id": 108
         },
         {
             "spot-id": 108,
@@ -1112,9 +1584,10 @@
             "lat": "35.62484764083992",
             "lon": "139.88824637236533",
             "type": "show",
-            "nearest-node-id": 26,
             "play-time": "1500",
-            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/975/"
+            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/975/",
+            "area": "アメリカンウォーターフロント",
+            "nearest-node-id": 26
         },
         {
             "spot-id": 109,
@@ -1123,9 +1596,10 @@
             "lat": "35.626591296757205",
             "lon": "139.88737282135511",
             "type": "show",
-            "nearest-node-id": 108,
             "play-time": "300",
-            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/930/"
+            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/930/",
+            "area": "パークワイド",
+            "nearest-node-id": 108
         },
         {
             "spot-id": 110,
@@ -1134,9 +1608,10 @@
             "lat": "35.62454488725738",
             "lon": "139.88491178287993",
             "type": "show",
-            "nearest-node-id": 125,
             "play-time": "600",
-            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/931/"
+            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/931/",
+            "area": "アメリカンウォーターフロント",
+            "nearest-node-id": 125
         },
         {
             "spot-id": 111,
@@ -1145,9 +1620,10 @@
             "lat": "35.625848533170725",
             "lon": "139.88223858921663",
             "type": "show",
-            "nearest-node-id": 65,
             "play-time": "1800",
-            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/927/"
+            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/927/",
+            "area": "ロストリバーデルタ",
+            "nearest-node-id": 65
         },
         {
             "spot-id": 112,
@@ -1156,9 +1632,11 @@
             "lat": "35.62410452165671",
             "lon": "139.88563214950267",
             "type": "greeting",
-            "nearest-node-id": 51,
             "play-time": "180",
-            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/905/"
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/905/",
+            "area": "アメリカンウォーターフロント",
+            "character": "シェリーメイ",
+            "nearest-node-id": 51
         },
         {
             "spot-id": 113,
@@ -1167,9 +1645,11 @@
             "lat": "35.62363420865239",
             "lon": "139.886931289538",
             "type": "greeting",
-            "nearest-node-id": 100,
             "play-time": "180",
-            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/270/"
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/270/",
+            "area": "アメリカンウォーターフロント",
+            "character": "当日のお楽しみ",
+            "nearest-node-id": 100
         },
         {
             "spot-id": 114,
@@ -1178,9 +1658,11 @@
             "lat": "35.626410442370045",
             "lon": "139.8822065159945",
             "type": "greeting",
-            "nearest-node-id": 86,
             "play-time": "180",
-            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/904/"
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/904/",
+            "area": "ロストリバーデルタ",
+            "character": "ダッフィー",
+            "nearest-node-id": 86
         },
         {
             "spot-id": 115,
@@ -1189,9 +1671,11 @@
             "lat": "35.625854419808654",
             "lon": "139.8812056245969",
             "type": "greeting",
-            "nearest-node-id": 72,
             "play-time": "180",
-            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/901/"
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/901/",
+            "area": "ロストリバーデルタ",
+            "character": "ミッキーマウス",
+            "nearest-node-id": 72
         },
         {
             "spot-id": 116,
@@ -1200,9 +1684,11 @@
             "lat": "35.625854419808654",
             "lon": "139.8812056245969",
             "type": "greeting",
-            "nearest-node-id": 72,
             "play-time": "180",
-            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/902/"
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/902/",
+            "area": "ロストリバーデルタ",
+            "character": "ミニーマウス",
+            "nearest-node-id": 72
         },
         {
             "spot-id": 117,
@@ -1211,9 +1697,11 @@
             "lat": "35.62640223074321",
             "lon": "139.88271777395298",
             "type": "greeting",
-            "nearest-node-id": 140,
             "play-time": "180",
-            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/272/"
+            "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/272/",
+            "area": "マーメイドラグーン",
+            "character": "当日のお楽しみ",
+            "nearest-node-id": 140
         }
     ]
 }
