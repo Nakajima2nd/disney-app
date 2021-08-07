@@ -10,6 +10,11 @@ const theme = createMuiTheme({
         height: 'calc(100% - 64px)'
       }
     },
+    MuiDialogContent: {
+      root: {
+        padding: 0
+      }
+    },
     MuiTab: {
       root: {
         // minWidth: '0px',
