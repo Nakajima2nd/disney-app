@@ -19,7 +19,6 @@ const EnableAvatar = styled(Avatar)`
 const DisableAvatar = styled(Avatar)`
   color: white;
   background-color: lightgray;
-  font-size: 1rem;
 `
 
 const WaitTimeContainer = styled(Box)`
