@@ -11,11 +11,39 @@ import { useGetSpotList } from '../hooks'
 import { Loading } from '../components/Loading'
 
 const Wrap = styled(Box)`
+  padding: 8px;
+  margin: 8px auto;
+  max-width: 800px;
+  background-color: white;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 816px) {
+    margin: 8px;
+  }
 `
 
 const Text = styled(Typography)`
+`
+
+const Title = styled(Typography)`
+  text-align: center;
+  margin: 32px 0 0;
+  font-size: 3rem;
+  font-weight: bold;
+`
+
+const Caption = styled(Typography)`
+  text-align: center;
+  font-size: 1.1rem;
+  width: max-content;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.5);
+`
+const Minnie = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  padding: 0 0 0 20%;
 `
 
 const SpotButton = styled(Button)`
@@ -48,7 +76,57 @@ const ConditionWalkSpeedSelect = styled(TextField)`
 `
 
 const SearchButton = styled(Button)`
-  margin: 16px 0 0;
+  display: flex;
+  margin: 20vw auto 32px;
+  width: 30vw;
+  height: 30vw;
+  border-radius: 50%;
+  position: relative;
+  background-color: rgba(245,226,196,1);
+  color: white;
+  font-size: 1.5rem;
+  transition: 0.5s;
+  max-width: 240px;
+  max-height: 240px;
+  &::before {
+    transition: 0.5s;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+    position: absolute;
+    right: -33%;
+    top: -50%;
+    content: '';
+    background-color: rgba(245,226,196,1);
+    max-width: 160px;
+    max-height: 160px;
+  }
+  &::after {
+    transition: 0.5s;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+    position: absolute;
+    left: -33%;
+    top: -50%;
+    content: '';
+    background-color: rgba(245,226,196,1);
+    max-width: 160px;
+    max-height: 160px;
+  }
+  &:hover {
+    transition: 0.5s;
+    background-color: rgba(209,223,210,1);
+    color: white;
+    &::after {
+      transition: 0.5s;
+      background-color: rgba(209,223,210,1);
+    }
+    &::before {
+      transition: 0.5s;
+      background-color: rgba(209,223,210,1);
+    }
+  }
 `
 
 const Spot = styled(Box)`
@@ -155,9 +233,19 @@ const Home = () => {
     })
   }
 
-  return (
+  return (<>
+    {/* タイトル */}
+    <Title>ディズニープラン</Title>
+    <Caption>TDRをめぐる計画を立てるお役立ちアプリです！</Caption>
+
+    {/* ミニーの画像 */}
+    <Minnie
+      src="/minnie/minnie_01.png"
+      alt="ミニーの画像"
+    />
+
     <Wrap>
-      <Text>回りたいスポットを入れてね</Text>
+      {/* 選択済みスポット一覧 */}
       {spots.map((spot, index) =>
         <Spot key={index}>
           <SpotButton
@@ -179,17 +267,8 @@ const Home = () => {
       >
         追加
       </PlusButton>
-      <SpotListDialog
-        spotList={spotList}
-        editing={editing}
-        selected={selected}
-        open={open}
-        spots={spots}
-        setEditing={setEditing}
-        setOpen={setOpen}
-        setSpots={setSpots}
-        setIndex={setSelected}
-      />
+
+      {/* 条件入力 */}
       <Condition>
         <ConditionTimePicker
           margin="normal"
@@ -220,15 +299,29 @@ const Home = () => {
           <MenuItem value="fast">せかせか</MenuItem>
         </ConditionWalkSpeedSelect>
       </Condition>
-      <SearchButton
-        onClick={handleSearch}
-        variant="contained"
-        color="primary"
-      >
-        検索
-      </SearchButton>
     </Wrap>
-  )
+
+    {/* 検索ボタン */}
+    <SearchButton
+      onClick={handleSearch}
+      variant="text"
+    >
+      検索
+    </SearchButton>
+
+    {/* スポット選択ダイアログ */}
+    <SpotListDialog
+      spotList={spotList}
+      editing={editing}
+      selected={selected}
+      open={open}
+      spots={spots}
+      setEditing={setEditing}
+      setOpen={setOpen}
+      setSpots={setSpots}
+      setIndex={setSelected}
+    />
+  </>)
 }
 
 export default Home
