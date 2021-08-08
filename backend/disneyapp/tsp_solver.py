@@ -47,6 +47,15 @@ class RandomTspSolver:
             巡回探索の出力オブジェクト。
         """
         self.spot_data_dict = RandomTspSolver.__make_spot_data_dict(travel_input.wait_time_mode)
+        if travel_input.optimize_spot_order == "true":
+            return self.__make_tour_by_optimizing_spot_order(travel_input)
+        else:
+            return self.__make_tour_from_original_spot_order(travel_input)
+
+    def __make_tour_by_optimizing_spot_order(self, travel_input):
+        """
+        スポットの並び順を最適化することによって巡回路を生成する。
+        """
         base_tour = [ travel_input_spot.spot_id for travel_input_spot in travel_input.spots ]
         current_best_score = 9999999999999
         current_best_tour = None
@@ -64,6 +73,18 @@ class RandomTspSolver:
             return None
         return self.__build_tour(travel_input, current_best_tour)
 
+    def __make_tour_from_original_spot_order(self, travel_input):
+        """
+        入力された順にスポットを並べて巡回路を構築する。
+        """
+        base_tour = [travel_input_spot.spot_id for travel_input_spot in travel_input.spots]
+        current_tour_with_od = [travel_input.start_spot_id] + base_tour + [travel_input.goal_spot_id]
+        tour = self.__trace_from_front(travel_input, current_tour_with_od)
+        score = self.__eval_spot_list_order(tour)
+        if score > 3600 * 24:
+            # 時刻制約を満たす経路にならない場合はNoneを返す
+            return None
+        return self.__build_tour(travel_input, current_tour_with_od)
 
     @staticmethod
     def __make_spot_data_dict(wait_time_mode):

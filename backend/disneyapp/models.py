@@ -90,6 +90,7 @@ class TravelInput:
         self.goal_spot_id = -1
         self.spots = []
         self.error_message = ""
+        self.optimize_spot_order = "true"
         self.init_by_json(json_data)
 
     def __init_time_mode(self, json_data):
@@ -280,6 +281,17 @@ class TravelInput:
             return False
         return True
 
+    def __init_optimize_spot_order(self, json_data):
+        if not json_data.get("optimize-spot-order"):
+            self.error_message = "optimize-spot-orderが存在しません。"
+            return False
+        self.optimize_spot_order = json_data["optimize-spot-order"]
+        valid_optimize_spot_order_list = ["true", "false"]
+        if self.optimize_spot_order not in valid_optimize_spot_order_list:
+            self.error_message = "optimize-spot-orderはtrue/falseのいずれかで指定してください。"
+            return False
+        return True
+
     def init_by_json(self, json_data):
         # note: time-modeはいったんdisableにする
         # if not self.__init_time_mode(json_data):
@@ -293,5 +305,7 @@ class TravelInput:
         if not self.__init_start_spot_id(json_data):
             return
         if not self.__init_goal_spot_id(json_data):
+            return
+        if not self.__init_optimize_spot_order(json_data):
             return
         self.__init_spots(json_data)
