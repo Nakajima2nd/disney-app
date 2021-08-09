@@ -34,16 +34,21 @@ const Condition = styled(Box)`
 `
 
 const ConditionTimePicker = styled(TimePicker)`
-  flex-basis: 15%;
+  flex-basis: 30%;
 `
 
 const ConditionWaitTimeModeSelect = styled(TextField)`
-  flex-basis: 55%;
+  flex-basis: 65%;
   margin: 16px 0 8px;
 `
 
 const ConditionWalkSpeedSelect = styled(TextField)`
-  flex-basis: 28%;
+  flex-basis: 30%;
+  margin: 16px 0 8px;
+`
+
+const ConditionOptimizeOpotOrder = styled(TextField)`
+  flex-basis: 65%;
   margin: 16px 0 8px;
 `
 
@@ -96,6 +101,7 @@ const Home = () => {
   const [specifiedTime, setSpecifiedTime] = useState(new Date())
   const [waitTimeMode, setWaitTimeMode] = useState('real')
   const [walkSpeed, setWalkSpeed] = useState('normal')
+  const [optimizeSpotOrder, setOptimizeSpotOrder] = useState("false")
   const router = useRouter()
   const { spotList, error } = useGetSpotList()
 
@@ -117,6 +123,10 @@ const Home = () => {
 
   const handleWalkSpeed = (event) => {
     setWalkSpeed(event.target.value)
+  }
+
+  const handleOptimizeSpotOrder = (event) => {
+    setOptimizeSpotOrder(event.target.value)
   }
 
   const handleDelete = (index) => (event) => {
@@ -147,6 +157,7 @@ const Home = () => {
           waitTimeMode: waitTimeMode,
           specifiedTime: formatDateTime(specifiedTime),
           walkSpeed: walkSpeed,
+          optimizeSpotOrder: optimizeSpotOrder,
           startSpotId: 103,
           goalSpotId: 103,
           spots: modifySpots(spots)
@@ -219,6 +230,15 @@ const Home = () => {
           <MenuItem value="normal">ふつう</MenuItem>
           <MenuItem value="fast">せかせか</MenuItem>
         </ConditionWalkSpeedSelect>
+        <ConditionOptimizeOpotOrder
+          label="スポットをめぐる順番"
+          value={optimizeSpotOrder}
+          onChange={handleOptimizeSpotOrder}
+          select
+        >
+          <MenuItem value={"false"}>選んだ順にめぐる</MenuItem>
+          <MenuItem value={"true"}>効率よくめぐる</MenuItem>
+        </ConditionOptimizeOpotOrder>
       </Condition>
       <SearchButton
         onClick={handleSearch}
