@@ -98,10 +98,12 @@ const Home = () => {
   const [editing, setEditing] = useState({})
   const [spots, setSpots] = useState([])
   const [selected, setSelected] = useState(-1)
-  const [specifiedTime, setSpecifiedTime] = useState(new Date())
-  const [waitTimeMode, setWaitTimeMode] = useState('real')
-  const [walkSpeed, setWalkSpeed] = useState('normal')
-  const [optimizeSpotOrder, setOptimizeSpotOrder] = useState("false")
+  const [condition, setCondition] = useState({
+    specifiedTime: new Date(),
+    waitTimeMode: 'real',
+    walkSpeed: 'normal',
+    optimizeSpotOrder: 'false'
+  })
   const router = useRouter()
   const { spotList, error } = useGetSpotList()
 
@@ -113,20 +115,12 @@ const Home = () => {
     setOpen(true)
   }
 
-  const handleSpecifiedTime = (date) => {
-    setSpecifiedTime(date);
+  const handleDateTime = (key) => (date) => {
+    setCondition(assoc(key, date, condition))
   }
 
-  const handleWaitTimeMode = (event) => {
-    setWaitTimeMode(event.target.value)
-  }
-
-  const handleWalkSpeed = (event) => {
-    setWalkSpeed(event.target.value)
-  }
-
-  const handleOptimizeSpotOrder = (event) => {
-    setOptimizeSpotOrder(event.target.value)
+  const handleSelect = (key) => (event) => {
+    setCondition(assoc(key, event.target.value, condition))
   }
 
   const handleDelete = (index) => (event) => {
@@ -154,10 +148,7 @@ const Home = () => {
       pathname: '/search',
       query: {
         param: encodeURI(JSON.stringify(toKebabCaseObject({
-          waitTimeMode: waitTimeMode,
-          specifiedTime: formatDateTime(specifiedTime),
-          walkSpeed: walkSpeed,
-          optimizeSpotOrder: optimizeSpotOrder,
+          ...assoc('specifiedTime', formatDateTime(condition.specifiedTime), condition),
           startSpotId: 103,
           goalSpotId: 103,
           spots: modifySpots(spots)
@@ -206,15 +197,15 @@ const Home = () => {
           margin="normal"
           label="時間"
           format="HH:mm"
-          value={specifiedTime}
-          onChange={handleSpecifiedTime}
+          value={condition.specifiedTime}
+          onChange={handleDateTime('specifiedTime')}
           okLabel="決定"
           cancelLabel="キャンセル"
         />
         <ConditionWaitTimeModeSelect
           label="待ち時間"
-          value={waitTimeMode}
-          onChange={handleWaitTimeMode}
+          value={condition.waitTimeMode}
+          onChange={handleSelect('waitTimeMode')}
           select
         >
           <MenuItem value="real">リアルタイム待ち時間</MenuItem>
@@ -222,8 +213,8 @@ const Home = () => {
         </ConditionWaitTimeModeSelect>
         <ConditionWalkSpeedSelect
           label="歩く速度"
-          value={walkSpeed}
-          onChange={handleWalkSpeed}
+          value={condition.walkSpeed}
+          onChange={handleSelect('walkSpeed')}
           select
         >
           <MenuItem value="slow">ゆっくり</MenuItem>
@@ -232,8 +223,8 @@ const Home = () => {
         </ConditionWalkSpeedSelect>
         <ConditionOptimizeOpotOrder
           label="スポットをめぐる順番"
-          value={optimizeSpotOrder}
-          onChange={handleOptimizeSpotOrder}
+          value={condition.optimizeSpotOrder}
+          onChange={handleSelect('optimizeSpotOrder')}
           select
         >
           <MenuItem value={"false"}>選んだ順にめぐる</MenuItem>
