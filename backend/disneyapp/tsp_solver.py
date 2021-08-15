@@ -234,6 +234,7 @@ class RandomTspSolver:
                     stay_time = spot.stay_time
             if desired_arrival_time != -1:
                 subroute.violate_goal_desired_arrival_time = (current_time - desired_arrival_time > 0)
+                subroute.surplus_wait_time = desired_arrival_time - current_time
                 current_time = max(current_time, desired_arrival_time)
             subroute.goal_time = sec_to_hhmm(current_time)
 
