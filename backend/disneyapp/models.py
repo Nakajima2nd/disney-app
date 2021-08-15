@@ -11,6 +11,8 @@ class Subroute:
         self.transit_time = -1
         # 目的地の到着希望時刻を破っている場合True
         self.violate_goal_desired_arrival_time = False
+        # 時刻指定などが原因で発生した、余分な待ち時間
+        self.surplus_wait_time = 0
         self.coords = []
 
     def to_dict(self):
@@ -25,6 +27,7 @@ class Subroute:
         for coord in self.coords:
             pair = [ coord[0], coord[1] ]
             ret_dict["coords"].append(pair)
+        ret_dict["surplus-wait-time"] = self.surplus_wait_time
         return ret_dict
 
 
