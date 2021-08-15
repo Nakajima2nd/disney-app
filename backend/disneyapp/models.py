@@ -131,8 +131,8 @@ class TravelInput:
         specified_time_str = json_data["specified-time"]
         try:
             # hh:mm -> 秒数 への変換
-            splited_time_str = specified_time_str.split(":")
-            self.specified_time = int(splited_time_str[0]) * 3600 + int(splited_time_str[1]) * 60
+            split_time_str = specified_time_str.split(":")
+            self.specified_time = int(split_time_str[0]) * 3600 + int(split_time_str[1]) * 60
         except:
             self.error_message = "時間の形式が不正です。hh:mm形式で指定してください。"
             return False
