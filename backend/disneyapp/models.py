@@ -11,6 +11,8 @@ class Subroute:
         self.transit_time = -1
         # 目的地の到着希望時刻を破っている場合True
         self.violate_goal_desired_arrival_time = False
+        # 時刻指定などが原因で発生した、余分な待ち時間
+        self.surplus_wait_time = 0
         self.coords = []
 
     def to_dict(self):
@@ -25,6 +27,7 @@ class Subroute:
         for coord in self.coords:
             pair = [ coord[0], coord[1] ]
             ret_dict["coords"].append(pair)
+        ret_dict["surplus-wait-time"] = self.surplus_wait_time
         return ret_dict
 
 
@@ -131,8 +134,8 @@ class TravelInput:
         specified_time_str = json_data["specified-time"]
         try:
             # hh:mm -> 秒数 への変換
-            hh_str, mm_str = specified_time_str.split(":")
-            self.specified_time = int(hh_str) * 3600 + int(mm_str) * 60
+            split_time_str = specified_time_str.split(":")
+            self.specified_time = int(split_time_str[0]) * 3600 + int(split_time_str[1]) * 60
         except:
             self.error_message = "時間の形式が不正です。hh:mm形式で指定してください。"
             return False
