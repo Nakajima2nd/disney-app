@@ -1,4 +1,4 @@
-from disneyapp.data_manager import CombinedDatamanager
+from disneyapp.data_manager import CombinedDatamanager,DynamicDataManager
 from disneyapp.models import TravelInput
 from disneyapp.tsp_solver import RandomTspSolver
 import copy, json
@@ -12,6 +12,11 @@ def sample(request):
     db_handler = DBHandler()
     record = db_handler.get_single_record("raw_html")
     return Response(record)
+
+@api_view(["GET"])
+def sample2(request):
+    data = DynamicDataManager.fetch_latest_data()
+    return Response(data)
 
 @api_view(["GET", "POST"])
 def spot_list(request):

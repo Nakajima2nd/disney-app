@@ -15,8 +15,8 @@ class DynamicDataManager:
     def fetch_latest_data(cls):
         current_time = int(time.time())
         # 前回データ取得時から5分以内であれば前回取得データを使いまわす
-        if current_time - cls.prev_fetch_time < 300:
-            return cls.prev_fetch_data
+        # if current_time - cls.prev_fetch_time < 300:
+        #     return cls.prev_fetch_data
         cls.prev_fetch_time = current_time
         url = DynamicDataManager.GAS_URL
         req = urllib.request.Request(url)
