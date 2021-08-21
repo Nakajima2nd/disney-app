@@ -23,6 +23,16 @@ delete-all:
 front-sh:
 	docker-compose exec frontend bash
 
+# バックエンドコンテナに入る
+.PHONY: backend-sh
+backend-sh:
+	docker-compose exec backend bash
+
+# バックエンドコンテナでherokuにログインする
+.PHONY: backend-login
+backend-login:
+	docker-compose exec backend scripts/heroku_login.sh
+
 # nodemodulesを手元にコピーする(エディターの補完を効かせるため)
 .PHONY: copy
 copy:
