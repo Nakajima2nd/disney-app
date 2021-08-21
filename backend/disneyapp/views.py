@@ -5,7 +5,7 @@ import copy, json
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from db_handler import DBHandler
+from disneyapp.db_handler import DBHandler
 
 @api_view(["GET"])
 def sample(request):
