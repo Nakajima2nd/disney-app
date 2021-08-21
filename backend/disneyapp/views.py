@@ -5,7 +5,13 @@ import copy, json
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from db_handler import DBHandler
 
+@api_view(["GET"])
+def sample(request):
+    db_handler = DBHandler()
+    record = db_handler.get_single_record("raw_html")
+    return Response(record)
 
 @api_view(["GET", "POST"])
 def spot_list(request):
