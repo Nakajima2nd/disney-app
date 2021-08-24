@@ -1,4 +1,4 @@
-from disneyapp.data_manager import StaticDataManager
+from disneyapp.data.data_manager import StaticDataManager
 
 
 class Subroute:
@@ -84,6 +84,9 @@ class TravelInputSpot:
 
 
 class TravelInput:
+    """
+    /search の入力情報を保持するクラス。入力情報のバリデーションもこのクラスで実施する。
+    """
     def __init__(self, json_data):
         self.time_mode = ""
         self.wait_time_mode = ""

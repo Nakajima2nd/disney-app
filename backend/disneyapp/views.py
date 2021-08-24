@@ -1,22 +1,12 @@
-from disneyapp.data_manager import CombinedDatamanager,DynamicDataManager
-from disneyapp.models import TravelInput
-from disneyapp.tsp_solver import RandomTspSolver
+from disneyapp.data.data_manager import CombinedDatamanager
+from disneyapp.algorithm.models import TravelInput
+from disneyapp.algorithm.tsp_solver import RandomTspSolver
 import copy, json
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from disneyapp.db_handler import DBHandler
+from disneyapp.data.db_handler import DBHandler
 
-@api_view(["GET"])
-def sample(request):
-    db_handler = DBHandler()
-    record = db_handler.get_single_record("raw_html")
-    return Response(record)
-
-@api_view(["GET"])
-def sample2(request):
-    data = DynamicDataManager.fetch_latest_data()
-    return Response(data)
 
 @api_view(["GET", "POST"])
 def spot_list(request):
@@ -25,6 +15,13 @@ def spot_list(request):
     spots_json_edited = edit_static_spots_data(filtered_spot_list)
     add_show_dynamic_data = add_show_dynamic_data_stub(spots_json_edited)
     return Response(add_show_dynamic_data)
+
+
+@api_view(["GET"])
+def sample(request):
+    db_handler = DBHandler()
+    latest_dynamic_data = db_handler.fetch_latest_dynamic_data(table_name="sea_dynamic_data")
+    return Response(latest_dynamic_data)
 
 
 @api_view(["POST"])
