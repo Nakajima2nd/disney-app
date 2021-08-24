@@ -4,6 +4,5 @@ from . import views
 
 urlpatterns = [
     path('spot/list', views.spot_list, name="spot_list"),
-    path('search', views.search, name="search"),
-    path('sample', views.sample, name="sample")
+    path('search', views.search, name="search")
 ]

@@ -1,4 +1,4 @@
-from disneyapp.data.data_manager import CombinedDatamanager
+from disneyapp.data.spot_list_data_converter import SpotListDataConverter
 from disneyapp.algorithm.models import TravelInput
 from disneyapp.algorithm.tsp_solver import RandomTspSolver
 import copy, json
@@ -10,18 +10,10 @@ from disneyapp.data.db_handler import DBHandler
 
 @api_view(["GET", "POST"])
 def spot_list(request):
-    spots_json_org = CombinedDatamanager.get_combined_spot_data()
+    spots_json_org = SpotListDataConverter.get_merged_spot_data()
     filtered_spot_list = filter_unuse_spots(spots_json_org)
     spots_json_edited = edit_static_spots_data(filtered_spot_list)
-    add_show_dynamic_data = add_show_dynamic_data_stub(spots_json_edited)
-    return Response(add_show_dynamic_data)
-
-
-@api_view(["GET"])
-def sample(request):
-    db_handler = DBHandler()
-    latest_dynamic_data = db_handler.fetch_latest_dynamic_data(table_name="sea_dynamic_data")
-    return Response(latest_dynamic_data)
+    return Response(spots_json_edited)
 
 
 @api_view(["POST"])
@@ -74,7 +66,6 @@ def edit_static_spots_data(spots_json_org):
     for spot_data in spots_json_org_copied:
         target_type = spot_data["type"]
         del [spot_data["type"]]
-        del [spot_data["nearest-node-id"]]
         if spot_data.get("play-time"):
             spot_data["play-time"] = int(spot_data["play-time"])
         if spots_obj.get(target_type):
@@ -82,31 +73,3 @@ def edit_static_spots_data(spots_json_org):
         else:
             spots_obj[target_type] = [spot_data]
     return spots_obj
-
-
-def add_show_dynamic_data_stub(spots_json):
-    """
-    ショーの動的情報を付与する。
-    最終的にはここはスクレイピングしてきたデータを付与したいが、いったん固定のデータをもたせる。
-    """
-    show_list = spots_json["show"]
-    target_dict = {
-        "ミッキー＆フレンズのハーバーグリーティング": ["11:30", "16:50"],
-        "ビッグバンドビート～ア・スペシャルトリート～" : ["11:15", "12:40", "14:40", "16:05"]
-    }
-    new_show_list = []
-    for i, show in enumerate(show_list):
-        if not target_dict.get(show["name"]):
-            show["enable"] = False
-            new_show_list.append(copy.deepcopy(show))
-            continue
-        show["enable"] = True
-        show_time_list = target_dict[show["name"]]
-        for show_time in show_time_list:
-            show_copied = copy.deepcopy(show)
-            show_copied["name"] += ("(" + show_time + ")")
-            show_copied["short-name"] += ("(" + show_time + ")")
-            show_copied["start-time"] = show_time
-            new_show_list.append(show_copied)
-    spots_json["show"] = new_show_list
-    return spots_json

@@ -1,4 +1,5 @@
-from disneyapp.data.data_manager import StaticDataManager, CombinedDatamanager
+from disneyapp.data.data_manager import StaticDataManager
+from disneyapp.data.spot_list_data_converter import SpotListDataConverter
 from disneyapp.algorithm.models import Tour, TourSpot, Subroute
 import random, copy
 
@@ -98,7 +99,7 @@ class RandomTspSolver:
                 real -> リアルタイム待ち時間
                 mean -> 平均待ち時間
         """
-        combined_spot_data = CombinedDatamanager.get_combined_spot_data()
+        combined_spot_data = SpotListDataConverter.get_merged_spot_data()
         spot_data_dict = {}
         for spot_data in combined_spot_data:
             spot_data_elem = {
