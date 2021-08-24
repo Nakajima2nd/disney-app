@@ -38,7 +38,7 @@ class AttractionSpotInfo:
         self.enable = False if obj["disable-flag"] else True
         self.wait_time = int(obj["wait-time"])
         self.mean_wait_time = int(obj["mean-wait-time"])
-        self.sp_status = obj["sp-status"] if obj.get("sp-status") else ""
+        self.sp_status = obj["standby-pass-status"]
         self.status = obj["status"]
         self.start_time = obj["start-time"]
         self.end_time = obj["end-time"]
