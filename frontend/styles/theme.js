@@ -15,6 +15,22 @@ const theme = createMuiTheme({
         padding: 0
       }
     },
+    MuiList: {
+      padding: {
+        paddingTop: 0,
+        paddingBottom: 0
+      }
+    },
+    MuiListItem: {
+      gutters: {
+        // paddingLeft: 0,
+        // paddingRight: 0
+      },
+      root: {
+        // paddingTop: 0,
+        // paddingBottom: 0
+      }
+    },
     MuiTab: {
       root: {
         // minWidth: '0px',
