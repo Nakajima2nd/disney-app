@@ -69,9 +69,6 @@ class RandomTspSolver:
             if score < current_best_score:
                 current_best_score = score
                 current_best_tour = copy.deepcopy(current_tour_with_od)
-        if score > 3600 * 24:
-            # 時刻制約を満たす巡回経路が見つからない場合はNoneを返す
-            return None
         return self.__build_tour(travel_input, current_best_tour)
 
     def __make_tour_from_original_spot_order(self, travel_input):
