@@ -14,7 +14,7 @@ import { Box } from '@material-ui/core'
 
 const Wrap = styled(Box)`
   position: relative;
-  top: 64px;
+  top: 56px;
 `
 
 const MyApp = ({ Component, pageProps }) => {
