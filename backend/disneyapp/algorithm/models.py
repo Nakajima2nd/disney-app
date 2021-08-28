@@ -68,7 +68,7 @@ class Tour:
         ret_dict = dict()
         ret_dict["start-time"] = self.start_time
         ret_dict["goal-time"] = self.goal_time
-        ret_dict["violate-goal-desired-arrival-time"] = self.violate_desired_arrival_time
+        ret_dict["violate-desired-arrival-time"] = self.violate_desired_arrival_time
         ret_dict["spots"] = []
         for spot in self.spots:
             ret_dict["spots"].append(spot.to_dict())
