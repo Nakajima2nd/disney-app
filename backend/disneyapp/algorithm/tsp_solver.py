@@ -82,9 +82,6 @@ class RandomTspSolver:
         current_tour_with_od = [travel_input.start_spot_id] + base_tour + [travel_input.goal_spot_id]
         tour = self.__trace_from_front(travel_input, current_tour_with_od)
         score = self.__eval_spot_list_order(tour)
-        if score > 3600 * 24:
-            # 時刻制約を満たす経路にならない場合はNoneを返す
-            return None
         return self.__build_tour(travel_input, current_tour_with_od)
 
     @staticmethod
@@ -147,10 +144,10 @@ class RandomTspSolver:
         """
         hh_str, mm_str = tour.goal_time.split(":")
         score = int(hh_str) * 3600 + int(mm_str) * 60
-        # 到着希望時刻を1つ破るごとに24時間のペナルティ
+        # 到着希望時刻を1つ破るごとに1時間のペナルティ
         for subroute in tour.subroutes:
             if subroute.violate_goal_desired_arrival_time:
-                score += 3600 * 24
+                score += 3600
         return score
 
     def __build_tour(self, travel_input, spot_order):
@@ -235,7 +232,9 @@ class RandomTspSolver:
                     stay_time = spot.stay_time
             if desired_arrival_time != -1:
                 subroute.violate_goal_desired_arrival_time = (current_time - desired_arrival_time > 0)
-                subroute.surplus_wait_time = desired_arrival_time - current_time
+                if subroute.violate_goal_desired_arrival_time:
+                    tour.violate_desired_arrival_time = True
+                subroute.surplus_wait_time = max(desired_arrival_time - current_time, 0)
                 current_time = max(current_time, desired_arrival_time)
             subroute.goal_time = sec_to_hhmm(current_time)
 
