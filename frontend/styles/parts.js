@@ -16,7 +16,7 @@ export const Mickey = styled.span`
     height: 0.6rem;
     border-radius: 50%;
     position: absolute;
-    right: -33%;
+    right: -37%;
     top: -50%;
     content: '';
     background-color: rgba(8,125,141,1);
@@ -27,7 +27,7 @@ export const Mickey = styled.span`
     height: 0.6rem;
     border-radius: 50%;
     position: absolute;
-    left: -32%;
+    left: -35%;
     top: -50%;
     content: '';
     background-color: rgba(8,125,141,1);

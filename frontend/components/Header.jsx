@@ -23,7 +23,7 @@ const Title = styled(Typography)`
 
 const CustomMickey = styled(Mickey)`
   margin: 0 8px;
-  top: 2px;
+  top: 4px;
 `
 
 export const Header = () => {
