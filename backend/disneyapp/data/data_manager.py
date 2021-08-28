@@ -1,13 +1,12 @@
 import json
 import time
-import urllib.request
+from disneyapp.data.db_handler import DBHandler
 
 
 class DynamicDataManager:
     """
     待ち時間や運営中/停止中などの動的情報を管理するクラス。
     """
-    GAS_URL = "https://script.google.com/macros/s/AKfycbzp6KOj4D2OsnmKf1pdMnKxYn-TpPtVhGjM9h2ImW1L5KsQWf51YLFVLHAVx3Cbu4DF0A/exec"
     prev_fetch_time = 0
     prev_fetch_data = {}
 
@@ -18,33 +17,9 @@ class DynamicDataManager:
         if current_time - cls.prev_fetch_time < 300:
             return cls.prev_fetch_data
         cls.prev_fetch_time = current_time
-        url = DynamicDataManager.GAS_URL
-        req = urllib.request.Request(url)
-        with urllib.request.urlopen(req) as res:
-            raw_dict = json.loads(res.read())
-            cls.prev_fetch_data = DynamicDataManager.__parse_raw_data(raw_dict)
+        db_handler = DBHandler()
+        cls.prev_fetch_data = db_handler.fetch_latest_dynamic_data(table_name="sea_dynamic_data")
         return cls.prev_fetch_data
-
-    @staticmethod
-    def __parse_raw_data(raw_data_dict):
-        ret_dict = { "spots": {} }
-        for key in raw_data_dict:
-            if key == "timestamp":
-                ret_dict[key] = raw_data_dict[key]
-            else:
-                splited_list = raw_data_dict[key].split(",")
-                enable_str = splited_list[0]
-                standby_pass_status = splited_list[1]
-                wait_time = splited_list[2]
-                mean_wait_time = splited_list[3]
-                enable = True if enable_str == "運営中" else False
-                ret_dict["spots"][key] = {
-                    "enable": enable,
-                    "sp-status": standby_pass_status,
-                    "wait-time": int(wait_time),
-                    "mean-wait-time": int(mean_wait_time)
-                }
-        return ret_dict
 
 
 class StaticDataManager:
@@ -126,25 +101,3 @@ class StaticDataManager:
             if target_id == spot["spot-id"]:
                 return spot
         return None
-
-
-class CombinedDatamanager:
-    """
-    静的情報と動的情報を組み合わせた情報を管理するクラス。
-    """
-    @staticmethod
-    def get_combined_spot_data():
-        """
-        note: 動的情報の更新タイミングはDynamicDataManagerが管理するため、このクラスでは情報を保持せず毎回リストを計算する
-        """
-        static_data = StaticDataManager.get_spots()
-        dynamic_data = DynamicDataManager.fetch_latest_data()
-        for elem in static_data:
-            name = elem["name"]
-            if not dynamic_data["spots"].get(name):
-                continue
-            elem["enable"] = dynamic_data["spots"][name]["enable"]
-            elem["wait-time"] = dynamic_data["spots"][name]["wait-time"]
-            elem["mean-wait-time"] = dynamic_data["spots"][name]["mean-wait-time"]
-            elem["sp-status"] = dynamic_data["spots"][name]["sp-status"]
-        return static_data
