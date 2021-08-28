@@ -76,7 +76,7 @@ const Conditions = styled(Box)`
 `
 
 const Condition = styled(Box)`
-  margin: 12px 0 0;
+  margin: 4px 0 0;
   flex-basis: 48%;
 `
 
@@ -110,6 +110,7 @@ const DeleteButton = styled(IconButton)`
 
 const SearchButton = styled(Button)`
   margin: 24px 0 0;
+  font-size: 18px;
 `
 
 const initialEditing = {
