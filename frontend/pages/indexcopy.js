@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { Avatar, Box, Button, ButtonGroup, Collapse, Grow, IconButton, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, TextField, Typography } from '@material-ui/core'
+import { Avatar, Box, Button, ButtonGroup, Card, CardActionArea, Collapse, IconButton, InputBase, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, TextField, Typography } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
 import { TimePicker } from '@material-ui/pickers';
-import { assoc, remove, pipe, update } from 'ramda'
+import { assoc, remove, update } from 'ramda'
 import { formatDateTime, toKebabCaseObject } from '../utils'
 import { useRouter } from 'next/router'
 import { useGetSpotList } from '../hooks'
@@ -16,9 +16,16 @@ const Wrap = styled(Box)`
   max-width: 800px;
   display: flex;
   flex-direction: column;
-  /* @media screen and (max-width: 816px) {
-    margin: 0 8px;
-  } */
+  @media screen and (max-width: 816px) {
+    margin: 8px;
+  }
+`
+
+const Title = styled(Typography)`
+  text-align: center;
+  margin: 32px 0 0;
+  font-size: 3rem;
+  font-weight: bold;
 `
 
 const Ad = styled.img`
@@ -56,7 +63,7 @@ const CustomAvatar = styled(Avatar)`
 `
 
 const StartAvatar = styled(CustomAvatar)`
-  background-color: ${(props) => props.theme.palette.start.main};
+  background-color: #575EF6;
   color: white;
 `
 
@@ -64,40 +71,38 @@ const ViaAvatar = styled(CustomAvatar)`
 `
 
 const GoalAvatar = styled(CustomAvatar)`
-  background-color: ${(props) => props.theme.palette.goal.main};
+  background-color: #FA02FF;
   color: white;
 `
 
 const Conditions = styled(Box)`
-  margin: 12px 0 0;
+  margin: 24px 0 0;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 `
 
 const Condition = styled(Box)`
-  margin: 4px 0 0;
   flex-basis: 48%;
 `
 
 const Label = styled(Typography)`
 `
 
+const CustomInputBase = styled(InputBase)`
+  height: 40px;
+`
+
 const ConditionTimePicker = styled(TimePicker)`
-  margin: 0;
-  background-color: white;
 `
 
 const ConditionWaitTimeModeSelect = styled(Select)`
-  background-color: white;
 `
 
 const ConditionWalkSpeedSelect = styled(Select)`
-  background-color: white;
 `
 
 const ConditionOptimizeSpotOrderSelect = styled(Select)`
-  background-color: white;
 `
 
 const DeleteButton = styled(IconButton)`
@@ -110,7 +115,6 @@ const DeleteButton = styled(IconButton)`
 
 const SearchButton = styled(Button)`
   margin: 24px 0 0;
-  font-size: 18px;
 `
 
 const initialEditing = {
@@ -130,16 +134,6 @@ const initialEditing = {
   enter: true
 }
 
-const initialStart = pipe(
-  assoc('spotId', 103),
-  assoc('shortName', 'サウス・エントランス')
-)(initialEditing)
-
-const initialGoal = pipe(
-  assoc('spotId', 103),
-  assoc('shortName', 'サウス・エントランス')
-)(initialEditing)
-
 const spotInterface = [
   'spotId',
   'desiredArrivalTime',
@@ -147,12 +141,10 @@ const spotInterface = [
   'specifiedWaitTime'
 ]
 
-const Home = ({ src }) => {
+const Home = () => {
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState({})
   const [spots, setSpots] = useState([])
-  const [start, setStart] = useState(initialStart)
-  const [goal, setGoal] = useState(initialGoal)
   const [selected, setSelected] = useState(-1)
   const [condition, setCondition] = useState({
     specifiedTime: new Date(),
@@ -164,6 +156,7 @@ const Home = ({ src }) => {
   const { spotList, error } = useGetSpotList()
 
   if (error) return <Text>{error}</Text>
+  if (!spotList) return <Loading />
   const handleOpen = (spot, index) => () => {
     setEditing(spot)
     setSelected(index)
@@ -208,8 +201,8 @@ const Home = ({ src }) => {
       query: {
         param: encodeURI(JSON.stringify(toKebabCaseObject({
           ...assoc('specifiedTime', formatDateTime(condition.specifiedTime), condition),
-          startSpotId: start.spotId,
-          goalSpotId: goal.spotId,
+          startSpotId: 103,
+          goalSpotId: 103,
           spots: modifySpots(spots)
         })))
       }
@@ -218,12 +211,13 @@ const Home = ({ src }) => {
 
   return (<>
 
-    {!spotList && <Loading />}
-
     <Wrap>
 
+      {/* ヘッダー */}
+      <Title>ディズニープラン</Title>
+
       {/* 広告 */}
-      <Ad src={src} alt="広告" />
+      <Ad src="" />
 
       {/* 説明文 */}
       <Caption>
@@ -241,11 +235,11 @@ const Home = ({ src }) => {
       <CustomList component={Paper} >
 
         {/* スタート */}
-        <CustomListItem button divider onClick={handleOpen(start, -2)} disabled={!spotList}>
+        <CustomListItem button divider>
           <ListItemAvatar>
             <StartAvatar variant="rounded">出発</StartAvatar>
           </ListItemAvatar>
-          <Grow in={selected !== -2 || !open} timeout={1000}><ListItemText>{start.shortName}</ListItemText></Grow>
+          <ListItemText>サウス・エントランス</ListItemText>
         </CustomListItem>
 
         {/* 選択済みスポット */}
@@ -266,7 +260,7 @@ const Home = ({ src }) => {
         )}
 
         {/* スポット追加 */}
-        <CustomListItem button onClick={handleOpen(initialEditing, -1)} divider disabled={!spotList}>
+        <CustomListItem button onClick={handleOpen(initialEditing, -1)} divider>
           <ListItemAvatar>
             <ViaAvatar variant="rounded">経由</ViaAvatar>
           </ListItemAvatar>
@@ -274,11 +268,11 @@ const Home = ({ src }) => {
         </CustomListItem>
 
         {/* ゴール */}
-        <CustomListItem button onClick={handleOpen(goal, -3)} disabled={!spotList}>
+        <CustomListItem button>
           <ListItemAvatar>
             <GoalAvatar variant="rounded">到着</GoalAvatar>
           </ListItemAvatar>
-          <Grow in={selected !== -3 || !open} timeout={1000}><ListItemText>{goal.shortName}</ListItemText></Grow>
+          <ListItemText>サウス・エントランス</ListItemText>
         </CustomListItem>
       </CustomList>
 
@@ -286,53 +280,76 @@ const Home = ({ src }) => {
       <Conditions>
         <Condition>
           <Label>出発時刻</Label>
-          <ConditionTimePicker
-            margin="normal"
-            format="HH:mm"
-            value={condition.specifiedTime}
-            onChange={handleDateTime('specifiedTime')}
-            okLabel="決定"
-            cancelLabel="キャンセル"
-            fullWidth
-          // inputVariant="outlined"
-          />
+          <Card>
+            <CardActionArea>
+              <ConditionTimePicker
+                margin="normal"
+                format="HH:mm"
+                value={condition.specifiedTime}
+                onChange={handleDateTime('specifiedTime')}
+                okLabel="決定"
+                cancelLabel="キャンセル"
+                fullWidth
+                TextFieldComponent={props =>
+                  <CustomInputBase
+                    onClick={props.onClick}
+                    value={props.value}
+                    onChange={props.onChange}
+                    fullWidth
+                  />}
+              />
+            </CardActionArea>
+          </Card>
         </Condition>
         <Condition>
           <Label>待ち時間</Label>
-          <ConditionWaitTimeModeSelect
-            value={condition.waitTimeMode}
-            onChange={handleSelect('waitTimeMode')}
-            fullWidth
-          // variant="outlined"
-          >
-            <MenuItem value="real">リアルタイム待ち時間</MenuItem>
-            <MenuItem value="mean">平均待ち時間</MenuItem>
-          </ConditionWaitTimeModeSelect>
+          <Card>
+            <CardActionArea>
+              <ConditionWaitTimeModeSelect
+                value={condition.waitTimeMode}
+                onChange={handleSelect('waitTimeMode')}
+                fullWidth
+                input={<CustomInputBase />}
+              >
+                <MenuItem value="real">リアルタイム待ち時間</MenuItem>
+                <MenuItem value="mean">平均待ち時間</MenuItem>
+              </ConditionWaitTimeModeSelect>
+            </CardActionArea>
+          </Card>
         </Condition>
         <Condition>
           <Label>歩く速度</Label>
-          <ConditionWalkSpeedSelect
-            value={condition.walkSpeed}
-            onChange={handleSelect('walkSpeed')}
-            fullWidth
-          // variant="outlined"
-          >
-            <MenuItem value="slow">ゆっくり</MenuItem>
-            <MenuItem value="normal">ふつう</MenuItem>
-            <MenuItem value="fast">せかせか</MenuItem>
-          </ConditionWalkSpeedSelect>
+          <Card>
+            <CardActionArea>
+              <ConditionWalkSpeedSelect
+                value={condition.walkSpeed}
+                onChange={handleSelect('walkSpeed')}
+                select
+                fullWidth
+                input={<CustomInputBase />}
+              >
+                <MenuItem value="slow">ゆっくり</MenuItem>
+                <MenuItem value="normal">ふつう</MenuItem>
+                <MenuItem value="fast">せかせか</MenuItem>
+              </ConditionWalkSpeedSelect>
+            </CardActionArea>
+          </Card>
         </Condition>
         <Condition>
           <Label>スポットを巡る順番</Label>
-          <ConditionOptimizeSpotOrderSelect
-            value={condition.optimizeSpotOrder}
-            onChange={handleSelect('optimizeSpotOrder')}
-            fullWidth
-          // variant="outlined"
-          >
-            <MenuItem value={"false"}>選んだ順にめぐる</MenuItem>
-            <MenuItem value={"true"}>効率よくめぐる</MenuItem>
-          </ConditionOptimizeSpotOrderSelect>
+          <Card>
+            <CardActionArea>
+              <ConditionOptimizeSpotOrderSelect
+                value={condition.optimizeSpotOrder}
+                onChange={handleSelect('optimizeSpotOrder')}
+                fullWidth
+                input={<CustomInputBase />}
+              >
+                <MenuItem value={"false"}>選んだ順にめぐる</MenuItem>
+                <MenuItem value={"true"}>効率よくめぐる</MenuItem>
+              </ConditionOptimizeSpotOrderSelect>
+            </CardActionArea>
+          </Card>
         </Condition>
       </Conditions>
 
@@ -342,7 +359,6 @@ const Home = ({ src }) => {
         variant="contained"
         color="primary"
         fullWidth
-        disabled={!spotList}
       >
         検索
       </SearchButton>
@@ -358,18 +374,9 @@ const Home = ({ src }) => {
       setEditing={setEditing}
       setOpen={setOpen}
       setSpots={setSpots}
-      setStart={setStart}
-      setGoal={setGoal}
+      setIndex={setSelected}
     />
   </>)
-}
-
-export function getServerSideProps() {
-  const min = Math.ceil(1)
-  const max = Math.floor(14)
-  const num = Math.floor(Math.random() * (max - min + 1) + min)
-  const src = '/minnie/minnie_' + ('00' + num).slice(-2) + '.png'
-  return { props: { src } }
 }
 
 export default Home

@@ -7,14 +7,14 @@ import {
 } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from '../styles/theme'
-import { Box } from '@material-ui/core'
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { Header } from '../components/Header'
+import { Box } from '@material-ui/core'
 
 const Wrap = styled(Box)`
-  margin: auto;
-  padding: 16px;
-  max-width: 800px;
+  position: relative;
+  top: 56px;
 `
 
 const MyApp = ({ Component, pageProps }) => {
@@ -32,6 +32,7 @@ const MyApp = ({ Component, pageProps }) => {
         <StyledComponentsThemeProvider theme={theme}>
           <CssBaseline />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Header />
             <Wrap>
               <Component {...pageProps} />
             </Wrap>

@@ -1,10 +1,7 @@
 import styled from 'styled-components'
 import { Button, Dialog, DialogActions, DialogContent, IconButton } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
-import { append, assoc, dissoc, pipe, update } from 'ramda'
-import { Error } from '../components/Error'
-import { Loading } from '../components/Loading'
-import { useGetSpotList } from '../hooks'
+import { append, assoc, dissoc, last, pipe, update } from 'ramda'
 import { ConditionInput } from './ConditionInput'
 import { SpotSelect } from './SpotSelect'
 
@@ -18,7 +15,7 @@ const CloseButton = styled(IconButton)`
 const SpotDialogContent = styled(DialogContent)`
 `
 
-export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEditing, setOpen, setSpots }) => {
+export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEditing, setOpen, setSpots, setStart, setGoal }) => {
   const handleClose = () => {
     setOpen(false)
   }
@@ -41,10 +38,20 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
       assoc('spotId', spot.spotId),
       assoc('name', spot.name),
       assoc('shortName', spot.shortName),
-      assoc('startTime', spot.startTime),
-      assoc('step', 1)
+      assoc('startTime', spot.startTime)
     )(editing)
     setEditing(newSpot)
+    if (selected === -2) {
+      setStart(newSpot)
+      handleClose()
+    }
+    else if (selected === -3) {
+      setGoal(newSpot)
+      handleClose()
+    }
+    else {
+      setEditing(assoc('step', 1, newSpot))
+    }
   }
 
   const handleBack = () => {
@@ -63,19 +70,23 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
     setEditing(assoc('specifiedWaitTime', event.target.value, editing))
   }
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
     const newSpot = pipe(
       assoc('desiredArrivalTime', editing.startTime ? editing.startTime : editing.checkedDesiredArrivalTime ? editing.desiredArrivalTime : null),
       assoc('stayTime', editing.checkedStayTime ? editing.stayTime : ''),
       assoc('specifiedWaitTime', editing.checkedSpecifiedWaitTime ? editing.specifiedWaitTime : '')
     )(editing)
     if (selected === -1) {
-      setSpots(append(newSpot))
+      const newSpots = append(newSpot, spots)
+      setSpots(newSpots)
+      handleClose()
+      await new Promise(resolve => setTimeout(resolve, 200))
+      setSpots(update(-1, assoc('display', true, last(newSpots)), newSpots))
     }
     else {
       setSpots(update(selected, newSpot, spots))
+      handleClose()
     }
-    handleClose()
   }
 
   return (

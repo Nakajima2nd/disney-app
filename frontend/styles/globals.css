@@ -15,3 +15,22 @@ a {
 * {
   box-sizing: border-box;
 }
+
+html {
+  font-size: 14px;
+}
+
+@media screen and (max-width: 816px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
+  background-color: rgb(226, 247, 255);
+  background-image:
+    radial-gradient(white 20%, transparent 25%),
+    radial-gradient(white 20%, transparent 25%);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
