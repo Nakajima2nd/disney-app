@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import React, { useEffect } from 'react'
-import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components'
+import styled, { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components'
 import {
   ThemeProvider as MaterialUIThemeProvider,
   StylesProvider
@@ -9,6 +9,13 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from '../styles/theme'
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { Header } from '../components/Header'
+import { Box } from '@material-ui/core'
+
+const Wrap = styled(Box)`
+  position: relative;
+  top: 64px;
+`
 
 const MyApp = ({ Component, pageProps }) => {
   // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)
@@ -25,7 +32,10 @@ const MyApp = ({ Component, pageProps }) => {
         <StyledComponentsThemeProvider theme={theme}>
           <CssBaseline />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Component {...pageProps} />
+            <Header />
+            <Wrap>
+              <Component {...pageProps} />
+            </Wrap>
           </MuiPickersUtilsProvider>
         </StyledComponentsThemeProvider>
       </MaterialUIThemeProvider>
