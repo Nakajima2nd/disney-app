@@ -17,7 +17,7 @@ const Wrap = styled(Box)`
   display: flex;
   flex-direction: column;
   @media screen and (max-width: 816px) {
-    margin: 8px;
+    margin: 0 8px;
   }
 `
 
@@ -151,7 +151,6 @@ const Home = () => {
   const { spotList, error } = useGetSpotList()
 
   if (error) return <Text>{error}</Text>
-  if (!spotList) return <Loading />
   const handleOpen = (spot, index) => () => {
     setEditing(spot)
     setSelected(index)
@@ -206,6 +205,8 @@ const Home = () => {
 
   return (<>
 
+    {!spotList && <Loading />}
+
     <Wrap>
 
       {/* 広告 */}
@@ -252,7 +253,7 @@ const Home = () => {
         )}
 
         {/* スポット追加 */}
-        <CustomListItem button onClick={handleOpen(initialEditing, -1)} divider>
+        <CustomListItem button onClick={handleOpen(initialEditing, -1)} divider disabled={!spotList}>
           <ListItemAvatar>
             <ViaAvatar variant="rounded">経由</ViaAvatar>
           </ListItemAvatar>
@@ -300,7 +301,6 @@ const Home = () => {
           <ConditionWalkSpeedSelect
             value={condition.walkSpeed}
             onChange={handleSelect('walkSpeed')}
-            select
             fullWidth
           // variant="outlined"
           >
@@ -329,6 +329,7 @@ const Home = () => {
         variant="contained"
         color="primary"
         fullWidth
+        disabled={!spotList}
       >
         検索
       </SearchButton>
