@@ -16,9 +16,9 @@ const Wrap = styled(Box)`
   max-width: 800px;
   display: flex;
   flex-direction: column;
-  @media screen and (max-width: 816px) {
+  /* @media screen and (max-width: 816px) {
     margin: 0 8px;
-  }
+  } */
 `
 
 const Ad = styled.img`
