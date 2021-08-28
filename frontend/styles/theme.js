@@ -4,6 +4,23 @@ import createBreakpoints from '@material-ui/core/styles/createBreakpoints'
 const breakpoints = createBreakpoints({})
 
 const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#3A6BA5'
+    },
+    secondary: {
+      main: '#D65C3A'
+    },
+    sea: {
+      main: '#3A6BA5'
+    },
+    start: {
+      main: '#1B614C'
+    },
+    goal: {
+      main: '#D65C3A'
+    }
+  },
   overrides: {
     MuiDialog: {
       paperFullWidth: {
