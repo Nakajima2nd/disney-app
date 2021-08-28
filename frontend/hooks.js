@@ -12,7 +12,8 @@ export const useGetSpotList = () => {
       setSpotList(toCamelCaseObject(res.data))
     }
     catch (error) {
-      setError(error)
+      console.log(error)
+      setError("何らかのエラー")
     }
   }
   useEffect(() => {
