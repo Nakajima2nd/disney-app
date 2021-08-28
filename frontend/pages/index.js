@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Avatar, Box, Button, ButtonGroup, Card, CardActionArea, Collapse, IconButton, InputBase, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, TextField, Typography } from '@material-ui/core'
+import { Avatar, Box, Button, ButtonGroup, Collapse, IconButton, InputBase, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, TextField, Typography } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
@@ -19,13 +19,6 @@ const Wrap = styled(Box)`
   @media screen and (max-width: 816px) {
     margin: 8px;
   }
-`
-
-const Title = styled(Typography)`
-  text-align: center;
-  margin: 32px 0 0;
-  font-size: 3rem;
-  font-weight: bold;
 `
 
 const Ad = styled.img`
@@ -215,11 +208,8 @@ const Home = () => {
 
     <Wrap>
 
-      {/* ヘッダー */}
-      <Title>ディズニープラン</Title>
-
       {/* 広告 */}
-      <Ad src="" />
+      <Ad src="" alt="広告" />
 
       {/* 説明文 */}
       <Caption>
