@@ -10,7 +10,8 @@ export const useGetSpotList = () => {
       const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/spot/list'
       const res = await axios.get(API_URL)
       setSpotList(toCamelCaseObject(res.data))
-    } catch (error) {
+    }
+    catch (error) {
       setError(error)
     }
   }
@@ -34,7 +35,8 @@ export const useGetSearchResult = (param) => {
       const body = JSON.parse(decodeURI(param))
       const res = await axios.post(API_URL, body)
       setSearchResult(toCamelCaseObject(res.data))
-    } catch (error) {
+    }
+    catch (error) {
       if (error.response) {
         setError(error.response.data.message)
       }
