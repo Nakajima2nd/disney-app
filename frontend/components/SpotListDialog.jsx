@@ -2,9 +2,6 @@ import styled from 'styled-components'
 import { Button, Dialog, DialogActions, DialogContent, IconButton } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import { append, assoc, dissoc, last, pipe, update } from 'ramda'
-import { Error } from '../components/Error'
-import { Loading } from '../components/Loading'
-import { useGetSpotList } from '../hooks'
 import { ConditionInput } from './ConditionInput'
 import { SpotSelect } from './SpotSelect'
 
@@ -18,7 +15,7 @@ const CloseButton = styled(IconButton)`
 const SpotDialogContent = styled(DialogContent)`
 `
 
-export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEditing, setOpen, setSpots }) => {
+export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEditing, setOpen, setSpots, setStart, setGoal }) => {
   const handleClose = () => {
     setOpen(false)
   }
@@ -41,10 +38,20 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
       assoc('spotId', spot.spotId),
       assoc('name', spot.name),
       assoc('shortName', spot.shortName),
-      assoc('startTime', spot.startTime),
-      assoc('step', 1)
+      assoc('startTime', spot.startTime)
     )(editing)
     setEditing(newSpot)
+    if (selected === -2) {
+      setStart(newSpot)
+      handleClose()
+    }
+    else if (selected === -3) {
+      setGoal(newSpot)
+      handleClose()
+    }
+    else {
+      setEditing(assoc('step', 1, newSpot))
+    }
   }
 
   const handleBack = () => {
@@ -77,8 +84,8 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
       setSpots(update(-1, assoc('display', true, last(newSpots)), newSpots))
     }
     else {
-      handleClose()
       setSpots(update(selected, newSpot, spots))
+      handleClose()
     }
   }
 

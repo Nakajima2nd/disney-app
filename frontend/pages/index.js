@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { Avatar, Box, Button, ButtonGroup, Collapse, IconButton, InputBase, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, TextField, Typography } from '@material-ui/core'
+import { Avatar, Box, Button, ButtonGroup, Collapse, Grow, IconButton, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, TextField, Typography } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
 import { TimePicker } from '@material-ui/pickers';
-import { assoc, remove, update } from 'ramda'
+import { assoc, remove, pipe, update } from 'ramda'
 import { formatDateTime, toKebabCaseObject } from '../utils'
 import { useRouter } from 'next/router'
 import { useGetSpotList } from '../hooks'
@@ -130,6 +130,16 @@ const initialEditing = {
   enter: true
 }
 
+const initialStart = pipe(
+  assoc('spotId', 103),
+  assoc('shortName', 'サウス・エントランス')
+)(initialEditing)
+
+const initialGoal = pipe(
+  assoc('spotId', 103),
+  assoc('shortName', 'サウス・エントランス')
+)(initialEditing)
+
 const spotInterface = [
   'spotId',
   'desiredArrivalTime',
@@ -141,6 +151,8 @@ const Home = ({ src }) => {
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState({})
   const [spots, setSpots] = useState([])
+  const [start, setStart] = useState(initialStart)
+  const [goal, setGoal] = useState(initialGoal)
   const [selected, setSelected] = useState(-1)
   const [condition, setCondition] = useState({
     specifiedTime: new Date(),
@@ -196,8 +208,8 @@ const Home = ({ src }) => {
       query: {
         param: encodeURI(JSON.stringify(toKebabCaseObject({
           ...assoc('specifiedTime', formatDateTime(condition.specifiedTime), condition),
-          startSpotId: 103,
-          goalSpotId: 103,
+          startSpotId: start.spotId,
+          goalSpotId: goal.spotId,
           spots: modifySpots(spots)
         })))
       }
@@ -229,11 +241,11 @@ const Home = ({ src }) => {
       <CustomList component={Paper} >
 
         {/* スタート */}
-        <CustomListItem button divider>
+        <CustomListItem button divider onClick={handleOpen(start, -2)} disabled={!spotList}>
           <ListItemAvatar>
             <StartAvatar variant="rounded">出発</StartAvatar>
           </ListItemAvatar>
-          <ListItemText>サウス・エントランス</ListItemText>
+          <Grow in={selected !== -2 || !open} timeout={1000}><ListItemText>{start.shortName}</ListItemText></Grow>
         </CustomListItem>
 
         {/* 選択済みスポット */}
@@ -262,11 +274,11 @@ const Home = ({ src }) => {
         </CustomListItem>
 
         {/* ゴール */}
-        <CustomListItem button>
+        <CustomListItem button onClick={handleOpen(goal, -3)} disabled={!spotList}>
           <ListItemAvatar>
             <GoalAvatar variant="rounded">到着</GoalAvatar>
           </ListItemAvatar>
-          <ListItemText>サウス・エントランス</ListItemText>
+          <Grow in={selected !== -3 || !open} timeout={1000}><ListItemText>{goal.shortName}</ListItemText></Grow>
         </CustomListItem>
       </CustomList>
 
@@ -346,7 +358,8 @@ const Home = ({ src }) => {
       setEditing={setEditing}
       setOpen={setOpen}
       setSpots={setSpots}
-      setIndex={setSelected}
+      setStart={setStart}
+      setGoal={setGoal}
     />
   </>)
 }
