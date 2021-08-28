@@ -56,7 +56,7 @@ const CustomAvatar = styled(Avatar)`
 `
 
 const StartAvatar = styled(CustomAvatar)`
-  background-color: #575EF6;
+  background-color: ${(props) => props.theme.palette.start.main};
   color: white;
 `
 
@@ -64,7 +64,7 @@ const ViaAvatar = styled(CustomAvatar)`
 `
 
 const GoalAvatar = styled(CustomAvatar)`
-  background-color: #FA02FF;
+  background-color: ${(props) => props.theme.palette.goal.main};
   color: white;
 `
 
@@ -137,7 +137,7 @@ const spotInterface = [
   'specifiedWaitTime'
 ]
 
-const Home = () => {
+const Home = ({ src }) => {
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState({})
   const [spots, setSpots] = useState([])
@@ -211,7 +211,7 @@ const Home = () => {
     <Wrap>
 
       {/* 広告 */}
-      <Ad src="" alt="広告" />
+      <Ad src={src} alt="広告" />
 
       {/* 説明文 */}
       <Caption>
@@ -349,6 +349,14 @@ const Home = () => {
       setIndex={setSelected}
     />
   </>)
+}
+
+export function getServerSideProps() {
+  const min = Math.ceil(1)
+  const max = Math.floor(14)
+  const num = Math.floor(Math.random() * (max - min + 1) + min)
+  const src = '/minnie/minnie_' + ('00' + num).slice(-2) + '.png'
+  return { props: { src } }
 }
 
 export default Home
