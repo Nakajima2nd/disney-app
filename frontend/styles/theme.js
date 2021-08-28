@@ -38,6 +38,11 @@ const theme = createMuiTheme({
           // minWidth: '0px',
         }
       }
+    },
+    MuiButton: {
+      root: {
+        fontSize: '1rem'
+      }
     }
   }
 })
