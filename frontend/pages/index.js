@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { Box, Button, IconButton, MenuItem, TextField, Typography } from '@material-ui/core'
+import { Avatar, Box, Button, ButtonGroup, Card, CardActionArea, Collapse, IconButton, InputBase, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, TextField, Typography } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
 import { TimePicker } from '@material-ui/pickers';
-import { assoc, remove } from 'ramda'
+import { assoc, remove, update } from 'ramda'
 import { formatDateTime, toKebabCaseObject } from '../utils'
 import { useRouter } from 'next/router'
 import { useGetSpotList } from '../hooks'
@@ -14,15 +14,11 @@ const Wrap = styled(Box)`
   padding: 8px;
   margin: 8px auto;
   max-width: 800px;
-  background-color: white;
   display: flex;
   flex-direction: column;
   @media screen and (max-width: 816px) {
     margin: 8px;
   }
-`
-
-const Text = styled(Typography)`
 `
 
 const Title = styled(Typography)`
@@ -32,111 +28,83 @@ const Title = styled(Typography)`
   font-weight: bold;
 `
 
-const Caption = styled(Typography)`
-  text-align: center;
-  font-size: 1.1rem;
-  width: max-content;
-  margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.5);
-`
-const Minnie = styled.img`
+const Ad = styled.img`
   width: 100%;
   height: 200px;
   object-fit: contain;
-  padding: 0 0 0 20%;
 `
 
-const SpotButton = styled(Button)`
-  margin: 16px 0 0;
-  flex-grow: 1;
+const Caption = styled(Box)`
+  margin: 24px 0 0;
 `
 
-const PlusButton = styled(Button)`
-  margin: 16px 0 0;
+const Text = styled(Typography)`
 `
 
-const Condition = styled(Box)`
+const SwitchButtons = styled(ButtonGroup)`
+  margin: 24px 0 0;
+`
+
+const Land = styled(Button)`
+`
+
+const Sea = styled(Button)`
+`
+
+const CustomList = styled(List)`
+  margin: 24px 0 0;
+`
+
+const CustomListItem = styled(ListItem)`
+`
+
+const CustomAvatar = styled(Avatar)`
+  height: 24px;
+`
+
+const StartAvatar = styled(CustomAvatar)`
+  background-color: #575EF6;
+  color: white;
+`
+
+const ViaAvatar = styled(CustomAvatar)`
+`
+
+const GoalAvatar = styled(CustomAvatar)`
+  background-color: #FA02FF;
+  color: white;
+`
+
+const Conditions = styled(Box)`
+  margin: 12px 0 0;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 `
 
+const Condition = styled(Box)`
+  margin: 12px 0 0;
+  flex-basis: 48%;
+`
+
+const Label = styled(Typography)`
+`
+
 const ConditionTimePicker = styled(TimePicker)`
-  flex-basis: 30%;
+  margin: 0;
+  background-color: white;
 `
 
-const ConditionWaitTimeModeSelect = styled(TextField)`
-  flex-basis: 65%;
-  margin: 16px 0 8px;
+const ConditionWaitTimeModeSelect = styled(Select)`
+  background-color: white;
 `
 
-const ConditionWalkSpeedSelect = styled(TextField)`
-  flex-basis: 30%;
-  margin: 16px 0 8px;
+const ConditionWalkSpeedSelect = styled(Select)`
+  background-color: white;
 `
 
-const ConditionOptimizeOpotOrder = styled(TextField)`
-  flex-basis: 65%;
-  margin: 16px 0 8px;
-`
-
-const SearchButton = styled(Button)`
-  display: flex;
-  margin: 20vw auto 32px;
-  width: 30vw;
-  height: 30vw;
-  border-radius: 50%;
-  position: relative;
-  background-color: rgba(245,226,196,1);
-  color: white;
-  font-size: 1.5rem;
-  transition: 0.5s;
-  max-width: 240px;
-  max-height: 240px;
-  &::before {
-    transition: 0.5s;
-    width: 20vw;
-    height: 20vw;
-    border-radius: 50%;
-    position: absolute;
-    right: -33%;
-    top: -50%;
-    content: '';
-    background-color: rgba(245,226,196,1);
-    max-width: 160px;
-    max-height: 160px;
-  }
-  &::after {
-    transition: 0.5s;
-    width: 20vw;
-    height: 20vw;
-    border-radius: 50%;
-    position: absolute;
-    left: -33%;
-    top: -50%;
-    content: '';
-    background-color: rgba(245,226,196,1);
-    max-width: 160px;
-    max-height: 160px;
-  }
-  &:hover {
-    transition: 0.5s;
-    background-color: rgba(209,223,210,1);
-    color: white;
-    &::after {
-      transition: 0.5s;
-      background-color: rgba(209,223,210,1);
-    }
-    &::before {
-      transition: 0.5s;
-      background-color: rgba(209,223,210,1);
-    }
-  }
-`
-
-const Spot = styled(Box)`
-  display: flex;
-  position: relative;
+const ConditionOptimizeSpotOrderSelect = styled(Select)`
+  background-color: white;
 `
 
 const DeleteButton = styled(IconButton)`
@@ -144,8 +112,11 @@ const DeleteButton = styled(IconButton)`
   right: 0;
   top: 50%;
   transform: translate(0, -50%);
-  margin: 8px 0 0;
   padding: 8px;
+`
+
+const SearchButton = styled(Button)`
+  margin: 24px 0 0;
 `
 
 const initialEditing = {
@@ -161,7 +132,8 @@ const initialEditing = {
   checkedSpecifiedWaitTime: false,
   step: 0,
   tab: 0,
-  keyword: ''
+  keyword: '',
+  enter: true
 }
 
 const spotInterface = [
@@ -201,8 +173,12 @@ const Home = () => {
     setCondition(assoc(key, event.target.value, condition))
   }
 
-  const handleDelete = (index) => (event) => {
-    setSpots(remove(index, 1, spots))
+  const handleDelete = (index) => async (event) => {
+    const newSpots = update(index, assoc('display', false, spots[index]), spots)
+    const newNewSpots = index < spots.length - 1 ? update(index + 1, assoc('enter', false, spots[index + 1]), newSpots) : newSpots
+    setSpots(newNewSpots)
+    await new Promise(resolve => setTimeout(resolve, 200))
+    setSpots(remove(index, 1, newNewSpots))
   }
 
   const modifySpots = (spots) => {
@@ -236,89 +212,137 @@ const Home = () => {
   }
 
   return (<>
-    {/* タイトル */}
-    <Title>ディズニープラン</Title>
-    <Caption>TDRをめぐる計画を立てるお役立ちアプリです！</Caption>
-
-    {/* ミニーの画像 */}
-    <Minnie
-      src="/minnie/minnie_01.png"
-      alt="ミニーの画像"
-    />
 
     <Wrap>
+
+      {/* ヘッダー */}
+      <Title>ディズニープラン</Title>
+
+      {/* 広告 */}
+      <Ad src="" />
+
+      {/* 説明文 */}
+      <Caption>
+        <Text>TDL・TDSを効率よくめぐる順番を計算するツールです♪</Text>
+        <Text>リアルタイム待ち時間にも対応◎</Text>
+      </Caption>
+
+      {/* ランド/シー切り替えボタン */}
+      <SwitchButtons variant="contained" fullWidth>
+        <Land>ディズニーランド</Land>
+        <Sea color="primary">ディズニーシー</Sea>
+      </SwitchButtons>
+
       {/* 選択済みスポット一覧 */}
-      {spots.map((spot, index) =>
-        <Spot key={index}>
-          <SpotButton
-            variant="outlined"
-            color="primary"
-            onClick={handleOpen(spot, index)}
+      <CustomList component={Paper} >
+
+        {/* スタート */}
+        <CustomListItem button divider>
+          <ListItemAvatar>
+            <StartAvatar variant="rounded">出発</StartAvatar>
+          </ListItemAvatar>
+          <ListItemText>サウス・エントランス</ListItemText>
+        </CustomListItem>
+
+        {/* 選択済みスポット */}
+        {spots.map((spot, index) =>
+          <Collapse in={spot.display} key={index} enter={spot.enter}>
+            <CustomListItem key={index} button onClick={handleOpen(spot, index)} divider>
+              <ListItemAvatar>
+                <ViaAvatar variant="rounded">経由</ViaAvatar>
+              </ListItemAvatar>
+              <ListItemText>{spot.shortName}</ListItemText>
+              <ListItemSecondaryAction>
+                <DeleteButton onClick={handleDelete(index)} color="secondary">
+                  <Close />
+                </DeleteButton>
+              </ListItemSecondaryAction>
+            </CustomListItem>
+          </Collapse>
+        )}
+
+        {/* スポット追加 */}
+        <CustomListItem button onClick={handleOpen(initialEditing, -1)} divider>
+          <ListItemAvatar>
+            <ViaAvatar variant="rounded">経由</ViaAvatar>
+          </ListItemAvatar>
+          <ListItemText>スポットを追加</ListItemText>
+        </CustomListItem>
+
+        {/* ゴール */}
+        <CustomListItem button>
+          <ListItemAvatar>
+            <GoalAvatar variant="rounded">到着</GoalAvatar>
+          </ListItemAvatar>
+          <ListItemText>サウス・エントランス</ListItemText>
+        </CustomListItem>
+      </CustomList>
+
+      {/* 検索条件 */}
+      <Conditions>
+        <Condition>
+          <Label>出発時刻</Label>
+          <ConditionTimePicker
+            margin="normal"
+            format="HH:mm"
+            value={condition.specifiedTime}
+            onChange={handleDateTime('specifiedTime')}
+            okLabel="決定"
+            cancelLabel="キャンセル"
+            fullWidth
+          // inputVariant="outlined"
+          />
+        </Condition>
+        <Condition>
+          <Label>待ち時間</Label>
+          <ConditionWaitTimeModeSelect
+            value={condition.waitTimeMode}
+            onChange={handleSelect('waitTimeMode')}
+            fullWidth
+          // variant="outlined"
           >
-            {spot.shortName}
-          </SpotButton>
-          <DeleteButton onClick={handleDelete(index)}>
-            <Close />
-          </DeleteButton>
-        </Spot>
-      )}
-      <PlusButton
-        variant="outlined"
-        color="secondary"
-        onClick={handleOpen(initialEditing, -1)}
+            <MenuItem value="real">リアルタイム待ち時間</MenuItem>
+            <MenuItem value="mean">平均待ち時間</MenuItem>
+          </ConditionWaitTimeModeSelect>
+        </Condition>
+        <Condition>
+          <Label>歩く速度</Label>
+          <ConditionWalkSpeedSelect
+            value={condition.walkSpeed}
+            onChange={handleSelect('walkSpeed')}
+            select
+            fullWidth
+          // variant="outlined"
+          >
+            <MenuItem value="slow">ゆっくり</MenuItem>
+            <MenuItem value="normal">ふつう</MenuItem>
+            <MenuItem value="fast">せかせか</MenuItem>
+          </ConditionWalkSpeedSelect>
+        </Condition>
+        <Condition>
+          <Label>スポットを巡る順番</Label>
+          <ConditionOptimizeSpotOrderSelect
+            value={condition.optimizeSpotOrder}
+            onChange={handleSelect('optimizeSpotOrder')}
+            fullWidth
+          // variant="outlined"
+          >
+            <MenuItem value={"false"}>選んだ順にめぐる</MenuItem>
+            <MenuItem value={"true"}>効率よくめぐる</MenuItem>
+          </ConditionOptimizeSpotOrderSelect>
+        </Condition>
+      </Conditions>
+
+      {/* 検索ボタン */}
+      <SearchButton
+        onClick={handleSearch}
+        variant="contained"
+        color="primary"
+        fullWidth
       >
-        追加
-      </PlusButton>
-
-      {/* 条件入力 */}
-      <Condition>
-        <ConditionTimePicker
-          margin="normal"
-          label="時間"
-          format="HH:mm"
-          value={condition.specifiedTime}
-          onChange={handleDateTime('specifiedTime')}
-          okLabel="決定"
-          cancelLabel="キャンセル"
-        />
-        <ConditionWaitTimeModeSelect
-          label="待ち時間"
-          value={condition.waitTimeMode}
-          onChange={handleSelect('waitTimeMode')}
-          select
-        >
-          <MenuItem value="real">リアルタイム待ち時間</MenuItem>
-          <MenuItem value="mean">平均待ち時間</MenuItem>
-        </ConditionWaitTimeModeSelect>
-        <ConditionWalkSpeedSelect
-          label="歩く速度"
-          value={condition.walkSpeed}
-          onChange={handleSelect('walkSpeed')}
-          select
-        >
-          <MenuItem value="slow">ゆっくり</MenuItem>
-          <MenuItem value="normal">ふつう</MenuItem>
-          <MenuItem value="fast">せかせか</MenuItem>
-        </ConditionWalkSpeedSelect>
-        <ConditionOptimizeOpotOrder
-          label="スポットをめぐる順番"
-          value={condition.optimizeSpotOrder}
-          onChange={handleSelect('optimizeSpotOrder')}
-          select
-        >
-          <MenuItem value={"false"}>選んだ順にめぐる</MenuItem>
-          <MenuItem value={"true"}>効率よくめぐる</MenuItem>
-        </ConditionOptimizeOpotOrder>
-      </Condition>
+        検索
+      </SearchButton>
     </Wrap>
-
-    {/* 検索ボタン */}
-    <SearchButton
-      onClick={handleSearch}
-      variant="text"
-    >
-      検索
-    </SearchButton>
 
     {/* スポット選択ダイアログ */}
     <SpotListDialog
