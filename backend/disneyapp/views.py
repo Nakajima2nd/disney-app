@@ -10,7 +10,7 @@ from disneyapp.data.db_handler import DBHandler
 
 @api_view(["GET", "POST"])
 def spot_list(request):
-    spots_json_org = SpotListDataConverter.get_merged_spot_data()
+    spots_json_org = SpotListDataConverter.get_merged_spot_data_list()
     filtered_spot_list = filter_unuse_spots(spots_json_org)
     spots_json_edited = edit_static_spots_data(filtered_spot_list)
     return Response(spots_json_edited)
