@@ -17,6 +17,14 @@ def sec_to_hhmm(sec):
     return hhmm
 
 
+def hhmm_to_sec(hh_mm_str):
+    """
+    hh:mm形式の文字列から秒に変換する。
+    """
+    hour, minute = hh_mm_str.split(":")
+    return int(hour) * 3600 + int(minute) * 60
+
+
 class RandomTspSolver:
     TRY_TIMES = 1000  # 試行回数
 
@@ -64,8 +72,8 @@ class RandomTspSolver:
         for count in range(RandomTspSolver.TRY_TIMES):
             current_tour = random.sample(base_tour, len(base_tour))
             current_tour_with_od = [travel_input.start_spot_id] + current_tour + [travel_input.goal_spot_id]
-            tour = self.__trace_from_front(travel_input, current_tour_with_od)
-            score = self.__eval_spot_list_order(tour)
+            tour = self.__build_tour(travel_input, current_tour_with_od)
+            score = tour.cost
             if score < current_best_score:
                 current_best_score = score
                 current_best_tour = copy.deepcopy(current_tour_with_od)
@@ -77,8 +85,6 @@ class RandomTspSolver:
         """
         base_tour = [travel_input_spot.spot_id for travel_input_spot in travel_input.spots]
         current_tour_with_od = [travel_input.start_spot_id] + base_tour + [travel_input.goal_spot_id]
-        tour = self.__trace_from_front(travel_input, current_tour_with_od)
-        score = self.__eval_spot_list_order(tour)
         return self.__build_tour(travel_input, current_tour_with_od)
 
     @staticmethod
@@ -93,25 +99,23 @@ class RandomTspSolver:
                 real -> リアルタイム待ち時間
                 mean -> 平均待ち時間
         """
-        combined_spot_data = SpotListDataConverter.get_merged_spot_data()
-        spot_data_dict = {}
-        for spot_data in combined_spot_data:
-            spot_data_elem = {
-                "play-time": int(spot_data["play-time"]) if spot_data.get("play-time") else 0,
-                "wait-time": int(spot_data["wait-time"]) if spot_data.get("wait-time") else 0,
-                "name": spot_data["name"],
-                "short-name": spot_data["short-name"],
-                "lat": spot_data["lat"],
-                "lon": spot_data["lon"],
-                "type": spot_data["type"]
-            }
-            # 待ち時間情報種別によってwait-timeに入れる値を切り替える
-            if wait_time_mode == "real":
-                spot_data_elem["wait-time"] = int(spot_data["wait-time"]) if spot_data.get("wait-time") else 0
-            else:
-                spot_data_elem["wait-time"] = int(spot_data["mean-wait-time"]) if spot_data.get("mean-wait-time") else 0
-            spot_data_dict[int(spot_data["spot-id"])] = spot_data_elem
-        return spot_data_dict
+        merged_spot_data_dict = SpotListDataConverter.get_merged_spot_data_dict()
+
+        for spot_id in merged_spot_data_dict:
+            # 暫定対応：play-timeをstringからintに変換する
+            # todo: play-timeは元データの時点でint型にすべきなので、データで対応する
+            if "play-time" in merged_spot_data_dict[spot_id]:
+                merged_spot_data_dict[spot_id]["play-time"] = int(merged_spot_data_dict[spot_id]["play-time"])
+            # play-time が存在しない場合は0埋めする
+            if "play-time" not in merged_spot_data_dict[spot_id]:
+                merged_spot_data_dict[spot_id]["play-time"] = 0
+            # wait-time が存在しない場合は0埋めする
+            if "wait-time" not in merged_spot_data_dict[spot_id]:
+                merged_spot_data_dict[spot_id]["wait-time"] = 0
+            # 平均待ち時間が指定された場合、wait-timeを平均待ち時間で上書きする
+            if "mean-wait-time" in merged_spot_data_dict[spot_id] and wait_time_mode == "mean":
+                merged_spot_data_dict[spot_id]["wait-time"] = merged_spot_data_dict[spot_id]["mean-wait-time"]
+        return merged_spot_data_dict
 
     @staticmethod
     def __make_cost_table():
@@ -139,12 +143,16 @@ class RandomTspSolver:
         """
         巡回順の評価値を返す。
         """
-        hh_str, mm_str = tour.goal_time.split(":")
-        score = int(hh_str) * 3600 + int(mm_str) * 60
-        # 到着希望時刻を1つ破るごとに1時間のペナルティ
+        # コストのベースは目的地の到着時刻
+        score = hhmm_to_sec(tour.goal_time)
         for subroute in tour.subroutes:
+            # 到着希望時刻を1つ破るごとに2時間のペナルティ
             if subroute.violate_goal_desired_arrival_time:
-                score += 3600
+                score += hhmm_to_sec("02:00")
+        for spot in tour.spots:
+            # スポットの営業時間を1つ破るたびに2時間のペナルティ
+            if spot.violate_business_hours:
+                score += hhmm_to_sec("02:00")
         return score
 
     def __build_tour(self, travel_input, spot_order):
@@ -154,6 +162,7 @@ class RandomTspSolver:
         tour = self.__trace_from_front(travel_input, spot_order)
         self.__set_subroute_coordinates(tour)
         self.__set_spot(spot_order, tour)
+        tour.cost = self.__eval_spot_list_order(tour)
         return tour
 
     def __set_subroute_coordinates(self, tour):
@@ -173,7 +182,10 @@ class RandomTspSolver:
     def __set_spot(self, spot_order, tour):
         """
         Tourオブジェクトのスポット情報を設定する。
+        note: 個別経路の情報を参照するので、tour.subroutes が計算済である必要がある。
         """
+        assert len(tour.subroutes) != 0
+        # (経路によらない)スポットの情報をセット
         for spot_id in spot_order:
             tour_spot = TourSpot()
             tour_spot.spot_id = spot_id
@@ -185,6 +197,24 @@ class RandomTspSolver:
             tour_spot.wait_time = self.spot_data_dict[spot_id]["wait-time"]
             tour_spot.play_time = self.spot_data_dict[spot_id]["play-time"]
             tour.spots.append(tour_spot)
+        # スポットの発着時刻をセット
+        for i, subroute in enumerate(tour.subroutes):
+            tour.spots[i].depart_time = subroute.start_time
+            tour.spots[i + 1].arrival_time = subroute.goal_time
+        # 各スポットが営業時間を守っているかチェック
+        for i, spot in enumerate(tour.spots):
+            # 営業開始より前に到着していないかチェック
+            if "start-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["start-time"] != "":
+                business_hours_start_time = self.spot_data_dict[spot.spot_id]["start-time"]  # 該当スポットの営業開始時刻
+                if hhmm_to_sec(spot.arrival_time) < hhmm_to_sec(business_hours_start_time):
+                    tour.spots[i].violate_business_hours = True
+                    tour.violate_business_hours = True
+            # 営業終了より後に出発していないかチェック
+            if "end-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["end-time"] != "":
+                business_hours_end_time = self.spot_data_dict[spot.spot_id]["end-time"]  # 該当スポットの営業終了時刻
+                if hhmm_to_sec(business_hours_end_time) < hhmm_to_sec(spot.depart_time):
+                    tour.spots[i].violate_business_hours = True
+                    tour.violate_business_hours = True
 
     @staticmethod
     def __find_target_spot_from_travel_input(travel_input, target_spot_id):

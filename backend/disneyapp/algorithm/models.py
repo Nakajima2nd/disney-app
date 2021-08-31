@@ -42,6 +42,9 @@ class TourSpot:
         self.type = ""
         self.play_time = -1 # sec
         self.wait_time = -1
+        self.arrival_time = ""
+        self.depart_time = ""
+        self.violate_business_hours = False
 
     def to_dict(self):
         ret_dict = dict()
@@ -53,6 +56,9 @@ class TourSpot:
         ret_dict["type"] = self.type
         ret_dict["play-time"] = self.play_time
         ret_dict["wait-time"] = self.wait_time
+        ret_dict["arrival-time"] = self.arrival_time
+        ret_dict["depart-time"] = self.depart_time
+        ret_dict["violate-business-hours"] = self.violate_business_hours
         return ret_dict
 
 
@@ -63,12 +69,16 @@ class Tour:
         self.spots = []
         self.subroutes = []
         self.violate_desired_arrival_time = False
+        self.violate_business_hours = False
+        self.cost = -1
 
     def to_dict(self):
         ret_dict = dict()
         ret_dict["start-time"] = self.start_time
         ret_dict["goal-time"] = self.goal_time
         ret_dict["violate-desired-arrival-time"] = self.violate_desired_arrival_time
+        ret_dict["violate-business-hours"] = self.violate_business_hours
+        ret_dict["cost"] = self.cost
         ret_dict["spots"] = []
         for spot in self.spots:
             ret_dict["spots"].append(spot.to_dict())
