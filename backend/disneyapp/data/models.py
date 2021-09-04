@@ -18,6 +18,7 @@ class AttractionSpotInfo:
         self.enable = True
         self.wait_time = -1
         self.mean_wait_time = -1
+        self.timespan_mean_wait_time = {}
         self.sp_status = ""
         self.status = ""
         self.start_time = ""
@@ -38,6 +39,7 @@ class AttractionSpotInfo:
         self.enable = False if obj["disable-flag"] else True
         self.wait_time = int(obj["wait-time"])
         self.mean_wait_time = int(obj["mean-wait-time"])
+        self.timespan_mean_wait_time = obj["timespan-mean-wait-time"]
         self.sp_status = obj["standby-pass-status"]
         self.status = obj["status"]
         self.start_time = obj["start-time"]
@@ -57,6 +59,7 @@ class AttractionSpotInfo:
             "enable": self.enable,
             "wait-time": self.wait_time,
             "mean-wait-time": self.mean_wait_time,
+            "timespan-mean-wait-time": self.timespan_mean_wait_time,
             "sp-status": self.sp_status,
             "status": self.status,
             "start-time": self.start_time,
@@ -88,6 +91,7 @@ class RestaurantSpotInfo:
         self.enable = True
         self.wait_time = -1
         self.mean_wait_time = -1
+        self.timespan_mean_wait_time = {}
         self.status = ""
         self.start_time = ""
         self.end_time = ""
@@ -111,6 +115,7 @@ class RestaurantSpotInfo:
         self.enable = False if obj["disable-flag"] else True
         self.wait_time = int(obj["wait-time"])
         self.mean_wait_time = int(obj["mean-wait-time"])
+        self.timespan_mean_wait_time = obj["timespan-mean-wait-time"]
         self.status = obj["status"]
         self.start_time = obj["start-time"]
         self.end_time = obj["end-time"]
@@ -133,6 +138,7 @@ class RestaurantSpotInfo:
             "enable": self.enable,
             "wait-time": self.wait_time,
             "mean-wait-time": self.mean_wait_time,
+            "timespan-mean-wait-time": self.timespan_mean_wait_time,
             "status": self.status,
             "start-time": self.start_time,
             "end-time": self.end_time,
@@ -216,6 +222,7 @@ class GreetingSpotInfo:
         self.standby_pass_status = ""
         self.wait_time = -1
         self.mean_wait_time = -1
+        self.timespan_mean_wait_time = {}
         self.status = ""
         self.start_time = ""
         self.end_time = ""
@@ -236,6 +243,7 @@ class GreetingSpotInfo:
         self.standby_pass_status = obj["standby-pass-status"]
         self.wait_time = int(obj["wait-time"])
         self.mean_wait_time = int(obj["mean-wait-time"])
+        self.timespan_mean_wait_time = obj["timespan-mean-wait-time"]
         self.status = obj["status"]
         self.start_time = obj["start-time"]
         self.end_time = obj["end-time"]
@@ -255,6 +263,7 @@ class GreetingSpotInfo:
             "standby-pass-status": self.standby_pass_status,
             "wait-time": self.wait_time,
             "mean-wait-time": self.mean_wait_time,
+            "timespan-mean-wait-time": self.timespan_mean_wait_time,
             "status": self.status,
             "start-time": self.start_time,
             "end-time": self.end_time,
