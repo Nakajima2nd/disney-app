@@ -13,7 +13,7 @@ const CustomListItem = styled(ListItem)`
 
 const EnableAvatar = styled(Avatar)`
   color: white;
-  background-color: darksalmon;
+  background-color: ${(props) => props.theme.palette.enable.main};
 `
 
 const DisableAvatar = styled(Avatar)`

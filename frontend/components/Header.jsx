@@ -18,7 +18,7 @@ const CustomToolbar = styled(Toolbar)`
 const Title = styled(Typography)`
   font-size: 2rem;
   font-weight: bold;
-  color: #087D8D;
+  color: ${(props) => props.theme.palette.logo.main};
 `
 
 const CustomMickey = styled(Mickey)`

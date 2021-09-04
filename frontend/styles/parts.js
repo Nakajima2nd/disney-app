@@ -6,7 +6,7 @@ export const Mickey = styled.span`
   height: 0.9rem;
   border-radius: 50%;
   position: relative;
-  background-color: rgba(8,125,141,1);
+  background-color: ${(props) => props.theme.palette.logo.main};
   color: white;
   transition: 0.5s;
   display: flex;
@@ -19,7 +19,7 @@ export const Mickey = styled.span`
     right: -37%;
     top: -50%;
     content: '';
-    background-color: rgba(8,125,141,1);
+    background-color: ${(props) => props.theme.palette.logo.main};
   }
   &::after {
     transition: 0.5s;
@@ -30,19 +30,19 @@ export const Mickey = styled.span`
     left: -35%;
     top: -50%;
     content: '';
-    background-color: rgba(8,125,141,1);
+    background-color: ${(props) => props.theme.palette.logo.main};
   }
   &:hover {
     transition: 0.5s;
-    background-color: rgba(209,223,210,1);
+    background-color: ${(props) => props.theme.palette.logo.contrast};
     color: white;
     &::after {
       transition: 0.5s;
-      background-color: rgba(209,223,210,1);
+      background-color: ${(props) => props.theme.palette.logo.contrast};
     }
     &::before {
       transition: 0.5s;
-      background-color: rgba(209,223,210,1);
+      background-color: ${(props) => props.theme.palette.logo.contrast};
     }
   }
 `
