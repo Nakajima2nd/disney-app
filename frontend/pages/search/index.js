@@ -36,9 +36,8 @@ const Distance = styled(Typography)`
   text-align: center;  
 `
 
-const Search = () => {
+const Search = ({ param }) => {
   const router = useRouter()
-  const param = router.query.param
   const { searchResult, error } = useGetSearchResult(param)
   if (error) return <>
     <Link href="/">もどる</Link>
@@ -61,6 +60,11 @@ const Search = () => {
       <Distance>{index < searchResult.subroutes.length && searchResult.subroutes[index].distance + 'm'}</Distance>
     </Box>)}
   </>)
+}
+
+export function getServerSideProps(context) {
+  const param = context.query.param
+  return { props: { param } }
 }
 
 export default Search
