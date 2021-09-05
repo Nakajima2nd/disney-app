@@ -19,6 +19,13 @@ const theme = createMuiTheme({
     },
     goal: {
       main: '#D65C3A'
+    },
+    logo: {
+      main: '#087D8D',
+      contrast: '#d1dfd2'
+    },
+    enable: {
+      main: '#F5BA23'
     }
   },
   overrides: {

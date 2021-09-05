@@ -12,7 +12,7 @@ import { Loading } from '../components/Loading'
 
 const Wrap = styled(Box)`
   padding: 8px;
-  margin: 8px auto;
+  margin: auto;
   max-width: 800px;
   display: flex;
   flex-direction: column;
@@ -110,7 +110,7 @@ const DeleteButton = styled(IconButton)`
 
 const SearchButton = styled(Button)`
   margin: 24px 0 0;
-  font-size: 18px;
+  font-size: 1.3rem;
 `
 
 const initialEditing = {
