@@ -145,13 +145,12 @@ class RandomTspSolver:
         """
         # コストのベースは目的地の到着時刻
         score = hhmm_to_sec(tour.goal_time)
-        for subroute in tour.subroutes:
-            # 到着希望時刻を1つ破るごとに2時間のペナルティ
-            if subroute.violate_goal_desired_arrival_time:
-                score += hhmm_to_sec("02:00")
         for spot in tour.spots:
             # スポットの営業時間を1つ破るたびに2時間のペナルティ
             if spot.violate_business_hours:
+                score += hhmm_to_sec("02:00")
+            # 到着希望時刻を1つ違反するたびに2時間のペナルティ
+            if spot.violate_desired_arrival_time:
                 score += hhmm_to_sec("02:00")
         return score
 
@@ -161,7 +160,7 @@ class RandomTspSolver:
         """
         tour = self.__trace_from_front(travel_input, spot_order)
         self.__set_subroute_coordinates(tour)
-        self.__set_spot(spot_order, tour)
+        self.__set_spot(spot_order, tour, travel_input)
         tour.cost = self.__eval_spot_list_order(tour)
         return tour
 
@@ -179,7 +178,7 @@ class RandomTspSolver:
                 coord_list = self.__node_pair_to_coords(org_node_id, dst_node_id)
                 subroute.coords.extend(coord_list)
 
-    def __set_spot(self, spot_order, tour):
+    def __set_spot(self, spot_order, tour, travel_input):
         """
         Tourオブジェクトのスポット情報を設定する。
         note: 個別経路の情報を参照するので、tour.subroutes が計算済である必要がある。
@@ -201,7 +200,6 @@ class RandomTspSolver:
         for i, subroute in enumerate(tour.subroutes):
             tour.spots[i].depart_time = subroute.start_time
             tour.spots[i + 1].arrival_time = subroute.goal_time
-        # 各スポットが営業時間を守っているかチェック
         for i, spot in enumerate(tour.spots):
             # 営業開始より前に到着していないかチェック
             if "start-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["start-time"] != "":
@@ -215,6 +213,15 @@ class RandomTspSolver:
                 if hhmm_to_sec(business_hours_end_time) < hhmm_to_sec(spot.depart_time):
                     tour.spots[i].violate_business_hours = True
                     tour.violate_business_hours = True
+            # 到着希望時刻を守っているかチェック
+            for input_spot in travel_input.spots:
+                if input_spot.spot_id != spot.spot_id:
+                    continue
+                if input_spot.desired_arrival_time == -1:
+                    continue
+                if input_spot.desired_arrival_time != hhmm_to_sec(spot.arrival_time):
+                    tour.spots[i].violate_desired_arrival_time = True
+                    tour.violate_desired_arrival_time = True
 
     @staticmethod
     def __find_target_spot_from_travel_input(travel_input, target_spot_id):
@@ -258,9 +265,6 @@ class RandomTspSolver:
                     desired_arrival_time = spot.desired_arrival_time
                     stay_time = spot.stay_time
             if desired_arrival_time != -1:
-                subroute.violate_goal_desired_arrival_time = (current_time - desired_arrival_time > 0)
-                if subroute.violate_goal_desired_arrival_time:
-                    tour.violate_desired_arrival_time = True
                 subroute.surplus_wait_time = max(desired_arrival_time - current_time, 0)
                 current_time = max(current_time, desired_arrival_time)
             subroute.goal_time = sec_to_hhmm(current_time)
