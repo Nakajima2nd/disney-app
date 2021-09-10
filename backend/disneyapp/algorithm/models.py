@@ -102,7 +102,7 @@ class TravelInput:
     """
     def __init__(self, json_data):
         self.time_mode = ""
-        self.wait_time_mode = ""
+        self.wait_time_mode = "mean"
         self.specified_time = -1  # 00:00からの経過秒数
         self.walk_speed = ""
         self.start_spot_id = -1
@@ -123,20 +123,6 @@ class TravelInput:
         valid_time_mode_list = ["start", "end"]
         if self.time_mode not in valid_time_mode_list:
             self.error_message = "time-modeはstart/endのいずれかを指定してください。"
-            return False
-        return True
-
-    def __init_wait_time_mode(self, json_data):
-        """
-        wait_time_modeを初期化する。初期化に失敗した場合はFalseを返す。
-        """
-        if not json_data.get("wait-time-mode"):
-            self.error_message = "wait-time-modeが存在しません。"
-            return False
-        self.wait_time_mode = json_data["wait-time-mode"]
-        valid_wait_time_mode_list = ["real", "mean"]
-        if self.wait_time_mode not in valid_wait_time_mode_list:
-            self.error_message = "wait-time-modeはreal/meanのいずれかを指定してください。"
             return False
         return True
 
@@ -315,8 +301,6 @@ class TravelInput:
         # note: time-modeはいったんdisableにする
         # if not self.__init_time_mode(json_data):
         #     return
-        if not self.__init_wait_time_mode(json_data):
-            return
         if not self.__init_specified_time(json_data):
             return
         if not self.__init_walk_speed(json_data):
