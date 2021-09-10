@@ -9,8 +9,6 @@ class Subroute:
         self.goal_time = ""
         self.distance = -1
         self.transit_time = -1
-        # 目的地の到着希望時刻を破っている場合True
-        self.violate_goal_desired_arrival_time = False
         # 時刻指定などが原因で発生した、余分な待ち時間
         self.surplus_wait_time = 0
         self.coords = []
@@ -28,7 +26,6 @@ class Subroute:
             pair = [ coord[0], coord[1] ]
             ret_dict["coords"].append(pair)
         ret_dict["surplus-wait-time"] = self.surplus_wait_time
-        ret_dict["violate-goal-desired-arrival-time"] = self.violate_goal_desired_arrival_time
         return ret_dict
 
 
@@ -45,6 +42,7 @@ class TourSpot:
         self.arrival_time = ""
         self.depart_time = ""
         self.violate_business_hours = False
+        self.violate_desired_arrival_time = False
 
     def to_dict(self):
         ret_dict = dict()
@@ -59,6 +57,7 @@ class TourSpot:
         ret_dict["arrival-time"] = self.arrival_time
         ret_dict["depart-time"] = self.depart_time
         ret_dict["violate-business-hours"] = self.violate_business_hours
+        ret_dict["violate-desired-arrival-time"] = self.violate_desired_arrival_time
         return ret_dict
 
 
