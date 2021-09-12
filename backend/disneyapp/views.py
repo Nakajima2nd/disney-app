@@ -35,6 +35,11 @@ def search(request):
         return Response({"message": "バックエンドサーバで予期せぬエラーが発生しました。"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+@api_view(["GET"])
+def debug(request):
+    return Response("OK!")
+
+
 def filter_unuse_spots(org_spot_list):
     """
     不要なスポットを削除する。
