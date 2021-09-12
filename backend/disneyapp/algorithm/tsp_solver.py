@@ -293,21 +293,24 @@ class RandomTspSolver:
         start_today : str("true" or "false")
             探索出発日時が本日か否か
         """
+        invalid_wait_time = -1
         # todo: 開園時間外であれば待ち時間を-1にする
         # スポットの営業時間外であれば待ち時間を-1にする
-        start_time_sec = -1
-        end_time_sec = -1
+        start_time_sec = invalid_wait_time
+        end_time_sec = invalid_wait_time
         if "start-time" in self.spot_data_dict[spot_id] and self.spot_data_dict[spot_id]["start-time"] != "":
             start_time_sec = hhmm_to_sec(self.spot_data_dict[spot_id]["start-time"])
         if "end-time" in self.spot_data_dict[spot_id] and self.spot_data_dict[spot_id]["end-time"] != "":
             end_time_sec = hhmm_to_sec(self.spot_data_dict[spot_id]["end-time"])
-        if start_time_sec != -1 and end_time_sec != -1:
+        if start_time_sec != invalid_wait_time and end_time_sec != invalid_wait_time:
             if arrival_time < start_time_sec or end_time_sec < arrival_time:
-                return -1
-        # リアルタイム待ち時間、平均待ち時間、時間帯ごとの平均待ち時間を計算する
-        real_wait_time = -1
-        mean_wait_time = -1
-        timespan_mean_wait_time = -1
+                return invalid_wait_time
+
+        # 各種待ち時間を計算する
+        real_wait_time = invalid_wait_time # リアルタイム待ち時間
+        mean_wait_time = invalid_wait_time # 平均待ち時間
+        arrive_timespan_mean_wait_time = invalid_wait_time  # 到着時間における平均待ち時間
+        current_timespan_mean_wait_time = invalid_wait_time  # 現在時刻における平均待ち時間
         if "wait-time" in self.spot_data_dict[spot_id]:
             real_wait_time = self.spot_data_dict[spot_id]["wait-time"]
         if "mean-wait-time" in self.spot_data_dict[spot_id]:
@@ -317,5 +320,24 @@ class RandomTspSolver:
             next_hour = arrival_time_hour + 1
             timespan_str = str(arrival_time_hour) + "~" + str(next_hour)
             if timespan_str in self.spot_data_dict[spot_id]["timespan-mean-wait-time"]:
-                timespan_mean_wait_time = self.spot_data_dict[spot_id]["timespan-mean-wait-time"][timespan_str]
-        return real_wait_time, mean_wait_time, timespan_mean_wait_time
+                arrive_timespan_mean_wait_time = self.spot_data_dict[spot_id]["timespan-mean-wait-time"][timespan_str]
+        # todo: 現在時刻における平均待ち時間を計算する
+
+        # 各待ち時間が取得できたか否かで返却する待ち時間情報を変化させる
+        # 場合分けはこちらを参照：https://github.com/Nakajima2nd/disney-app/wiki/スポット待ち時間の計算方式
+        if real_wait_time != invalid_wait_time:
+            if arrive_timespan_mean_wait_time:
+                if start_today == "true":
+                    return (real_wait_time - current_timespan_mean_wait_time) + arrive_timespan_mean_wait_time
+                else:
+                    return real_wait_time
+            else:
+                return real_wait_time
+        else:
+            if arrive_timespan_mean_wait_time != -1:
+                return arrive_timespan_mean_wait_time
+            else:
+                if mean_wait_time != -1:
+                    return mean_wait_time
+                else:
+                    return invalid_wait_time

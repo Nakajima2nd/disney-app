@@ -5,7 +5,6 @@ import copy, json
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from disneyapp.data.db_handler import DBHandler
 
 
 @api_view(["GET", "POST"])
@@ -37,7 +36,9 @@ def search(request):
 
 @api_view(["GET"])
 def debug(request):
-    return Response("OK!")
+    tsp_solver = RandomTspSolver()
+    ret_str = tsp_solver.calc_wait_time(spot_id=0,arrival_time=37800,start_today="true")
+    return Response(ret_str)
 
 
 def filter_unuse_spots(org_spot_list):
