@@ -37,25 +37,19 @@ class RandomTspSolver:
 
     def __init__(self):
         # todo: このへんのdictはsolverではなくdata_managerで持つほうが良い。要リファクタ
-        self.spot_data_dict = {}
         self.cost_table = RandomTspSolver.__make_cost_table()  # org_spot_id, dst_spot_id -> distance
         self.link_dict = RandomTspSolver.__make_link_dict()
+        self.spot_data_dict = RandomTspSolver.__make_spot_data_dict()
 
     def exec(self, travel_input):
         """
         順列をランダムに生成して最もコストの小さい巡回路を生成する。
-
-        Parameter
-        ---------
-        ravel_input : TravelInput
-            巡回探索の入力オブジェクト。
 
         Returns:
         --------
         tour : Tour
             巡回探索の出力オブジェクト。
         """
-        self.spot_data_dict = RandomTspSolver.__make_spot_data_dict(travel_input.wait_time_mode)
         if travel_input.optimize_spot_order == "true":
             return self.__make_tour_by_optimizing_spot_order(travel_input)
         else:
@@ -88,16 +82,9 @@ class RandomTspSolver:
         return self.__build_tour(travel_input, current_tour_with_od)
 
     @staticmethod
-    def __make_spot_data_dict(wait_time_mode):
+    def __make_spot_data_dict():
         """
         巡回経路探索で用いるSpotデータを初期化する。
-
-        Parameter
-        ---------
-        wait_time_mode : string
-            待ち時間情報種別。
-                real -> リアルタイム待ち時間
-                mean -> 平均待ち時間
         """
         merged_spot_data_dict = SpotListDataConverter.get_merged_spot_data_dict()
 
@@ -112,10 +99,9 @@ class RandomTspSolver:
             # wait-time が存在しない場合は0埋めする
             if "wait-time" not in merged_spot_data_dict[spot_id]:
                 merged_spot_data_dict[spot_id]["wait-time"] = 0
-            # 平均待ち時間が指定された場合、wait-timeを平均待ち時間で上書きする
-            if "mean-wait-time" in merged_spot_data_dict[spot_id] and wait_time_mode == "mean":
-                merged_spot_data_dict[spot_id]["wait-time"] = merged_spot_data_dict[spot_id]["mean-wait-time"]
+
         return merged_spot_data_dict
+
 
     @staticmethod
     def __make_cost_table():
@@ -292,3 +278,44 @@ class RandomTspSolver:
         if self.link_dict.get(dst_node_id, org_node_id):
             return list(reversed(self.link_dict[(dst_node_id, org_node_id)]))
         return []
+
+    def calc_wait_time(self, spot_id, arrival_time, start_today):
+        """
+        当該スポットの待ち時間を計算する。
+        仕様は次のURLを参照：https://github.com/Nakajima2nd/disney-app/wiki/スポット待ち時間の計算方式
+
+        Parameters:
+        -----------
+        spot_id : int
+            スポットID
+        arrival_time : int
+            該当スポットの到着時刻（00:00からの経過秒表記）
+        start_today : str("true" or "false")
+            探索出発日時が本日か否か
+        """
+        # todo: 開園時間外であれば待ち時間を-1にする
+        # スポットの営業時間外であれば待ち時間を-1にする
+        start_time_sec = -1
+        end_time_sec = -1
+        if "start-time" in self.spot_data_dict[spot_id] and self.spot_data_dict[spot_id]["start-time"] != "":
+            start_time_sec = hhmm_to_sec(self.spot_data_dict[spot_id]["start-time"])
+        if "end-time" in self.spot_data_dict[spot_id] and self.spot_data_dict[spot_id]["end-time"] != "":
+            end_time_sec = hhmm_to_sec(self.spot_data_dict[spot_id]["end-time"])
+        if start_time_sec != -1 and end_time_sec != -1:
+            if arrival_time < start_time_sec or end_time_sec < arrival_time:
+                return -1
+        # リアルタイム待ち時間、平均待ち時間、時間帯ごとの平均待ち時間を計算する
+        real_wait_time = -1
+        mean_wait_time = -1
+        timespan_mean_wait_time = -1
+        if "wait-time" in self.spot_data_dict[spot_id]:
+            real_wait_time = self.spot_data_dict[spot_id]["wait-time"]
+        if "mean-wait-time" in self.spot_data_dict[spot_id]:
+            mean_wait_time = self.spot_data_dict[spot_id]["mean-wait-time"]
+        if "timespan-mean-wait-time" in self.spot_data_dict[spot_id]:
+            arrival_time_hour = int(sec_to_hhmm(arrival_time).split(":")[0])
+            next_hour = arrival_time_hour + 1
+            timespan_str = str(arrival_time_hour) + "~" + str(next_hour)
+            if timespan_str in self.spot_data_dict[spot_id]["timespan-mean-wait-time"]:
+                timespan_mean_wait_time = self.spot_data_dict[spot_id]["timespan-mean-wait-time"][timespan_str]
+        return real_wait_time, mean_wait_time, timespan_mean_wait_time
