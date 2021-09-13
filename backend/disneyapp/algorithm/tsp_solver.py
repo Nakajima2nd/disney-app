@@ -1,7 +1,7 @@
 from disneyapp.data.data_manager import StaticDataManager
 from disneyapp.data.spot_list_data_converter import SpotListDataConverter
 from disneyapp.algorithm.models import Tour, TourSpot, Subroute
-import random, copy
+import random, copy, datetime
 
 
 def sec_to_hhmm(sec):
@@ -23,6 +23,17 @@ def hhmm_to_sec(hh_mm_str):
     """
     hour, minute = hh_mm_str.split(":")
     return int(hour) * 3600 + int(minute) * 60
+
+
+def get_current_time_sec():
+    """
+    現在時刻を00:00からの経過秒数形式で返却する。
+    """
+    dt_tokyo = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
+    hour = dt_tokyo.hour
+    minute = dt_tokyo.minute
+    return int(hour * 3600) + int(minute) * 60
+
 
 
 class RandomTspSolver:
@@ -279,6 +290,15 @@ class RandomTspSolver:
             return list(reversed(self.link_dict[(dst_node_id, org_node_id)]))
         return []
 
+    def __is_valid_times(self, time_list):
+        """
+        time_listの時刻がすべて-1でなければTrueを返す。
+        """
+        for time_ in time_list:
+            if time_ == -1:
+                return False
+        return True
+
     def calc_wait_time(self, spot_id, arrival_time, start_today):
         """
         当該スポットの待ち時間を計算する。
@@ -316,28 +336,34 @@ class RandomTspSolver:
         if "mean-wait-time" in self.spot_data_dict[spot_id]:
             mean_wait_time = self.spot_data_dict[spot_id]["mean-wait-time"]
         if "timespan-mean-wait-time" in self.spot_data_dict[spot_id]:
+            # 到着時間における平均待ち時間
             arrival_time_hour = int(sec_to_hhmm(arrival_time).split(":")[0])
             next_hour = arrival_time_hour + 1
             timespan_str = str(arrival_time_hour) + "~" + str(next_hour)
             if timespan_str in self.spot_data_dict[spot_id]["timespan-mean-wait-time"]:
                 arrive_timespan_mean_wait_time = self.spot_data_dict[spot_id]["timespan-mean-wait-time"][timespan_str]
-        # todo: 現在時刻における平均待ち時間を計算する
+            # 現在時刻における平均待ち時間
+            current_hour = int(sec_to_hhmm(get_current_time_sec()).split(":")[0])
+            next_hour = current_hour + 1
+            timespan_str = str(current_hour) + "~" + str(next_hour)
+            if timespan_str in self.spot_data_dict[spot_id]["timespan-mean-wait-time"]:
+                current_timespan_mean_wait_time = self.spot_data_dict[spot_id]["timespan-mean-wait-time"][timespan_str]
 
         # 各待ち時間が取得できたか否かで返却する待ち時間情報を変化させる
         # 場合分けはこちらを参照：https://github.com/Nakajima2nd/disney-app/wiki/スポット待ち時間の計算方式
-        if real_wait_time != invalid_wait_time:
-            if arrive_timespan_mean_wait_time:
-                if start_today == "true":
-                    return (real_wait_time - current_timespan_mean_wait_time) + arrive_timespan_mean_wait_time
-                else:
-                    return real_wait_time
-            else:
-                return real_wait_time
-        else:
-            if arrive_timespan_mean_wait_time != -1:
-                return arrive_timespan_mean_wait_time
-            else:
-                if mean_wait_time != -1:
-                    return mean_wait_time
-                else:
-                    return invalid_wait_time
+        if start_today == "true" and self.__is_valid_times([real_wait_time,
+                                                            current_timespan_mean_wait_time,
+                                                            arrive_timespan_mean_wait_time]):
+            return (real_wait_time - current_timespan_mean_wait_time) + arrive_timespan_mean_wait_time
+
+        if arrive_timespan_mean_wait_time != -1:
+            return arrive_timespan_mean_wait_time
+
+        if start_today == "true" and real_wait_time != -1:
+            return real_wait_time
+
+        if mean_wait_time != -1:
+            return mean_wait_time
+
+        return -1
+
