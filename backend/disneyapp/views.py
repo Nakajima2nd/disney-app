@@ -37,7 +37,7 @@ def search(request):
 @api_view(["GET"])
 def debug(request):
     tsp_solver = RandomTspSolver()
-    ret_str = tsp_solver.calc_wait_time(spot_id=0,arrival_time=37800,start_today="true")
+    ret_str = tsp_solver.calc_wait_time(spot_id=24,arrival_time=37800,start_today="true")
     return Response(ret_str)
 
 

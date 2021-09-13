@@ -190,13 +190,20 @@ class RandomTspSolver:
             tour_spot.lat = self.spot_data_dict[spot_id]["lat"]
             tour_spot.lon = self.spot_data_dict[spot_id]["lon"]
             tour_spot.type = self.spot_data_dict[spot_id]["type"]
-            tour_spot.wait_time = self.spot_data_dict[spot_id]["wait-time"]
             tour_spot.play_time = self.spot_data_dict[spot_id]["play-time"]
             tour.spots.append(tour_spot)
         # スポットの発着時刻をセット
         for i, subroute in enumerate(tour.subroutes):
             tour.spots[i].depart_time = subroute.start_time
             tour.spots[i + 1].arrival_time = subroute.goal_time
+        # 待ち時間をセット
+        for i, spot in enumerate(tour.spots):
+            # 出発地と目的地については待ち時間を計算しない
+            if i == 0 or i == len(tour.spots) - 1:
+                tour.spots[i].wait_time = -1
+                continue
+            wait_time = self.calc_wait_time(spot.spot_id, hhmm_to_sec(spot.arrival_time), travel_input.start_today)
+            tour.spots[i].wait_time = wait_time
         for i, spot in enumerate(tour.spots):
             # 営業開始より前に到着していないかチェック
             if "start-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["start-time"] != "":
@@ -267,7 +274,8 @@ class RandomTspSolver:
             subroute.goal_time = sec_to_hhmm(current_time)
 
             # dstスポットのイベントを消化するまでの時間を計測
-            current_time += max(self.spot_data_dict[dst_spot_id]["wait-time"] * 60, 0)  # note:待ち時間が-1の場合は0にする
+            wait_time_minute = self.calc_wait_time(dst_spot_id, current_time, travel_input.start_today)
+            current_time += max(wait_time_minute * 60, 0)  # note:待ち時間が-1の場合は0にする
             dst_spot = RandomTspSolver.__find_target_spot_from_travel_input(travel_input, dst_spot_id)
             current_time += dst_spot.specified_wait_time if dst_spot else 0
             current_time += self.spot_data_dict[dst_spot_id]["play-time"]
@@ -289,15 +297,6 @@ class RandomTspSolver:
         if self.link_dict.get(dst_node_id, org_node_id):
             return list(reversed(self.link_dict[(dst_node_id, org_node_id)]))
         return []
-
-    def __is_valid_times(self, time_list):
-        """
-        time_listの時刻がすべて-1でなければTrueを返す。
-        """
-        for time_ in time_list:
-            if time_ == -1:
-                return False
-        return True
 
     def calc_wait_time(self, spot_id, arrival_time, start_today):
         """
@@ -351,19 +350,20 @@ class RandomTspSolver:
 
         # 各待ち時間が取得できたか否かで返却する待ち時間情報を変化させる
         # 場合分けはこちらを参照：https://github.com/Nakajima2nd/disney-app/wiki/スポット待ち時間の計算方式
-        if start_today == "true" and self.__is_valid_times([real_wait_time,
-                                                            current_timespan_mean_wait_time,
-                                                            arrive_timespan_mean_wait_time]):
+        use_complex_wait_time = real_wait_time != invalid_wait_time and \
+                                current_timespan_mean_wait_time != invalid_wait_time and \
+                                arrive_timespan_mean_wait_time != invalid_wait_time
+        if start_today == "true" and use_complex_wait_time:
             return (real_wait_time - current_timespan_mean_wait_time) + arrive_timespan_mean_wait_time
 
-        if arrive_timespan_mean_wait_time != -1:
+        if arrive_timespan_mean_wait_time != invalid_wait_time:
             return arrive_timespan_mean_wait_time
 
-        if start_today == "true" and real_wait_time != -1:
+        if start_today == "true" and real_wait_time != invalid_wait_time:
             return real_wait_time
 
-        if mean_wait_time != -1:
+        if mean_wait_time != invalid_wait_time:
             return mean_wait_time
 
-        return -1
+        return invalid_wait_time
 
