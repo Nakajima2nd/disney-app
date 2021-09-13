@@ -202,7 +202,7 @@ class RandomTspSolver:
             if i == 0 or i == len(tour.spots) - 1:
                 tour.spots[i].wait_time = -1
                 continue
-            wait_time = self.calc_wait_time(spot.spot_id, hhmm_to_sec(spot.arrival_time), travel_input.start_today)
+            wait_time = self.__calc_wait_time(spot.spot_id, hhmm_to_sec(spot.arrival_time), travel_input.start_today)
             tour.spots[i].wait_time = wait_time
         for i, spot in enumerate(tour.spots):
             # 営業開始より前に到着していないかチェック
@@ -274,7 +274,7 @@ class RandomTspSolver:
             subroute.goal_time = sec_to_hhmm(current_time)
 
             # dstスポットのイベントを消化するまでの時間を計測
-            wait_time_minute = self.calc_wait_time(dst_spot_id, current_time, travel_input.start_today)
+            wait_time_minute = self.__calc_wait_time(dst_spot_id, current_time, travel_input.start_today)
             current_time += max(wait_time_minute * 60, 0)  # note:待ち時間が-1の場合は0にする
             dst_spot = RandomTspSolver.__find_target_spot_from_travel_input(travel_input, dst_spot_id)
             current_time += dst_spot.specified_wait_time if dst_spot else 0
@@ -298,7 +298,7 @@ class RandomTspSolver:
             return list(reversed(self.link_dict[(dst_node_id, org_node_id)]))
         return []
 
-    def calc_wait_time(self, spot_id, arrival_time, start_today):
+    def __calc_wait_time(self, spot_id, arrival_time, start_today):
         """
         当該スポットの待ち時間を計算する。
         仕様は次のURLを参照：https://github.com/Nakajima2nd/disney-app/wiki/スポット待ち時間の計算方式
