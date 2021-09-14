@@ -204,15 +204,17 @@ class RandomTspSolver:
             # 営業開始より前に到着していないかチェック
             if "start-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["start-time"] != "":
                 business_hours_start_time = self.spot_data_dict[spot.spot_id]["start-time"]  # 該当スポットの営業開始時刻
-                if hhmm_to_sec(spot.arrival_time) < hhmm_to_sec(business_hours_start_time):
-                    tour.spots[i].violate_business_hours = True
-                    tour.violate_business_hours = True
+                if spot.arrival_time != "":
+                    if hhmm_to_sec(spot.arrival_time) < hhmm_to_sec(business_hours_start_time):
+                        tour.spots[i].violate_business_hours = True
+                        tour.violate_business_hours = True
             # 営業終了より後に出発していないかチェック
             if "end-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["end-time"] != "":
                 business_hours_end_time = self.spot_data_dict[spot.spot_id]["end-time"]  # 該当スポットの営業終了時刻
-                if hhmm_to_sec(business_hours_end_time) < hhmm_to_sec(spot.depart_time):
-                    tour.spots[i].violate_business_hours = True
-                    tour.violate_business_hours = True
+                if spot.depart_time != "":
+                    if hhmm_to_sec(business_hours_end_time) < hhmm_to_sec(spot.depart_time):
+                        tour.spots[i].violate_business_hours = True
+                        tour.violate_business_hours = True
             # 到着希望時刻を守っているかチェック
             for input_spot in travel_input.spots:
                 if input_spot.spot_id != spot.spot_id:
