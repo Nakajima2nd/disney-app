@@ -1,5 +1,6 @@
 from disneyapp.data.data_manager import StaticDataManager
 from disneyapp.data.spot_list_data_converter import SpotListDataConverter
+from disneyapp.data.park_data_accessor import ParkDataAccessor
 from disneyapp.algorithm.models import Tour, TourSpot, Subroute
 import random, copy
 
@@ -40,6 +41,9 @@ class RandomTspSolver:
         self.spot_data_dict = {}
         self.cost_table = RandomTspSolver.__make_cost_table()  # org_spot_id, dst_spot_id -> distance
         self.link_dict = RandomTspSolver.__make_link_dict()
+        opening_hours = ParkDataAccessor.get_opening_hours()
+        self.open_time = opening_hours.open_time
+        self.close_time = opening_hours.close_time
 
     def exec(self, travel_input):
         """
@@ -200,19 +204,37 @@ class RandomTspSolver:
         for i, subroute in enumerate(tour.subroutes):
             tour.spots[i].depart_time = subroute.start_time
             tour.spots[i + 1].arrival_time = subroute.goal_time
+            if i == 0:
+                # スタートの場合、到着時刻を出発時刻に合わせる
+                tour.spots[i].arrival_time = tour.spots[i].depart_time
+            if i == len(tour.subroutes) - 1:
+                # ゴールの場合、出発時刻を到着時刻に合わせる
+                tour.spots[i + 1].depart_time = tour.spots[i + 1].arrival_time
         for i, spot in enumerate(tour.spots):
-            # 営業開始より前に到着していないかチェック
             if "start-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["start-time"] != "":
+                # 営業開始より前に到着していないかチェック
                 business_hours_start_time = self.spot_data_dict[spot.spot_id]["start-time"]  # 該当スポットの営業開始時刻
                 if spot.arrival_time != "":
                     if hhmm_to_sec(spot.arrival_time) < hhmm_to_sec(business_hours_start_time):
                         tour.spots[i].violate_business_hours = True
                         tour.violate_business_hours = True
-            # 営業終了より後に出発していないかチェック
+            else:
+                # 営業開始時刻が取得できない場合、開園時間より前に到着していないかチェック
+                if spot.arrival_time != "":
+                    if hhmm_to_sec(spot.arrival_time) < hhmm_to_sec(self.open_time):
+                        tour.spots[i].violate_business_hours = True
+                        tour.violate_business_hours = True
             if "end-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["end-time"] != "":
+                # 営業終了より後に出発していないかチェック
                 business_hours_end_time = self.spot_data_dict[spot.spot_id]["end-time"]  # 該当スポットの営業終了時刻
                 if spot.depart_time != "":
                     if hhmm_to_sec(business_hours_end_time) < hhmm_to_sec(spot.depart_time):
+                        tour.spots[i].violate_business_hours = True
+                        tour.violate_business_hours = True
+            else:
+                # 営業終了時刻が取得できない場合、閉園時間より後に出発していないかチェック
+                if spot.depart_time != "":
+                    if hhmm_to_sec(self.close_time) < hhmm_to_sec(spot.depart_time):
                         tour.spots[i].violate_business_hours = True
                         tour.violate_business_hours = True
             # 到着希望時刻を守っているかチェック
