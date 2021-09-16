@@ -113,6 +113,7 @@ class TravelInput:
         self.spots = []
         self.error_message = ""
         self.optimize_spot_order = "true"
+        self.start_today = "true"
         self.init_by_json(json_data)
 
     def __init_time_mode(self, json_data):
@@ -254,18 +255,6 @@ class TravelInput:
 
         return travel_input_spot
 
-    @staticmethod
-    def __is_duplicate_spot(spots):
-        """
-        同じスポットが複数回指定されている場合Trueを返す。
-        """
-        spot_set = set()
-        for spot in spots:
-            if spot.spot_id in spot_set:
-                return True
-            spot_set.add(spot.spot_id)
-        return False
-
     def __init_spots(self, json_data):
         """
         spotsを初期化する。初期化に失敗した場合はFalseを返す。
@@ -284,9 +273,6 @@ class TravelInput:
             if not (travel_input_spot := self.__init_spot(spot_json)):
                 return False
             self.spots.append(travel_input_spot)
-        if TravelInput.__is_duplicate_spot(self.spots):
-            self.error_message = "同じスポットが複数回指定されています。"
-            return False
         return True
 
     def __init_optimize_spot_order(self, json_data):
@@ -299,6 +285,21 @@ class TravelInput:
             self.error_message = "optimize-spot-orderはtrue/falseのいずれかで指定してください。"
             return False
         return True
+
+    def __init_start_today(self, json_data):
+        # note: フロントエンドの対応が入るまではバックエンドAPIの破壊的変更を入れない
+        if "start-today" in json_data:
+            self.start_today = json_data["start-today"]
+        return True
+        # if not json_data.get("start-today"):
+        #     self.error_message = "start-todayが存在しません"
+        #     return False
+        # self.start_today = json_data["start-today"]
+        # valid_start_today_list = ["true", "false"]
+        # if self.start_today not in valid_start_today_list:
+        #     self.error_message = "start-todayはtrue/falseのいずれかで指定してください。"
+        #     return False
+        # return True
 
     def init_by_json(self, json_data):
         # note: time-modeはいったんdisableにする
@@ -313,5 +314,7 @@ class TravelInput:
         if not self.__init_goal_spot_id(json_data):
             return
         if not self.__init_optimize_spot_order(json_data):
+            return
+        if not self.__init_start_today(json_data):
             return
         self.__init_spots(json_data)
