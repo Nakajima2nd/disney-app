@@ -204,6 +204,14 @@ class RandomTspSolver:
             if i == len(tour.subroutes) - 1:
                 # ゴールの場合、出発時刻を到着時刻に合わせる
                 tour.spots[i + 1].depart_time = tour.spots[i + 1].arrival_time
+        # 待ち時間をセット
+        for i, spot in enumerate(tour.spots):
+            # 出発地と目的地については待ち時間を計算しない
+            if i == 0 or i == len(tour.spots) - 1:
+                tour.spots[i].wait_time = -1
+                continue
+            wait_time = self.__calc_wait_time(spot.spot_id, hhmm_to_sec(spot.arrival_time), travel_input.start_today)
+            tour.spots[i].wait_time = wait_time
         for i, spot in enumerate(tour.spots):
             if "start-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["start-time"] != "":
                 # 営業開始より前に到着していないかチェック
