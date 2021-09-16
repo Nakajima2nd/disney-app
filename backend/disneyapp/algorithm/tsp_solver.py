@@ -100,10 +100,6 @@ class RandomTspSolver:
         merged_spot_data_dict = SpotListDataConverter.get_merged_spot_data_dict()
 
         for spot_id in merged_spot_data_dict:
-            # 暫定対応：play-timeをstringからintに変換する
-            # todo: play-timeは元データの時点でint型にすべきなので、データで対応する
-            if "play-time" in merged_spot_data_dict[spot_id]:
-                merged_spot_data_dict[spot_id]["play-time"] = int(merged_spot_data_dict[spot_id]["play-time"])
             # play-time が存在しない場合は0埋めする
             if "play-time" not in merged_spot_data_dict[spot_id]:
                 merged_spot_data_dict[spot_id]["play-time"] = 0
