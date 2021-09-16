@@ -348,3 +348,12 @@ class PlaceSpotInfo:
             "area": self.area,
             "type": "place"
         }]
+
+
+class OpeningHours:
+    """
+    パークの開園時間のクラス。
+    """
+    def __init__(self, opening_hours_dict):
+        self.open_time = opening_hours_dict["open-time"]
+        self.close_time = opening_hours_dict["close-time"]
