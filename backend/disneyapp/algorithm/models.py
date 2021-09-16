@@ -65,6 +65,8 @@ class Tour:
     def __init__(self):
         self.start_time = ""  # hh:mm
         self.goal_time = ""   # hh:mm
+        self.park_open_time = ""
+        self.park_close_time = ""
         self.spots = []
         self.subroutes = []
         self.violate_desired_arrival_time = False
@@ -75,6 +77,8 @@ class Tour:
         ret_dict = dict()
         ret_dict["start-time"] = self.start_time
         ret_dict["goal-time"] = self.goal_time
+        ret_dict["park-open-time"] = self.park_open_time
+        ret_dict["park-close-time"] = self.park_close_time
         ret_dict["violate-desired-arrival-time"] = self.violate_desired_arrival_time
         ret_dict["violate-business-hours"] = self.violate_business_hours
         ret_dict["cost"] = self.cost
