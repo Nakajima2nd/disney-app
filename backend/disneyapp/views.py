@@ -5,7 +5,6 @@ import copy, json
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from disneyapp.data.db_handler import DBHandler
 
 
 @api_view(["GET", "POST"])
@@ -33,6 +32,11 @@ def search(request):
         return Response(tour.to_dict())
     except:
         return Response({"message": "バックエンドサーバで予期せぬエラーが発生しました。"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(["GET"])
+def debug(request):
+    return Response("debug mode")
 
 
 def filter_unuse_spots(org_spot_list):
