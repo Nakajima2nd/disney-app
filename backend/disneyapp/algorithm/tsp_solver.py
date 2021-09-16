@@ -166,6 +166,8 @@ class RandomTspSolver:
         self.__set_subroute_coordinates(tour)
         self.__set_spot(spot_order, tour, travel_input)
         tour.cost = self.__eval_spot_list_order(tour)
+        tour.park_open_time = self.open_time
+        tour.park_close_time = self.close_time
         return tour
 
     def __set_subroute_coordinates(self, tour):
