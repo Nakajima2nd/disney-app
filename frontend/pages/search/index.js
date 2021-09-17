@@ -6,6 +6,12 @@ import { Loading } from '../../components/Loading'
 import { useGetSearchResult } from '../../hooks'
 import { ArrowRightAlt, DirectionsWalk, Room } from '@material-ui/icons'
 
+const Wrap = styled(Box)`
+  margin: auto;
+  padding-bottom: 8px;
+  max-width: 800px;
+`
+
 const Text = styled(Typography)`
 `
 
@@ -125,47 +131,49 @@ const Search = ({ param }) => {
     })
   }
 
-  return (<>
-    <Overview>
-      <OverviewText>{searchResult.startTime}</OverviewText>
-      <ArrowRightAlt color="inherit" fontSize="large" />
-      <OverviewText>{searchResult.goalTime}</OverviewText>
-      <Duration>{getDuration(searchResult.startTime, searchResult.goalTime)}</Duration>
-    </Overview>
-    {searchResult.spots.map((spot, index) => <Box key={index}>
-      <Spot square>
-        <Timetable>
-          <Text color="textSecondary">{index > 0 && searchResult.subroutes[index - 1].goalTime + '着'}</Text>
-          <Text color="textSecondary">{index < searchResult.subroutes.length && searchResult.subroutes[index].startTime + '発'}</Text>
-        </Timetable>
-        <SpotText>{spot.shortSpotName}</SpotText>
-        <WaitTime visibility={index > 0 && index < searchResult.spots.length - 1 ? 'visible' : 'hidden'}>
-          <EnableAvatar>{spot.waitTime}分</EnableAvatar>
-          <WtaiTimeText color="textSecondary">待ち</WtaiTimeText>
-        </WaitTime>
-      </Spot>
-      {index < searchResult.subroutes.length &&
-        <Distance>
-          <Line></Line>
-          <Walk>
-            <DirectionsWalk fontSize="large" />
-            <DistanceText color="textSecondary">{searchResult.subroutes[index].distance}m{getTransitTime(searchResult.subroutes[index].transitTime)}</DistanceText>
-          </Walk>
-          <Room fontSize="large" />
-        </Distance>
-      }
-    </Box>)}
-    <ButtonWrap>
-      <BackButton
-        onClick={handleBack}
-        variant="contained"
-        color="primary"
-        fullWidth
-      >
-        条件を変えて再検索
-      </BackButton>
-    </ButtonWrap>
-  </>)
+  return (
+    <Wrap>
+      <Overview>
+        <OverviewText>{searchResult.startTime}</OverviewText>
+        <ArrowRightAlt color="inherit" fontSize="large" />
+        <OverviewText>{searchResult.goalTime}</OverviewText>
+        <Duration>{getDuration(searchResult.startTime, searchResult.goalTime)}</Duration>
+      </Overview>
+      {searchResult.spots.map((spot, index) => <Box key={index}>
+        <Spot square>
+          <Timetable>
+            <Text color="textSecondary">{index > 0 && searchResult.subroutes[index - 1].goalTime + '着'}</Text>
+            <Text color="textSecondary">{index < searchResult.subroutes.length && searchResult.subroutes[index].startTime + '発'}</Text>
+          </Timetable>
+          <SpotText>{spot.shortSpotName}</SpotText>
+          <WaitTime visibility={index > 0 && index < searchResult.spots.length - 1 ? 'visible' : 'hidden'}>
+            <EnableAvatar>{spot.waitTime}分</EnableAvatar>
+            <WtaiTimeText color="textSecondary">待ち</WtaiTimeText>
+          </WaitTime>
+        </Spot>
+        {index < searchResult.subroutes.length &&
+          <Distance>
+            <Line></Line>
+            <Walk>
+              <DirectionsWalk fontSize="large" />
+              <DistanceText color="textSecondary">{searchResult.subroutes[index].distance}m{getTransitTime(searchResult.subroutes[index].transitTime)}</DistanceText>
+            </Walk>
+            <Room fontSize="large" />
+          </Distance>
+        }
+      </Box>)}
+      <ButtonWrap>
+        <BackButton
+          onClick={handleBack}
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
+          条件を変えて再検索
+        </BackButton>
+      </ButtonWrap>
+    </Wrap>
+  )
 }
 
 export function getServerSideProps(context) {
