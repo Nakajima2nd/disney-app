@@ -263,9 +263,9 @@ class TravelInput:
             self.error_message = "spotsが存在しません。"
             return False
         spots = json_data["spots"]
-        if len(spots) == 0:
-            self.error_message = "spotsの要素数は1つ以上指定してください。"
-            return False
+        # if len(spots) == 0:
+        #     self.error_message = "spotsの要素数は1つ以上指定してください。"
+        #     return False
         for i, spot_json in enumerate(spots):
             if spot_json.get("spot-id") == None:
                 self.error_message = str(i) + "番目のspotにspot-idが存在しません。"
