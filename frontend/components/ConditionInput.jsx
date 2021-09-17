@@ -26,20 +26,22 @@ const ConditionSwitch = styled(FormControlLabel)`
 
 export const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handleSpecifiedWaitTime, editing, handleSwitches }) => {
   const switchLabels = {
-    0: 'スタンバイパスを使用する',
-    1: '入店時刻を指定する',
-    4: '到着時刻を指定する'
+    attraction: 'スタンバイパスを使用する',
+    restaurant: '入店時刻を指定する',
+    place: '到着時刻を指定する',
+    greeting: '到着時刻を指定する'
   }
   const inputLables = {
-    0: 'スタンバイパス指定時刻',
-    1: '入店時刻',
-    4: '到着時刻'
+    attraction: 'スタンバイパス指定時刻',
+    restaurant: '入店時刻',
+    place: '到着時刻',
+    greeting: '到着時刻'
   }
 
   return (
     <Wrap>
       <Text>{editing.name}</Text>
-      {(editing.tab === 0 || editing.tab === 1 || editing.tab === 4) && <>
+      {(editing.tab === 'attraction' || editing.tab === 'restaurant' || editing.tab === 'place' || editing.tab === 'greeting') && <>
         <ConditionSwitch
           control={<Switch checked={editing.checkedDesiredArrivalTime} color="primary" onChange={handleSwitches} name="checkedDesiredArrivalTime" />}
           label={<Text color="textSecondary">{switchLabels[editing.tab]}</Text>}
@@ -57,7 +59,7 @@ export const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handl
           />
         </Collapse>
       </>}
-      {(editing.tab === 1 || editing.tab === 2) && <>
+      {(editing.tab === 'restaurant' || editing.tab === 'shop') && <>
         <ConditionSwitch
           control={<Switch checked={editing.checkedStayTime} color="primary" onChange={handleSwitches} name="checkedStayTime" />}
           label={<Text color="textSecondary">滞在時間を指定する</Text>}
@@ -76,7 +78,7 @@ export const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handl
           </StayTimeSelect>
         </Collapse>
       </>}
-      {editing.tab === 3 && <>
+      {editing.tab === 'show' && <>
         <ConditionSwitch
           control={<Switch checked={editing.checkedSpecifiedWaitTime} color="primary" onChange={handleSwitches} name="checkedSpecifiedWaitTime" />}
           label={<Text color="textSecondary">余裕をもって到着する</Text>}

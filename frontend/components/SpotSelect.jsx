@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Tabs, Tab, TextField, InputAdornment } from '@material-ui/core'
-import { Restaurant, SportsTennis, AccessibilityNew, ShoppingCart, Search, Mood } from '@material-ui/icons'
+import { Restaurant, SportsTennis, AccessibilityNew, ShoppingCart, Search, Mood, Flag } from '@material-ui/icons'
 import { SpotList } from './SpotList'
 
 const KeywordInput = styled(TextField)`
@@ -36,14 +36,15 @@ export const SpotSelect = ({ handleKeyword, handleTab, spotList, editing, handle
       textColor="primary"
       scrollButtons="on"
     >
-      <SpotTab icon={<SportsTennis />} label="アトラクション" />
-      <SpotTab icon={<Restaurant />} label="レストラン" />
-      <SpotTab icon={<ShoppingCart />} label="ショップ" />
-      <SpotTab icon={<AccessibilityNew />} label="ショー" />
-      <SpotTab icon={<Mood />} label="グリーティング" />
+      <SpotTab icon={<SportsTennis />} label="アトラクション" value="attraction"/>
+      <SpotTab icon={<Restaurant />} label="レストラン" value="restaurant"/>
+      <SpotTab icon={<ShoppingCart />} label="ショップ" value="shop"/>
+      <SpotTab icon={<Flag />} label="スポット" value="place"/>
+      <SpotTab icon={<AccessibilityNew />} label="ショー" value="show"/>
+      <SpotTab icon={<Mood />} label="グリーティング" value="greeting"/>
     </SpotTabs>
     <SpotList
-      obj={spotList[Object.keys(spotList)[editing.tab]]}
+      obj={spotList[editing.tab]}
       editing={editing}
       handleClickSpot={handleClickSpot}
     />
