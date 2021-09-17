@@ -125,19 +125,21 @@ const initialEditing = {
   checkedStayTime: false,
   checkedSpecifiedWaitTime: false,
   step: 0,
-  tab: 0,
+  tab: 'attraction',
   keyword: '',
   enter: true
 }
 
 const initialStart = pipe(
   assoc('spotId', 103),
-  assoc('shortName', 'サウス・エントランス')
-)(initialEditing)
+  assoc('shortName', 'サウス・エントランス'),
+  assoc('tab', 'place')
+  )(initialEditing)
 
 const initialGoal = pipe(
   assoc('spotId', 103),
-  assoc('shortName', 'サウス・エントランス')
+  assoc('shortName', 'サウス・エントランス'),
+  assoc('tab', 'place')
 )(initialEditing)
 
 const spotInterface = [

@@ -44,7 +44,7 @@ export const SpotList = ({ obj, editing, handleClickSpot }) => {
           onClick={handleClickSpot(spot)}
           selected={editing.name === spot.name}
         >
-          {editing.tab === 0 && <>
+          {editing.tab === 'attraction' && <>
             <ListItemText primary={spot.shortName} />
             <WaitTimeContainer>
               {spot.enable && spot.waitTime >= 0 && <Typography color="textSecondary" variant="caption">待ち時間</Typography>}
@@ -58,7 +58,7 @@ export const SpotList = ({ obj, editing, handleClickSpot }) => {
               {spot.meanWaitTime >= 0 && <Typography color="textSecondary" variant="caption">{'平均' + spot.meanWaitTime + '分'}</Typography>}
             </WaitTimeContainer>
           </>}
-          {editing.tab !== 0 && <ListItemText primary={spot.shortName} />}
+          {editing.tab !== 'attraction' && <ListItemText primary={spot.shortName} />}
         </CustomListItem>
         <Divider />
       </Fragment>)}
