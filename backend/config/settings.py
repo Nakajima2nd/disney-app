@@ -51,6 +51,10 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3001',
     'http://localhost:3001',
+    'https://tdr-plan.com',
+    'http://tdr-plan.com',
+    'https://www.tdr-plan.com',
+    'http://www.tdr-plan.com'
 ]
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
