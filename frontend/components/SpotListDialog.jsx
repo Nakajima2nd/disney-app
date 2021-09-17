@@ -72,7 +72,7 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
 
   const handleComplete = async () => {
     const newSpot = pipe(
-      assoc('desiredArrivalTime', editing.startTime ? editing.startTime : editing.checkedDesiredArrivalTime ? editing.desiredArrivalTime : null),
+      assoc('desiredArrivalTime', editing.tab === 'show' ? editing.startTime : editing.checkedDesiredArrivalTime ? editing.desiredArrivalTime : null),
       assoc('stayTime', editing.checkedStayTime ? editing.stayTime : ''),
       assoc('specifiedWaitTime', editing.checkedSpecifiedWaitTime ? editing.specifiedWaitTime : '')
     )(editing)
@@ -103,7 +103,7 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
           <SpotSelect
             handleKeyword={handleKeyword}
             handleTab={handleTab}
-            spotList={dissoc('place', spotList)}
+            spotList={spotList}
             editing={editing}
             handleClickSpot={handleClickSpot}
           />
