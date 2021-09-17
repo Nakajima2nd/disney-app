@@ -225,7 +225,7 @@ const Home = ({ src }) => {
     <Wrap>
 
       {/* 広告 */}
-      <Ad src={src} alt="広告" />
+      {/* <Ad src={src} alt="広告" /> */}
 
       {/* 説明文 */}
       <Caption>
