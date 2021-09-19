@@ -15,15 +15,7 @@ const CustomToolbar = styled(Toolbar)`
   justify-content: center;
 `
 
-const Title = styled(Typography)`
-  font-size: 2rem;
-  font-weight: bold;
-  color: ${(props) => props.theme.palette.logo.main};
-`
-
-const CustomMickey = styled(Mickey)`
-  margin: 0 8px;
-  top: 4px;
+const Logo = styled.img`
 `
 
 export const Header = () => {
@@ -34,9 +26,7 @@ export const Header = () => {
       elevation={1}
     >
       <CustomToolbar>
-        <Title>ディズニー</Title>
-        <CustomMickey />
-        <Title>プラン</Title>
+        <Logo src="/logo.png" />
       </CustomToolbar>
     </CustomAppBar>
   )
