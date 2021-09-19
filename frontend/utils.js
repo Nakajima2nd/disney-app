@@ -50,11 +50,11 @@ export const formatDateTime = (date) => {
 }
 
 export const parseDateTime = (string) => {
-  let now = new Date()
   if (string) {
+    let now = new Date()
     const hour = string.split(':')[0]
     const minute = string.split(':')[1]
     now.setHours(hour, minute)
+    return now
   }
-  return now
 }
