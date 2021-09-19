@@ -287,7 +287,7 @@ const Home = ({ src }) => {
       {/* 検索条件 */}
       <Conditions>
         <Condition>
-          <Label>インパ</Label>
+          <Label>入園日</Label>
           <ConditionStartTodaySelect
             value={condition.startToday}
             onChange={handleSelect('startToday')}
