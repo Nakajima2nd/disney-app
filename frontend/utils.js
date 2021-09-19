@@ -48,3 +48,13 @@ export const formatDateTime = (date) => {
     return date
   }
 }
+
+export const parseDateTime = (string) => {
+  let now = new Date()
+  if (string) {
+    const hour = string.split(':')[0]
+    const minute = string.split(':')[1]
+    now.setHours(hour, minute)
+  }
+  return now
+}
