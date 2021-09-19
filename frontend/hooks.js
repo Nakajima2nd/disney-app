@@ -1,6 +1,9 @@
 import axios from 'axios'
+import { assoc } from 'ramda'
 import { useEffect, useState } from 'react';
-import { toCamelCaseObject } from './utils';
+import { useRecoilState } from 'recoil';
+import { searchInputState } from './atoms/searchInput';
+import { toCamelCaseObject, toKebabCaseObject } from './utils';
 
 export const useGetSpotList = () => {
   const [spotList, setSpotList] = useState()
@@ -29,12 +32,47 @@ export const useGetSpotList = () => {
 
 export const useGetSearchResult = (param) => {
   const [searchResult, setSearchResult] = useState()
+  const [searchInput, setSearchInput] = useRecoilState(searchInputState)
   const [error, setError] = useState()
+  const spotInterface = [
+    'spotId',
+    'desiredArrivalTime',
+    'stayTime',
+    'specifiedWaitTime'
+  ]
+
+  const modifySpots = (spots) => {
+    return spots.map(spot => {
+      return Object.keys(spot).filter(key => spotInterface.includes(key)).reduce((acc, cur) => {
+        if (cur === 'spotId') {
+          return assoc(cur, spot[cur], acc)
+        }
+        else if (spot[cur]) {
+          return assoc(cur, spot[cur], acc)
+        }
+        else {
+          return acc
+        }
+      }, {})
+    })
+  }
+
+  const createRequest = (body) => {
+    return toKebabCaseObject({
+      ...body.condition,
+      startSpotId: body.start.spotId,
+      goalSpotId: body.goal.spotId,
+      spots: modifySpots(body.spots)
+    })
+  }
+
   const fetch = async () => {
     try {
       const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/search'
       const body = JSON.parse(decodeURI(param))
-      const res = await axios.post(API_URL, body)
+      setSearchInput(body)
+      const request = createRequest(body)
+      const res = await axios.post(API_URL, request)
       setSearchResult(toCamelCaseObject(res.data))
     }
     catch (error) {
@@ -50,7 +88,7 @@ export const useGetSearchResult = (param) => {
     if (!searchResult && !error) {
       fetch()
     }
-  })
+  }, [searchResult, error])
   return {
     searchResult: searchResult,
     error: error

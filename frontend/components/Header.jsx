@@ -1,6 +1,9 @@
 import styled from 'styled-components'
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Box, Toolbar, Typography } from '@material-ui/core'
 import { Mickey } from '../styles/parts'
+import { useRecoilState } from 'recoil'
+import { searchInputState } from '../atoms/searchInput'
+import { useRouter } from 'next/router'
 
 const CustomAppBar = styled(AppBar)`
   text-align: center;
@@ -19,6 +22,15 @@ const Logo = styled.img`
 `
 
 export const Header = () => {
+  const router = useRouter()
+  const [searchInput, setSearchInput] = useRecoilState(searchInputState)
+  const onClick = () => {
+    setSearchInput(null)
+    router.push({
+      pathname: '/',
+    })
+  }
+
   return (
     <CustomAppBar
       color="inherit"
