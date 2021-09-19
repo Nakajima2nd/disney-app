@@ -1,14 +1,17 @@
 import styled from 'styled-components'
-import { Avatar, Box, Button, ButtonGroup, Collapse, Grow, IconButton, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, TextField, Typography } from '@material-ui/core'
+import { Avatar, Box, Button, ButtonGroup, Collapse, Grow, IconButton, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, Typography } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
 import { TimePicker } from '@material-ui/pickers';
 import { assoc, remove, pipe, update } from 'ramda'
-import { formatDateTime, toKebabCaseObject } from '../utils'
+import { formatDateTime, parseDateTime } from '../utils'
 import { useRouter } from 'next/router'
 import { useGetSpotList } from '../hooks'
 import { Loading } from '../components/Loading'
+import { useRecoilState } from 'recoil'
+import { searchInputState } from '../atoms/searchInput'
+import { useEffect } from 'react'
 
 const Wrap = styled(Box)`
   padding: 8px;
@@ -19,12 +22,6 @@ const Wrap = styled(Box)`
   /* @media screen and (max-width: 816px) {
     margin: 0 8px;
   } */
-`
-
-const Ad = styled.img`
-  width: 100%;
-  height: 200px;
-  object-fit: contain;
 `
 
 const Caption = styled(Box)`
@@ -134,7 +131,7 @@ const initialStart = pipe(
   assoc('spotId', 103),
   assoc('shortName', 'サウス・エントランス'),
   assoc('tab', 'place')
-  )(initialEditing)
+)(initialEditing)
 
 const initialGoal = pipe(
   assoc('spotId', 103),
@@ -142,14 +139,7 @@ const initialGoal = pipe(
   assoc('tab', 'place')
 )(initialEditing)
 
-const spotInterface = [
-  'spotId',
-  'desiredArrivalTime',
-  'stayTime',
-  'specifiedWaitTime'
-]
-
-const Home = ({ src }) => {
+const Home = () => {
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState({})
   const [spots, setSpots] = useState([])
@@ -164,6 +154,7 @@ const Home = ({ src }) => {
   })
   const router = useRouter()
   const { spotList, error } = useGetSpotList()
+  const [searchInput, setSearchInput] = useRecoilState(searchInputState)
 
   if (error) return <Text>{error}</Text>
   const handleOpen = (spot, index) => () => {
@@ -188,45 +179,34 @@ const Home = ({ src }) => {
     setSpots(remove(index, 1, newNewSpots))
   }
 
-  const modifySpots = (spots) => {
-    return spots.map(spot => {
-      return Object.keys(spot).filter(key => spotInterface.includes(key)).reduce((acc, cur) => {
-        if (cur === 'spotId') {
-          return assoc(cur, spot[cur], acc)
-        }
-        else if (spot[cur]) {
-          return assoc(cur, cur === 'desiredArrivalTime' ? formatDateTime(spot[cur]) : spot[cur], acc)
-        }
-        else {
-          return acc
-        }
-      }, {})
-    })
-  }
-
   const handleSearch = () => {
     router.push({
       pathname: '/search',
       query: {
-        param: encodeURI(JSON.stringify(toKebabCaseObject({
-          ...assoc('specifiedTime', formatDateTime(condition.specifiedTime), condition),
-          startSpotId: start.spotId,
-          goalSpotId: goal.spotId,
-          spots: modifySpots(spots)
-        })))
+        param: encodeURI(JSON.stringify({
+          condition: assoc('specifiedTime', formatDateTime(condition.specifiedTime), condition),
+          start: start,
+          goal: goal,
+          spots: spots.map(spot => assoc('desiredArrivalTime', formatDateTime(spot.desiredArrivalTime), spot))
+        }))
       }
     })
   }
+
+  useEffect(() => {
+    if (searchInput) {
+      setSpots(searchInput.spots.map(spot => assoc('desiredArrivalTime', parseDateTime(spot.desiredArrivalTime), spot)))
+      setStart(searchInput.start)
+      setGoal(searchInput.goal)
+      setCondition(assoc('specifiedTime', parseDateTime(searchInput.condition.specifiedTime), searchInput.condition))
+    }
+  }, [searchInput])
 
   return (<>
 
     {!spotList && <Loading />}
 
     <Wrap>
-
-      {/* 広告 */}
-      {/* <Ad src={src} alt="広告" /> */}
-
       {/* 説明文 */}
       <Caption>
         <Text>TDL・TDSを効率よくめぐる順番を計算するツールです♪</Text>
@@ -364,14 +344,6 @@ const Home = ({ src }) => {
       setGoal={setGoal}
     />
   </>)
-}
-
-export function getServerSideProps() {
-  const min = Math.ceil(1)
-  const max = Math.floor(14)
-  const num = Math.floor(Math.random() * (max - min + 1) + min)
-  const src = '/minnie/minnie_' + ('00' + num).slice(-2) + '.png'
-  return { props: { src } }
 }
 
 export default Home
