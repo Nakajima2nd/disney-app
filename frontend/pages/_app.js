@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import React, { useEffect } from 'react'
+import { RecoilRoot } from 'recoil'
 import styled, { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components'
 import {
   ThemeProvider as MaterialUIThemeProvider,
@@ -32,10 +33,12 @@ const MyApp = ({ Component, pageProps }) => {
         <StyledComponentsThemeProvider theme={theme}>
           <CssBaseline />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Header />
-            <Wrap>
-              <Component {...pageProps} />
-            </Wrap>
+            <RecoilRoot>
+              <Header />
+              <Wrap>
+                <Component {...pageProps} />
+              </Wrap>
+            </RecoilRoot>
           </MuiPickersUtilsProvider>
         </StyledComponentsThemeProvider>
       </MaterialUIThemeProvider>
