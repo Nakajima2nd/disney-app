@@ -38,7 +38,7 @@ export const Header = () => {
       elevation={1}
     >
       <CustomToolbar>
-        <Logo src="/logo.png" />
+        <Logo src="/logo.png" onClick={onClick}/>
       </CustomToolbar>
     </CustomAppBar>
   )
