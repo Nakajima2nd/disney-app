@@ -160,7 +160,7 @@ const Home = ({ src }) => {
     specifiedTime: new Date(),
     startToday: 'true',
     walkSpeed: 'normal',
-    optimizeSpotOrder: 'false'
+    optimizeSpotOrder: 'true'
   })
   const router = useRouter()
   const { spotList, error } = useGetSpotList()
@@ -332,8 +332,8 @@ const Home = ({ src }) => {
             fullWidth
           // variant="outlined"
           >
-            <MenuItem value={"false"}>選んだ順にめぐる</MenuItem>
             <MenuItem value={"true"}>効率よくめぐる</MenuItem>
+            <MenuItem value={"false"}>選んだ順にめぐる</MenuItem>
           </ConditionOptimizeSpotOrderSelect>
         </Condition>
       </Conditions>
