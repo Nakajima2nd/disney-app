@@ -88,7 +88,7 @@ const ConditionTimePicker = styled(TimePicker)`
   background-color: white;
 `
 
-const ConditionWaitTimeModeSelect = styled(Select)`
+const ConditionStartTodaySelect = styled(Select)`
   background-color: white;
 `
 
@@ -134,7 +134,7 @@ const initialStart = pipe(
   assoc('spotId', 103),
   assoc('shortName', 'サウス・エントランス'),
   assoc('tab', 'place')
-  )(initialEditing)
+)(initialEditing)
 
 const initialGoal = pipe(
   assoc('spotId', 103),
@@ -158,7 +158,7 @@ const Home = ({ src }) => {
   const [selected, setSelected] = useState(-1)
   const [condition, setCondition] = useState({
     specifiedTime: new Date(),
-    waitTimeMode: 'real',
+    startToday: 'true',
     walkSpeed: 'normal',
     optimizeSpotOrder: 'false'
   })
@@ -287,6 +287,18 @@ const Home = ({ src }) => {
       {/* 検索条件 */}
       <Conditions>
         <Condition>
+          <Label>インパ</Label>
+          <ConditionStartTodaySelect
+            value={condition.startToday}
+            onChange={handleSelect('startToday')}
+            fullWidth
+          // variant="outlined"
+          >
+            <MenuItem value="true">本日！</MenuItem>
+            <MenuItem value="false">べつの日</MenuItem>
+          </ConditionStartTodaySelect>
+        </Condition>
+        <Condition>
           <Label>出発時刻</Label>
           <ConditionTimePicker
             margin="normal"
@@ -298,18 +310,6 @@ const Home = ({ src }) => {
             fullWidth
           // inputVariant="outlined"
           />
-        </Condition>
-        <Condition>
-          <Label>待ち時間</Label>
-          <ConditionWaitTimeModeSelect
-            value={condition.waitTimeMode}
-            onChange={handleSelect('waitTimeMode')}
-            fullWidth
-          // variant="outlined"
-          >
-            <MenuItem value="real">リアルタイム待ち時間</MenuItem>
-            <MenuItem value="mean">平均待ち時間</MenuItem>
-          </ConditionWaitTimeModeSelect>
         </Condition>
         <Condition>
           <Label>歩く速度</Label>
