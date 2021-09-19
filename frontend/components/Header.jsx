@@ -18,22 +18,7 @@ const CustomToolbar = styled(Toolbar)`
   justify-content: center;
 `
 
-const LogoWrap = styled(Box)`
-  height: 100%;
-  display: flex;  
-  justify-content: center;
-  align-items: center;
-`
-
-const Title = styled(Typography)`
-  font-size: 2rem;
-  font-weight: bold;
-  color: ${(props) => props.theme.palette.logo.main};
-`
-
-const CustomMickey = styled(Mickey)`
-  margin: 0 8px;
-  top: 4px;
+const Logo = styled.img`
 `
 
 export const Header = () => {
@@ -53,11 +38,7 @@ export const Header = () => {
       elevation={1}
     >
       <CustomToolbar>
-        <LogoWrap onClick={onClick}>
-          <Title>ディズニー</Title>
-          <CustomMickey />
-          <Title>プラン</Title>
-        </LogoWrap>
+        <Logo src="/logo.png" />
       </CustomToolbar>
     </CustomAppBar>
   )
