@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 
 
-@api_view(["GET", "POST"])
+@api_view(["GET"])
 def spot_list(request):
     spots_json_org = SpotListDataConverter.get_merged_spot_data_list()
     filtered_spot_list = filter_unuse_spots(spots_json_org)
@@ -15,13 +15,29 @@ def spot_list(request):
     return Response(spots_json_edited)
 
 
-@api_view(["POST"])
+@api_view(["POST", "GET"])
 def search(request):
-    try:
+    json_data = None
+    if request.method == "POST":
         try:
             json_data = json.loads(request.body)
         except:
             return Response({"message": "入力が不正です。Jsonのパースに失敗しました。"}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        try:
+            json_data = TravelInput.request_param_to_dict(request.GET)
+        except:
+            return Response({"message": "入力が不正です。リクエストパラメタのパースに失敗しました。"}, status=status.HTTP_400_BAD_REQUEST)
+    return exec_search(json_data)
+
+
+@api_view(["GET"])
+def debug(request):
+    return Response("debug mode")
+
+
+def exec_search(json_data):
+    try:
         travel_input = TravelInput(json_data)
         if travel_input.error_message != "":
             return Response({"message": "入力が不正です。" + travel_input.error_message}, status=status.HTTP_400_BAD_REQUEST)
@@ -32,11 +48,6 @@ def search(request):
         return Response(tour.to_dict())
     except:
         return Response({"message": "バックエンドサーバで予期せぬエラーが発生しました。"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-@api_view(["GET"])
-def debug(request):
-    return Response("debug mode")
 
 
 def filter_unuse_spots(org_spot_list):
