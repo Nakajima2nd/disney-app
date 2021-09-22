@@ -296,12 +296,14 @@ class RandomTspSolver:
             subroute.goal_time = sec_to_hhmm(current_time)
 
             # dstスポットのイベントを消化するまでの時間を計測
-            wait_time_minute = self.__calc_wait_time(dst_spot_id, current_time, travel_input.start_today)
-            current_time += max(wait_time_minute * 60, 0)  # note:待ち時間が-1の場合は0にする
-            dst_spot = RandomTspSolver.__find_target_spot_from_travel_input(travel_input, dst_spot_id)
-            current_time += dst_spot.specified_wait_time if dst_spot else 0
-            current_time += self.spot_data_dict[dst_spot_id]["play-time"]
-            current_time += stay_time if stay_time != -1 else 0
+            if i != 0 and i != len(spot_order) - 1:
+                # 出発地・目的地の場合は加算しない
+                wait_time_minute = self.__calc_wait_time(dst_spot_id, current_time, travel_input.start_today)
+                current_time += max(wait_time_minute * 60, 0)  # note:待ち時間が-1の場合は0にする
+                current_time += self.spot_data_dict[dst_spot_id]["play-time"]
+                dst_spot = RandomTspSolver.__find_target_spot_from_travel_input(travel_input, dst_spot_id)
+                current_time += dst_spot.specified_wait_time if dst_spot else 0
+                current_time += stay_time if stay_time != -1 else 0
             tour.subroutes.append(subroute)
             del subroute
         tour.goal_time = sec_to_hhmm(current_time)
