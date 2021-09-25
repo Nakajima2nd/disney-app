@@ -263,9 +263,6 @@ class TravelInput:
             self.error_message = "spotsが存在しません。"
             return False
         spots = json_data["spots"]
-        # if len(spots) == 0:
-        #     self.error_message = "spotsの要素数は1つ以上指定してください。"
-        #     return False
         for i, spot_json in enumerate(spots):
             if spot_json.get("spot-id") == None:
                 self.error_message = str(i) + "番目のspotにspot-idが存在しません。"
@@ -318,3 +315,65 @@ class TravelInput:
         if not self.__init_start_today(json_data):
             return
         self.__init_spots(json_data)
+
+    @staticmethod
+    def request_param_to_dict(request):
+        ret_dict = {}
+        # walk-speed
+        if "walk-speed" in request:
+            ret_dict["walk-speed"] = request["walk-speed"]
+        else:
+            ret_dict["walk-speed"] = "normal"
+        # start-spot-id
+        if "start-spot-id" in request:
+            ret_dict["start-spot-id"] = request["start-spot-id"]
+        # goal-spot-id
+        if "goal-spot-id" in request:
+            ret_dict["goal-spot-id"] = request["goal-spot-id"]
+        # optimize-spot-order
+        if "optimize-spot-order" in request:
+            ret_dict["optimize-spot-order"] = request["optimize-spot-order"]
+        else:
+            ret_dict["optimize-spot-order"] = "true"
+        # start-today
+        if "start-today" in request:
+            ret_dict["start-today"] = request["start-today"]
+        else:
+            ret_dict["start-today"] = "true"
+        # specified-time
+        if "specified-time" in request:
+            ret_dict["specified-time"] = request["specified-time"]
+
+        # spots
+        ret_dict["spots"] = []
+        if "spot-ids" in request:
+            spot_list = request["spot-ids"].split("_")
+            for spot_id in spot_list:
+                ret_dict["spots"].append({"spot-id": spot_id})
+        if "desired-arrival-times" in request:
+            desired_arrival_time_list = request["desired-arrival-times"].split("_")
+            if len(desired_arrival_time_list) != len(ret_dict["spots"]):
+                raise Exception
+            for i, desired_arrival_time in enumerate(desired_arrival_time_list):
+                if desired_arrival_time == "":
+                    continue
+                ret_dict["spots"][i]["desired-arrival-time"] = desired_arrival_time
+        if "stay-times" in request:
+            stay_time_list = request["stay-times"].split("_")
+            if len(stay_time_list) != len(ret_dict["spots"]):
+                raise Exception
+            for i, stay_time in enumerate(stay_time_list):
+                if stay_time == "":
+                    continue
+                ret_dict["spots"][i]["stay-time"] = stay_time
+        if "specified-wait-times" in request:
+            specified_wait_time_list = request["specified-wait-times"].split("_")
+            if len(specified_wait_time_list) != len(ret_dict["spots"]):
+                raise Exception
+            for i, specified_wait_time in enumerate(specified_wait_time_list):
+                if specified_wait_time == "":
+                    continue
+                ret_dict["spots"][i]["specified-wait-time"] = specified_wait_time
+        return ret_dict
+
+
