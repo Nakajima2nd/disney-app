@@ -19,7 +19,7 @@ class AttractionSpotInfo:
         self.wait_time = -1
         self.mean_wait_time = -1
         self.timespan_mean_wait_time = {}
-        self.sp_status = ""
+        self.standby_pass_status = ""
         self.status = ""
         self.start_time = ""
         self.end_time = ""
@@ -40,7 +40,7 @@ class AttractionSpotInfo:
         self.wait_time = int(obj["wait-time"])
         self.mean_wait_time = int(obj["mean-wait-time"])
         self.timespan_mean_wait_time = obj["timespan-mean-wait-time"]
-        self.sp_status = obj["standby-pass-status"]
+        self.standby_pass_status = obj["standby-pass-status"]
         self.status = obj["status"]
         self.start_time = obj["start-time"]
         self.end_time = obj["end-time"]
@@ -60,7 +60,7 @@ class AttractionSpotInfo:
             "wait-time": self.wait_time,
             "mean-wait-time": self.mean_wait_time,
             "timespan-mean-wait-time": self.timespan_mean_wait_time,
-            "sp-status": self.sp_status,
+            "standby-pass-status": self.standby_pass_status,
             "status": self.status,
             "start-time": self.start_time,
             "end-time": self.end_time,
