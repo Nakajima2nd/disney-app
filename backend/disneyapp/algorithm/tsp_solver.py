@@ -36,6 +36,20 @@ def get_current_time_sec():
     return int(hour * 3600) + int(minute) * 60
 
 
+def get_transit_time_min(distance, speed):
+    """
+    距離[m]と速度[m/s]から所要時間[sec]を計算する。
+    1分未満は丸める。
+    """
+    transit_time = int(float(distance) / speed)
+    mod = transit_time % 60
+    if mod < 30:
+        # あまりが30秒未満であれば切り捨て
+        return transit_time - mod
+    else:
+        # あまりが30秒以上であれば切り上げ
+        return transit_time - mod + 1
+
 
 class RandomTspSolver:
     TRY_TIMES = 1000  # 試行回数
@@ -281,7 +295,7 @@ class RandomTspSolver:
             # orgスポットからdstスポットに移動する
             subroute.distance = int(self.cost_table[(subroute.start_spot_id, subroute.goal_spot_id)]["distance"])
             speed = RandomTspSolver.WALK_SPEED_DICT[travel_input.walk_speed]
-            subroute.transit_time = int(float(subroute.distance) / speed)
+            subroute.transit_time = get_transit_time_min(subroute.distance, speed)
             current_time += subroute.transit_time
             # note: 目的地に到着希望時刻が設定されている & 到着希望時刻より前に到着した場合は、到着希望時刻まで待機する
             desired_arrival_time = -1
@@ -300,7 +314,7 @@ class RandomTspSolver:
                 # 出発地・目的地の場合は加算しない
                 wait_time_minute = self.__calc_wait_time(dst_spot_id, current_time, travel_input.start_today)
                 current_time += max(wait_time_minute * 60, 0)  # note:待ち時間が-1の場合は0にする
-                current_time += self.spot_data_dict[dst_spot_id]["play-time"]
+                current_time += self.spot_data_dict[dst_spot_id]["play-time"] * 60
                 dst_spot = RandomTspSolver.__find_target_spot_from_travel_input(travel_input, dst_spot_id)
                 current_time += dst_spot.specified_wait_time if dst_spot else 0
                 current_time += stay_time if stay_time != -1 else 0
