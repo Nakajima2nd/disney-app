@@ -189,6 +189,11 @@ class RandomTspSolver:
             tour_spot.spot_id = spot_id
             tour_spot.spot_name = self.spot_data_dict[spot_id]["name"]
             tour_spot.spot_short_name = self.spot_data_dict[spot_id]["short-name"]
+            # showの名称から開始時刻の情報が落ちているので、ここで付与する
+            if self.spot_data_dict[spot_id]["type"] == "show":
+                desired_arrival_time = self.__find_target_spot_from_travel_input(travel_input, spot_id).desired_arrival_time
+                tour_spot.spot_name = tour_spot.spot_name + "(" + sec_to_hhmm(desired_arrival_time) + ")"
+                tour_spot.spot_short_name = tour_spot.spot_short_name + "(" + sec_to_hhmm(desired_arrival_time) + ")"
             tour_spot.lat = self.spot_data_dict[spot_id]["lat"]
             tour_spot.lon = self.spot_data_dict[spot_id]["lon"]
             tour_spot.type = self.spot_data_dict[spot_id]["type"]

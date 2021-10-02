@@ -43,10 +43,18 @@ class SpotListDataConverter:
     def get_merged_spot_data_dict():
         """
         静的データと動的データをマージし、spot-idをキーにしたdictにして返す。
+        ただし、showについては時刻指定の情報を削除する。
         """
         merged_spot_data_list = SpotListDataConverter.get_merged_spot_data_list()
         merged_spot_data_dict = {}
         for merged_spot_data in merged_spot_data_list:
             spot_id = merged_spot_data["spot-id"]
+            if spot_id in merged_spot_data_dict:
+                continue
+            # showの場合時刻指定の情報を削除する
+            if merged_spot_data["type"] == "show":
+                merged_spot_data["name"] = merged_spot_data["name"].split("(")[0]
+                merged_spot_data["short-name"] = merged_spot_data["short-name"].split("(")[0]
+                merged_spot_data["start-time"] = ""
             merged_spot_data_dict[spot_id] = merged_spot_data
         return merged_spot_data_dict
