@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
 import { TimePicker } from '@material-ui/pickers';
 import { assoc, remove, pipe, update } from 'ramda'
-import { formatDateTime, parseDateTime } from '../utils'
+import { formatDateTime, parseDateTime, toKebabCaseObject } from '../utils'
 import { useRouter } from 'next/router'
 import { useGetSpotList } from '../hooks'
 import { Loading } from '../components/Loading'
@@ -139,6 +139,13 @@ const initialGoal = pipe(
   assoc('tab', 'place')
 )(initialEditing)
 
+const initialCondition = {
+  specifiedTime: new Date(),
+  startToday: 'true',
+  walkSpeed: 'normal',
+  optimizeSpotOrder: 'true'
+}
+
 const Home = () => {
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState({})
@@ -146,12 +153,7 @@ const Home = () => {
   const [start, setStart] = useState(initialStart)
   const [goal, setGoal] = useState(initialGoal)
   const [selected, setSelected] = useState(-1)
-  const [condition, setCondition] = useState({
-    specifiedTime: new Date(),
-    startToday: 'true',
-    walkSpeed: 'normal',
-    optimizeSpotOrder: 'true'
-  })
+  const [condition, setCondition] = useState(initialCondition)
   const router = useRouter()
   const { spotList, error } = useGetSpotList()
   const [searchInput, setSearchInput] = useRecoilState(searchInputState)
@@ -179,28 +181,114 @@ const Home = () => {
     setSpots(remove(index, 1, newNewSpots))
   }
 
+  // todo: スタート地点、ゴール地点をショーにした場合、開始時間の考慮はどうするのか
   const handleSearch = () => {
+    const query = {
+      'startSpotId': start.spotId,
+      'goalSpotId': goal.spotId,
+      'specifiedTime': formatDateTime(condition.specifiedTime),
+      'spotIds': spots.map(spot => String(spot.spotId)).join('_'),
+      'walkSpeed': condition.walkSpeed,
+      'optimizeSpotOrder': condition.optimizeSpotOrder,
+      'startToday': condition.startToday,
+      'desiredArrivalTimes': spots.map(spot => formatDateTime(spot.desiredArrivalTime)).join('_'),
+      'stayTimes': spots.map(spot => spot.stayTime).join('_'),
+      'specifiedWaitTimes': spots.map(spot => spot.specifiedWaitTime).join('_')
+    }
+
     router.push({
       pathname: '/search',
-      query: {
-        param: encodeURI(JSON.stringify({
-          condition: assoc('specifiedTime', formatDateTime(condition.specifiedTime), condition),
-          start: start,
-          goal: goal,
-          spots: spots.map(spot => assoc('desiredArrivalTime', formatDateTime(spot.desiredArrivalTime), spot))
-        }))
-      }
+      query: toKebabCaseObject(query)
     })
   }
 
+  // todo: スタート地点、ゴール地点をショーにした場合、開始時間の考慮はどうするのか
+  const parseSearchInput = (searchInput) => {
+    // スタート地点
+    Object.entries(spotList).some(([key, value]) => {
+      const spot = value.find(spot => String(spot.spotId) === searchInput.startSpotId)
+      if (spot) {
+        setStart(pipe(
+          assoc('tab', key),
+          assoc('keyword', ''),
+          assoc('step', 0)
+        )(spot))
+        return true
+      }
+    })
+
+    // ゴール地点
+    Object.entries(spotList).some(([key, value]) => {
+      const spot = value.find(spot => String(spot.spotId) === searchInput.goalSpotId)
+      if (spot) {
+        setGoal(pipe(
+          assoc('tab', key),
+          assoc('keyword', ''),
+          assoc('step', 0)
+        )(spot))
+        return true
+      }
+    })
+
+    // スポット
+    const spots = searchInput.spotIds.split('_').reduce((acc, cur, index) => {
+      Object.entries(spotList).some(([key, value]) => {
+        const spot = value.find(spot => String(spot.spotId) === cur)
+        if (spot) {
+          const desiredArrivalTime = searchInput.desiredArrivalTimes.split('_')[index]
+          const checkedDesiredArrivalTime = desiredArrivalTime ? true : false
+          const stayTime = searchInput.stayTimes.split('_')[index]
+          const checkedStayTime = stayTime ? true : false
+          const specifiedWaitTime = searchInput.specifiedWaitTimes.split('_')[index]
+          const checkedSpecifiedWaitTime = specifiedWaitTime ? true : false
+          const name = key === 'show' ? spot.name.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)$/, `(${desiredArrivalTime})`) : spot.name
+          const shortName = key === 'show' ? spot.shortName.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)$/, `(${desiredArrivalTime})`) : spot.shortName
+          const startTime = key === 'show' ? desiredArrivalTime : spot.startTime
+
+          const spppot = pipe(
+            assoc('spotId', spot.spotId),
+            assoc('name', name),
+            assoc('shortName', shortName),
+            assoc('startTime', startTime),
+            assoc('tab', key),
+            assoc('display', true),
+            assoc('step', 1),
+            assoc('desiredArrivalTime', parseDateTime(desiredArrivalTime)),
+            assoc('checkedDesiredArrivalTime', checkedDesiredArrivalTime),
+            assoc('stayTime', stayTime),
+            assoc('checkedStayTime', checkedStayTime),
+            assoc('specifiedWaitTime', specifiedWaitTime),
+            assoc('checkedSpecifiedWaitTime', checkedSpecifiedWaitTime)
+          )(initialEditing)
+          acc.push(spppot)
+          return true
+        }
+      })
+      return acc
+    }, [])
+    setSpots(spots)
+
+    // 検索条件
+    const condition = Object.keys(initialCondition).reduce((acc, cur) => {
+      if (searchInput[cur]) {
+        if (cur === 'specifiedTime') {
+          return assoc(cur, parseDateTime(searchInput[cur]), acc)
+        }
+        else {
+          return assoc(cur, searchInput[cur], acc)
+        }
+      }
+      return acc
+    }, initialCondition)
+    setCondition(condition)
+
+  }
+
   useEffect(() => {
-    if (searchInput) {
-      setSpots(searchInput.spots.map(spot => assoc('desiredArrivalTime', parseDateTime(spot.desiredArrivalTime), spot)))
-      setStart(searchInput.start)
-      setGoal(searchInput.goal)
-      setCondition(assoc('specifiedTime', parseDateTime(searchInput.condition.specifiedTime), searchInput.condition))
+    if (searchInput && spotList) {
+      parseSearchInput(searchInput)
     }
-  }, [searchInput])
+  }, [searchInput, spotList])
 
   return (<>
 
@@ -227,7 +315,9 @@ const Home = () => {
           <ListItemAvatar>
             <StartAvatar variant="rounded">出発</StartAvatar>
           </ListItemAvatar>
-          <Grow in={selected !== -2 || !open} timeout={1000}><ListItemText>{start.shortName}</ListItemText></Grow>
+          <Grow in={selected !== -2 || !open} timeout={1000}>
+            <ListItemText>{start.shortName}</ListItemText>
+          </Grow>
         </CustomListItem>
 
         {/* 選択済みスポット */}
@@ -237,7 +327,9 @@ const Home = () => {
               <ListItemAvatar>
                 <ViaAvatar variant="rounded">経由</ViaAvatar>
               </ListItemAvatar>
-              <ListItemText>{spot.shortName}</ListItemText>
+              <Grow in={selected !== index || !open} timeout={1000}>
+                <ListItemText>{spot.shortName}</ListItemText>
+              </Grow>
               <ListItemSecondaryAction>
                 <DeleteButton onClick={handleDelete(index)} color="secondary">
                   <Close />
@@ -252,7 +344,9 @@ const Home = () => {
           <ListItemAvatar>
             <ViaAvatar variant="rounded">経由</ViaAvatar>
           </ListItemAvatar>
-          <ListItemText>スポットを追加</ListItemText>
+          <Grow in={true} timeout={1000}>
+            <ListItemText>スポットを追加</ListItemText>
+          </Grow>
         </CustomListItem>
 
         {/* ゴール */}
@@ -260,7 +354,9 @@ const Home = () => {
           <ListItemAvatar>
             <GoalAvatar variant="rounded">到着</GoalAvatar>
           </ListItemAvatar>
-          <Grow in={selected !== -3 || !open} timeout={1000}><ListItemText>{goal.shortName}</ListItemText></Grow>
+          <Grow in={selected !== -3 || !open} timeout={1000}>
+            <ListItemText>{goal.shortName}</ListItemText>
+          </Grow>
         </CustomListItem>
       </CustomList>
 
