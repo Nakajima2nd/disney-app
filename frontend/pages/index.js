@@ -187,23 +187,18 @@ const Home = () => {
       'startSpotId': start.spotId,
       'goalSpotId': goal.spotId,
       'specifiedTime': formatDateTime(condition.specifiedTime),
-      'spotIds': spots.map(spot => String(spot.spotId)).join('_'),
-      'walkSpeed': condition.walkSpeed,
-      'optimizeSpotOrder': condition.optimizeSpotOrder,
-      'startToday': condition.startToday,
-      'desiredArrivalTimes': spots.map(spot => formatDateTime(spot.desiredArrivalTime)).join('_'),
-      'stayTimes': spots.map(spot => spot.stayTime).join('_'),
-      'specifiedWaitTimes': spots.map(spot => spot.specifiedWaitTime).join('_')
+      'spotIds': spots.length !== 0 ? spots.map(spot => String(spot.spotId)).join('_') : 'none',
+      'walkSpeed': initialCondition.walkSpeed !== condition.walkSpeed ? condition.walkSpeed : 'none',
+      'optimizeSpotOrder': initialCondition.optimizeSpotOrder !== condition.optimizeSpotOrder ? condition.optimizeSpotOrder : 'none',
+      'startToday': initialCondition.startToday !== condition.startToday ? condition.startToday : 'none',
+      'desiredArrivalTimes': spots.length !== 0 ? spots.map(spot => formatDateTime(spot.desiredArrivalTime)).join('_') : 'none',
+      'stayTimes': spots.length !== 0 ? spots.map(spot => spot.stayTime).join('_') : 'none',
+      'specifiedWaitTimes': spots.length !== 0 ? spots.map(spot => spot.specifiedWaitTime).join('_') : 'none'
     }
 
-    const queeeery = spots.length === 0
-      ? pipe(
-        dissoc('spotIds'),
-        dissoc('desiredArrivalTimes'),
-        dissoc('stayTimes'),
-        dissoc('specifiedWaitTimes')
-      )(query)
-      : query
+    const queeeery = Object.keys(query).reduce((acc, cur) => {
+      return query[cur] === 'none' ? dissoc(cur, acc) : acc 
+    }, query)
 
     router.push({
       pathname: '/search',
