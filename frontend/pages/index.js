@@ -4,7 +4,7 @@ import { Close } from '@material-ui/icons'
 import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
 import { TimePicker } from '@material-ui/pickers';
-import { assoc, remove, pipe, update } from 'ramda'
+import { assoc, dissoc, remove, pipe, update } from 'ramda'
 import { formatDateTime, parseDateTime, toKebabCaseObject } from '../utils'
 import { useRouter } from 'next/router'
 import { useGetSpotList } from '../hooks'
@@ -196,9 +196,18 @@ const Home = () => {
       'specifiedWaitTimes': spots.map(spot => spot.specifiedWaitTime).join('_')
     }
 
+    const queeeery = spots.length === 0
+      ? pipe(
+        dissoc('spotIds'),
+        dissoc('desiredArrivalTimes'),
+        dissoc('stayTimes'),
+        dissoc('specifiedWaitTimes')
+      )(query)
+      : query
+
     router.push({
       pathname: '/search',
-      query: toKebabCaseObject(query)
+      query: toKebabCaseObject(queeeery)
     })
   }
 
@@ -231,42 +240,44 @@ const Home = () => {
     })
 
     // スポット
-    const spots = searchInput.spotIds.split('_').reduce((acc, cur, index) => {
-      Object.entries(spotList).some(([key, value]) => {
-        const spot = value.find(spot => String(spot.spotId) === cur)
-        if (spot) {
-          const desiredArrivalTime = searchInput.desiredArrivalTimes.split('_')[index]
-          const checkedDesiredArrivalTime = desiredArrivalTime ? true : false
-          const stayTime = searchInput.stayTimes.split('_')[index]
-          const checkedStayTime = stayTime ? true : false
-          const specifiedWaitTime = searchInput.specifiedWaitTimes.split('_')[index]
-          const checkedSpecifiedWaitTime = specifiedWaitTime ? true : false
-          const name = key === 'show' ? spot.name.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)$/, `(${desiredArrivalTime})`) : spot.name
-          const shortName = key === 'show' ? spot.shortName.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)$/, `(${desiredArrivalTime})`) : spot.shortName
-          const startTime = key === 'show' ? desiredArrivalTime : spot.startTime
+    if (searchInput.spotIds) {
+      const spots = searchInput.spotIds.split('_').reduce((acc, cur, index) => {
+        Object.entries(spotList).some(([key, value]) => {
+          const spot = value.find(spot => String(spot.spotId) === cur)
+          if (spot) {
+            const desiredArrivalTime = searchInput.desiredArrivalTimes.split('_')[index]
+            const checkedDesiredArrivalTime = desiredArrivalTime ? true : false
+            const stayTime = searchInput.stayTimes.split('_')[index]
+            const checkedStayTime = stayTime ? true : false
+            const specifiedWaitTime = searchInput.specifiedWaitTimes.split('_')[index]
+            const checkedSpecifiedWaitTime = specifiedWaitTime ? true : false
+            const name = key === 'show' ? spot.name.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)$/, `(${desiredArrivalTime})`) : spot.name
+            const shortName = key === 'show' ? spot.shortName.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)$/, `(${desiredArrivalTime})`) : spot.shortName
+            const startTime = key === 'show' ? desiredArrivalTime : spot.startTime
 
-          const spppot = pipe(
-            assoc('spotId', spot.spotId),
-            assoc('name', name),
-            assoc('shortName', shortName),
-            assoc('startTime', startTime),
-            assoc('tab', key),
-            assoc('display', true),
-            assoc('step', 1),
-            assoc('desiredArrivalTime', parseDateTime(desiredArrivalTime)),
-            assoc('checkedDesiredArrivalTime', checkedDesiredArrivalTime),
-            assoc('stayTime', stayTime),
-            assoc('checkedStayTime', checkedStayTime),
-            assoc('specifiedWaitTime', specifiedWaitTime),
-            assoc('checkedSpecifiedWaitTime', checkedSpecifiedWaitTime)
-          )(initialEditing)
-          acc.push(spppot)
-          return true
-        }
-      })
-      return acc
-    }, [])
-    setSpots(spots)
+            const spppot = pipe(
+              assoc('spotId', spot.spotId),
+              assoc('name', name),
+              assoc('shortName', shortName),
+              assoc('startTime', startTime),
+              assoc('tab', key),
+              assoc('display', true),
+              assoc('step', 1),
+              assoc('desiredArrivalTime', parseDateTime(desiredArrivalTime)),
+              assoc('checkedDesiredArrivalTime', checkedDesiredArrivalTime),
+              assoc('stayTime', stayTime),
+              assoc('checkedStayTime', checkedStayTime),
+              assoc('specifiedWaitTime', specifiedWaitTime),
+              assoc('checkedSpecifiedWaitTime', checkedSpecifiedWaitTime)
+            )(initialEditing)
+            acc.push(spppot)
+            return true
+          }
+        })
+        return acc
+      }, [])
+      setSpots(spots)
+    }
 
     // 検索条件
     const condition = Object.keys(initialCondition).reduce((acc, cur) => {
