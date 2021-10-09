@@ -103,9 +103,9 @@ const BackButton = styled(Button)`
   font-size: 1.3rem;
 `
 
-const Search = ({ param }) => {
+const Search = ({ query }) => {
   const router = useRouter()
-  const { searchResult, error } = useGetSearchResult(param)
+  const { searchResult, error } = useGetSearchResult(query)
   if (error) return <>
     <Link href="/">もどる</Link>
     <ErrorText>{error}</ErrorText>
@@ -177,8 +177,8 @@ const Search = ({ param }) => {
 }
 
 export function getServerSideProps(context) {
-  const param = context.query.param
-  return { props: { param } }
+  const query = context.query
+  return { props: { query } }
 }
 
 export default Search
