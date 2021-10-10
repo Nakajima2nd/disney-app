@@ -47,10 +47,12 @@ const Spot = styled(Card)`
 const Timetable = styled(Box)`
   display: flex;
   flex-direction: column;
+  min-width: 52px;
 `
 
 const SpotText = styled(Box)`
   font-size: 1.2rem;
+  padding: 0 8px;
 `
 
 const WaitTime = styled(Box)`
