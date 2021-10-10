@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Avatar, Box, Typography, List, ListItem, ListItemText, Divider } from '@material-ui/core'
+import { Avatar, Box, Typography, List, ListItem } from '@material-ui/core'
 import { Fragment } from 'react'
 import { groupBy } from 'ramda'
 
@@ -74,6 +74,7 @@ const AvatarContainer = styled(Box)`
 export const SpotList = ({ list, editing, handleClickSpot }) => {
   const filterdSpots = list.filter(spot => spot.name.indexOf(editing.keyword) > -1)
   const groupedSpots = groupBy(spot => spot.area, filterdSpots)
+
   return (<>
     {Object.entries(groupedSpots).map(([area, spots], index) =>
       <Wrap>
@@ -86,7 +87,7 @@ export const SpotList = ({ list, editing, handleClickSpot }) => {
               onClick={handleClickSpot(spot)}
               selected={editing.name === spot.name}
             >
-              <SpotImg src={`/img/spots/${spot.spotId}_${spot.shortName}.jpg`} alt={spot.shortName} />
+              <SpotImg src={`/img/spots/${spot.spotId}_${spot.shortName}.jpg`} onError={(e) => e.target.src = "/img/spots/default.jpg"} alt={spot.shortName} />
               <SpotNameContainer>
                 <SpotName>{spot.shortName}</SpotName>
                 {(spot.startTime || spot.endTime) && <BusinessHours color="textSecondary">{spot.startTime}~{spot.endTime}</BusinessHours>}
