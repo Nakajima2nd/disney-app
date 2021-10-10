@@ -24,10 +24,9 @@ const CustomListItem = styled(ListItem)`
   border-bottom: 1px solid lightgray;
   justify-content: space-between;
   margin: 0 8px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 0 8px;
   width: calc(100% - 16px);
-  height: 92px;
+  /* height: 92px; */
 `
 
 const SpotImg = styled.img`
@@ -90,11 +89,11 @@ export const SpotList = ({ list, editing, handleClickSpot }) => {
               <SpotImg src={`/img/spots/${spot.spotId}_${spot.shortName}.jpg`} alt={spot.shortName} />
               <SpotNameContainer>
                 <SpotName>{spot.shortName}</SpotName>
-                <BusinessHours color="textSecondary">{spot.startTime}~{spot.endTime}</BusinessHours>
+                {(spot.startTime || spot.endTime) && <BusinessHours color="textSecondary">{spot.startTime}~{spot.endTime}</BusinessHours>}
               </SpotNameContainer>
               <WaitTimeContainer>
                 {editing.tab === 'attraction' && <>
-                  {spot.enable && spot.waitTime >= 0 && <Typography color="textSecondary" variant="caption">待ち時間</Typography>}
+                  <Typography color="textSecondary" variant="caption">{spot.enable && spot.waitTime >= 0 ? '待ち時間' : '　'}</Typography>
                   <AvatarContainer>
                     {!spot.enable && <DisableAvatar>休止</DisableAvatar>}
                     {spot.enable && spot.waitTime < 0 && <DisableAvatar>準備</DisableAvatar>}
@@ -102,7 +101,7 @@ export const SpotList = ({ list, editing, handleClickSpot }) => {
                     {(!spot.enable || spot.waitTime < 0) && <Typography color="textSecondary" variant="caption">中</Typography>}
                     {spot.enable && spot.waitTime >= 0 && <Typography color="textSecondary" variant="caption">分</Typography>}
                   </AvatarContainer>
-                  {spot.meanWaitTime >= 0 && <Typography color="textSecondary" variant="caption">{'平均' + spot.meanWaitTime + '分'}</Typography>}
+                  <Typography color="textSecondary" variant="caption">{spot.meanWaitTime >= 0 ? '平均' + spot.meanWaitTime + '分' : '　'}</Typography>
                 </>}
               </WaitTimeContainer>
             </CustomListItem>
