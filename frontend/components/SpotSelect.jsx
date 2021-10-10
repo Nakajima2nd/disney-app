@@ -44,7 +44,7 @@ export const SpotSelect = ({ handleKeyword, handleTab, spotList, editing, handle
       <SpotTab icon={<Mood />} label="グリーティング" value="greeting"/>
     </SpotTabs>
     <SpotList
-      obj={spotList[editing.tab]}
+      list={spotList[editing.tab]}
       editing={editing}
       handleClickSpot={handleClickSpot}
     />
