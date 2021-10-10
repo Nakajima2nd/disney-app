@@ -26,7 +26,7 @@ const CustomListItem = styled(ListItem)`
   margin: 0 8px;
   padding: 0 8px;
   width: calc(100% - 16px);
-  /* height: 92px; */
+  height: 75px;
 `
 
 const SpotImg = styled.img`
