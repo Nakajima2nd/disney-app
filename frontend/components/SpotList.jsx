@@ -75,6 +75,9 @@ export const SpotList = ({ list, editing, handleClickSpot }) => {
   const filterdSpots = list.filter(spot => spot.name.indexOf(editing.keyword) > -1)
   const groupedSpots = groupBy(spot => spot.area, filterdSpots)
 
+  const removeStartTime = (str) => {
+    return str.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)/, '')
+  }
   return (<>
     {Object.entries(groupedSpots).map(([area, spots], index) =>
       <Wrap>
@@ -87,7 +90,7 @@ export const SpotList = ({ list, editing, handleClickSpot }) => {
               onClick={handleClickSpot(spot)}
               selected={editing.name === spot.name}
             >
-              <SpotImg src={`/img/spots/${spot.spotId}_${spot.shortName}.jpg`} onError={(e) => e.target.src = "/img/spots/default.jpg"} alt={spot.shortName} />
+              <SpotImg src={removeStartTime(`/img/spots/${spot.spotId}_${spot.shortName}.jpg`)} onError={(e) => e.target.src = "/img/spots/default.jpg"} alt={spot.shortName} />
               <SpotNameContainer>
                 <SpotName>{spot.shortName}</SpotName>
                 {(spot.startTime || spot.endTime) && <BusinessHours color="textSecondary">{spot.startTime}~{spot.endTime}</BusinessHours>}
