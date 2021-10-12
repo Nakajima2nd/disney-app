@@ -39,6 +39,7 @@ class TourSpot:
         self.type = ""
         self.play_time = -1 # sec
         self.wait_time = -1
+        self.specified_wait_time = 0
         self.arrival_time = ""
         self.depart_time = ""
         self.violate_business_hours = False
@@ -52,9 +53,10 @@ class TourSpot:
         ret_dict["lat"] = self.lat
         ret_dict["lon"] = self.lon
         ret_dict["type"] = self.type
-        ret_dict["play-time"] = self.play_time
+        ret_dict["arrival_time"] = self.arrival_time
+        ret_dict["specified-wait-time"] = self.specified_wait_time
         ret_dict["wait-time"] = self.wait_time
-        ret_dict["arrival-time"] = self.arrival_time
+        ret_dict["play-time"] = self.play_time
         ret_dict["depart-time"] = self.depart_time
         ret_dict["violate-business-hours"] = self.violate_business_hours
         ret_dict["violate-desired-arrival-time"] = self.violate_desired_arrival_time
@@ -95,6 +97,10 @@ class TravelInputSpot:
     def __init__(self):
         self.spot_id = -1
         self.desired_arrival_time = -1  # 00:00 からの経過秒数
+        # オリジナルの到着指定時刻。
+        # specified_wait_timeが指定された場合、巡回探索の際に内部的に到着希望時刻(desired_arrival_time)を早めるという処理を行っている。
+        # しかし、トレース時にオリジナルの到着希望時刻を参照する必要が出てきたため、こちらの変数で管理している。
+        self.desired_arrival_time_origin = -1
         self.stay_time = -1  # [秒]
         self.specified_wait_time = 0
 
@@ -115,20 +121,6 @@ class TravelInput:
         self.optimize_spot_order = "true"
         self.start_today = "true"
         self.init_by_json(json_data)
-
-    def __init_time_mode(self, json_data):
-        """
-        time_modeを初期化する。初期化に失敗した場合はFalseを返す。
-        """
-        if not json_data.get("time-mode"):
-            self.error_message = "time-modeが存在しません。"
-            return False
-        self.time_mode = json_data["time-mode"]
-        valid_time_mode_list = ["start", "end"]
-        if self.time_mode not in valid_time_mode_list:
-            self.error_message = "time-modeはstart/endのいずれかを指定してください。"
-            return False
-        return True
 
     def __init_specified_time(self, json_data):
         """
@@ -225,6 +217,7 @@ class TravelInput:
                 # hh:mm -> 秒数 への変換
                 hh_str, mm_str = spot_json["desired-arrival-time"].split(":")
                 travel_input_spot.desired_arrival_time = int(hh_str) * 3600 + int(mm_str) * 60
+                travel_input_spot.desired_arrival_time_origin = travel_input_spot.desired_arrival_time
             except:
                 self.error_message = "時間の形式が不正です。hh:mm形式で指定してください。"
                 return None
@@ -299,9 +292,6 @@ class TravelInput:
         # return True
 
     def init_by_json(self, json_data):
-        # note: time-modeはいったんdisableにする
-        # if not self.__init_time_mode(json_data):
-        #     return
         if not self.__init_specified_time(json_data):
             return
         if not self.__init_walk_speed(json_data):

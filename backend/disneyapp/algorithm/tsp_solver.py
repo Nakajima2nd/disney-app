@@ -231,6 +231,19 @@ class RandomTspSolver:
                 continue
             wait_time = self.__calc_wait_time(spot.spot_id, hhmm_to_sec(spot.arrival_time), travel_input.start_today)
             tour.spots[i].wait_time = wait_time
+        # 指定待ち時間をセット
+        for i, spot in enumerate(tour.spots):
+            # 出発地と目的地については指定待ち時間を設定しない
+            if i == 0 or i == len(tour.spots) - 1:
+                continue
+            spot_obj = self.__find_target_spot_from_travel_input(travel_input, spot.spot_id)
+            if spot_obj.desired_arrival_time_origin == -1:
+                continue
+            spot_arrival_time = hhmm_to_sec(spot.arrival_time)
+            # 指定した待ち時間だけ待てなかった場合に備えて、travel_input.specified_wait_timeをそのままセットすることは避ける
+            specified_wait_time = max(min(spot_obj.desired_arrival_time_origin - spot_arrival_time, spot_obj.specified_wait_time), 0)
+            tour.spots[i].specified_wait_time = int(specified_wait_time / 60) # 秒 -> 分
+        # 各種違反フラグをセット
         for i, spot in enumerate(tour.spots):
             if "start-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["start-time"] != "":
                 # 営業開始より前に到着していないかチェック
@@ -264,6 +277,8 @@ class RandomTspSolver:
                     continue
                 if input_spot.desired_arrival_time == -1:
                     continue
+                # note: 指定待ち時間（地蔵する時間）が指定されている場合、desired_arrival_time がその分前倒しになっている。
+                # したがってその場合でも、単純にdesired_arrival_time と spot.arrival_time を比較すればよい。
                 if input_spot.desired_arrival_time != hhmm_to_sec(spot.arrival_time):
                     tour.spots[i].violate_desired_arrival_time = True
                     tour.violate_desired_arrival_time = True
@@ -310,7 +325,7 @@ class RandomTspSolver:
                     desired_arrival_time = spot.desired_arrival_time
                     stay_time = spot.stay_time
             if desired_arrival_time != -1:
-                subroute.surplus_wait_time = max(desired_arrival_time - current_time, 0)
+                subroute.surplus_wait_time = int(max(desired_arrival_time - current_time, 0)/60)
                 current_time = max(current_time, desired_arrival_time)
             subroute.goal_time = sec_to_hhmm(current_time)
 
