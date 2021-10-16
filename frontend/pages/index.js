@@ -191,13 +191,13 @@ const Home = () => {
       'walkSpeed': initialCondition.walkSpeed !== condition.walkSpeed ? condition.walkSpeed : 'none',
       'optimizeSpotOrder': initialCondition.optimizeSpotOrder !== condition.optimizeSpotOrder ? condition.optimizeSpotOrder : 'none',
       'startToday': initialCondition.startToday !== condition.startToday ? condition.startToday : 'none',
-      'desiredArrivalTimes': spots.length !== 0 ? spots.map(spot => formatDateTime(spot.desiredArrivalTime)).join('_') : 'none',
-      'stayTimes': spots.length !== 0 ? spots.map(spot => spot.stayTime).join('_') : 'none',
-      'specifiedWaitTimes': spots.length !== 0 ? spots.map(spot => spot.specifiedWaitTime).join('_') : 'none'
+      'desiredArrivalTimes': spots.filter(spot => spot.desiredArrivalTime).length > 0 ? spots.map(spot => formatDateTime(spot.desiredArrivalTime)).join('_') : 'none',
+      'stayTimes': spots.filter(spot => spot.stayTime).length > 0 ? spots.map(spot => spot.stayTime).join('_') : 'none',
+      'specifiedWaitTimes': spots.filter(spot => spot.specifiedWaitTime).length > 0 ? spots.map(spot => spot.specifiedWaitTime).join('_') : 'none'
     }
 
     const queeeery = Object.keys(query).reduce((acc, cur) => {
-      return query[cur] === 'none' ? dissoc(cur, acc) : acc 
+      return query[cur] === 'none' ? dissoc(cur, acc) : acc
     }, query)
 
     router.push({
@@ -240,11 +240,11 @@ const Home = () => {
         Object.entries(spotList).some(([key, value]) => {
           const spot = value.find(spot => String(spot.spotId) === cur)
           if (spot) {
-            const desiredArrivalTime = searchInput.desiredArrivalTimes.split('_')[index]
+            const desiredArrivalTime = searchInput.desiredArrivalTimes ? searchInput.desiredArrivalTimes.split('_')[index] : null
             const checkedDesiredArrivalTime = desiredArrivalTime ? true : false
-            const stayTime = searchInput.stayTimes.split('_')[index]
+            const stayTime = searchInput.stayTimes ? searchInput.stayTimes.split('_')[index] : null
             const checkedStayTime = stayTime ? true : false
-            const specifiedWaitTime = searchInput.specifiedWaitTimes.split('_')[index]
+            const specifiedWaitTime = searchInput.specifiedWaitTimes ? searchInput.specifiedWaitTimes.split('_')[index] : null
             const checkedSpecifiedWaitTime = specifiedWaitTime ? true : false
             const name = key === 'show' ? spot.name.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)$/, `(${desiredArrivalTime})`) : spot.name
             const shortName = key === 'show' ? spot.shortName.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)$/, `(${desiredArrivalTime})`) : spot.shortName
