@@ -52,7 +52,7 @@ def get_transit_time_min(distance, speed):
 
 
 class RandomTspSolver:
-    TRY_TIMES = 1000  # 試行回数
+    TRY_TIMES = 10000  # 試行回数
 
     # 歩くスピード [m/s]
     WALK_SPEED_DICT = {
@@ -317,16 +317,26 @@ class RandomTspSolver:
             speed = RandomTspSolver.WALK_SPEED_DICT[travel_input.walk_speed]
             subroute.transit_time = get_transit_time_min(subroute.distance, speed)
             current_time += subroute.transit_time
-            # note: 目的地に到着希望時刻が設定されている & 到着希望時刻より前に到着した場合は、到着希望時刻まで待機する
+            # 下記のいずれかの条件を満たす場合は到着前に待機する。
+            # 1. 目的地に到着希望時刻が設定されている、かつ到着希望時刻より前に到着する
+            # 2. 目的地の営業開始時刻よりも前に目的地に到着する
+            # 3. 開園時間よりも前に目的地に到着する
+            # note: 複数満たす場合は1->2->3の順で優先する。
             desired_arrival_time = -1
-            stay_time = -1
-            for spot in travel_input.spots:
-                if spot.spot_id == dst_spot_id:
-                    desired_arrival_time = spot.desired_arrival_time
-                    stay_time = spot.stay_time
+            if i != len(spot_order) - 1:
+                dst_spot = self.__find_target_spot_from_travel_input(travel_input, dst_spot_id)
+                desired_arrival_time = dst_spot.desired_arrival_time
             if desired_arrival_time != -1:
                 subroute.surplus_wait_time = int(max(desired_arrival_time - current_time, 0)/60)
                 current_time = max(current_time, desired_arrival_time)
+            elif "start-time" in self.spot_data_dict[dst_spot_id] and self.spot_data_dict[dst_spot_id]["start-time"] != "" != -1:
+                spot_start_time_sec = hhmm_to_sec(self.spot_data_dict[dst_spot_id]["start-time"])
+                subroute.surplus_wait_time = int(max(spot_start_time_sec - current_time, 0)/60)
+                current_time = max(current_time, spot_start_time_sec)
+            else:
+                open_time_sec = hhmm_to_sec(self.open_time)
+                subroute.surplus_wait_time = int(max(open_time_sec - current_time, 0) / 60)
+                current_time = max(current_time, open_time_sec)
             subroute.goal_time = sec_to_hhmm(current_time)
 
             # dstスポットのイベントを消化するまでの時間を計測
@@ -337,7 +347,7 @@ class RandomTspSolver:
                 current_time += self.spot_data_dict[dst_spot_id]["play-time"] * 60
                 dst_spot = RandomTspSolver.__find_target_spot_from_travel_input(travel_input, dst_spot_id)
                 current_time += dst_spot.specified_wait_time if dst_spot else 0
-                current_time += stay_time if stay_time != -1 else 0
+                current_time += dst_spot.stay_time if dst_spot.stay_time != -1 else 0
             tour.subroutes.append(subroute)
             del subroute
         tour.goal_time = sec_to_hhmm(current_time)
