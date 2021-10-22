@@ -40,6 +40,9 @@ class TourSpot:
         self.play_time = -1 # sec
         self.wait_time = -1
         self.specified_wait_time = 0
+        self.specified_wait_time_result = 0
+        self.desired_arrival_time = -1
+        self.stay_time = -1
         self.arrival_time = ""
         self.depart_time = ""
         self.violate_business_hours = False
@@ -54,10 +57,11 @@ class TourSpot:
         ret_dict["lon"] = self.lon
         ret_dict["type"] = self.type
         ret_dict["arrival_time"] = self.arrival_time
-        ret_dict["specified-wait-time"] = self.specified_wait_time
+        ret_dict["specified-wait-time-result"] = self.specified_wait_time_result
         ret_dict["wait-time"] = self.wait_time
         ret_dict["play-time"] = self.play_time
         ret_dict["depart-time"] = self.depart_time
+        ret_dict["stay-time"] = self.stay_time
         ret_dict["violate-business-hours"] = self.violate_business_hours
         ret_dict["violate-desired-arrival-time"] = self.violate_desired_arrival_time
         return ret_dict

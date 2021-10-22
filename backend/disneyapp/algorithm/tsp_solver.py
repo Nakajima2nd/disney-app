@@ -1,7 +1,7 @@
 from disneyapp.data.data_manager import StaticDataManager
 from disneyapp.data.spot_list_data_converter import SpotListDataConverter
 from disneyapp.data.park_data_accessor import ParkDataAccessor
-from disneyapp.algorithm.models import Tour, TourSpot, Subroute
+from disneyapp.algorithm.models import Tour, TourSpot, Subroute, TravelInputSpot
 import random, copy, datetime
 
 
@@ -88,13 +88,17 @@ class RandomTspSolver:
         """
         スポットの並び順を最適化することによって巡回路を生成する。
         """
-        base_tour = [ travel_input_spot.spot_id for travel_input_spot in travel_input.spots ]
+        base_tour = copy.deepcopy(travel_input.spots)
         current_best_score = 9999999999999
         current_best_tour = None
         random.seed(1)
         for count in range(RandomTspSolver.TRY_TIMES):
             current_tour = random.sample(base_tour, len(base_tour))
-            current_tour_with_od = [travel_input.start_spot_id] + current_tour + [travel_input.goal_spot_id]
+            start_spot = TravelInputSpot()
+            start_spot.spot_id = travel_input.start_spot_id
+            goal_spot = TravelInputSpot()
+            goal_spot.spot_id = travel_input.goal_spot_id
+            current_tour_with_od = [start_spot] + current_tour + [goal_spot]
             tour = self.__build_tour(travel_input, current_tour_with_od)
             score = tour.cost
             if score < current_best_score:
@@ -106,8 +110,12 @@ class RandomTspSolver:
         """
         入力された順にスポットを並べて巡回路を構築する。
         """
-        base_tour = [travel_input_spot.spot_id for travel_input_spot in travel_input.spots]
-        current_tour_with_od = [travel_input.start_spot_id] + base_tour + [travel_input.goal_spot_id]
+        base_tour = copy.deepcopy(travel_input.spots)
+        start_spot = TravelInputSpot()
+        start_spot.spot_id = travel_input.start_spot_id
+        goal_spot = TravelInputSpot()
+        goal_spot.spot_id = travel_input.goal_spot_id
+        current_tour_with_od = [start_spot] + base_tour + [goal_spot]
         return self.__build_tour(travel_input, current_tour_with_od)
 
     @staticmethod
@@ -197,20 +205,23 @@ class RandomTspSolver:
         """
         assert len(tour.subroutes) != 0
         # (経路によらない)スポットの情報をセット
-        for spot_id in spot_order:
+        for spot_obj in spot_order:
             tour_spot = TourSpot()
-            tour_spot.spot_id = spot_id
-            tour_spot.spot_name = self.spot_data_dict[spot_id]["name"]
-            tour_spot.spot_short_name = self.spot_data_dict[spot_id]["short-name"]
+            tour_spot.spot_id = spot_obj.spot_id
+            tour_spot.spot_name = self.spot_data_dict[spot_obj.spot_id]["name"]
+            tour_spot.spot_short_name = self.spot_data_dict[spot_obj.spot_id]["short-name"]
             # showの名称から開始時刻の情報が落ちているので、ここで付与する
-            if self.spot_data_dict[spot_id]["type"] == "show":
-                desired_arrival_time = self.__find_target_spot_from_travel_input(travel_input, spot_id).desired_arrival_time
+            if self.spot_data_dict[spot_obj.spot_id]["type"] == "show":
+                desired_arrival_time = spot_obj.desired_arrival_time
                 tour_spot.spot_name = tour_spot.spot_name + "(" + sec_to_hhmm(desired_arrival_time) + ")"
                 tour_spot.spot_short_name = tour_spot.spot_short_name + "(" + sec_to_hhmm(desired_arrival_time) + ")"
-            tour_spot.lat = self.spot_data_dict[spot_id]["lat"]
-            tour_spot.lon = self.spot_data_dict[spot_id]["lon"]
-            tour_spot.type = self.spot_data_dict[spot_id]["type"]
-            tour_spot.play_time = self.spot_data_dict[spot_id]["play-time"]
+            tour_spot.lat = self.spot_data_dict[spot_obj.spot_id]["lat"]
+            tour_spot.lon = self.spot_data_dict[spot_obj.spot_id]["lon"]
+            tour_spot.type = self.spot_data_dict[spot_obj.spot_id]["type"]
+            tour_spot.play_time = self.spot_data_dict[spot_obj.spot_id]["play-time"]
+            tour_spot.desired_arrival_time = spot_obj.desired_arrival_time
+            tour_spot.stay_time = spot_obj.stay_time
+            tour_spot.specified_wait_time = spot_obj.specified_wait_time
             tour.spots.append(tour_spot)
         # スポットの発着時刻をセット
         for i, subroute in enumerate(tour.subroutes):
@@ -235,13 +246,12 @@ class RandomTspSolver:
             # 出発地と目的地については指定待ち時間を設定しない
             if i == 0 or i == len(tour.spots) - 1:
                 continue
-            spot_obj = self.__find_target_spot_from_travel_input(travel_input, spot.spot_id)
-            if spot_obj.desired_arrival_time_origin == -1:
+            if spot.desired_arrival_time == -1:
                 continue
             spot_arrival_time = hhmm_to_sec(spot.arrival_time)
-            # 指定した待ち時間だけ待てなかった場合に備えて、travel_input.specified_wait_timeをそのままセットすることは避ける
-            specified_wait_time = max(min(spot_obj.desired_arrival_time_origin - spot_arrival_time, spot_obj.specified_wait_time), 0)
-            tour.spots[i].specified_wait_time = int(specified_wait_time / 60) # 秒 -> 分
+            # 指定した待ち時間だけ待てなかった場合に備える
+            specified_wait_time_result = max(min(spot.desired_arrival_time - spot_arrival_time, spot.specified_wait_time), 0)
+            tour.spots[i].specified_wait_time_result = int(specified_wait_time_result / 60) # 秒 -> 分
         # 各種違反フラグをセット
         for i, spot in enumerate(tour.spots):
             if "start-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["start-time"] != "":
@@ -301,14 +311,14 @@ class RandomTspSolver:
         tour = Tour()
         tour.start_time = sec_to_hhmm(travel_input.specified_time)
         current_time = travel_input.specified_time
-        for i, dst_spot_id in enumerate(spot_order):
+        for i, dst_spot in enumerate(spot_order):
             if i == 0:
                 continue
             subroute = Subroute()
 
             # 個別経路のorg, dstのスポットIDを設定
-            subroute.start_spot_id = spot_order[i - 1]
-            subroute.goal_spot_id = dst_spot_id
+            subroute.start_spot_id = spot_order[i - 1].spot_id
+            subroute.goal_spot_id = dst_spot.spot_id
             subroute.start_time = sec_to_hhmm(current_time)
 
             # orgスポットからdstスポットに移動する
@@ -323,13 +333,12 @@ class RandomTspSolver:
             # note: 複数満たす場合は1->2->3の順で優先する。
             desired_arrival_time = -1
             if i != len(spot_order) - 1:
-                dst_spot = self.__find_target_spot_from_travel_input(travel_input, dst_spot_id)
                 desired_arrival_time = dst_spot.desired_arrival_time
             if desired_arrival_time != -1:
                 subroute.surplus_wait_time = int(max(desired_arrival_time - current_time, 0)/60)
                 current_time = max(current_time, desired_arrival_time)
-            elif "start-time" in self.spot_data_dict[dst_spot_id] and self.spot_data_dict[dst_spot_id]["start-time"] != "" != -1:
-                spot_start_time_sec = hhmm_to_sec(self.spot_data_dict[dst_spot_id]["start-time"])
+            elif "start-time" in self.spot_data_dict[dst_spot.spot_id] and self.spot_data_dict[dst_spot.spot_id]["start-time"] != "" != -1:
+                spot_start_time_sec = hhmm_to_sec(self.spot_data_dict[dst_spot.spot_id]["start-time"])
                 subroute.surplus_wait_time = int(max(spot_start_time_sec - current_time, 0)/60)
                 current_time = max(current_time, spot_start_time_sec)
             else:
@@ -341,11 +350,10 @@ class RandomTspSolver:
             # dstスポットのイベントを消化するまでの時間を計測
             if i != 0 and i != len(spot_order) - 1:
                 # 出発地・目的地の場合は加算しない
-                wait_time_minute = self.__calc_wait_time(dst_spot_id, current_time, travel_input.start_today)
+                wait_time_minute = self.__calc_wait_time(dst_spot.spot_id, current_time, travel_input.start_today)
                 current_time += max(wait_time_minute * 60, 0)  # note:待ち時間が-1の場合は0にする
-                current_time += self.spot_data_dict[dst_spot_id]["play-time"] * 60
-                dst_spot = RandomTspSolver.__find_target_spot_from_travel_input(travel_input, dst_spot_id)
-                current_time += dst_spot.specified_wait_time if dst_spot else 0
+                current_time += self.spot_data_dict[dst_spot.spot_id]["play-time"] * 60
+                current_time += dst_spot.specified_wait_time if dst_spot.specified_wait_time != -1 else 0
                 current_time += dst_spot.stay_time if dst_spot.stay_time != -1 else 0
             tour.subroutes.append(subroute)
             del subroute
