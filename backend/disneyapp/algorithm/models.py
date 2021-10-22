@@ -42,7 +42,7 @@ class TourSpot:
         self.specified_wait_time = 0
         self.specified_wait_time_result = 0
         self.desired_arrival_time = -1
-        self.stay_time = -1
+        self.stay_time = 0
         self.arrival_time = ""
         self.depart_time = ""
         self.violate_business_hours = False
@@ -105,7 +105,7 @@ class TravelInputSpot:
         # specified_wait_timeが指定された場合、巡回探索の際に内部的に到着希望時刻(desired_arrival_time)を早めるという処理を行っている。
         # しかし、トレース時にオリジナルの到着希望時刻を参照する必要が出てきたため、こちらの変数で管理している。
         self.desired_arrival_time_origin = -1
-        self.stay_time = -1  # [秒]
+        self.stay_time = 0  # [分]
         self.specified_wait_time = 0
 
 
@@ -230,7 +230,7 @@ class TravelInput:
                 self.error_message = "stay-timeを指定できるのは、restaurant/shopのいずれかのみです。"
                 return None
             try:
-                travel_input_spot.stay_time = int(spot_json["stay-time"]) * 60
+                travel_input_spot.stay_time = int(spot_json["stay-time"])
             except:
                 self.error_message = "stay-timeには整数を指定してください。"
                 return None

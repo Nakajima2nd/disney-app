@@ -353,8 +353,8 @@ class RandomTspSolver:
                 wait_time_minute = self.__calc_wait_time(dst_spot.spot_id, current_time, travel_input.start_today)
                 current_time += max(wait_time_minute * 60, 0)  # note:待ち時間が-1の場合は0にする
                 current_time += self.spot_data_dict[dst_spot.spot_id]["play-time"] * 60
-                current_time += dst_spot.specified_wait_time if dst_spot.specified_wait_time != -1 else 0
-                current_time += dst_spot.stay_time if dst_spot.stay_time != -1 else 0
+                current_time += dst_spot.specified_wait_time
+                current_time += dst_spot.stay_time * 60
             tour.subroutes.append(subroute)
             del subroute
         tour.goal_time = sec_to_hhmm(current_time)
