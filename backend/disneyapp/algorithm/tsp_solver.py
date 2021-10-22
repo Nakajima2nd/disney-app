@@ -127,7 +127,6 @@ class RandomTspSolver:
 
         return merged_spot_data_dict
 
-
     @staticmethod
     def __make_cost_table():
         all_spot_pair_list = StaticDataManager.get_all_spot_pair()

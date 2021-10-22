@@ -110,8 +110,6 @@ class TravelInput:
     /search の入力情報を保持するクラス。入力情報のバリデーションもこのクラスで実施する。
     """
     def __init__(self, json_data):
-        self.time_mode = ""
-        self.wait_time_mode = "mean"
         self.specified_time = -1  # 00:00からの経過秒数
         self.walk_speed = ""
         self.start_spot_id = -1
