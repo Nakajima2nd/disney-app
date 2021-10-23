@@ -52,7 +52,7 @@ def get_transit_time_min(distance, speed):
 
 
 class RandomTspSolver:
-    TRY_TIMES = 10000  # 試行回数
+    TRY_TIMES = 1000  # 試行回数
 
     # 歩くスピード [m/s]
     WALK_SPEED_DICT = {
