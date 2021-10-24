@@ -11,6 +11,7 @@ def test_exhaustive():
         url = "http://localhost:8001/search"
         response = requests.post(url, json=input_dict)
         assert response.status_code == 200
-        assert RouteValidator.is_valid_route(input_dict, json.loads(response.text))
+        route_dict = json.loads(response.text)
+        assert RouteValidator.is_valid_route(input_dict, route_dict)
 
 
