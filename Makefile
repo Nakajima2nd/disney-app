@@ -27,3 +27,7 @@ front-sh:
 .PHONY: copy
 copy:
 	sudo docker cp disney-app_frontend_1:/code/node_modules ./frontend/
+
+.PHONY: test-backend
+test-backend:
+	docker-compose exec backend pytest

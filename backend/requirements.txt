@@ -5,3 +5,5 @@ gunicorn
 django-heroku
 psycopg2-binary
 python-dotenv
+pytest
+requests
