@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Avatar, Box, Typography, List, ListItem } from '@material-ui/core'
+import { Avatar, Box, Typography, List, ListItem, ListItemSecondaryAction, Checkbox } from '@material-ui/core'
 import { Fragment } from 'react'
 import { groupBy } from 'ramda'
 
@@ -24,9 +24,14 @@ const CustomListItem = styled(ListItem)`
   border-bottom: 1px solid lightgray;
   justify-content: space-between;
   margin: 0 8px;
-  padding: 0 8px;
+  padding: ${(props) => props.checkbox ? '0 8px 0 40px' : '0 8px'};
   width: calc(100% - 16px);
   height: 75px;
+`
+
+const CustomListItemSecondaryAction = styled(ListItemSecondaryAction)`
+  right: initial;
+  left: 8px;
 `
 
 const SpotImg = styled.img`
@@ -71,7 +76,7 @@ const AvatarContainer = styled(Box)`
   align-items: flex-end;
 `
 
-export const SpotList = ({ list, editing, handleClickSpot }) => {
+export const SpotList = ({ list, editing, handleClickSpot, checked, handleCheckbox, selected }) => {
   const filterdSpots = list.filter(spot => spot.name.indexOf(editing.keyword) > -1)
   const groupedSpots = groupBy(spot => spot.area, filterdSpots)
 
@@ -80,7 +85,7 @@ export const SpotList = ({ list, editing, handleClickSpot }) => {
   }
   return (<>
     {Object.entries(groupedSpots).map(([area, spots], index) =>
-      <Wrap>
+      <Wrap key={index}>
         <AreaName>{area}</AreaName>
         <CustomList>
           {spots.map((spot, index) => <Fragment key={index}>
@@ -89,6 +94,7 @@ export const SpotList = ({ list, editing, handleClickSpot }) => {
               button
               onClick={handleClickSpot(spot)}
               selected={editing.name === spot.name}
+              checkbox={selected === -1}
             >
               <SpotImg src={removeStartTime(`/img/spots/${spot.spotId}_${spot.shortName}.jpg`)} onError={(e) => e.target.src = "/img/spots/default.jpg"} alt={spot.shortName} />
               <SpotNameContainer>
@@ -108,6 +114,15 @@ export const SpotList = ({ list, editing, handleClickSpot }) => {
                   <Typography color="textSecondary" variant="caption">{spot.meanWaitTime >= 0 ? '平均' + spot.meanWaitTime + '分' : '　'}</Typography>
                 </>}
               </WaitTimeContainer>
+              {selected === -1 &&
+                <CustomListItemSecondaryAction>
+                  <Checkbox
+                    edge="end"
+                    onChange={handleCheckbox(spot)}
+                    checked={checked.some(s => s.shortName === spot.shortName)}
+                  />
+                </CustomListItemSecondaryAction>
+              }
             </CustomListItem>
           </Fragment>)}
         </CustomList>
