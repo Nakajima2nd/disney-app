@@ -14,7 +14,7 @@ const SpotTabs = styled(Tabs)`
 const SpotTab = styled(Tab)`
 `
 
-export const SpotSelect = ({ handleKeyword, handleTab, spotList, editing, handleClickSpot }) => {
+export const SpotSelect = ({ handleKeyword, handleTab, spotList, editing, handleClickSpot, checked, handleCheckbox, selected }) => {
   return (<>
     <KeywordInput
       value={editing.keyword}
@@ -47,6 +47,9 @@ export const SpotSelect = ({ handleKeyword, handleTab, spotList, editing, handle
       list={spotList[editing.tab]}
       editing={editing}
       handleClickSpot={handleClickSpot}
+      checked={checked}
+      handleCheckbox={handleCheckbox}
+      selected={selected}
     />
   </>)
 }
