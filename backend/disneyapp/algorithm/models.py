@@ -40,6 +40,9 @@ class TourSpot:
         self.play_time = -1 # sec
         self.wait_time = -1
         self.specified_wait_time = 0
+        self.specified_wait_time_result = 0
+        self.desired_arrival_time = -1
+        self.stay_time = 0
         self.arrival_time = ""
         self.depart_time = ""
         self.violate_business_hours = False
@@ -54,10 +57,11 @@ class TourSpot:
         ret_dict["lon"] = self.lon
         ret_dict["type"] = self.type
         ret_dict["arrival_time"] = self.arrival_time
-        ret_dict["specified-wait-time"] = self.specified_wait_time
+        ret_dict["specified-wait-time-result"] = self.specified_wait_time_result
         ret_dict["wait-time"] = self.wait_time
         ret_dict["play-time"] = self.play_time
         ret_dict["depart-time"] = self.depart_time
+        ret_dict["stay-time"] = self.stay_time
         ret_dict["violate-business-hours"] = self.violate_business_hours
         ret_dict["violate-desired-arrival-time"] = self.violate_desired_arrival_time
         return ret_dict
@@ -101,7 +105,7 @@ class TravelInputSpot:
         # specified_wait_timeが指定された場合、巡回探索の際に内部的に到着希望時刻(desired_arrival_time)を早めるという処理を行っている。
         # しかし、トレース時にオリジナルの到着希望時刻を参照する必要が出てきたため、こちらの変数で管理している。
         self.desired_arrival_time_origin = -1
-        self.stay_time = -1  # [秒]
+        self.stay_time = 0  # [分]
         self.specified_wait_time = 0
 
 
@@ -110,8 +114,6 @@ class TravelInput:
     /search の入力情報を保持するクラス。入力情報のバリデーションもこのクラスで実施する。
     """
     def __init__(self, json_data):
-        self.time_mode = ""
-        self.wait_time_mode = "mean"
         self.specified_time = -1  # 00:00からの経過秒数
         self.walk_speed = ""
         self.start_spot_id = -1
@@ -228,7 +230,7 @@ class TravelInput:
                 self.error_message = "stay-timeを指定できるのは、restaurant/shopのいずれかのみです。"
                 return None
             try:
-                travel_input_spot.stay_time = int(spot_json["stay-time"]) * 60
+                travel_input_spot.stay_time = int(spot_json["stay-time"])
             except:
                 self.error_message = "stay-timeには整数を指定してください。"
                 return None
