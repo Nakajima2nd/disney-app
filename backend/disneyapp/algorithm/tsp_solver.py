@@ -48,7 +48,7 @@ def get_transit_time_min(distance, speed):
         return transit_time - mod
     else:
         # あまりが30秒以上であれば切り上げ
-        return transit_time - mod + 1
+        return transit_time - mod + 60
 
 
 class RandomTspSolver:

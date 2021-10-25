@@ -56,7 +56,7 @@ class TourSpot:
         ret_dict["lat"] = self.lat
         ret_dict["lon"] = self.lon
         ret_dict["type"] = self.type
-        ret_dict["arrival_time"] = self.arrival_time
+        ret_dict["arrival-time"] = self.arrival_time
         ret_dict["specified-wait-time-result"] = self.specified_wait_time_result
         ret_dict["wait-time"] = self.wait_time
         ret_dict["play-time"] = self.play_time
