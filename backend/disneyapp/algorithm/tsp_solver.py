@@ -208,6 +208,7 @@ class RandomTspSolver:
         for spot_obj in spot_order:
             tour_spot = TourSpot()
             tour_spot.spot_id = spot_obj.spot_id
+            tour_spot.original_spot_order = spot_obj.original_spot_order
             tour_spot.spot_name = self.spot_data_dict[spot_obj.spot_id]["name"]
             tour_spot.spot_short_name = self.spot_data_dict[spot_obj.spot_id]["short-name"]
             # showの名称から開始時刻の情報が落ちているので、ここで付与する
