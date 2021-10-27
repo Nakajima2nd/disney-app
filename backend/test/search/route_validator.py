@@ -39,14 +39,14 @@ class RouteValidator:
         result : bool
             妥当な経路になっている場合True, そうでなければFalse.
         """
-        # if not self.__exist_expect_keys(route):
-        #     return False
-        # if not self.__check_basic_consistency_of_route(route):
-        #     return False
-        # if not self.__check_time_consistency_of_route(route):
-        #     return False
-        # if not self.__check_violate_flag(route):
-        #     return False
+        if not self.__exist_expect_keys(route):
+            return False
+        if not self.__check_basic_consistency_of_route(route):
+            return False
+        if not self.__check_time_consistency_of_route(route):
+            return False
+        if not self.__check_violate_flag(route):
+            return False
         if not self.__is_user_expected_route(search_input, route):
             return False
         return True
