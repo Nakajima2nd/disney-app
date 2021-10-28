@@ -25,7 +25,11 @@ class RouteValidator:
 
     def is_valid_route(self, search_input, route):
         """
-        /search の入力であるdictと/searchの返却結果を受け取り、妥当なルートになっているかを検証する。
+        /search の入力であるdictと/searchの返却結果を受け取り、仕様通りのルートになっているかを検証する。
+        なお、下記については守っていなくても仕様違反ではないためこのメソッドではチェックしない。（別メソッドで検証する）
+        ・各スポットの到着希望時刻
+        ・各スポットの滞在時間
+        ・各スポットの指定待ち時間
 
         Parameters:
         -----------
@@ -45,7 +49,7 @@ class RouteValidator:
             return False
         if not self.__check_time_consistency_of_route(route):
             return False
-        if not self.__check_violate_flag(route):
+        if not self.__check_violate_flag(search_input, route):
             return False
         if not self.__is_user_expected_route(search_input, route):
             return False
@@ -81,9 +85,6 @@ class RouteValidator:
     def __check_basic_consistency_of_route(self, route):
         """
         routeを構成する情報の一貫性がとれていることを確認する。
-        ただし、下記については別メソッドでチェックする。
-        ・所要時間
-        ・各種違反フラグ
         """
         spots = route["spots"]
         subroutes = route["subroutes"]
@@ -150,10 +151,58 @@ class RouteValidator:
             return False
         return True
 
-    def __check_violate_flag(self, route):
+    def __check_violate_flag(self, input, route):
         """
-        各種違反フラグが正しいか確認する。
+        各種違反フラグの整合性がとれているか確認する。
         """
+        # 経路全体の違反フラグがtrue → 少なくとも1つのスポットについて違反フラグがtrue であることのチェック
+        if route["violate-desired-arrival-time"] == "true":
+            violate_desired_arrival_time_flag = False
+            for spot in route["spots"]:
+                if spot["violate-desired-arrival-time"] == "true":
+                    violate_desired_arrival_time_flag = True
+            if not violate_desired_arrival_time_flag:
+                self.error_message = "全体の違反フラグがtrueなのに、違反しているスポットがひとつもありません。"
+                return False
+        if route["violate-business-hours"] == "true":
+            violate_business_hours_flag = False
+            for spot in route["spots"]:
+                if spot["violate-business-hours"] == "true":
+                    violate_business_hours_flag = True
+            if not violate_business_hours_flag:
+                self.error_message = "全体の違反フラグがtrueなのに、違反しているスポットがひとつもありません。"
+                return False
+        # 1つ以上のスポットについて違反フラグがtrue → 経路全体の違反フラグがtrue であることのチェック
+        for spot in route["spots"]:
+            if spot["violate-business-hours"] == "true" and route["violate-business-hours"] == "false":
+                self.error_message = "スポットの違反フラグがtrueであるにもかかわらず、経路全体の違反フラグがfalseです。"
+                return False
+            if spot["violate-desired-arrival-time"] == "true" and route["violate-desired-arrival-time"] == "false":
+                self.error_message = "スポットの違反フラグがtrueであるにもかかわらず、経路全体の違反フラグがfalseです。"
+                return False
+        # 各スポットについて、違反フラグと到着希望時刻、実際の到着時刻の対応関係が合っていることを確認
+        for spot in route["spots"]:
+            # スタート地点、ゴール地点の場合は到着希望時刻違反フラグは常にfalse
+            if spot["original-spot-order"] == -1:
+                if spot["violate-desired-arrival-time"] == "true":
+                    self.error_message = "スタート地点またはゴール地点の到着希望時刻違反フラグがtrueになっています。"
+                    return False
+            origin_spot = input["spots"][spot["original-spot-order"]]
+            if "desired-arrival-time" not in origin_spot:
+                # 到着希望時刻指定がなければ、到着時刻希望違反フラグは常にfalse
+                if spot["violate-desired-arrival-time"] == "true":
+                    self.error_message = "到着希望時刻がされていないスポットについて、違反フラグがtrueになっています。"
+                    return False
+            else:
+                # 到着希望時刻指定がある場合、フラグと実際の到着時刻の整合性がとれている
+                if spot["violate-desired-arrival-time"] == "true":
+                    if origin_spot["desired-arrival-time"] == spot["arrival-time"]:
+                        self.error_message = "到着希望時刻違反フラグがtrueであるにもかかわらず、到着希望時刻に到着しています。"
+                        return False
+                else:
+                    if origin_spot["desired-arrival-time"] != spot["arrival-time"]:
+                        self.error_message = "到着希望時刻フラグがfalseであるにもかかわらず、到着希望時刻に到着していません。"
+                        return False
         return True
 
     def __is_user_expected_route(self, input, route):
@@ -177,54 +226,12 @@ class RouteValidator:
         if input_spot_id_set != route_spot_id_set:
             self.error_message = "入力で指定したスポットの集合と、実際にめぐっているスポットの集合が異なります。"
             return False
-        # 到着希望時刻が守られている
-        if not self.__meet_desired_arrival_times(input, route):
-            return False
-        # 滞在時間指定が守られている
-        if not self.__meet_stay_times(input, route):
-            return False
-        # 希望待ち時間が守られている
-        if not self.__meet_specified_wait_times(input, route):
-            return False
         # optimize-spot-orderがfalseの場合、入力した地点順序で巡回している
-        return True
-
-    def __meet_desired_arrival_times(self, input, route):
-        """
-        到着希望時刻がすべて守られている場合Trueを返す。
-        同じスポットが複数指定され、それぞれ別々の到着希望時刻指定がなされている場合も考慮する。
-        """
-        # 各スポットIDから、そのスポットIDに指定されている指定時刻一覧を引けるdictをつくる
-        input_spotid_to_spot_dict = {}  # spot_id -> [spot]
-        for spot in input["spots"]:
-            if "desired-arrival-time" not in spot:
-                continue
-            spot_id = spot["spot-id"]
-            if spot_id in input_spotid_to_spot_dict:
-                input_spotid_to_spot_dict[spot_id].append(spot["desired-arrival-time"])
-            else:
-                input_spotid_to_spot_dict[spot_id] = [spot["desired-arrival-time"]]
-        for spot_id in input_spotid_to_spot_dict:
-            desired_arrival_time_list = input_spotid_to_spot_dict[spot_id]
-            for desired_arrival_time in desired_arrival_time_list:
-                target_spot_find_flag = False
-                for spot in route["spots"]:
-                    if spot["spot-id"] == spot_id and spot["arrival-time"] == desired_arrival_time:
-                        target_spot_find_flag = True
-                        del spot
-                if not target_spot_find_flag:
-                    self.error_message = "スポットID=" + str(spot_id) + ", 到着希望時刻=" + str(desired_arrival_time) + " が満たされていません。"
+        if input["optimize-spot-order"] == "false":
+            for i, spot in enumerate(route["spots"]):
+                if i == 0 or i == len(route["spots"]) - 1:
+                    continue
+                if spot["original-spot-order"] != i - 1:
+                    self.error_message = "original-spot-order=trueにもかかわらず、入力の順にスポットを巡っていません。"
                     return False
-        return True
-
-    def __meet_stay_times(self, input, route):
-        """
-        滞在時間がすべて守られている場合Trueを返す。
-        """
-        return True
-
-    def __meet_specified_wait_times(self, input, route):
-        """
-        指定待ち時間がすべて満たされている場合Trueを返す。
-        """
         return True
