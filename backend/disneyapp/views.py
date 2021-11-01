@@ -1,6 +1,8 @@
 from disneyapp.data.spot_list_data_converter import SpotListDataConverter
 from disneyapp.algorithm.models import TravelInput
 from disneyapp.algorithm.tsp_solver import RandomTspSolver
+from disneyapp.data.park_data_accessor import ParkDataAccessor
+
 import copy, json
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -29,6 +31,17 @@ def search(request):
         except:
             return Response({"message": "入力が不正です。リクエストパラメタのパースに失敗しました。"}, status=status.HTTP_400_BAD_REQUEST)
     return exec_search(json_data)
+
+
+@api_view(['GET'])
+def business_hours(request):
+    opening_hours = ParkDataAccessor.get_opening_hours()
+    return Response(
+        {
+            "open-time": opening_hours.open_time,
+            "close-time": opening_hours.close_time
+        }
+    )
 
 
 @api_view(["GET"])
