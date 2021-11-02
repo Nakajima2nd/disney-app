@@ -108,4 +108,3 @@ class InputGenerator:
                 self.__set_specified_wait_time(spot)
             spots.append(spot)
         return spots
-
