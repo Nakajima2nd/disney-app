@@ -65,10 +65,11 @@ class InputGenerator:
         start_today_list = ["true", "false"]
         return random.choice(start_today_list)
 
-    def __set_desired_arrival_time(self, spot):
-        # 1/6の確率で到着時刻を設定する
+    def __set_desired_arrival_time(self, type, spot):
+        # 1/6の確率で到着希望時刻を設定する
+        # ただし、showの場合は必ず到着希望時刻を設定する
         set_arrival_time = [True, False, False, False, False, False]
-        if random.choice(set_arrival_time):
+        if random.choice(set_arrival_time) or type == "show":
             desired_arrival_time_list = ["10:00", "11:00", "13:00",
                                          "14:00", "15:00", "16:00",
                                          "17:00", "18:00", "19:00"]
@@ -101,7 +102,7 @@ class InputGenerator:
             spot["spot-id"] = spot_info["spot-id"]
             # 到着希望時刻
             if spot_info["type"] in ["attraction", "restaurant", "place", "greeting", "show"]:
-                self.__set_desired_arrival_time(spot)
+                self.__set_desired_arrival_time(spot_info["type"], spot)
             # 滞在時間
             if spot_info["type"] in ["restaurant", "shop"]:
                 self.__set_stay_time(spot)

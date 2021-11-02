@@ -142,7 +142,7 @@ class RouteValidator:
             goal_spot_time = max(next_spot["wait-time"], 0) * 60 + next_spot["specified-wait-time-result"] * 60 + \
                              next_spot["play-time"] * 60 + next_spot["stay-time"] * 60
             if hhmm_to_sec(next_spot["arrival-time"]) + goal_spot_time != hhmm_to_sec(next_spot["depart-time"]):
-                self.error_message = str(i) + "番目のsubrouteが次式を満たしません：目的地スポットの到着時刻 + 目的地スポットのでのイベント消化 = 目的地スポットの出発時刻"
+                self.error_message = str(i + 1) + "番目のspotが次式を満たしません：目的地スポットの到着時刻 + 目的地スポットのでのイベント消化 = 目的地スポットの出発時刻"
                 return False
             spend_time += (subroute_transit_time + goal_spot_time)
         # 移動時間の合計 + スポットでのイベント消化時間の合計 = 所要時間
@@ -187,6 +187,7 @@ class RouteValidator:
                 if spot["violate-desired-arrival-time"] == True:
                     self.error_message = "スタート地点またはゴール地点の到着希望時刻違反フラグがtrueになっています。"
                     return False
+                continue
             origin_spot = input["spots"][spot["original-spot-order"]]
             if "desired-arrival-time" not in origin_spot:
                 # 到着希望時刻指定がなければ、到着時刻希望違反フラグは常にfalse
@@ -234,4 +235,5 @@ class RouteValidator:
                 if spot["original-spot-order"] != i - 1:
                     self.error_message = "original-spot-order=trueにもかかわらず、入力の順にスポットを巡っていません。"
                     return False
+        # スポット名称が入力と一致している
         return True
