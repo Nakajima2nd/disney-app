@@ -66,10 +66,12 @@ class InputGenerator:
         return random.choice(start_today_list)
 
     def __set_desired_arrival_time(self, spot):
-        # 1/5の確率で到着時刻を設定する
-        set_arrival_time = [True, False, False, False, False]
+        # 1/6の確率で到着時刻を設定する
+        set_arrival_time = [True, False, False, False, False, False]
         if random.choice(set_arrival_time):
-            desired_arrival_time_list = ["10:00", "14:00", "16:00"]
+            desired_arrival_time_list = ["10:00", "11:00", "13:00",
+                                         "14:00", "15:00", "16:00",
+                                         "17:00", "18:00", "19:00"]
             desired_arrival_time = random.choice(desired_arrival_time_list)
             spot["desired-arrival-time"] = desired_arrival_time
 

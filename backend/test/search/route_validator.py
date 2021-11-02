@@ -181,10 +181,10 @@ class RouteValidator:
                 self.error_message = "スポットの違反フラグがtrueであるにもかかわらず、経路全体の違反フラグがfalseです。"
                 return False
         # 各スポットについて、違反フラグと到着希望時刻、実際の到着時刻の対応関係が合っていることを確認
-        for spot in route["spots"]:
+        for i, spot in enumerate(route["spots"]):
             # スタート地点、ゴール地点の場合は到着希望時刻違反フラグは常にfalse
             if spot["original-spot-order"] == -1:
-                if spot["violate-desired-arrival-time"] == "true":
+                if spot["violate-desired-arrival-time"] == True:
                     self.error_message = "スタート地点またはゴール地点の到着希望時刻違反フラグがtrueになっています。"
                     return False
             origin_spot = input["spots"][spot["original-spot-order"]]
@@ -195,13 +195,13 @@ class RouteValidator:
                     return False
             else:
                 # 到着希望時刻指定がある場合、フラグと実際の到着時刻の整合性がとれている
-                if spot["violate-desired-arrival-time"] == "true":
+                if spot["violate-desired-arrival-time"] == True:
                     if origin_spot["desired-arrival-time"] == spot["arrival-time"]:
-                        self.error_message = "到着希望時刻違反フラグがtrueであるにもかかわらず、到着希望時刻に到着しています。"
+                        self.error_message = str(i) + "番目スポット:到着希望時刻違反フラグがtrueであるにもかかわらず、到着希望時刻に到着しています。"
                         return False
                 else:
                     if origin_spot["desired-arrival-time"] != spot["arrival-time"]:
-                        self.error_message = "到着希望時刻フラグがfalseであるにもかかわらず、到着希望時刻に到着していません。"
+                        self.error_message = str(i) + "番目スポット:到着希望時刻フラグがfalseであるにもかかわらず、到着希望時刻に到着していません。"
                         return False
         return True
 
