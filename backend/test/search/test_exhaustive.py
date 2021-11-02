@@ -6,7 +6,7 @@ import json
 
 
 def test_exhaustive():
-    REQUEST_NUM = 100
+    REQUEST_NUM = 200
     route_validator = RouteValidator()
     url = "http://localhost:8001/search"
     try:

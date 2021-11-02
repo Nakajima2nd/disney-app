@@ -44,7 +44,7 @@ class InputGenerator:
         spot_type = random.choice(spot_type_list)
         spot = random.choice(self.spot_list[spot_type])
         # 一応、スポットのタイプを付与する
-        spot["spot-type"] = spot_type
+        spot["type"] = spot_type
         return spot
 
     def __get_start_spot_id(self):
@@ -65,12 +65,47 @@ class InputGenerator:
         start_today_list = ["true", "false"]
         return random.choice(start_today_list)
 
+    def __set_desired_arrival_time(self, spot):
+        # 1/5の確率で到着時刻を設定する
+        set_arrival_time = [True, False, False, False, False]
+        if random.choice(set_arrival_time):
+            desired_arrival_time_list = ["10:00", "14:00", "16:00"]
+            desired_arrival_time = random.choice(desired_arrival_time_list)
+            spot["desired-arrival-time"] = desired_arrival_time
+
+    def __set_stay_time(self, spot):
+        # 1/5の確率で滞在時間を設定する
+        set_arrival_time = [True, False, False, False, False]
+        if random.choice(set_arrival_time):
+            stay_time_list = ["10", "30", "60"]
+            stay_time = random.choice(stay_time_list)
+            spot["stay-time"] = stay_time
+
+    def __set_specified_wait_time(self, spot):
+        # 1/5の確率で指定待ち時間を指定する
+        set_arrival_time = [True, False, False, False, False]
+        if random.choice(set_arrival_time):
+            specified_wait_time_list = ["10", "30", "60"]
+            specified_wait_time = random.choice(specified_wait_time_list)
+            spot["specified-wait-time"] = specified_wait_time
+
     def __get_spots(self):
         spot_num_candidate = [5, 10, 15]
         spot_num = random.choice(spot_num_candidate)
         spots = []
         for i in range(spot_num):
             spot = dict()
-            spot["spot-id"] = self.__get_random_spot()["spot-id"]
+            spot_info = self.__get_random_spot()
+            spot["spot-id"] = spot_info["spot-id"]
+            # 到着希望時刻
+            if spot_info["type"] in ["attraction", "restaurant", "place", "greeting", "show"]:
+                self.__set_desired_arrival_time(spot)
+            # 滞在時間
+            if spot_info["type"] in ["restaurant", "shop"]:
+                self.__set_stay_time(spot)
+            # 指定待ち時間
+            if spot_info["type"] == "show":
+                self.__set_specified_wait_time(spot)
             spots.append(spot)
         return spots
+
