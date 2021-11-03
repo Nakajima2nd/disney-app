@@ -196,12 +196,13 @@ class RouteValidator:
                     return False
             else:
                 # 到着希望時刻指定がある場合、フラグと実際の到着時刻の整合性がとれている
+                net_arrival_time = sec_to_hhmm(hhmm_to_sec(spot["arrival-time"]) + spot["specified-wait-time-result"] * 60)
                 if spot["violate-desired-arrival-time"] == True:
-                    if origin_spot["desired-arrival-time"] == spot["arrival-time"]:
+                    if origin_spot["desired-arrival-time"] == net_arrival_time:
                         self.error_message = str(i) + "番目スポット:到着希望時刻違反フラグがtrueであるにもかかわらず、到着希望時刻に到着しています。"
                         return False
                 else:
-                    if origin_spot["desired-arrival-time"] != spot["arrival-time"]:
+                    if origin_spot["desired-arrival-time"] != net_arrival_time:
                         self.error_message = str(i) + "番目スポット:到着希望時刻フラグがfalseであるにもかかわらず、到着希望時刻に到着していません。"
                         return False
         return True

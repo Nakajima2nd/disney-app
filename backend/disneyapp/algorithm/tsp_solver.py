@@ -250,9 +250,7 @@ class RandomTspSolver:
             if spot.desired_arrival_time == -1:
                 continue
             spot_arrival_time = hhmm_to_sec(spot.arrival_time)
-            # 指定した待ち時間だけ待てなかった場合に備える
-            specified_wait_time_result = max(min(spot.desired_arrival_time - spot_arrival_time, spot.specified_wait_time), 0)
-            tour.spots[i].specified_wait_time_result = int(specified_wait_time_result / 60) # 秒 -> 分
+            tour.spots[i].specified_wait_time_result = int(spot.specified_wait_time / 60) # 秒 -> 分
         # 各種違反フラグをセット
         for i, spot in enumerate(tour.spots):
             if "start-time" in self.spot_data_dict[spot.spot_id] and self.spot_data_dict[spot.spot_id]["start-time"] != "":
@@ -282,8 +280,8 @@ class RandomTspSolver:
                         tour.spots[i].violate_business_hours = True
                         tour.violate_business_hours = True
             # 到着希望時刻を守っているかチェック
-            for input_spot in travel_input.spots:
-                if input_spot.spot_id != spot.spot_id:
+            for j, input_spot in enumerate(travel_input.spots):
+                if j != spot.original_spot_order:
                     continue
                 if input_spot.desired_arrival_time == -1:
                     continue

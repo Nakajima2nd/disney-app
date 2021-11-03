@@ -1,4 +1,4 @@
-from disneyapp.data.spot_list_data_converter import SpotListDataConverter
+from disneyapp.data.spot_list_data_converter import SpotListDataConverter, DynamicDataManager
 from disneyapp.algorithm.models import TravelInput
 from disneyapp.algorithm.tsp_solver import RandomTspSolver
 from disneyapp.data.park_data_accessor import ParkDataAccessor
@@ -46,7 +46,7 @@ def business_hours(request):
 
 @api_view(["GET"])
 def debug(request):
-    return Response("debug mode")
+    return Response("Debug")
 
 
 def exec_search(json_data):

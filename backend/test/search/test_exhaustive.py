@@ -9,10 +9,6 @@ def test_exhaustive():
     REQUEST_NUM = 200
     route_validator = RouteValidator()
     url = "http://localhost:8001/search"
-    try:
-        requests.get("http://localhost:8001/spot/list", timeout=1.0)
-    except:
-        pass
     spot_list_dict = json.loads(requests.get("http://localhost:8001/spot/list").text)
     input_generator = InputGenerator(spot_list_dict)
     input_dict_list = input_generator.generate_search_input(REQUEST_NUM)
