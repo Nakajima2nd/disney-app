@@ -6,7 +6,10 @@ import json
 
 
 def test_exhaustive():
-    REQUEST_NUM = 200
+    """
+    /searchの網羅的なテストを実施する。
+    """
+    REQUEST_NUM = 100
     route_validator = RouteValidator()
     url = "http://localhost:8001/search"
     spot_list_dict = json.loads(requests.get("http://localhost:8001/spot/list").text)
