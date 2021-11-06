@@ -32,6 +32,7 @@ class Subroute:
 class TourSpot:
     def __init__(self):
         self.spot_id = -1
+        self.original_spot_order = -1
         self.spot_name = ""
         self.spot_short_name = ""
         self.lat = ""
@@ -51,12 +52,13 @@ class TourSpot:
     def to_dict(self):
         ret_dict = dict()
         ret_dict["spot-id"] = self.spot_id
+        ret_dict["original-spot-order"] = self.original_spot_order
         ret_dict["spot-name"] = self.spot_name
         ret_dict["short-spot-name"] = self.spot_short_name
         ret_dict["lat"] = self.lat
         ret_dict["lon"] = self.lon
         ret_dict["type"] = self.type
-        ret_dict["arrival_time"] = self.arrival_time
+        ret_dict["arrival-time"] = self.arrival_time
         ret_dict["specified-wait-time-result"] = self.specified_wait_time_result
         ret_dict["wait-time"] = self.wait_time
         ret_dict["play-time"] = self.play_time
@@ -100,11 +102,8 @@ class Tour:
 class TravelInputSpot:
     def __init__(self):
         self.spot_id = -1
+        self.original_spot_order = -1  # Input中での当該スポットの番号
         self.desired_arrival_time = -1  # 00:00 からの経過秒数
-        # オリジナルの到着指定時刻。
-        # specified_wait_timeが指定された場合、巡回探索の際に内部的に到着希望時刻(desired_arrival_time)を早めるという処理を行っている。
-        # しかし、トレース時にオリジナルの到着希望時刻を参照する必要が出てきたため、こちらの変数で管理している。
-        self.desired_arrival_time_origin = -1
         self.stay_time = 0  # [分]
         self.specified_wait_time = 0
 
@@ -189,7 +188,7 @@ class TravelInput:
             return False
         return True
 
-    def __init_spot(self, spot_json):
+    def __init_spot(self, spot_json, original_spot_order):
         """
         TravelInputSpotオブジェクトを生成する。
         生成に失敗した場合はNoneを返す。
@@ -219,7 +218,6 @@ class TravelInput:
                 # hh:mm -> 秒数 への変換
                 hh_str, mm_str = spot_json["desired-arrival-time"].split(":")
                 travel_input_spot.desired_arrival_time = int(hh_str) * 3600 + int(mm_str) * 60
-                travel_input_spot.desired_arrival_time_origin = travel_input_spot.desired_arrival_time
             except:
                 self.error_message = "時間の形式が不正です。hh:mm形式で指定してください。"
                 return None
@@ -247,6 +245,7 @@ class TravelInput:
             except:
                 self.error_message = "specified-wait-timeには整数を指定してください。"
                 return None
+        travel_input_spot.original_spot_order = original_spot_order
 
         return travel_input_spot
 
@@ -262,7 +261,7 @@ class TravelInput:
             if spot_json.get("spot-id") == None:
                 self.error_message = str(i) + "番目のspotにspot-idが存在しません。"
                 return False
-            if not (travel_input_spot := self.__init_spot(spot_json)):
+            if not (travel_input_spot := self.__init_spot(spot_json, i)):
                 return False
             self.spots.append(travel_input_spot)
         return True
@@ -279,19 +278,15 @@ class TravelInput:
         return True
 
     def __init_start_today(self, json_data):
-        # note: フロントエンドの対応が入るまではバックエンドAPIの破壊的変更を入れない
-        if "start-today" in json_data:
-            self.start_today = json_data["start-today"]
+        if not json_data.get("start-today"):
+            self.error_message = "start-todayが存在しません"
+            return False
+        self.start_today = json_data["start-today"]
+        valid_start_today_list = ["true", "false"]
+        if self.start_today not in valid_start_today_list:
+            self.error_message = "start-todayはtrue/falseのいずれかで指定してください。"
+            return False
         return True
-        # if not json_data.get("start-today"):
-        #     self.error_message = "start-todayが存在しません"
-        #     return False
-        # self.start_today = json_data["start-today"]
-        # valid_start_today_list = ["true", "false"]
-        # if self.start_today not in valid_start_today_list:
-        #     self.error_message = "start-todayはtrue/falseのいずれかで指定してください。"
-        #     return False
-        # return True
 
     def init_by_json(self, json_data):
         if not self.__init_specified_time(json_data):
