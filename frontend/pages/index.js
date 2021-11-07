@@ -263,7 +263,9 @@ const Home = () => {
               assoc('stayTime', stayTime),
               assoc('checkedStayTime', checkedStayTime),
               assoc('specifiedWaitTime', specifiedWaitTime),
-              assoc('checkedSpecifiedWaitTime', checkedSpecifiedWaitTime)
+              assoc('checkedSpecifiedWaitTime', checkedSpecifiedWaitTime),
+              assoc('timespanMeanWaitTime', spot.timespanMeanWaitTime),
+              assoc('waitTime', spot.waitTime)
             )(initialEditing)
             acc.push(spppot)
             return true
