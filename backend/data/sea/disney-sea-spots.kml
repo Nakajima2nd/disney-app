@@ -1169,7 +1169,7 @@
         </Style>
         <Style id="1204">
             <IconStyle id="1205">
-                <color>ff0000ff</color>
+                <color>ffb469ff</color>
                 <colorMode>normal</colorMode>
                 <scale>1</scale>
                 <heading>0</heading>
@@ -1224,7 +1224,7 @@
         </Style>
         <Style id="1229">
             <IconStyle id="1230">
-                <color>ffb469ff</color>
+                <color>ffffff00</color>
                 <colorMode>normal</colorMode>
                 <scale>1</scale>
                 <heading>0</heading>
@@ -1284,17 +1284,6 @@
                 <scale>1</scale>
                 <heading>0</heading>
                 <Icon id="1256">
-                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
-                </Icon>
-            </IconStyle>
-        </Style>
-        <Style id="1259">
-            <IconStyle id="1260">
-                <color>ffffff00</color>
-                <colorMode>normal</colorMode>
-                <scale>1</scale>
-                <heading>0</heading>
-                <Icon id="1261">
                     <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
                 </Icon>
             </IconStyle>
@@ -2035,93 +2024,86 @@
             </Point>
         </Placemark>
         <Placemark id="1198">
-            <description>ディズニーシー・プラザ</description>
+            <description>ミッキー広場</description>
             <styleUrl>#1199</styleUrl>
             <Point id="1197">
-                <coordinates>139.88897013253737,35.62696701859257,0.0</coordinates>
+                <coordinates>139.88737282135511,35.626591296757205,0.0</coordinates>
             </Point>
         </Placemark>
         <Placemark id="1203">
-            <description>ミッキー広場</description>
+            <description>ミッキー＆フレンズのハーバーグリーティング：ディズニー・クリスマス</description>
             <styleUrl>#1204</styleUrl>
             <Point id="1202">
                 <coordinates>139.88737282135511,35.626591296757205,0.0</coordinates>
             </Point>
         </Placemark>
         <Placemark id="1208">
-            <description>ミッキー＆フレンズのハーバーグリーティング</description>
+            <description>ビッグバンドビート～ア・スペシャルトリート～</description>
             <styleUrl>#1209</styleUrl>
             <Point id="1207">
-                <coordinates>139.88737282135511,35.626591296757205,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="1213">
-            <description>ビッグバンドビート～ア・スペシャルトリート～</description>
-            <styleUrl>#1214</styleUrl>
-            <Point id="1212">
                 <coordinates>139.88824637236533,35.62484764083992,0.0</coordinates>
             </Point>
         </Placemark>
-        <Placemark id="1218">
+        <Placemark id="1213">
             <description>ディズニー・ライト・ザ・ナイト</description>
-            <styleUrl>#1219</styleUrl>
-            <Point id="1217">
+            <styleUrl>#1214</styleUrl>
+            <Point id="1212">
                 <coordinates>139.88737282135511,35.626591296757205,0.0</coordinates>
             </Point>
         </Placemark>
-        <Placemark id="1223">
+        <Placemark id="1218">
             <description>マイ・フレンド・ダッフィー</description>
-            <styleUrl>#1224</styleUrl>
-            <Point id="1222">
+            <styleUrl>#1219</styleUrl>
+            <Point id="1217">
                 <coordinates>139.88491178287993,35.62454488725738,0.0</coordinates>
             </Point>
         </Placemark>
-        <Placemark id="1228">
+        <Placemark id="1223">
             <description>ソング・オブ・ミラージュ</description>
-            <styleUrl>#1229</styleUrl>
-            <Point id="1227">
+            <styleUrl>#1224</styleUrl>
+            <Point id="1222">
                 <coordinates>139.88223858921663,35.625848533170725,0.0</coordinates>
             </Point>
         </Placemark>
-        <Placemark id="1233">
+        <Placemark id="1228">
             <description>ヴィレッジ・グリーティングプレイス</description>
-            <styleUrl>#1234</styleUrl>
-            <Point id="1232">
+            <styleUrl>#1229</styleUrl>
+            <Point id="1227">
                 <coordinates>139.88563214950267,35.62410452165671,0.0</coordinates>
             </Point>
         </Placemark>
-        <Placemark id="1238">
+        <Placemark id="1233">
             <description>ドックサイドステージ（キャラクターグリーティング）</description>
-            <styleUrl>#1239</styleUrl>
-            <Point id="1237">
+            <styleUrl>#1234</styleUrl>
+            <Point id="1232">
                 <coordinates>139.886931289538,35.62363420865239,0.0</coordinates>
             </Point>
         </Placemark>
-        <Placemark id="1243">
+        <Placemark id="1238">
             <description>“サルードス・アミーゴス！”グリーティングドック</description>
-            <styleUrl>#1244</styleUrl>
-            <Point id="1242">
+            <styleUrl>#1239</styleUrl>
+            <Point id="1237">
                 <coordinates>139.8822065159945,35.626410442370045,0.0</coordinates>
             </Point>
         </Placemark>
-        <Placemark id="1248">
+        <Placemark id="1243">
             <description>ミッキー＆フレンズ・グリーティングトレイル（ミッキー）</description>
+            <styleUrl>#1244</styleUrl>
+            <Point id="1242">
+                <coordinates>139.8812056245969,35.625854419808654,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="1248">
+            <description>ミッキー＆フレンズ・グリーティングトレイル（ミニー）</description>
             <styleUrl>#1249</styleUrl>
             <Point id="1247">
                 <coordinates>139.8812056245969,35.625854419808654,0.0</coordinates>
             </Point>
         </Placemark>
         <Placemark id="1253">
-            <description>ミッキー＆フレンズ・グリーティングトレイル（ミニー）</description>
+            <description>マーメイドラグーンシアター（キャラクターグリーティング）</description>
             <styleUrl>#1254</styleUrl>
             <Point id="1252">
-                <coordinates>139.8812056245969,35.625854419808654,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="1258">
-            <description>マーメイドラグーンシアター（キャラクターグリーティング）</description>
-            <styleUrl>#1259</styleUrl>
-            <Point id="1257">
                 <coordinates>139.88271777395298,35.62640223074321,0.0</coordinates>
             </Point>
         </Placemark>
