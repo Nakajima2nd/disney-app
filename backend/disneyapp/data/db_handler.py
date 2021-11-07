@@ -22,7 +22,7 @@ class DBHandler:
         """
         with psycopg2.connect(self.database_url, sslmode='require') as conn:
             with conn.cursor(cursor_factory=DictCursor) as cur:
-                cur.execute("SELECT data FROM " + table_name + " ORDER BY datetime DESC")
+                cur.execute("SELECT data FROM " + table_name + " ORDER BY datetime DESC limit 1")
                 latest_dynamic_record = cur.fetchone()
                 return json.loads(latest_dynamic_record["data"])
 
