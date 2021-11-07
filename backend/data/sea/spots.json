@@ -11,6 +11,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/219/",
             "area": "メディテレーニアンハーバー",
             "speed-thrill": "false",
+            "description": "ライド、シアター、大きな音がする、暗やみをすすむ、雨の日も安心",
             "nearest-node-id": 8
         },
         {
@@ -24,6 +25,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/227/",
             "area": "メディテレーニアンハーバー",
             "speed-thrill": "false",
+            "description": "ライド、移動・周遊",
             "nearest-node-id": 10
         },
         {
@@ -36,6 +38,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/244/",
             "area": "メディテレーニアンハーバー",
             "speed-thrill": "false",
+            "description": "体験型、暗やみをすすむ",
             "nearest-node-id": 45
         },
         {
@@ -49,6 +52,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/230/",
             "area": "メディテレーニアンハーバー",
             "speed-thrill": "false",
+            "description": "ライド、移動・周遊",
             "nearest-node-id": 21
         },
         {
@@ -62,6 +66,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/246/",
             "area": "アメリカンウォーターフロント",
             "speed-thrill": "false",
+            "description": "シアタータイプ、雨の日も安心、大きな音がする、暗やみをすすむ",
             "nearest-node-id": 100
         },
         {
@@ -75,6 +80,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/243/",
             "area": "アメリカンウォーターフロント",
             "speed-thrill": "true",
+            "description": "ライド、スピード/スリルあり、雨の日も安心、大きな音がする、怖いキャラクターが登場、暗やみをすすむ",
             "nearest-node-id": 36
         },
         {
@@ -88,6 +94,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/232/",
             "area": "アメリカンウォーターフロント",
             "speed-thrill": "false",
+            "description": "ライド、移動・周遊、雨の日も安心",
             "nearest-node-id": 25
         },
         {
@@ -101,6 +108,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/228/",
             "area": "アメリカンウォーターフロント",
             "speed-thrill": "false",
+            "description": "ライド、移動・周遊",
             "nearest-node-id": 51
         },
         {
@@ -114,6 +122,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/218/",
             "area": "アメリカンウォーターフロント",
             "speed-thrill": "false",
+            "description": "ライド、3D体験、雨の日も安心、大きな音がする、暗やみをすすむ、回転する",
             "nearest-node-id": 28
         },
         {
@@ -127,6 +136,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/233/",
             "area": "アメリカンウォーターフロント",
             "speed-thrill": "false",
+            "description": "ライド、移動・周遊",
             "nearest-node-id": 37
         },
         {
@@ -140,6 +150,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/234/",
             "area": "ポートディスカバリー",
             "speed-thrill": "false",
+            "description": "ライド、回転する",
             "nearest-node-id": 60
         },
         {
@@ -153,6 +164,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/231/",
             "area": "ポートディスカバリー",
             "speed-thrill": "false",
+            "description": "ライド、移動・周遊、雨の日も安心",
             "nearest-node-id": 62
         },
         {
@@ -166,6 +178,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/247/",
             "area": "ポートディスカバリー",
             "speed-thrill": "false",
+            "description": "ライド、雨の日も安心、大きな音がする、暗やみをすすむ",
             "nearest-node-id": 64
         },
         {
@@ -179,6 +192,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/222/",
             "area": "ロストリバーデルタ",
             "speed-thrill": "true",
+            "description": "ライド、シングルライダー対象、スピード/スリルあり、雨の日も安心、大きな音がする、怖いキャラクターが登場、暗やみをすすむ",
             "nearest-node-id": 75
         },
         {
@@ -192,6 +206,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/229/",
             "area": "ロストリバーデルタ",
             "speed-thrill": "false",
+            "description": "ライド、移動・周遊",
             "nearest-node-id": 86
         },
         {
@@ -205,6 +220,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/242/",
             "area": "ロストリバーデルタ",
             "speed-thrill": "true",
+            "description": "ライド、シングルライダー対象、スピード/スリルあり、大きな音がする、回転する",
             "nearest-node-id": 78
         },
         {
@@ -218,6 +234,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/236/",
             "area": "アラビアンコースト",
             "speed-thrill": "false",
+            "description": "ライド、ディズニーの世界を体験、回転する",
             "nearest-node-id": 70
         },
         {
@@ -231,6 +248,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/220/",
             "area": "アラビアンコースト",
             "speed-thrill": "false",
+            "description": "ライド、ディズニーの世界を体験、回転する",
             "nearest-node-id": 89
         },
         {
@@ -244,6 +262,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/235/",
             "area": "アラビアンコースト",
             "speed-thrill": "false",
+            "description": "ライド、雨の日も安心、暗やみをすすむ",
             "nearest-node-id": 88
         },
         {
@@ -257,6 +276,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/226/",
             "area": "アラビアンコースト",
             "speed-thrill": "false",
+            "description": "シアタータイプ、3D体験、ディズニーの世界を体験、雨の日も安心、大きな音がする、暗やみをすすむ",
             "nearest-node-id": 71
         },
         {
@@ -269,6 +289,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/202/",
             "area": "マーメイドラグーン",
             "speed-thrill": "false",
+            "description": "体験型、ディズニーの世界を体験、雨の日も安心、大きな音がする、怖いキャラクターが登場、暗やみをすすむ",
             "nearest-node-id": 91
         },
         {
@@ -282,6 +303,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/239/",
             "area": "マーメイドラグーン",
             "speed-thrill": "false",
+            "description": "ライド、雨の日も安心、暗やみをすすむ",
             "nearest-node-id": 94
         },
         {
@@ -295,6 +317,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/238/",
             "area": "マーメイドラグーン",
             "speed-thrill": "false",
+            "description": "ライド、回転する",
             "nearest-node-id": 97
         },
         {
@@ -308,6 +331,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/237/",
             "area": "マーメイドラグーン",
             "speed-thrill": "true",
+            "description": "ライド、スピード/スリルあり、ディズニーの世界を体験",
             "nearest-node-id": 82
         },
         {
@@ -321,6 +345,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/240/",
             "area": "マーメイドラグーン",
             "speed-thrill": "false",
+            "description": "ライド、ディズニーの世界を体験、雨の日も安心、暗やみをすすむ、回転する",
             "nearest-node-id": 96
         },
         {
@@ -334,6 +359,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/221/",
             "area": "マーメイドラグーン",
             "speed-thrill": "false",
+            "description": "シアタータイプ、ディズニーの世界を体験、雨の日も安心、大きな音がする、暗やみをすすむ",
             "nearest-node-id": 140
         },
         {
@@ -347,6 +373,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/241/",
             "area": "マーメイドラグーン",
             "speed-thrill": "false",
+            "description": "ライド、雨の日も安心、暗やみをすすむ、回転する",
             "nearest-node-id": 93
         },
         {
@@ -360,6 +387,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/224/",
             "area": "ミステリアスアイランド",
             "speed-thrill": "false",
+            "description": "ライド、雨の日も安心、大きな音がする、怖いキャラクターが登場、暗やみをすすむ",
             "nearest-node-id": 14
         },
         {
@@ -373,6 +401,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/attraction/detail/223/",
             "area": "ミステリアスアイランド",
             "speed-thrill": "true",
+            "description": "ライド、スピード/スリルあり、大きな音がする、怖いキャラクターが登場、暗やみをすすむ",
             "nearest-node-id": 99
         },
         {
@@ -394,6 +423,7 @@
             "budget-day": "1,200～2,200円",
             "budget-night": "1,200～2,200円",
             "seats": "570",
+            "description": "パスタやロティサリーチキンなど。お子様メニューあり、低アレルゲンメニューあり",
             "nearest-node-id": 118
         },
         {
@@ -414,6 +444,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "120",
+            "description": "ドリンクやスウィーツなど",
             "nearest-node-id": 31
         },
         {
@@ -435,6 +466,7 @@
             "budget-day": "1,200円～2,200円",
             "budget-night": "1,200円～2,200円",
             "seats": "840",
+            "description": "パスタやピッツァなど",
             "nearest-node-id": 11
         },
         {
@@ -455,6 +487,7 @@
             "budget-day": "3,700円～",
             "budget-night": "5,800円～",
             "seats": "200",
+            "description": "コース料理と豊富なワイン",
             "nearest-node-id": 122
         },
         {
@@ -475,6 +508,7 @@
             "budget-day": "1,200～2,200円",
             "budget-night": "1,200～2,200円",
             "seats": "70",
+            "description": "オードヴルやカクテルなど",
             "nearest-node-id": 122
         },
         {
@@ -495,6 +529,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "150",
+            "description": "パンやスウィーツ",
             "nearest-node-id": 114
         },
         {
@@ -516,6 +551,7 @@
             "budget-day": "2,200円～",
             "budget-night": "2,200円～",
             "seats": "220",
+            "description": "パスタ料理や窯焼きピッツァなど。お子様メニューあり、低アレルゲンメニューあり",
             "nearest-node-id": 22
         },
         {
@@ -535,6 +571,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "90",
+            "description": "ターキーレッグ",
             "nearest-node-id": 120
         },
         {
@@ -556,6 +593,7 @@
             "budget-day": "3,700円～",
             "budget-night": "3,700円～",
             "seats": "190",
+            "description": "ローストビーフなどのセットメニュー。お子様メニューあり、低アレルゲンメニューあり",
             "nearest-node-id": 100
         },
         {
@@ -575,6 +613,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "860",
+            "description": "ハンバーガーなど",
             "nearest-node-id": 127
         },
         {
@@ -596,6 +635,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "None",
+            "description": "ダッフィーをモチーフにしたスウィーツやドリンク",
             "nearest-node-id": 125
         },
         {
@@ -617,6 +657,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "470",
+            "description": "サンドウィッチやフライドチキンなど",
             "nearest-node-id": 38
         },
         {
@@ -638,6 +679,7 @@
             "budget-day": "1,200～2,200円",
             "budget-night": "1,200～2,200円",
             "seats": "110",
+            "description": "サンドウィッチや生ビール、カクテルなど",
             "nearest-node-id": 100
         },
         {
@@ -657,6 +699,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "None",
+            "description": "ホットドッグのワゴン",
             "nearest-node-id": 33
         },
         {
@@ -676,6 +719,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "560",
+            "description": "サンドウィッチ",
             "nearest-node-id": 24
         },
         {
@@ -696,6 +740,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "None",
+            "description": "骨付きソーセージなどのワゴン",
             "nearest-node-id": 41
         },
         {
@@ -715,6 +760,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "None",
+            "description": "チュロスなど",
             "nearest-node-id": 50
         },
         {
@@ -735,6 +781,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "40",
+            "description": "ベイクドポテトや季節のメニュー",
             "nearest-node-id": 38
         },
         {
@@ -754,6 +801,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "None",
+            "description": "フルーツカップなどのワゴン",
             "nearest-node-id": 41
         },
         {
@@ -773,6 +821,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "None",
+            "description": "ポークライスロールなど",
             "nearest-node-id": 37
         },
         {
@@ -793,6 +842,7 @@
             "budget-day": "2,200円～",
             "budget-night": "2,200円～",
             "seats": "260",
+            "description": "天麩羅などの和食。お子様メニューあり、低アレルゲンメニューあり",
             "nearest-node-id": 33
         },
         {
@@ -813,6 +863,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "40",
+            "description": "カウンターサービス",
             "nearest-node-id": 37
         },
         {
@@ -832,6 +883,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "30",
+            "description": "うきわまんのワゴン",
             "nearest-node-id": 56
         },
         {
@@ -851,6 +903,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "20",
+            "description": "フライドピザなどのワゴン",
             "nearest-node-id": 49
         },
         {
@@ -871,6 +924,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "80",
+            "description": "スナックなど",
             "nearest-node-id": 62
         },
         {
@@ -891,6 +945,7 @@
             "budget-day": "1,200～2,200円",
             "budget-night": "1,200～2,200円",
             "seats": "500",
+            "description": "グリルドビーフなど。お子様メニューあり、低アレルゲンメニューあり",
             "nearest-node-id": 62
         },
         {
@@ -910,6 +965,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "None",
+            "description": "スナックなど",
             "nearest-node-id": 76
         },
         {
@@ -929,6 +985,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "30",
+            "description": "スナックなど",
             "nearest-node-id": 79
         },
         {
@@ -948,6 +1005,7 @@
             "budget-day": "1,200円～2,200円",
             "budget-night": "1,200円～2,200円",
             "seats": "620",
+            "description": "ワンプレートのメキシコ料理など",
             "nearest-node-id": 86
         },
         {
@@ -970,6 +1028,7 @@
             "budget-day": "1,200～2,200円",
             "budget-night": "1,200～2,200円",
             "seats": "700",
+            "description": "ポークやチキン、サーモンをオーブンでローストした料理など。お子様メニューあり、低アレルゲンメニューあり",
             "nearest-node-id": 137
         },
         {
@@ -989,6 +1048,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "30",
+            "description": "チキンレッグ",
             "nearest-node-id": 78
         },
         {
@@ -1008,6 +1068,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "None",
+            "description": "チュロスのワゴン",
             "nearest-node-id": 68
         },
         {
@@ -1027,6 +1088,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "930",
+            "description": "ライスとナンが付くカリー。低アレルゲンメニューあり",
             "nearest-node-id": 129
         },
         {
@@ -1047,6 +1109,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "160",
+            "description": "スナックなど",
             "nearest-node-id": 68
         },
         {
@@ -1066,6 +1129,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "580",
+            "description": "ピザなど",
             "nearest-node-id": 0
         },
         {
@@ -1087,6 +1151,7 @@
             "budget-day": "1,200～2,200円",
             "budget-night": "1,200～2,200円",
             "seats": "610",
+            "description": "チャーハンや点心などの中華料理。お子様メニューあり、低アレルゲンメニューあり",
             "nearest-node-id": 48
         },
         {
@@ -1106,6 +1171,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "140",
+            "description": "スナックなど",
             "nearest-node-id": 47
         },
         {
@@ -1125,6 +1191,7 @@
             "budget-day": "～1,200円",
             "budget-night": "～1,200円",
             "seats": "None",
+            "description": "チュロスのワゴン",
             "nearest-node-id": 48
         },
         {
@@ -1136,6 +1203,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/604/",
             "area": "メディテレーニアンハーバー",
+            "description": "",
             "nearest-node-id": 117
         },
         {
@@ -1147,6 +1215,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/600/",
             "area": "メディテレーニアンハーバー",
+            "description": "文具、本やDVDなど",
             "nearest-node-id": 6
         },
         {
@@ -1158,6 +1227,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/616/",
             "area": "メディテレーニアンハーバー",
+            "description": "インテリア雑貨など",
             "nearest-node-id": 30
         },
         {
@@ -1169,6 +1239,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/615/",
             "area": "メディテレーニアンハーバー",
+            "description": "",
             "nearest-node-id": 30
         },
         {
@@ -1180,6 +1251,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/601/",
             "area": "メディテレーニアンハーバー",
+            "description": "テーブルウェアやキッチングッズなど",
             "nearest-node-id": 113
         },
         {
@@ -1191,6 +1263,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/611/",
             "area": "メディテレーニアンハーバー",
+            "description": "ダッフィーのグッズなど",
             "nearest-node-id": 6
         },
         {
@@ -1202,6 +1275,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/613/",
             "area": "メディテレーニアンハーバー",
+            "description": "ファンキャップやカチューシャのワゴン",
             "nearest-node-id": 17
         },
         {
@@ -1213,6 +1287,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/602/",
             "area": "メディテレーニアンハーバー",
+            "description": "カチューシャやパスケースなどのワゴン",
             "nearest-node-id": 112
         },
         {
@@ -1224,6 +1299,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/612/",
             "area": "メディテレーニアンハーバー",
+            "description": "パーク内最大のアパレルのお店",
             "nearest-node-id": 6
         },
         {
@@ -1235,6 +1311,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/608/",
             "area": "メディテレーニアンハーバー",
+            "description": "写真関連グッズ",
             "nearest-node-id": 3
         },
         {
@@ -1246,6 +1323,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/605/",
             "area": "メディテレーニアンハーバー",
+            "description": "アクセサリーなど",
             "nearest-node-id": 117
         },
         {
@@ -1257,6 +1335,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/614/",
             "area": "メディテレーニアンハーバー",
+            "description": "チョコレートやクッキーなどのお菓子",
             "nearest-node-id": 19
         },
         {
@@ -1268,6 +1347,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/606/",
             "area": "メディテレーニアンハーバー",
+            "description": "カチューシャや季節に合わせたグッズなどのワゴン",
             "nearest-node-id": 118
         },
         {
@@ -1279,6 +1359,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/617/",
             "area": "メディテレーニアンハーバー",
+            "description": "ファンキャップやカチューシャ、光るおもちゃなどパークで活躍しそうなグッズのワゴン",
             "nearest-node-id": 55
         },
         {
@@ -1290,6 +1371,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/629/",
             "area": "アメリカンウォーターフロント",
+            "description": "ダッフィーのグッズ",
             "nearest-node-id": 123
         },
         {
@@ -1301,6 +1383,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/622/",
             "area": "アメリカンウォーターフロント",
+            "description": "アパレルやオズワルドのグッズなど",
             "nearest-node-id": 33
         },
         {
@@ -1312,6 +1395,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/618/",
             "area": "アメリカンウォーターフロント",
+            "description": "ディズニー／ピクサー映画『トイ・ストーリー』のグッズなどのワゴン",
             "nearest-node-id": 29
         },
         {
@@ -1323,6 +1407,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/624/",
             "area": "アメリカンウォーターフロント",
+            "description": "「タワー・オブ・テラー」のグッズやアトラクション体験中の瞬間写真",
             "nearest-node-id": 36
         },
         {
@@ -1334,6 +1419,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/623/",
             "area": "アメリカンウォーターフロント",
+            "description": "ファンキャップやカチューシャ、光るおもちゃなどのワゴン",
             "nearest-node-id": 33
         },
         {
@@ -1345,6 +1431,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/621/",
             "area": "アメリカンウォーターフロント",
+            "description": "ダッフィーのグッズやお菓子など",
             "nearest-node-id": 24
         },
         {
@@ -1356,6 +1443,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/631/",
             "area": "ポートディスカバリー",
+            "description": "カチューシャや光るおもちゃなどのワゴン",
             "nearest-node-id": 58
         },
         {
@@ -1367,6 +1455,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/630/",
             "area": "ポートディスカバリー",
+            "description": "ニモの雑貨やお菓子など",
             "nearest-node-id": 59
         },
         {
@@ -1378,6 +1467,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/648/",
             "area": "ロストリバーデルタ",
+            "description": "",
             "nearest-node-id": 137
         },
         {
@@ -1389,6 +1479,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/644/",
             "area": "ロストリバーデルタ",
+            "description": "「インディ・ジョーンズ・アドベンチャー：クリスタルスカルの魔宮」体験中の瞬間写真",
             "nearest-node-id": 137
         },
         {
@@ -1400,6 +1491,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/647/",
             "area": "ロストリバーデルタ",
+            "description": "カチューシャや光るおもちゃなどのワゴン",
             "nearest-node-id": 138
         },
         {
@@ -1411,6 +1503,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/645/",
             "area": "ロストリバーデルタ",
+            "description": "オリジナルグッズが作れるお店",
             "nearest-node-id": 110
         },
         {
@@ -1422,6 +1515,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/641/",
             "area": "アラビアンコースト",
+            "description": "ガラス工芸品と手品用品の実演販売など",
             "nearest-node-id": 132
         },
         {
@@ -1433,6 +1527,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/650/",
             "area": "アラビアンコースト",
+            "description": "ゲームに挑戦！",
             "nearest-node-id": 135
         },
         {
@@ -1444,6 +1539,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/637/",
             "area": "マーメイドラグーン",
+            "description": "",
             "nearest-node-id": 82
         },
         {
@@ -1455,6 +1551,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/638/",
             "area": "マーメイドラグーン",
+            "description": "ベビーグッズ、キッズウェアなど",
             "nearest-node-id": 109
         },
         {
@@ -1466,6 +1563,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/640/",
             "area": "マーメイドラグーン",
+            "description": "カチューシャや光るおもちゃのワゴン",
             "nearest-node-id": 16
         },
         {
@@ -1477,6 +1575,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/633/",
             "area": "マーメイドラグーン",
+            "description": "アリエルのグッズやお菓子など。似顔絵や切り絵の実演販売",
             "nearest-node-id": 0
         },
         {
@@ -1488,6 +1587,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/636/",
             "area": "マーメイドラグーン",
+            "description": "",
             "nearest-node-id": 82
         },
         {
@@ -1499,6 +1599,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/639/",
             "area": "マーメイドラグーン",
+            "description": "ぬいぐるみやおもちゃ、カプセルトイなど",
             "nearest-node-id": 97
         },
         {
@@ -1510,6 +1611,7 @@
             "type": "shop",
             "url": "https://www.tokyodisneyresort.jp/tds/shop/detail/632/",
             "area": "ミステリアスアイランド",
+            "description": "",
             "nearest-node-id": 47
         },
         {
@@ -1521,6 +1623,7 @@
             "type": "place",
             "url": "https://www.tokyodisneyresort.jp/tds/service/detail/041/",
             "area": "メディテレーニアンハーバー",
+            "description": "カチューシャなど",
             "nearest-node-id": 106
         },
         {
@@ -1532,6 +1635,7 @@
             "type": "place",
             "url": "https://www.tokyodisneyresort.jp/tds/service/detail/041/",
             "area": "メディテレーニアンハーバー",
+            "description": "東京ディズニーシー入口手前に広がるチケットブース",
             "nearest-node-id": 107
         },
         {
@@ -1542,43 +1646,35 @@
             "lon": "139.88911531873848",
             "type": "place",
             "area": "メディテレーニアンハーバー",
+            "description": "ディズニーシーのシンボル",
             "nearest-node-id": 4
         },
         {
             "spot-id": 105,
-            "name": "ディズニーシー・プラザ",
-            "short-name": "ディズニーシー・プラザ",
-            "lat": "35.62696701859257",
-            "lon": "139.88897013253737",
-            "type": "place",
-            "url": "https://www.tokyodisneyresort.jp/dream/photo/character/tds_disneysea-plaza.html",
-            "area": "メディテレーニアンハーバー",
-            "nearest-node-id": 3
-        },
-        {
-            "spot-id": 106,
             "name": "ミッキー広場",
             "short-name": "ミッキー広場",
             "lat": "35.626591296757205",
             "lon": "139.88737282135511",
             "type": "place",
             "area": "メディテレーニアンハーバー",
+            "description": "メディテレーニアンハーバーのショーの中心になる場所",
             "nearest-node-id": 108
         },
         {
-            "spot-id": 107,
-            "name": "ミッキー＆フレンズのハーバーグリーティング",
+            "spot-id": 106,
+            "name": "ミッキー＆フレンズのハーバーグリーティング：ディズニー・クリスマス",
             "short-name": "ハーバーグリーティング",
             "lat": "35.626591296757205",
             "lon": "139.88737282135511",
             "type": "show",
             "play-time": 10,
-            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/265/",
+            "url": "https://www.tokyodisneyresort.jp/tds/show/detail/950/",
             "area": "メディテレーニアンハーバー",
+            "description": "水上、屋外",
             "nearest-node-id": 108
         },
         {
-            "spot-id": 108,
+            "spot-id": 107,
             "name": "ビッグバンドビート～ア・スペシャルトリート～",
             "short-name": "ビッグバンドビート",
             "lat": "35.62484764083992",
@@ -1587,10 +1683,11 @@
             "play-time": 25,
             "url": "https://www.tokyodisneyresort.jp/tds/show/detail/975/",
             "area": "アメリカンウォーターフロント",
+            "description": "ミッキーの仲間たちが繰り広げる、スウィングジャズの音楽を中心にしたレビューショー。ステージショー、雨の日も実施",
             "nearest-node-id": 26
         },
         {
-            "spot-id": 109,
+            "spot-id": 108,
             "name": "ディズニー・ライト・ザ・ナイト",
             "short-name": "ディズニー・ライト・ザ・ナイト",
             "lat": "35.626591296757205",
@@ -1599,10 +1696,11 @@
             "play-time": 5,
             "url": "https://www.tokyodisneyresort.jp/tds/show/detail/930/",
             "area": "パークワイド",
+            "description": "雨の日も実施、屋外",
             "nearest-node-id": 108
         },
         {
-            "spot-id": 110,
+            "spot-id": 109,
             "name": "マイ・フレンド・ダッフィー",
             "short-name": "マイ・フレンド・ダッフィー",
             "lat": "35.62454488725738",
@@ -1611,10 +1709,11 @@
             "play-time": 10,
             "url": "https://www.tokyodisneyresort.jp/tds/show/detail/931/",
             "area": "アメリカンウォーターフロント",
+            "description": "シェリーメイ誕生の物語と、新しいお友だちジェラトーニが、ミニーとシェリーメイに出会うまでの物語を楽しい歌やダンスで紹介。ステージショー、雨の日も実施、食事ができる",
             "nearest-node-id": 125
         },
         {
-            "spot-id": 111,
+            "spot-id": 110,
             "name": "ソング・オブ・ミラージュ",
             "short-name": "ソング・オブ・ミラージュ",
             "lat": "35.625848533170725",
@@ -1623,10 +1722,11 @@
             "play-time": 30,
             "url": "https://www.tokyodisneyresort.jp/tds/show/detail/927/",
             "area": "ロストリバーデルタ",
+            "description": "ミッキーマウスと仲間たちが、かつて多くの冒険家たちの間で話題となった幻の都市、黄金に輝く川の都「リオ・ドラード」を目指し、誰も見たことのない、時空を超えた大冒険を繰り広げます",
             "nearest-node-id": 65
         },
         {
-            "spot-id": 112,
+            "spot-id": 111,
             "name": "ヴィレッジ・グリーティングプレイス",
             "short-name": "ヴィレッジ・グリーティングプレイス",
             "lat": "35.62410452165671",
@@ -1636,10 +1736,11 @@
             "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/905/",
             "area": "アメリカンウォーターフロント",
             "character": "シェリーメイ",
+            "description": "のどかな漁村ケープコッドで、シェリーメイとの写真撮影",
             "nearest-node-id": 51
         },
         {
-            "spot-id": 113,
+            "spot-id": 112,
             "name": "ドックサイドステージ（キャラクターグリーティング）",
             "short-name": "ドックサイドステージ",
             "lat": "35.62363420865239",
@@ -1649,10 +1750,11 @@
             "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/270/",
             "area": "アメリカンウォーターフロント",
             "character": "当日のお楽しみ",
+            "description": "ドックサイドステージで、ディズニーの仲間たちと写真撮影",
             "nearest-node-id": 100
         },
         {
-            "spot-id": 114,
+            "spot-id": 113,
             "name": "“サルードス・アミーゴス！”グリーティングドック",
             "short-name": "サルードス・アミーゴス！",
             "lat": "35.626410442370045",
@@ -1662,10 +1764,11 @@
             "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/904/",
             "area": "ロストリバーデルタ",
             "character": "ダッフィー",
+            "description": "ラテンアメリカの伝統的な衣装を身につけたダッフィーと一緒に写真撮影",
             "nearest-node-id": 86
         },
         {
-            "spot-id": 115,
+            "spot-id": 114,
             "name": "ミッキー＆フレンズ・グリーティングトレイル（ミッキー）",
             "short-name": "グリーティングトレイル（ミッキー）",
             "lat": "35.625854419808654",
@@ -1675,10 +1778,11 @@
             "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/901/",
             "area": "ロストリバーデルタ",
             "character": "ミッキーマウス",
+            "description": "古代文明の遺跡や、植物や昆虫などの調査・研究をしているディズニーの仲間たちと写真撮影",
             "nearest-node-id": 72
         },
         {
-            "spot-id": 116,
+            "spot-id": 115,
             "name": "ミッキー＆フレンズ・グリーティングトレイル（ミニー）",
             "short-name": "グリーティングトレイル（ミニー）",
             "lat": "35.625854419808654",
@@ -1688,10 +1792,11 @@
             "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/902/",
             "area": "ロストリバーデルタ",
             "character": "ミニーマウス",
+            "description": "古代文明の遺跡や、植物や昆虫などの調査・研究をしているディズニーの仲間たちと写真撮影",
             "nearest-node-id": 72
         },
         {
-            "spot-id": 117,
+            "spot-id": 116,
             "name": "マーメイドラグーンシアター（キャラクターグリーティング）",
             "short-name": "マーメイドラグーンシアター",
             "lat": "35.62640223074321",
@@ -1701,6 +1806,7 @@
             "url": "https://www.tokyodisneyresort.jp/tds/greeting/detail/272/",
             "area": "マーメイドラグーン",
             "character": "当日のお楽しみ",
+            "description": "マーメイドラグーンシアター内で、ディズニーの仲間たちと写真撮影",
             "nearest-node-id": 140
         }
     ]

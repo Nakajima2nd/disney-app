@@ -1,4 +1,3 @@
-
 class AttractionSpotInfo:
     """
     spot/list で返却するアトラクション情報のクラス。
@@ -14,6 +13,7 @@ class AttractionSpotInfo:
         self.url = ""
         self.area = ""
         self.speed_thrill = "false"
+        self.description = ""
         # dynamic data
         self.enable = True
         self.wait_time = -1
@@ -34,6 +34,7 @@ class AttractionSpotInfo:
         self.url = obj["url"]
         self.area = obj["area"]
         self.speed_thrill = obj["speed-thrill"]
+        self.description = obj["description"]
 
     def set_dynamic_data(self, obj):
         self.enable = False if obj["disable-flag"] else True
@@ -56,6 +57,7 @@ class AttractionSpotInfo:
             "url": self.url,
             "area": self.area,
             "speed-thrill": self.speed_thrill,
+            "description": self.description,
             "enable": self.enable,
             "wait-time": self.wait_time,
             "mean-wait-time": self.mean_wait_time,
@@ -87,6 +89,7 @@ class RestaurantSpotInfo:
         self.budget_day = ""
         self.budget_night = ""
         self.seats = ""
+        self.description = ""
         # dynamic data
         self.enable = True
         self.wait_time = -1
@@ -110,6 +113,7 @@ class RestaurantSpotInfo:
         self.budget_day = obj["budget-day"]
         self.budget_night = obj["budget-night"]
         self.seats = obj["seats"]
+        self.description = obj["description"]
 
     def set_dynamic_data(self, obj):
         self.enable = False if obj["disable-flag"] else True
@@ -135,6 +139,7 @@ class RestaurantSpotInfo:
             "budget-day": self.budget_day,
             "budget-night": self.budget_night,
             "seats": self.seats,
+            "description": self.description,
             "enable": self.enable,
             "wait-time": self.wait_time,
             "mean-wait-time": self.mean_wait_time,
@@ -160,6 +165,7 @@ class ShowSpotInfo:
         self.play_time = -1
         self.url = ""
         self.area = ""
+        self.description = ""
         # dynamic data
         self.enable = True
         self.next_start_time = ""
@@ -174,6 +180,7 @@ class ShowSpotInfo:
         self.play_time = obj["play-time"] if obj.get("play-time") else -1
         self.url = obj["url"]
         self.area = obj["area"]
+        self.description = obj["description"]
 
     def set_dynamic_data(self, obj):
         self.enable = False if obj["disable-flag"] else True
@@ -193,6 +200,7 @@ class ShowSpotInfo:
                     "play-time": self.play_time,
                     "url": self.url,
                     "area": self.area,
+                    "description": self.description,
                     "enable": self.enable,
                     "next-start-time": self.next_start_time,
                     "start-time": start_time,
@@ -217,6 +225,7 @@ class GreetingSpotInfo:
         self.url = ""
         self.area = ""
         self.character = ""
+        self.description = ""
         # dynamic data
         self.enable = True
         self.standby_pass_status = ""
@@ -237,6 +246,7 @@ class GreetingSpotInfo:
         self.url = obj["url"]
         self.area = obj["area"]
         self.character = obj["character"]
+        self.description = obj["description"]
 
     def set_dynamic_data(self, obj):
         self.enable = False if obj["disable-flag"] else True
@@ -259,6 +269,7 @@ class GreetingSpotInfo:
             "url": self.url,
             "area": self.area,
             "character": self.character,
+            "description": self.description,
             "enable": self.enable,
             "standby-pass-status": self.standby_pass_status,
             "wait-time": self.wait_time,
@@ -284,6 +295,7 @@ class ShopSpotInfo:
         self.lon = ""
         self.url = ""
         self.area = ""
+        self.description = ""
 
     def set_static_data(self, obj):
         self.spot_id = obj["spot-id"]
@@ -293,6 +305,7 @@ class ShopSpotInfo:
         self.lon = obj["lon"]
         self.url = obj["url"]
         self.area = obj["area"]
+        self.description = obj["description"]
 
     def set_dynamic_data(self, obj):
         # shopは動的情報は存在しない
@@ -307,6 +320,7 @@ class ShopSpotInfo:
             "lon": self.lon,
             "url": self.url,
             "area": self.area,
+            "description": self.description,
             "type": "shop"
         }]
 
@@ -323,6 +337,7 @@ class PlaceSpotInfo:
         self.lon = ""
         self.url = ""
         self.area = ""
+        self.description = ""
 
     def set_static_data(self, obj):
         self.spot_id = obj["spot-id"]
@@ -332,6 +347,7 @@ class PlaceSpotInfo:
         self.lon = obj["lon"]
         self.url = obj["url"] if obj.get("url") else ""
         self.area = obj["area"]
+        self.description = obj["description"]
 
     def set_dynamic_data(self, obj):
         # placeは動的情報は存在しない
@@ -346,6 +362,7 @@ class PlaceSpotInfo:
             "lon": self.lon,
             "url": self.url,
             "area": self.area,
+            "description": self.description,
             "type": "place"
         }]
 
