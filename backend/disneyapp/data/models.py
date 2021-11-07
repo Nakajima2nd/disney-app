@@ -1,4 +1,3 @@
-
 class AttractionSpotInfo:
     """
     spot/list で返却するアトラクション情報のクラス。
@@ -14,6 +13,7 @@ class AttractionSpotInfo:
         self.url = ""
         self.area = ""
         self.speed_thrill = "false"
+        self.description = "説明文"
         # dynamic data
         self.enable = True
         self.wait_time = -1
@@ -56,6 +56,7 @@ class AttractionSpotInfo:
             "url": self.url,
             "area": self.area,
             "speed-thrill": self.speed_thrill,
+            "description": self.description,
             "enable": self.enable,
             "wait-time": self.wait_time,
             "mean-wait-time": self.mean_wait_time,
@@ -87,6 +88,7 @@ class RestaurantSpotInfo:
         self.budget_day = ""
         self.budget_night = ""
         self.seats = ""
+        self.description = "説明文"
         # dynamic data
         self.enable = True
         self.wait_time = -1
@@ -135,6 +137,7 @@ class RestaurantSpotInfo:
             "budget-day": self.budget_day,
             "budget-night": self.budget_night,
             "seats": self.seats,
+            "description": self.description,
             "enable": self.enable,
             "wait-time": self.wait_time,
             "mean-wait-time": self.mean_wait_time,
@@ -160,6 +163,7 @@ class ShowSpotInfo:
         self.play_time = -1
         self.url = ""
         self.area = ""
+        self.description = "説明文"
         # dynamic data
         self.enable = True
         self.next_start_time = ""
@@ -193,6 +197,7 @@ class ShowSpotInfo:
                     "play-time": self.play_time,
                     "url": self.url,
                     "area": self.area,
+                    "description": self.description,
                     "enable": self.enable,
                     "next-start-time": self.next_start_time,
                     "start-time": start_time,
@@ -217,6 +222,7 @@ class GreetingSpotInfo:
         self.url = ""
         self.area = ""
         self.character = ""
+        self.description = "説明文"
         # dynamic data
         self.enable = True
         self.standby_pass_status = ""
@@ -259,6 +265,7 @@ class GreetingSpotInfo:
             "url": self.url,
             "area": self.area,
             "character": self.character,
+            "description": self.description,
             "enable": self.enable,
             "standby-pass-status": self.standby_pass_status,
             "wait-time": self.wait_time,
@@ -284,6 +291,7 @@ class ShopSpotInfo:
         self.lon = ""
         self.url = ""
         self.area = ""
+        self.description = "説明文"
 
     def set_static_data(self, obj):
         self.spot_id = obj["spot-id"]
@@ -307,6 +315,7 @@ class ShopSpotInfo:
             "lon": self.lon,
             "url": self.url,
             "area": self.area,
+            "description": self.description,
             "type": "shop"
         }]
 
@@ -323,6 +332,7 @@ class PlaceSpotInfo:
         self.lon = ""
         self.url = ""
         self.area = ""
+        self.description = "説明文"
 
     def set_static_data(self, obj):
         self.spot_id = obj["spot-id"]
@@ -346,6 +356,7 @@ class PlaceSpotInfo:
             "lon": self.lon,
             "url": self.url,
             "area": self.area,
+            "description": self.description,
             "type": "place"
         }]
 
