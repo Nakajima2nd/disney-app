@@ -1,9 +1,14 @@
 import styled from 'styled-components'
 import { Box, FormControlLabel, MenuItem, Switch, TextField, Typography, Collapse } from '@material-ui/core'
 import { TimePicker } from '@material-ui/pickers';
+import { WaitTimeChart } from './charts/WaitTimeChart';
 
 const Wrap = styled(Box)`
   padding: 0 16px;
+`
+
+const ChartWrap = styled(Box)`
+  margin-top: 16px;
 `
 
 const Text = styled(Typography)`
@@ -38,9 +43,20 @@ export const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handl
     greeting: '到着時刻'
   }
 
+  console.log(editing)
+
   return (
     <Wrap>
       <Text>{editing.name}</Text>
+      {editing.timespanMeanWaitTime && Object.keys(editing.timespanMeanWaitTime).length > 0 &&
+        <ChartWrap>
+          <WaitTimeChart
+            timespanMeanWaitTime={editing.timespanMeanWaitTime}
+            shortName={editing.shortName}
+            waitTime={editing.waitTime}
+          />
+        </ChartWrap>
+      }
       {(editing.tab === 'attraction' || editing.tab === 'restaurant' || editing.tab === 'place' || editing.tab === 'greeting') && <>
         <ConditionSwitch
           control={<Switch checked={editing.checkedDesiredArrivalTime} color="primary" onChange={handleSwitches} name="checkedDesiredArrivalTime" />}

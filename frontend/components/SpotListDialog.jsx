@@ -48,7 +48,9 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
       assoc('spotId', spot.spotId),
       assoc('name', spot.name),
       assoc('shortName', spot.shortName),
-      assoc('startTime', spot.startTime)
+      assoc('startTime', spot.startTime),
+      assoc('timespanMeanWaitTime', spot.timespanMeanWaitTime),
+      assoc('waitTime', spot.waitTime)
     )(editing)
     setEditing(newSpot)
     if (selected === -2) {
@@ -75,6 +77,8 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
         assoc('name', spot.name),
         assoc('shortName', spot.shortName),
         assoc('startTime', spot.startTime),
+        assoc('timespanMeanWaitTime', spot.timespanMeanWaitTime),
+        assoc('waitTime', spot.waitTime),
         assoc('step', 1)
       )(editing)
       setChecked(checked.concat(newSpot))
