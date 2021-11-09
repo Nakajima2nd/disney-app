@@ -28,12 +28,13 @@ const DiffWaitTime = styled(Typography)`
   color: ${(props) => props.theme.palette.enable.main};
 `
 
-export const WaitTimeChart = ({ timespanMeanWaitTime, shortName, waitTime }) => {
+export const WaitTimeChart = ({ timespanMeanWaitTime, waitTime }) => {
 
   const currentHours = new Date().getHours()
   const regex = new RegExp(`^${currentHours}`)
   const currentTimespan = Object.keys(timespanMeanWaitTime).find(timespan => regex.test(timespan))
-  const diffWaitTime = waitTime - timespanMeanWaitTime[currentTimespan]
+  const diffWaitTime = currentTimespan ? waitTime - timespanMeanWaitTime[currentTimespan] : null
+  const max = Math.max(waitTime, ...Object.values(timespanMeanWaitTime))
 
   const options = {
     chart: {
@@ -54,7 +55,7 @@ export const WaitTimeChart = ({ timespanMeanWaitTime, shortName, waitTime }) => 
       show: false
     },
     dataLabels: {
-      offsetY: -20,
+      offsetY: -24,
       enabled: true,
       style: {
         colors: ['#000']
@@ -68,15 +69,18 @@ export const WaitTimeChart = ({ timespanMeanWaitTime, shortName, waitTime }) => 
     },
     yaxis: {
       show: false,
+      max: max + 2,
+      tickAmount: 4
     },
     annotations: {
+      position: diffWaitTime > 0 ? 'back' : 'front',
       points: [{
         x: currentTimespan,
         y: waitTime,
         label: {
           text: String(waitTime),
           offsetY: 0,
-          offsetX: -16
+          offsetX: -20
         },
         marker: {
           size: 0
@@ -100,7 +104,7 @@ export const WaitTimeChart = ({ timespanMeanWaitTime, shortName, waitTime }) => 
 
   return (
     <Wrap>
-      <Title>{shortName}の待ち時間情報</Title>
+      <Title>過去1週間の平均待ち時間</Title>
       <Chart
         options={waitTime < 0 ? dissoc('annotations', options) : options}
         series={series}
@@ -108,7 +112,7 @@ export const WaitTimeChart = ({ timespanMeanWaitTime, shortName, waitTime }) => 
         width="100%"
         height={240}
       />
-      <Info visible={waitTime < 0 ? false : true}>
+      <Info visible={(!diffWaitTime || (waitTime < 0)) ? false : true}>
         <Typography>ただいま、普段より</Typography>
         <DiffWaitTime>{Math.abs(diffWaitTime)}分</DiffWaitTime>
         <Typography>{diffWaitTime < 0 ? 'すいています' : 'こんでいます'}</Typography>

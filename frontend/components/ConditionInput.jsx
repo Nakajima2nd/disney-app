@@ -43,8 +43,6 @@ export const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handl
     greeting: '到着時刻'
   }
 
-  console.log(editing)
-
   return (
     <Wrap>
       <Text>{editing.name}</Text>
@@ -52,7 +50,6 @@ export const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handl
         <ChartWrap>
           <WaitTimeChart
             timespanMeanWaitTime={editing.timespanMeanWaitTime}
-            shortName={editing.shortName}
             waitTime={editing.waitTime}
           />
         </ChartWrap>
