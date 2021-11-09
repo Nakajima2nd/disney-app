@@ -1,10 +1,43 @@
 import styled from 'styled-components'
-import { Box, FormControlLabel, MenuItem, Switch, TextField, Typography, Collapse } from '@material-ui/core'
-import { TimePicker } from '@material-ui/pickers';
-import { WaitTimeChart } from './charts/WaitTimeChart';
+import { Box, FormControlLabel, MenuItem, Switch, TextField, Typography, Collapse, Link, List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
+import { FiberManualRecord, OpenInNew } from '@material-ui/icons'
+import { TimePicker } from '@material-ui/pickers'
+import { WaitTimeChart } from './charts/WaitTimeChart'
 
 const Wrap = styled(Box)`
   padding: 0 16px;
+`
+
+const Name = styled(Typography)`
+  font-size: 1.0rem;
+  font-weight: bold;
+`
+
+const DescriptionList = styled(List)`
+  margin-top: 16px;
+  list-style: circle;
+`
+
+const DescriptionListItem = styled(ListItem)`
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin-top: 16px;
+`
+
+const CustomListItemIcon = styled(ListItemIcon)`
+  min-width: 16px;
+  width: 16px;
+`
+
+const CustomListItemText = styled(Typography)`
+  font-size: 0.9rem;
+`
+
+const CustomLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
 `
 
 const ChartWrap = styled(Box)`
@@ -45,7 +78,19 @@ export const ConditionInput = ({ handleDesiredArrivalTime, handleStayTime, handl
 
   return (
     <Wrap>
-      <Text>{editing.name}</Text>
+      <Name color="primary">{editing.name}</Name>
+      <DescriptionList>
+        <DescriptionListItem>
+          <CustomListItemIcon><FiberManualRecord color="primary" style={{ fontSize: 12 }} /></CustomListItemIcon>
+          <CustomListItemText>{editing.description}</CustomListItemText>
+        </DescriptionListItem>
+        <DescriptionListItem>
+          <CustomListItemIcon><FiberManualRecord color="primary" style={{ fontSize: 12 }} /></CustomListItemIcon>
+          <CustomLink href={editing.url} target="_blank" rel="noopener">
+            公式ページ<OpenInNew />
+          </CustomLink>
+        </DescriptionListItem>
+      </DescriptionList>
       {editing.timespanMeanWaitTime && Object.keys(editing.timespanMeanWaitTime).length > 0 &&
         <ChartWrap>
           <WaitTimeChart

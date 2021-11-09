@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Button, Dialog, DialogActions, DialogContent, Fab, IconButton } from '@material-ui/core'
 import { Add, Close } from '@material-ui/icons'
-import { append, assoc, dissoc, last, pipe, update } from 'ramda'
+import { append, assoc, last, pipe, update } from 'ramda'
 import { ConditionInput } from './ConditionInput'
 import { SpotSelect } from './SpotSelect'
 import { useState } from 'react'
@@ -43,6 +43,7 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
     setEditing(assoc(event.target.name, event.target.checked, editing))
   }
 
+  // todo: /page/indexとhandleClickSpotとhandleCheckboxで似たような記述が必要なのをどうにかする
   const handleClickSpot = (spot) => () => {
     const newSpot = pipe(
       assoc('spotId', spot.spotId),
@@ -50,7 +51,9 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
       assoc('shortName', spot.shortName),
       assoc('startTime', spot.startTime),
       assoc('timespanMeanWaitTime', spot.timespanMeanWaitTime),
-      assoc('waitTime', spot.waitTime)
+      assoc('waitTime', spot.waitTime),
+      assoc('url', spot.url),
+      assoc('description', spot.description)
     )(editing)
     setEditing(newSpot)
     if (selected === -2) {
@@ -66,6 +69,7 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
     }
   }
 
+  // todo: /page/indexとhandleClickSpotとhandleCheckboxで似たような記述が必要なのをどうにかする
   const handleCheckbox = (spot) => () => {
     const exists = checked.some(s => s.shortName === spot.shortName)
     if (exists) {
@@ -79,6 +83,8 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
         assoc('startTime', spot.startTime),
         assoc('timespanMeanWaitTime', spot.timespanMeanWaitTime),
         assoc('waitTime', spot.waitTime),
+        assoc('url', spot.url),
+        assoc('description', spot.description),
         assoc('step', 1)
       )(editing)
       setChecked(checked.concat(newSpot))
