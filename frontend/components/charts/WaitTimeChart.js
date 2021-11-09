@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-import { Box, Typography } from '@material-ui/core'
+import { Box, Fade, Typography } from '@material-ui/core'
 import dynamic from 'next/dynamic'
 import { dissoc } from 'ramda'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const Wrap = styled(Box)`
   background-color: #E1F8FF;
+  height: 301px;
 `
 
 const Title = styled(Typography)`
@@ -30,10 +31,9 @@ const DiffWaitTime = styled(Typography)`
 
 export const WaitTimeChart = ({ timespanMeanWaitTime, waitTime }) => {
 
-  const currentHours = new Date().getHours()
-  const regex = new RegExp(`^${currentHours}`)
-  const currentTimespan = Object.keys(timespanMeanWaitTime).find(timespan => regex.test(timespan))
-  const diffWaitTime = currentTimespan ? waitTime - timespanMeanWaitTime[currentTimespan] : null
+  const currentHours = new Date().getHours().toString()
+  const currentTimespan = Object.keys(timespanMeanWaitTime).find(timespan => timespan.split('~')[0] === currentHours)
+  const diffWaitTime = (waitTime > 0 && currentTimespan) ? waitTime - timespanMeanWaitTime[currentTimespan] : null
   const max = Math.max(waitTime, ...Object.values(timespanMeanWaitTime))
 
   const options = {
@@ -42,7 +42,7 @@ export const WaitTimeChart = ({ timespanMeanWaitTime, waitTime }) => {
         show: false
       }
     },
-    colors: Object.keys(timespanMeanWaitTime).map((timespan => regex.test(timespan) ? '#00B7D0' : '#2B99FF')),
+    colors: Object.keys(timespanMeanWaitTime).map((timespan => timespan === currentTimespan ? '#00B7D0' : '#2B99FF')),
     plotOptions: {
       bar: {
         distributed: true,
@@ -112,11 +112,13 @@ export const WaitTimeChart = ({ timespanMeanWaitTime, waitTime }) => {
         width="100%"
         height={240}
       />
-      <Info visible={(!diffWaitTime || (waitTime < 0)) ? false : true}>
-        <Typography>ただいま、普段より</Typography>
-        <DiffWaitTime>{Math.abs(diffWaitTime)}分</DiffWaitTime>
-        <Typography>{diffWaitTime < 0 ? 'すいています' : 'こんでいます'}</Typography>
-      </Info>
+      <Fade in={true} timeout={1000}>
+        <Info visible={diffWaitTime}>
+          <Typography>ただいま、普段より</Typography>
+          <DiffWaitTime>{Math.abs(diffWaitTime)}分</DiffWaitTime>
+          <Typography>{diffWaitTime < 0 ? 'すいています' : 'こんでいます'}</Typography>
+        </Info>
+      </Fade>
     </Wrap>
   )
 }
