@@ -250,6 +250,7 @@ const Home = () => {
             const shortName = key === 'show' ? spot.shortName.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)$/, `(${desiredArrivalTime})`) : spot.shortName
             const startTime = key === 'show' ? desiredArrivalTime : spot.startTime
 
+            // todo: /page/indexとhandleClickSpotとhandleCheckboxで似たような記述が必要なのをどうにかする
             const spppot = pipe(
               assoc('spotId', spot.spotId),
               assoc('name', name),
@@ -265,7 +266,9 @@ const Home = () => {
               assoc('specifiedWaitTime', specifiedWaitTime),
               assoc('checkedSpecifiedWaitTime', checkedSpecifiedWaitTime),
               assoc('timespanMeanWaitTime', spot.timespanMeanWaitTime),
-              assoc('waitTime', spot.waitTime)
+              assoc('waitTime', spot.waitTime),
+              assoc('url', spot.url),
+              assoc('description', spot.description),
             )(initialEditing)
             acc.push(spppot)
             return true
