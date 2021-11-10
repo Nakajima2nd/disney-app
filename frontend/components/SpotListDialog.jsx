@@ -91,21 +91,24 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
     }
   }
 
-  const handleBackChecked = () => {
-    const index = checked.findIndex(spot => spot.shortName === editing.shortName)
-    const newChecked = update(index, pipe(
-      assoc('checkedDesiredArrivalTime', editing.checkedDesiredArrivalTime),
-      assoc('desiredArrivalTime', editing.tab === 'show' ? editing.startTime : editing.checkedDesiredArrivalTime ? editing.desiredArrivalTime : null),
-      assoc('checkedStayTime', editing.checkedStayTime),
-      assoc('stayTime', editing.checkedStayTime ? editing.stayTime : ''),
-      assoc('checkedSpecifiedWaitTime', editing.checkedSpecifiedWaitTime),
-      assoc('specifiedWaitTime', editing.checkedSpecifiedWaitTime ? editing.specifiedWaitTime : '')
-    )(checked[index]), checked)
-    setChecked(newChecked)
-    handleBack()
+  const handleAdd = () => {
+    setChecked(checked.concat(editing))
+    setEditing(assoc('step', 0, editing))
   }
 
   const handleBack = () => {
+    const index = checked.findIndex(spot => spot.shortName === editing.shortName)
+    if (index !== -1) {
+      const newChecked = update(index, pipe(
+        assoc('checkedDesiredArrivalTime', editing.checkedDesiredArrivalTime),
+        assoc('desiredArrivalTime', editing.tab === 'show' ? editing.startTime : editing.checkedDesiredArrivalTime ? editing.desiredArrivalTime : null),
+        assoc('checkedStayTime', editing.checkedStayTime),
+        assoc('stayTime', editing.checkedStayTime ? editing.stayTime : ''),
+        assoc('checkedSpecifiedWaitTime', editing.checkedSpecifiedWaitTime),
+        assoc('specifiedWaitTime', editing.checkedSpecifiedWaitTime ? editing.specifiedWaitTime : '')
+      )(checked[index]), checked)
+      setChecked(newChecked)
+    }
     setEditing(assoc('step', 0, editing))
   }
 
@@ -187,15 +190,11 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
           />
         }
       </SpotDialogContent>
-      {editing.step === 1 && checked.length === 0 &&
+      {editing.step === 1 &&
         <DialogActions>
           <Button onClick={handleBack} color="primary">もどる</Button>
-          <Button onClick={handleComplete} color="primary">決定</Button>
-        </DialogActions>
-      }
-      {editing.step === 1 && checked.length > 0 &&
-        <DialogActions>
-          <Button onClick={handleBackChecked} color="primary">もどる</Button>
+          {checked.length === 0 && <Button onClick={handleComplete} color="primary">決定</Button>}
+          {checked.length !== 0 && !checked.some(s => s.shortName === editing.shortName) && <Button onClick={handleAdd} color="primary">チェックリストに追加</Button>}
         </DialogActions>
       }
       {editing.step === 0 && checked.length > 0 &&
