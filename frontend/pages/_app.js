@@ -12,6 +12,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Header } from '../components/Header'
 import { Box } from '@material-ui/core'
+import GoogleAnalytics from './GoogleAnalytics'
 
 const Wrap = styled(Box)`
   position: relative;
@@ -36,6 +37,7 @@ const MyApp = ({ Component, pageProps }) => {
             <RecoilRoot>
               <Header />
               <Wrap>
+                <GoogleAnalytics />
                 <Component {...pageProps} />
               </Wrap>
             </RecoilRoot>
