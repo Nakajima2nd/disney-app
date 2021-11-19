@@ -12,7 +12,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Header } from '../components/Header'
 import { Box } from '@material-ui/core'
-import GoogleAnalytics from './GoogleAnalytics'
+import GoogleAnalytics from '../components/GoogleAnalytics'
 
 const Wrap = styled(Box)`
   position: relative;
