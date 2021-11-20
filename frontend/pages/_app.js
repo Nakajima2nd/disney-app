@@ -13,9 +13,10 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Header } from '../components/Header'
 import { Box } from '@material-ui/core'
 
+// todo: 本当はtop手書きはよくない
 const Wrap = styled(Box)`
   position: relative;
-  top: 56px;
+  top: 92px;
 `
 
 const MyApp = ({ Component, pageProps }) => {
