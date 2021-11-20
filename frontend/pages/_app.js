@@ -13,6 +13,8 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Header } from '../components/Header'
 import { Box } from '@material-ui/core'
 import GoogleAnalytics from '../components/GoogleAnalytics'
+import { useRouter } from "next/router";
+import { existsGaId, pageview } from '../components/gtag'
 
 const Wrap = styled(Box)`
   position: relative;
@@ -20,13 +22,28 @@ const Wrap = styled(Box)`
 `
 
 const MyApp = ({ Component, pageProps }) => {
+  const router = useRouter()
+  
   // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)
   useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles)
     }
-  }, [])
+    // Google Analytics
+    if (!existsGaId) {
+      return
+    }
+    const handleRouteChange = (path) => {
+      pageview(path)
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
     <StylesProvider injectFirst>
