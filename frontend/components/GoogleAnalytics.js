@@ -11,7 +11,7 @@ const GoogleAnalytics = () => (
               window.dataLayer = window.dataLayer || [];
               function gtag(){window.dataLayer.push(arguments);}
               gtag('js', new Date());    
-              gtag('config', '${GA_ID}');
+              gtag('config', '${GA_ID}', {'debug_mode':true});
           `}
         </Script>
       </>
