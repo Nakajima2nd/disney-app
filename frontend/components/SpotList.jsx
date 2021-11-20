@@ -23,9 +23,9 @@ const CustomListItem = styled(ListItem)`
   display: flex;
   border-bottom: 1px solid lightgray;
   justify-content: space-between;
-  margin: 0 8px;
-  padding: ${(props) => props.checkbox ? '0 8px 0 40px' : '0 8px'};
-  width: calc(100% - 16px);
+  margin: 0;
+  padding: ${(props) => props.checkbox ? '0 16px 0 48px' : '0 16px'};
+  width: 100%;
   height: 75px;
 `
 

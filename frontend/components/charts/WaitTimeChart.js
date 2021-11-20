@@ -7,11 +7,20 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Wrap = styled(Box)`
   background-color: #E1F8FF;
   height: 301px;
+  position: relative;
 `
 
 const Title = styled(Typography)`
   text-align: center;
   padding-top: 16px;
+`
+
+const CustomFade = styled(Fade)`
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 0);
+  width: 100%;
 `
 
 const Info = styled(Box)`
@@ -112,13 +121,13 @@ export const WaitTimeChart = ({ timespanMeanWaitTime, waitTime }) => {
         width="100%"
         height={240}
       />
-      <Fade in={true} timeout={1000}>
-        <Info visible={diffWaitTime}>
+      <CustomFade in={true} timeout={1000}>
+        <Info visible={diffWaitTime !== null}>
           <Typography>ただいま、普段より</Typography>
           <DiffWaitTime>{Math.abs(diffWaitTime)}分</DiffWaitTime>
           <Typography>{diffWaitTime < 0 ? 'すいています' : 'こんでいます'}</Typography>
         </Info>
-      </Fade>
+      </CustomFade>
     </Wrap>
   )
 }
