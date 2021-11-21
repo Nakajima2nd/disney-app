@@ -6,26 +6,30 @@ const breakpoints = createBreakpoints({})
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#3A6BA5'
+      main: '#2B99FF',
+      contrastText: '#fff'
     },
     secondary: {
-      main: '#D65C3A'
+      main: '#FFC224'
+    },
+    close: {
+      main: '#FF0A0A'
     },
     sea: {
-      main: '#3A6BA5'
+      main: '#2B99FF'
     },
     start: {
-      main: '#1B614C'
+      main: '#FFC224'
     },
     goal: {
-      main: '#D65C3A'
+      main: '#FFC224'
     },
     logo: {
       main: '#087D8D',
       contrast: '#d1dfd2'
     },
     enable: {
-      main: '#F5BA23'
+      main: '#FFC224'
     }
   },
   overrides: {
