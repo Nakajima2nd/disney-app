@@ -33,7 +33,7 @@ const Dummy = styled.div`
 const Text = styled.p`
   /* @import url('https://fonts.googleapis.com/css2?family=M+PLUS+2&family=Mochiy+Pop+One&display=swap'); */
   /* font-family: 'M PLUS 2', sans-serif; */
-  font-family: 'Mochiy Pop One';
+  /* font-family: 'Mochiy Pop One'; */
   font-size: 32px;
   font-weight: bold;
   color: #15859A;
