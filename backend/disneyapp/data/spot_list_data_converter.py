@@ -20,15 +20,20 @@ class SpotListDataConverter:
             return PlaceSpotInfo()
 
     @staticmethod
-    def get_merged_spot_data_list():
+    def get_merged_spot_data_list(use_cache=False):
         """
         静的データと動的データを、スポット名称をキーにマージして返す。
+
+        Parameter:
+        ----------
+        use_cache : bool
+            キャッシュデータを使う場合true。
 
         Returns: array-like
             スポット情報のリスト。
         """
         spot_static_data_list = StaticDataManager.get_spots()
-        spot_dynamic_data = DynamicDataManager.fetch_latest_data()
+        spot_dynamic_data = DynamicDataManager.fetch_latest_data(use_cache)
         merged_spot_data_list = []
         for static_spot_data in spot_static_data_list:
             merged_spot_data = SpotListDataConverter.select_spot_info_class(static_spot_data)
@@ -40,12 +45,17 @@ class SpotListDataConverter:
         return merged_spot_data_list
 
     @staticmethod
-    def get_merged_spot_data_dict():
+    def get_merged_spot_data_dict(use_cache=False):
         """
         静的データと動的データをマージし、spot-idをキーにしたdictにして返す。
         ただし、showについては時刻指定の情報を削除する。
+
+        Parameter:
+        ----------
+        use_cache : bool
+            キャッシュデータを使う場合true。
         """
-        merged_spot_data_list = SpotListDataConverter.get_merged_spot_data_list()
+        merged_spot_data_list = SpotListDataConverter.get_merged_spot_data_list(use_cache)
         merged_spot_data_dict = {}
         for merged_spot_data in merged_spot_data_list:
             spot_id = merged_spot_data["spot-id"]

@@ -11,7 +11,7 @@ class ParkDataAccessor:
         """
         最新の日時の開園時間、閉園時間を返す。
         """
-        latest_data = DynamicDataManager.fetch_latest_data()
+        latest_data = DynamicDataManager.fetch_latest_data(use_cache=True)
         opening_hours_dict = latest_data["開園時間"]
         opening_hours_obj = OpeningHours(opening_hours_dict)
         return opening_hours_obj

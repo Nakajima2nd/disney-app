@@ -123,7 +123,7 @@ class RandomTspSolver:
         """
         巡回経路探索で用いるSpotデータを初期化する。
         """
-        merged_spot_data_dict = SpotListDataConverter.get_merged_spot_data_dict()
+        merged_spot_data_dict = SpotListDataConverter.get_merged_spot_data_dict(use_cache=True)
 
         for spot_id in merged_spot_data_dict:
             # play-time が存在しない場合は0埋めする

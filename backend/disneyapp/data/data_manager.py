@@ -11,10 +11,18 @@ class DynamicDataManager:
     prev_fetch_data = {}
 
     @classmethod
-    def fetch_latest_data(cls):
+    def fetch_latest_data(cls, use_cache=False):
+        """
+        最新のデータをDBから取得する。
+
+        Parameter:
+        ----------
+        use_cache : bool
+            キャッシュデータを使う場合Trueを指定する。
+        """
         current_time = int(time.time())
         # 前回データ取得時から5分以内であれば前回取得データを使いまわす
-        if current_time - cls.prev_fetch_time < 300:
+        if (current_time - cls.prev_fetch_time < 300) and use_cache:
             return cls.prev_fetch_data
         cls.prev_fetch_time = current_time
         db_handler = DBHandler()
