@@ -30,6 +30,7 @@ const MyApp = ({ Component, pageProps }) => {
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles)
     }
+    
     // Google Analytics
     if (!existsGaId) {
       return
