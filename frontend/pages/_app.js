@@ -16,9 +16,10 @@ import GoogleAnalytics from '../components/GoogleAnalytics'
 import { useRouter } from 'next/router';
 import { existsGaId, pageview } from '../components/gtag'
 
+// todo: 本当はtop手書きはよくない
 const Wrap = styled(Box)`
   position: relative;
-  top: 56px;
+  top: 92px;
 `
 
 const MyApp = ({ Component, pageProps }) => {

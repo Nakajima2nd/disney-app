@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Avatar, Box, Button, ButtonGroup, Collapse, Grow, IconButton, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, Typography } from '@material-ui/core'
-import { Close } from '@material-ui/icons'
+import { Avatar, Box, Button, Card, Collapse, Grow, IconButton, List, ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText, MenuItem, Paper, Select, Typography } from '@material-ui/core'
+import { Close, FiberManualRecord } from '@material-ui/icons'
 import { useState } from 'react'
 import { SpotListDialog } from '../components/SpotListDialog'
 import { TimePicker } from '@material-ui/pickers';
@@ -14,7 +14,6 @@ import { searchInputState } from '../atoms/searchInput'
 import { useEffect } from 'react'
 
 const Wrap = styled(Box)`
-  padding: 8px;
   margin: auto;
   max-width: 800px;
   display: flex;
@@ -24,25 +23,32 @@ const Wrap = styled(Box)`
   } */
 `
 
-const Caption = styled(Box)`
-  margin: 24px 0 0;
-`
-
 const Text = styled(Typography)`
 `
 
-const SwitchButtons = styled(ButtonGroup)`
-  margin: 24px 0 0;
+const DescriptionList = styled(List)`
+  margin: 16px 0 0;
+  padding: 16px 8px;
+  background-color: white;
 `
 
-const Land = styled(Button)`
+const DescriptionListItem = styled(ListItem)`
+  display: flex;
+  align-items: center;
+  padding: 0;
 `
 
-const Sea = styled(Button)`
+const DescriptionListItemIcon = styled(ListItemIcon)`
+  min-width: 16px;
+  width: 16px;
+`
+
+const DescriptionListItemText = styled(Typography)`
+  font-size: 0.9rem;
 `
 
 const CustomList = styled(List)`
-  margin: 24px 0 0;
+  margin: 16px 8px 0;
 `
 
 const CustomListItem = styled(ListItem)`
@@ -65,19 +71,26 @@ const GoalAvatar = styled(CustomAvatar)`
   color: white;
 `
 
-const Conditions = styled(Box)`
-  margin: 12px 0 0;
+const Conditions = styled(Card)`
+  margin: 16px 8px;
+  padding: 16px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-content: space-around;
+  // 本当はgapを使いたいが、新しいプロパティなので様子見
+  /* gap: 16px; */
 `
 
 const Condition = styled(Box)`
-  margin: 4px 0 0;
-  flex-basis: 48%;
+  flex-basis: calc(50% - 8px);
+  :nth-child(n + 3) {
+    margin-top: 16px;
+  }
 `
 
 const Label = styled(Typography)`
+  font-size: 0.8rem;
 `
 
 const ConditionTimePicker = styled(TimePicker)`
@@ -102,11 +115,12 @@ const DeleteButton = styled(IconButton)`
   right: 0;
   top: 50%;
   transform: translate(0, -50%);
-  padding: 8px;
+  padding: 0;
+  color: ${props => props.theme.palette.close.main};
 `
 
 const SearchButton = styled(Button)`
-  margin: 24px 0 0;
+  margin: 16px 0 0;
   font-size: 1.3rem;
 `
 
@@ -307,16 +321,16 @@ const Home = () => {
 
     <Wrap>
       {/* 説明文 */}
-      <Caption>
-        <Text>TDL・TDSを効率よくめぐる順番を計算するツールです♪</Text>
-        <Text>リアルタイム待ち時間にも対応◎</Text>
-      </Caption>
-
-      {/* ランド/シー切り替えボタン */}
-      <SwitchButtons variant="contained" fullWidth>
-        <Land>ディズニーランド</Land>
-        <Sea color="primary">ディズニーシー</Sea>
-      </SwitchButtons>
+      <DescriptionList>
+        <DescriptionListItem>
+          <DescriptionListItemIcon><FiberManualRecord color="primary" style={{ fontSize: 12 }} /></DescriptionListItemIcon>
+          <DescriptionListItemText>TDL・TDSを効率よくめぐる順番を計算するツールです</DescriptionListItemText>
+        </DescriptionListItem>
+        <DescriptionListItem>
+          <DescriptionListItemIcon><FiberManualRecord color="primary" style={{ fontSize: 12 }} /></DescriptionListItemIcon>
+          <DescriptionListItemText>リアルタイム待ち時間にも対応</DescriptionListItemText>
+        </DescriptionListItem>
+      </DescriptionList>
 
       {/* 選択済みスポット一覧 */}
       <CustomList component={Paper} >
@@ -342,7 +356,7 @@ const Home = () => {
                 <ListItemText>{spot.shortName}</ListItemText>
               </Grow>
               <ListItemSecondaryAction>
-                <DeleteButton onClick={handleDelete(index)} color="secondary">
+                <DeleteButton onClick={handleDelete(index)}>
                   <Close />
                 </DeleteButton>
               </ListItemSecondaryAction>
@@ -423,18 +437,19 @@ const Home = () => {
             <MenuItem value={"false"}>選んだ順にめぐる</MenuItem>
           </ConditionOptimizeSpotOrderSelect>
         </Condition>
+
+        {/* 検索ボタン */}
+        <SearchButton
+          onClick={handleSearch}
+          variant="contained"
+          color="primary"
+          fullWidth
+          disabled={!spotList}
+        >
+          検索
+        </SearchButton>
       </Conditions>
 
-      {/* 検索ボタン */}
-      <SearchButton
-        onClick={handleSearch}
-        variant="contained"
-        color="primary"
-        fullWidth
-        disabled={!spotList}
-      >
-        検索
-      </SearchButton>
     </Wrap>
 
     {/* スポット選択ダイアログ */}

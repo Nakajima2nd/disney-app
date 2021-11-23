@@ -27,10 +27,5 @@ html {
 }
 
 body {
-  background-color: rgb(226, 247, 255);
-  background-image:
-    radial-gradient(white 20%, rgba(255, 255, 255, 0) 25%),
-    radial-gradient(white 20%, rgba(255, 255, 255, 0) 25%);
-  background-size: 40px 40px;
-  background-position: 0 0, 20px 20px;
+  background-color: #E1F8FF;
 }

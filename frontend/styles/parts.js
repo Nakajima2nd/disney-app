@@ -1,6 +1,17 @@
 import styled from 'styled-components'
 import { Button } from '@material-ui/core'
 
+export const TabPanel = ({ children, value, index }) => {
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+    >
+      {children}
+    </div>
+  )
+}
+
 export const Mickey = styled.span`
   width: 0.9rem;
   height: 0.9rem;

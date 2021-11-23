@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Dialog, DialogActions, DialogContent, Fab, IconButton } from '@material-ui/core'
+import { Box, Button, Dialog, DialogActions, DialogContent, Fab, IconButton } from '@material-ui/core'
 import { Add, Close } from '@material-ui/icons'
 import { append, assoc, last, pipe, update } from 'ramda'
 import { ConditionInput } from './ConditionInput'
@@ -14,6 +14,17 @@ const CloseButton = styled(IconButton)`
 `
 
 const SpotDialogContent = styled(DialogContent)`
+  position: relative;
+  overflow: hidden;
+`
+
+const ContentWrap = styled(Box)`
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: ${props => props.current ? 0 : '100%'};
 `
 
 const CustomFab = styled(Fab)`
@@ -168,7 +179,10 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
         <Close />
       </CloseButton>
       <SpotDialogContent>
-        {editing.step === 0 &&
+        <ContentWrap
+          current={editing.step === 0}
+          opacity={editing.step === 0 ? 1 : 0}
+        >
           <SpotSelect
             handleKeyword={handleKeyword}
             handleTab={handleTab}
@@ -179,8 +193,11 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
             handleCheckbox={handleCheckbox}
             selected={selected}
           />
-        }
-        {editing.step === 1 &&
+        </ContentWrap>
+        <ContentWrap
+          current={editing.step === 1}
+          opacity={editing.step === 1 ? 1 : 0}
+        >
           <ConditionInput
             handleDesiredArrivalTime={handleDesiredArrivalTime}
             handleStayTime={handleStayTime}
@@ -188,7 +205,7 @@ export const SpotListDialog = ({ spotList, editing, selected, open, spots, setEd
             editing={editing}
             handleSwitches={handleSwitches}
           />
-        }
+        </ContentWrap>
       </SpotDialogContent>
       {editing.step === 1 &&
         <DialogActions>

@@ -23,9 +23,9 @@ const CustomListItem = styled(ListItem)`
   display: flex;
   border-bottom: 1px solid lightgray;
   justify-content: space-between;
-  margin: 0 8px;
-  padding: ${(props) => props.checkbox ? '0 8px 0 40px' : '0 8px'};
-  width: calc(100% - 16px);
+  margin: 0;
+  padding: ${(props) => props.checkbox ? '0 16px 0 48px' : '0 16px'};
+  width: 100%;
   height: 75px;
 `
 
@@ -83,6 +83,9 @@ export const SpotList = ({ list, editing, handleClickSpot, checked, handleCheckb
   const removeStartTime = (str) => {
     return str.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)/, '')
   }
+  
+  const hasWaitTime = (type) => ["attraction", "restaurant", "greeting"].includes(type)
+
   return (<>
     {Object.entries(groupedSpots).map(([area, spots], index) =>
       <Wrap key={index}>
@@ -102,7 +105,7 @@ export const SpotList = ({ list, editing, handleClickSpot, checked, handleCheckb
                 {(spot.startTime || spot.endTime) && <BusinessHours color="textSecondary">{spot.startTime}~{spot.endTime}</BusinessHours>}
               </SpotNameContainer>
               <WaitTimeContainer>
-                {editing.tab === 'attraction' && <>
+                {hasWaitTime(editing.tab) && <>
                   <Typography color="textSecondary" variant="caption">{spot.enable && spot.waitTime >= 0 ? '待ち時間' : '　'}</Typography>
                   <AvatarContainer>
                     {!spot.enable && <DisableAvatar>休止</DisableAvatar>}
