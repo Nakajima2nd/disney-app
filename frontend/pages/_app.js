@@ -12,6 +12,9 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Header } from '../components/Header'
 import { Box } from '@material-ui/core'
+import GoogleAnalytics from '../components/GoogleAnalytics'
+import { useRouter } from 'next/router';
+import { existsGaId, pageview } from '../components/gtag'
 
 // todo: 本当はtop手書きはよくない
 const Wrap = styled(Box)`
@@ -20,13 +23,27 @@ const Wrap = styled(Box)`
 `
 
 const MyApp = ({ Component, pageProps }) => {
+  const router = useRouter()
+  
   // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)
   useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles)
     }
-  }, [])
+    
+    // Google Analytics
+    if (!existsGaId) {
+      return
+    }
+    const handleRouteChange = (path) => {
+      pageview(path)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
     <StylesProvider injectFirst>
@@ -37,6 +54,7 @@ const MyApp = ({ Component, pageProps }) => {
             <RecoilRoot>
               <Header />
               <Wrap>
+                <GoogleAnalytics />
                 <Component {...pageProps} />
               </Wrap>
             </RecoilRoot>
