@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Avatar, Box, Typography, List, ListItem, ListItemSecondaryAction, Checkbox } from '@material-ui/core'
 import { Fragment } from 'react'
 import { groupBy } from 'ramda'
+import { hasWaitTime } from '../utils'
 
 const Wrap = styled(Box)`
   margin-top: 24px;
@@ -84,8 +85,6 @@ export const SpotList = ({ list, editing, handleClickSpot, checked, handleCheckb
     return str.replace(/\(((0?[0-9]|1[0-9])|2[0-3]):[0-5][0-9]\)/, '')
   }
   
-  const hasWaitTime = (type) => ["attraction", "restaurant", "greeting"].includes(type)
-
   return (<>
     {Object.entries(groupedSpots).map(([area, spots], index) =>
       <Wrap key={index}>

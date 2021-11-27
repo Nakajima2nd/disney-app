@@ -58,3 +58,5 @@ export const parseDateTime = (string) => {
     return now
   }
 }
+
+export const hasWaitTime = type => ["attraction", "restaurant", "greeting"].includes(type)
