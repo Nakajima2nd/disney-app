@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { Loading } from '../../components/Loading'
 import { useGetSearchResult } from '../../hooks'
 import { ArrowRightAlt, DirectionsWalk, Room } from '@material-ui/icons'
+import { hasWaitTime } from '../../utils'
 
 const Wrap = styled(Box)`
   margin: auto;
@@ -65,6 +66,14 @@ const EnableAvatar = styled(Avatar)`
   width: 4rem;
   height: 4rem;
   font-size: 1.6rem;
+`
+
+const DisableAvatar = styled(Avatar)`
+  color: white;
+  background-color: lightgray;
+  width: 4rem;
+  height: 4rem;
+  font-size: 1.2rem;
 `
 
 const WtaiTimeText = styled(Typography)`
@@ -148,9 +157,17 @@ const Search = ({ query }) => {
             <Text color="textSecondary">{index < searchResult.subroutes.length && searchResult.subroutes[index].startTime + '発'}</Text>
           </Timetable>
           <SpotText>{spot.shortSpotName}</SpotText>
-          <WaitTime visibility={index > 0 && index < searchResult.spots.length - 1 ? 'visible' : 'hidden'}>
-            <EnableAvatar>{spot.waitTime}分</EnableAvatar>
-            <WtaiTimeText color="textSecondary">待ち</WtaiTimeText>
+          <WaitTime visibility={index > 0 && index < searchResult.spots.length - 1 && hasWaitTime(spot.type) ? 'visible' : 'hidden'}>
+            {spot.violateBusinessHour && <>
+              <DisableAvatar>時間外</DisableAvatar>
+            </>}
+            {!spot.violateBusinessHour && spot.waitTime === -1 && <>
+              <DisableAvatar>休止中</DisableAvatar>
+            </>}
+            {!spot.violateBusinessHour && spot.waitTime !== -1 && <>
+              <EnableAvatar>{spot.waitTime}分</EnableAvatar>
+              <WtaiTimeText color="textSecondary">待ち</WtaiTimeText>
+            </>}
           </WaitTime>
         </Spot>
         {index < searchResult.subroutes.length &&
