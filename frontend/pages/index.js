@@ -12,6 +12,7 @@ import { Loading } from '../components/Loading'
 import { useRecoilState } from 'recoil'
 import { searchInputState } from '../atoms/searchInput'
 import { useEffect } from 'react'
+import Head from 'next/head'
 
 const Wrap = styled(Box)`
   margin: auto;
@@ -320,6 +321,12 @@ const Home = () => {
     {!spotList && <Loading />}
 
     <Wrap>
+      <Head>
+        <title>TDS計画ツール|ディズニープラン</title>
+        <meta property="og:title" content="TDS計画ツール|ディズニープラン" />
+        <meta property="og:description" content="ディズニーランド・シーを効率よくめぐる計画をたてるwebアプリです！リアルタイム待ち時間を考慮しています！" />
+        <meta property="og:image" content="/og.png" />
+      </Head>
       {/* 説明文 */}
       <DescriptionList>
         <DescriptionListItem>

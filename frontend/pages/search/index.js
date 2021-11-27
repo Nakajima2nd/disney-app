@@ -6,6 +6,7 @@ import { Loading } from '../../components/Loading'
 import { useGetSearchResult } from '../../hooks'
 import { ArrowRightAlt, DirectionsWalk, Room } from '@material-ui/icons'
 import { hasWaitTime } from '../../utils'
+import Head from 'next/head'
 
 const Wrap = styled(Box)`
   margin: auto;
@@ -144,6 +145,12 @@ const Search = ({ query }) => {
 
   return (
     <Wrap>
+      <Head>
+        <title>探索結果|TDS計画ツール|ディズニープラン</title>
+        <meta property="og:title" content="探索結果|TDS計画ツール|ディズニープラン" />
+        <meta property="og:description" content="ディズニーランド・シーを効率よくめぐる計画をたてるwebアプリです！リアルタイム待ち時間を考慮しています！" />
+        <meta property="og:image" content="/og.png" />
+      </Head>
       <Overview>
         <OverviewText>{searchResult.startTime}</OverviewText>
         <ArrowRightAlt color="inherit" fontSize="large" />
