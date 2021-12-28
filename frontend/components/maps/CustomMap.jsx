@@ -59,7 +59,6 @@ export const CustomMap = ({ searchResult }) => {
   }
 
   console.log(markers)
-  console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)
   return (
     <LoadScriptNext googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
       <GoogleMap
