@@ -7,6 +7,7 @@ import { useGetSearchResult } from '../../hooks'
 import { ArrowRightAlt, DirectionsWalk, Room } from '@material-ui/icons'
 import { hasWaitTime } from '../../utils'
 import Head from 'next/head'
+import { CustomMap } from '../../components/maps/CustomMap'
 
 const Wrap = styled(Box)`
   margin: auto;
@@ -157,6 +158,7 @@ const Search = ({ query }) => {
         <OverviewText>{searchResult.goalTime}</OverviewText>
         <Duration>{getDuration(searchResult.startTime, searchResult.goalTime)}</Duration>
       </Overview>
+      <CustomMap searchResult={searchResult} />
       {searchResult.spots.map((spot, index) => <Box key={index}>
         <Spot square>
           <Timetable>
