@@ -58,13 +58,21 @@ const SmallAvatar = styled(Avatar)`
   margin: 0 8px;
 `
 
+const ArrivalAvatar = styled(SmallAvatar)`
+  background-color: ${(props) => props.theme.palette.arrival.main};
+`
+
+const DepartureAvatar = styled(SmallAvatar)`
+  background-color: ${(props) => props.theme.palette.departure.main};
+`
+
 const Name = styled(Typography)`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   flex-basis: calc(100% - 50px - 32px);
 `
-    
+
 const CustomMobileStepper = styled(MobileStepper)`
   padding: 0;
   position: absolute;
@@ -195,7 +203,7 @@ const Distance = styled(Box)`
 const Line = styled.span`
   height: 100%;
   width: 8px;
-  background-color: currentColor;
+  background-color: ${(props) => props.current ? props.theme.palette.logo.main : 'lightgray'};
 `
 
 const Walk = styled(Box)`
@@ -268,12 +276,12 @@ const Search = ({ query }) => {
       <CurrentPath>
         <Start>
           <Time>{searchResult.subroutes[activeStep].startTime}発</Time>
-          <SmallAvatar>S</SmallAvatar>
+          <DepartureAvatar>S</DepartureAvatar>
           <Name>{searchResult.spots[activeStep].shortSpotName}</Name>
         </Start>
         <Goal>
           <Time>{searchResult.subroutes[activeStep].goalTime}着</Time>
-          <SmallAvatar>G</SmallAvatar>
+          <ArrivalAvatar>G</ArrivalAvatar>
           <Name>{searchResult.spots[activeStep + 1].shortSpotName}</Name>
         </Goal>
         <CustomMobileStepper
@@ -295,7 +303,7 @@ const Search = ({ query }) => {
         />
       </CurrentPath>
       <MapWrap>
-        <CustomMap searchResult={searchResult} />
+        <CustomMap searchResult={searchResult} current={activeStep} />
       </MapWrap>
       <GlobalStyle />
       <SwipeableDrawer
@@ -339,7 +347,9 @@ const Search = ({ query }) => {
             </Spot>
             {index < searchResult.subroutes.length &&
               <Distance>
-                <Line></Line>
+                <Line
+                  current={index === activeStep}
+                />
                 <Walk>
                   <DirectionsWalk fontSize="large" />
                   <DistanceText color="textSecondary">{searchResult.subroutes[index].distance}m{getTransitTime(searchResult.subroutes[index].transitTime)}</DistanceText>
