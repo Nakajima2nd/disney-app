@@ -14,6 +14,8 @@ const GlobalStyle = createGlobalStyle`
   .MuiDrawer-root > .MuiPaper-root {
     height: calc(80% - 72px);
     overflow: visible;
+    max-width: 800px;
+    margin: auto;
   }
 `
 
