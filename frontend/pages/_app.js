@@ -20,7 +20,8 @@ import { existsGaId, pageview } from '../components/gtag'
 const Wrap = styled(Box)`
   position: absolute;
   top: 92px;
-  left: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
   width: 100%;
   height: calc(100% - 56px - 36px);
   margin: auto;
