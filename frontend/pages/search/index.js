@@ -1,10 +1,10 @@
 import styled, { createGlobalStyle } from 'styled-components'
-import { Avatar, Box, Button, Card, SwipeableDrawer, Typography } from '@material-ui/core'
+import { Avatar, Box, Button, Card, MobileStepper, SwipeableDrawer, Typography } from '@material-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Loading } from '../../components/Loading'
 import { useGetSearchResult } from '../../hooks'
-import { ArrowRightAlt, DirectionsWalk, Room } from '@material-ui/icons'
+import { ArrowRightAlt, DirectionsWalk, Room, KeyboardArrowRight, KeyboardArrowLeft } from '@material-ui/icons'
 import { hasWaitTime } from '../../utils'
 import Head from 'next/head'
 import { CustomMap } from '../../components/maps/CustomMap'
@@ -27,7 +27,60 @@ const Wrap = styled(Box)`
 
 const CurrentPath = styled(Box)`
   height: 72px;
+  padding: 8px 0 0 0;
   background: white;
+  position: relative;
+`
+
+const Start = styled(Box)`
+  display: flex;
+  align-items: center;
+  padding: 0 48px;
+`
+
+const Goal = styled(Box)`
+  display: flex; 
+  align-items: center;
+  padding: 0 48px;
+`
+
+const Time = styled(Typography)`
+  white-space: nowrap;
+  width: 50px;
+  text-align: right;
+  flex-basis: 50px;
+`
+
+const SmallAvatar = styled(Avatar)`
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  margin: 0 8px;
+`
+
+const Name = styled(Typography)`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex-basis: calc(100% - 50px - 32px);
+`
+    
+const CustomMobileStepper = styled(MobileStepper)`
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 100%;
+  background-color: inherit;
+  height: 16px;
+`
+
+const ArrowButton = styled(Button)`
+  position: relative;
+  top: -28px;
+  width: 24px;
+  min-width: 24px;
 `
 
 const MapWrap = styled(Box)`
@@ -165,6 +218,7 @@ const Search = ({ query }) => {
   const router = useRouter()
   const { searchResult, error } = useGetSearchResult(query)
   const [open, setOpen] = useState(false)
+  const [activeStep, setActiveStep] = useState(0)
   if (error) return <>
     <Link href="/">もどる</Link>
     <ErrorText>{error}</ErrorText>
@@ -193,6 +247,16 @@ const Search = ({ query }) => {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen)
   }
+
+  const handleNextArrow = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+
+  }
+
+  const handleBackArrow = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  }
+
   return (
     <Wrap>
       <Head>
@@ -202,7 +266,33 @@ const Search = ({ query }) => {
         <meta property="og:image" content="/og.png" />
       </Head>
       <CurrentPath>
-        aaa
+        <Start>
+          <Time>{searchResult.subroutes[activeStep].startTime}発</Time>
+          <SmallAvatar>S</SmallAvatar>
+          <Name>{searchResult.spots[activeStep].shortSpotName}</Name>
+        </Start>
+        <Goal>
+          <Time>{searchResult.subroutes[activeStep].goalTime}着</Time>
+          <SmallAvatar>G</SmallAvatar>
+          <Name>{searchResult.spots[activeStep + 1].shortSpotName}</Name>
+        </Goal>
+        <CustomMobileStepper
+          variant="dots"
+          steps={searchResult.subroutes.length}
+          position="static"
+          activeStep={activeStep}
+          nextButton={
+            <ArrowButton size="small" onClick={handleNextArrow} disabled={activeStep === searchResult.subroutes.length - 1}>
+              <KeyboardArrowRight />
+            </ArrowButton>
+          }
+          backButton={
+            <ArrowButton size="small" onClick={handleBackArrow} disabled={activeStep === 0}>
+              <KeyboardArrowLeft />
+            </ArrowButton>
+          }
+
+        />
       </CurrentPath>
       <MapWrap>
         <CustomMap searchResult={searchResult} />
