@@ -11,8 +11,13 @@ const center = {
   lng: 139.8844380917959
 };
 
-export const CustomMap = ({ searchResult }) => {
+export const CustomMap = ({ searchResult, current }) => {
   const [path, setPath] = useState()
+  const [currentPaths, setCurrentPaths] = useState(
+    searchResult.subroutes[current].coords.map(latlng => ({
+      lat: Number(latlng[0]),
+      lng: Number(latlng[1])
+    })))
 
   console.log(searchResult)
 
@@ -22,11 +27,6 @@ export const CustomMap = ({ searchResult }) => {
       lng: Number(latlng[1])
     })))
   }, [])
-
-  const currentPaths = searchResult.subroutes[0].coords.map(latlng => ({
-    lat: Number(latlng[0]),
-    lng: Number(latlng[1])
-  }))
 
   const markers = searchResult.spots.map(spot => ({
     position: {
@@ -78,6 +78,14 @@ export const CustomMap = ({ searchResult }) => {
     setPath(window.google.maps.SymbolPath.CIRCLE)
   }
 
+  useEffect(() => {
+    setCurrentPaths(
+      searchResult.subroutes[current].coords.map(latlng => ({
+        lat: Number(latlng[0]),
+        lng: Number(latlng[1])
+      })))
+  }, [current])
+
   return (
     <LoadScriptNext googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
       <GoogleMap
@@ -87,13 +95,14 @@ export const CustomMap = ({ searchResult }) => {
         zoom={16}
         clickableIcons={false}
         id="15c2beb9dbd319e9"
-        heading={390}
+        // heading={390}
         options={{
           mapId: '8f8f4d61dd1b3627',
           mapTypeControl: false,
           zoomControl: false,
           fullscreenControl: false,
-          rotateControl: false
+          rotateControl: false,
+          // heading: 90
         }}
       >
         {/* マーカー */}
