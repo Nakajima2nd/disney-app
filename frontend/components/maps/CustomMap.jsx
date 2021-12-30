@@ -2,12 +2,12 @@ import { GoogleMap, LoadScriptNext, Marker, Polyline } from '@react-google-maps/
 
 const containerStyle = {
   width: '100%',
-  height: '800px'
+  height: '100%'
 };
 
 const center = {
-  lat: 35.626630558175975,
-  lng: 139.88994325030163
+  lat: 35.625745295180174,
+  lng: 139.8844380917959
 };
 
 export const CustomMap = ({ searchResult }) => {
@@ -31,7 +31,19 @@ export const CustomMap = ({ searchResult }) => {
       lat: Number(spot.lat),
       lng: Number(spot.lon)
     },
-    label: spot.shortSpotName
+    label: {
+      text: spot.shortSpotName,
+      color: '#5c5c5c'
+    },
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+      scale: 2,
+      fillColor: '#2B99FF',
+      fillOpacity: 0.4,
+      strokeColor: '#2B99FF',
+      strokeOpacity: 0.4,
+      strokeWeight: 16
+    }
   }))
 
   const options = {
@@ -64,20 +76,25 @@ export const CustomMap = ({ searchResult }) => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={17}
+        zoom={16}
         clickableIcons={false}
         id="15c2beb9dbd319e9"
-        options={{ mapId: '8f8f4d61dd1b3627' }}
+        heading={390}
+        options={{
+          mapId: '8f8f4d61dd1b3627',
+          mapTypeControl: false,
+          zoomControl: false,
+          fullscreenControl: false,
+          rotateControl: false
+        }}
       >
         {/* マーカー */}
         {markers.map((marker, index) => (
           <Marker
             key={index}
-            // icon={{
-            //   path: google.maps.SymbolPath.CIRCLE,
-            //   scale: 7,
-            // }}
+            icon={marker.icon}
             position={marker.position}
+            label={marker.label}
           />
 
         ))}
