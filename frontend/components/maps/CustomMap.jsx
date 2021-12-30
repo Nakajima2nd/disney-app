@@ -1,4 +1,5 @@
 import { GoogleMap, LoadScriptNext, Marker, Polyline } from '@react-google-maps/api'
+import { useEffect, useState } from 'react';
 
 const containerStyle = {
   width: '100%',
@@ -11,6 +12,7 @@ const center = {
 };
 
 export const CustomMap = ({ searchResult }) => {
+  const [path, setPath] = useState()
 
   console.log(searchResult)
 
@@ -36,7 +38,7 @@ export const CustomMap = ({ searchResult }) => {
       color: '#5c5c5c'
     },
     icon: {
-      path: google.maps.SymbolPath.CIRCLE,
+      // path: window.google.maps.SymbolPath.CIRCLE,
       scale: 2,
       fillColor: '#2B99FF',
       fillOpacity: 0.4,
@@ -71,9 +73,15 @@ export const CustomMap = ({ searchResult }) => {
   }
 
   console.log(markers)
+
+  const onLoad = () => {
+    setPath(window.google.maps.SymbolPath.CIRCLE)
+  }
+
   return (
     <LoadScriptNext googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
       <GoogleMap
+        onLoad={onLoad}
         mapContainerStyle={containerStyle}
         center={center}
         zoom={16}
@@ -92,7 +100,10 @@ export const CustomMap = ({ searchResult }) => {
         {markers.map((marker, index) => (
           <Marker
             key={index}
-            icon={marker.icon}
+            icon={{
+              ...marker.icon,
+              path: path
+            }}
             position={marker.position}
             label={marker.label}
           />
