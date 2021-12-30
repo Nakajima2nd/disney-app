@@ -18,8 +18,13 @@ import { existsGaId, pageview } from '../components/gtag'
 
 // todo: 本当はtop手書きはよくない
 const Wrap = styled(Box)`
-  position: relative;
+  position: absolute;
   top: 92px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 56px - 36px);
+  margin: auto;
+  max-width: 800px;
 `
 
 const MyApp = ({ Component, pageProps }) => {
