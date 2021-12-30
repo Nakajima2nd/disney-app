@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
     overflow: visible;
     max-width: 800px;
     margin: auto;
+    background-color: rgba(255, 255, 255, 0.9);
   }
 `
 
