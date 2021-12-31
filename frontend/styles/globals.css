@@ -31,3 +31,12 @@ body {
   background-color: #E1F8FF;
   height: 100%;
 }
+
+.marker-label {
+  position: relative;
+  top: -24px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 0 8px;
+  font-size: 10px;
+}
