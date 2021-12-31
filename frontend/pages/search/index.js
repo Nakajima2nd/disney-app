@@ -71,6 +71,7 @@ const Name = styled(Typography)`
   text-overflow: ellipsis;
   overflow: hidden;
   flex-basis: calc(100% - 50px - 32px);
+  font-size: 1.2rem;
 `
 
 const CustomMobileStepper = styled(MobileStepper)`
@@ -117,23 +118,26 @@ const Puller = styled(Box)`
 
 const Overview = styled(Box)`
   padding: 16px 0;
-  display: flex;
-  color: ${(props) => props.theme.palette.logo.main};
-  justify-content: center;
-  align-items: center;
   position: absolute;
   top: -72px;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   visibility: visible;
-  background-color: white;
+  background-color: #fafafa;
   width: 100%;
   height: 72px;
-  opacity: 0.8;
+  color: ${(props) => props.theme.palette.logo.main};
+  text-align: center;
 `
 const OverviewText = styled(Typography)`
   font-size: 1.8rem;
   font-weight: bold;
+`
+
+const TimeWrap = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Detail = styled(Box)`
@@ -142,7 +146,8 @@ const Detail = styled(Box)`
 `
 
 const Duration = styled(Typography)`
-  color: initial;
+  position: relative;
+  top: -8px;
 `
 
 const Spot = styled(Card)`
@@ -319,9 +324,11 @@ const Search = ({ query }) => {
       >
         <Overview>
           <Puller />
-          <OverviewText>{searchResult.startTime}</OverviewText>
-          <ArrowRightAlt color="inherit" fontSize="large" />
-          <OverviewText>{searchResult.goalTime}</OverviewText>
+          <TimeWrap>
+            <OverviewText>{searchResult.startTime}</OverviewText>
+            <ArrowRightAlt color="inherit" fontSize="large" />
+            <OverviewText>{searchResult.goalTime}</OverviewText>
+          </TimeWrap>
           <Duration>{getDuration(searchResult.startTime, searchResult.goalTime)}</Duration>
         </Overview>
         <Detail>
