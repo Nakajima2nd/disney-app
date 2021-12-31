@@ -1,18 +1,28 @@
-import { GoogleMap, LoadScriptNext, Marker, Polyline } from '@react-google-maps/api'
+import { GoogleMap, LoadScriptNext, Marker, Polyline, useGoogleMap } from '@react-google-maps/api'
 import { useEffect, useState } from 'react';
 
 const containerStyle = {
   width: '100%',
   height: '100%'
-};
+}
 
-const center = {
-  lat: 35.625745295180174,
-  lng: 139.8844380917959
-};
+const AAA = ({ lat, lng }) => {
+  const map = useGoogleMap()
+
+  useEffect(() => {
+    map.setMapTypeId('satellite')
+    map.panTo(new window.google.maps.LatLng(lat, lng))
+  }, [map, lat, lng])
+  return null
+}
 
 export const CustomMap = ({ searchResult, current }) => {
   const [iconPath, setIconPath] = useState()
+  const [center, setCenter] = useState({
+    lat: (Number(searchResult.spots[current].lat) + Number(searchResult.spots[current + 1].lat)) / 2,
+    lng: (Number(searchResult.spots[current].lon) + Number(searchResult.spots[current + 1].lon)) / 2,
+  })
+  console.log(searchResult)
   const [currentPaths, setCurrentPaths] = useState(
     searchResult.subroutes[current].coords.map(latlng => ({
       lat: Number(latlng[0]),
@@ -52,14 +62,16 @@ export const CustomMap = ({ searchResult, current }) => {
     },
     label: {
       text: spot.shortSpotName,
-      color: '#5c5c5c'
+      fontSize: '12px',
+      color: '#fff',
+      className: 'marker-label'
     },
     icon: {
       scale: 2,
       fillColor: '#2B99FF',
-      fillOpacity: 0.4,
+      fillOpacity: 1,
       strokeColor: '#2B99FF',
-      strokeOpacity: 0.4,
+      strokeOpacity: 1,
       strokeWeight: 16
     },
     zIndex: 1
@@ -74,7 +86,7 @@ export const CustomMap = ({ searchResult, current }) => {
 
   const options = {
     strokeColor: '#c0c0c0',
-    strokeOpacity: 0.8,
+    strokeOpacity: 1,
     strokeWeight: 4,
     fillColor: '#c0c0c0',
     fillOpacity: 0.3,
@@ -139,6 +151,7 @@ export const CustomMap = ({ searchResult, current }) => {
       <GoogleMap
         onLoad={onLoad}
         mapContainerStyle={containerStyle}
+        mapTypeId="satellite"
         center={center}
         zoom={16}
         clickableIcons={false}
@@ -153,6 +166,7 @@ export const CustomMap = ({ searchResult, current }) => {
           // heading: 90
         }}
       >
+        <AAA lat={(Number(searchResult.spots[current].lat) + Number(searchResult.spots[current + 1].lat)) / 2} lng={(Number(searchResult.spots[current].lon) + Number(searchResult.spots[current + 1].lon)) / 2} />
         {/* マーカー */}
         {markers.map((marker, index) => (
           <Marker
