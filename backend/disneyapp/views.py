@@ -2,6 +2,7 @@ from disneyapp.data.spot_list_data_converter import SpotListDataConverter, Dynam
 from disneyapp.algorithm.models import TravelInput
 from disneyapp.algorithm.tsp_solver import RandomTspSolver
 from disneyapp.data.park_data_accessor import ParkDataAccessor
+from disneyapp.data.db_handler import DBHandler
 
 import copy, json
 from rest_framework.response import Response
@@ -46,7 +47,9 @@ def business_hours(request):
 
 @api_view(['GET'])
 def ticket_reservation(request):
-    return Response("ticket reservation")
+    db_handler = DBHandler()
+    result = db_handler.fetch_ticket_reservation_info(from_time="2022-1-10", upto_time="2022-2-10")
+    return Response(result)
 
 
 @api_view(["GET"])
