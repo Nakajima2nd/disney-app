@@ -2,6 +2,7 @@ from disneyapp.data.spot_list_data_converter import SpotListDataConverter, Dynam
 from disneyapp.algorithm.models import TravelInput
 from disneyapp.algorithm.tsp_solver import RandomTspSolver
 from disneyapp.data.park_data_accessor import ParkDataAccessor
+from disneyapp.data.ticket_reservation_accesor import TicketReservationAccessor
 
 import copy, json
 from rest_framework.response import Response
@@ -42,6 +43,12 @@ def business_hours(request):
             "close-time": opening_hours.close_time
         }
     )
+
+
+@api_view(['GET'])
+def ticket_reservation(request):
+    result = TicketReservationAccessor.fetch_ticket_status_list()
+    return Response(result)
 
 
 @api_view(["GET"])

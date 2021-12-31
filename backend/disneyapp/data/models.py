@@ -374,3 +374,45 @@ class OpeningHours:
     def __init__(self, opening_hours_dict):
         self.open_time = opening_hours_dict["open-time"]
         self.close_time = opening_hours_dict["close-time"]
+
+
+class WeatherInfo:
+    """
+    天気情報のクラス。
+    """
+    def __init__(self):
+        self.chance_of_rain = 0   # 降水確率
+        self.high_temperature = 0 # 最高気温
+        self.low_temperature = 0  # 最低気温
+        self.wind_speed = 0       # 風速
+
+    def to_dict(self):
+        return {
+            "chance_of_rain" : self.chance_of_rain,
+            "high-temperature": self.high_temperature,
+            "low-temperature": self.low_temperature,
+            "wind-speed": self.wind_speed
+        }
+
+
+class TicketReservationInfo:
+    """
+    チケット予約情報のクラス。
+    """
+    def __init__(self):
+        self.date_str = ""
+        self.one_day_pass_sea = False
+        self.one_day_pass_land = False
+        self.last_update_str = ""
+        self.weather_info = WeatherInfo()
+
+    def to_dict(self):
+        return {
+            "date_str" : self.date_str,
+            "last_update": self.last_update_str,
+            "oneday-pass": {
+                "sea": self.one_day_pass_sea,
+                "land": self.one_day_pass_land
+            },
+            "weather" : self.weather_info.to_dict()
+        }

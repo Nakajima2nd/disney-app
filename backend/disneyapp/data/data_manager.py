@@ -26,7 +26,7 @@ class DynamicDataManager:
             return cls.prev_fetch_data
         cls.prev_fetch_time = current_time
         db_handler = DBHandler()
-        cls.prev_fetch_data = db_handler.fetch_latest_dynamic_data(table_name="sea_dynamic_data")
+        cls.prev_fetch_data = db_handler.fetch_sea_dynamic_data()
         return cls.prev_fetch_data
 
 
