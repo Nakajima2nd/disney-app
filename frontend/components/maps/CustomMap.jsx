@@ -12,21 +12,38 @@ const center = {
 };
 
 export const CustomMap = ({ searchResult, current }) => {
-  const [path, setPath] = useState()
+  const [iconPath, setIconPath] = useState()
   const [currentPaths, setCurrentPaths] = useState(
     searchResult.subroutes[current].coords.map(latlng => ({
       lat: Number(latlng[0]),
       lng: Number(latlng[1])
-    })))
-
-  console.log(searchResult)
-
-  const paths = searchResult.subroutes.reduce((acc, { coords }) => {
-    return acc.concat(coords.map(latlng => ({
-      lat: Number(latlng[0]),
-      lng: Number(latlng[1])
-    })))
-  }, [])
+    }))
+  )
+  const [currentMarkers, setCurrentMarkers] = useState(
+    searchResult.spots.flatMap((spot, index) => (
+      index === current || index === current + 1
+        ? {
+          position: {
+            lat: Number(spot.lat),
+            lng: Number(spot.lon)
+          },
+          label: {
+            text: index === current ? 'S' : 'G',
+            color: '#fff'
+          },
+          icon: {
+            scale: 4,
+            fillColor: index === current ? '#5956FF' : '#FF56E4',
+            fillOpacity: 1,
+            strokeColor: index === current ? '#5956FF' : '#FF56E4',
+            strokeOpacity: 1,
+            strokeWeight: 16
+          },
+          zIndex: 2
+        }
+        : []
+    ))
+  )
 
   const markers = searchResult.spots.map(spot => ({
     position: {
@@ -38,15 +55,22 @@ export const CustomMap = ({ searchResult, current }) => {
       color: '#5c5c5c'
     },
     icon: {
-      // path: window.google.maps.SymbolPath.CIRCLE,
       scale: 2,
       fillColor: '#2B99FF',
       fillOpacity: 0.4,
       strokeColor: '#2B99FF',
       strokeOpacity: 0.4,
       strokeWeight: 16
-    }
+    },
+    zIndex: 1
   }))
+
+  const paths = searchResult.subroutes.reduce((acc, { coords }) => {
+    return acc.concat(coords.map(latlng => ({
+      lat: Number(latlng[0]),
+      lng: Number(latlng[1])
+    })))
+  }, [])
 
   const options = {
     strokeColor: '#c0c0c0',
@@ -72,10 +96,8 @@ export const CustomMap = ({ searchResult, current }) => {
     zIndex: 2
   }
 
-  console.log(markers)
-
   const onLoad = () => {
-    setPath(window.google.maps.SymbolPath.CIRCLE)
+    setIconPath(window.google.maps.SymbolPath.CIRCLE)
   }
 
   useEffect(() => {
@@ -83,7 +105,33 @@ export const CustomMap = ({ searchResult, current }) => {
       searchResult.subroutes[current].coords.map(latlng => ({
         lat: Number(latlng[0]),
         lng: Number(latlng[1])
-      })))
+      }))
+    )
+    setCurrentMarkers(
+      searchResult.spots.flatMap((spot, index) => (
+        index === current || index === current + 1
+          ? {
+            position: {
+              lat: Number(spot.lat),
+              lng: Number(spot.lon)
+            },
+            label: {
+              text: index === current ? 'S' : 'G',
+              color: '#fff'
+            },
+            icon: {
+              scale: 4,
+              fillColor: index === current ? '#5956FF' : '#FF56E4',
+              fillOpacity: 1,
+              strokeColor: index === current ? '#5956FF' : '#FF56E4',
+              strokeOpacity: 1,
+              strokeWeight: 16
+            },
+            zIndex: 2
+          }
+          : []
+      ))
+    )
   }, [current])
 
   return (
@@ -94,10 +142,10 @@ export const CustomMap = ({ searchResult, current }) => {
         center={center}
         zoom={16}
         clickableIcons={false}
-        id="15c2beb9dbd319e9"
+        id={process.env.NEXT_PUBLIC_GOOGLE_MAPS_ID}
         // heading={390}
         options={{
-          mapId: '8f8f4d61dd1b3627',
+          mapId: process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAPID,
           mapTypeControl: false,
           zoomControl: false,
           fullscreenControl: false,
@@ -111,12 +159,25 @@ export const CustomMap = ({ searchResult, current }) => {
             key={index}
             icon={{
               ...marker.icon,
-              path: path
+              path: iconPath
             }}
             position={marker.position}
             label={marker.label}
+            zIndex={marker.zIndex}
           />
-
+        ))}
+        {/* スタートとゴールのマーカー */}
+        {currentMarkers.map((marker, index) => (
+          <Marker
+            key={index}
+            icon={{
+              ...marker.icon,
+              path: iconPath
+            }}
+            position={marker.position}
+            label={marker.label}
+            zIndex={marker.zIndex}
+          />
         ))}
         {/* ルート全容 */}
         <Polyline
