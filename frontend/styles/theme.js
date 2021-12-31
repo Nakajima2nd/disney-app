@@ -30,6 +30,12 @@ const theme = createMuiTheme({
     },
     enable: {
       main: '#FFC224'
+    },
+    arrival: {
+      main: '#FF56E4'
+    },
+    departure: {
+      main: '#5956FF'
     }
   },
   overrides: {
@@ -70,6 +76,11 @@ const theme = createMuiTheme({
     MuiButton: {
       root: {
         fontSize: '1rem'
+      }
+    },
+    MuiMobileStepper: {
+      dotActive: {
+        backgroundColor: '#087D8D'
       }
     }
   }

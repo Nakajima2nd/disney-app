@@ -6,7 +6,10 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang='ja'>
-        <Head />
+        <Head>
+          <style>{'#__next { height: 100%}'}
+          </style>
+        </Head>
         <body>
           <Main />
           <NextScript />

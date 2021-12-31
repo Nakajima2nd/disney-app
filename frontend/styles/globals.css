@@ -18,6 +18,7 @@ a {
 
 html {
   font-size: 14px;
+  height: 100%;
 }
 
 @media screen and (max-width: 816px) {
@@ -28,4 +29,5 @@ html {
 
 body {
   background-color: #E1F8FF;
+  height: 100%;
 }
