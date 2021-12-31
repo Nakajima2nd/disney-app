@@ -44,6 +44,11 @@ def business_hours(request):
     )
 
 
+@api_view(['GET'])
+def ticket_reservation(request):
+    return Response("ticket reservation")
+
+
 @api_view(["GET"])
 def debug(request):
     return Response("Debug")
