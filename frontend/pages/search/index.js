@@ -9,6 +9,7 @@ import { hasWaitTime } from '../../utils'
 import Head from 'next/head'
 import { CustomMap } from '../../components/maps/CustomMap'
 import { useState } from 'react'
+import SwipeableViews from 'react-swipeable-views'
 
 const GlobalStyle = createGlobalStyle`
   .MuiDrawer-root > .MuiPaper-root {
@@ -270,6 +271,10 @@ const Search = ({ query }) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
 
+  const handleChangeIndex = index => {
+    setActiveStep(index)
+  }
+
   return (
     <Wrap>
       <Head>
@@ -279,16 +284,25 @@ const Search = ({ query }) => {
         <meta property="og:image" content="/og.png" />
       </Head>
       <CurrentPath>
-        <Start>
-          <Time>{searchResult.subroutes[activeStep].startTime}発</Time>
-          <DepartureAvatar>S</DepartureAvatar>
-          <Name>{searchResult.spots[activeStep].shortSpotName}</Name>
-        </Start>
-        <Goal>
-          <Time>{searchResult.subroutes[activeStep].goalTime}着</Time>
-          <ArrivalAvatar>G</ArrivalAvatar>
-          <Name>{searchResult.spots[activeStep + 1].shortSpotName}</Name>
-        </Goal>
+        <SwipeableViews
+          enableMouseEvents
+          index={activeStep}
+          resistance
+          onChangeIndex={index => handleChangeIndex(index)}
+        >
+          {searchResult.subroutes.map((_, index) => <>
+            <Start>
+              <Time>{searchResult.subroutes[index].startTime}発</Time>
+              <DepartureAvatar>S</DepartureAvatar>
+              <Name>{searchResult.spots[index].shortSpotName}</Name>
+            </Start>
+            <Goal>
+              <Time>{searchResult.subroutes[index].goalTime}着</Time>
+              <ArrivalAvatar>G</ArrivalAvatar>
+              <Name>{searchResult.spots[index + 1].shortSpotName}</Name>
+            </Goal>
+          </>)}
+        </SwipeableViews>
         <CustomMobileStepper
           variant="dots"
           steps={searchResult.subroutes.length}
@@ -304,7 +318,6 @@ const Search = ({ query }) => {
               <KeyboardArrowLeft />
             </ArrowButton>
           }
-
         />
       </CurrentPath>
       <MapWrap>
