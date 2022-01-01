@@ -52,8 +52,6 @@ def get_transit_time_min(distance, speed):
 
 
 class RandomTspSolver:
-    TRY_TIMES = 1000  # 試行回数
-
     # 歩くスピード [m/s]
     WALK_SPEED_DICT = {
         "slow": 0.85,
@@ -92,7 +90,8 @@ class RandomTspSolver:
         current_best_score = 9999999999999
         current_best_tour = None
         random.seed(1)
-        for count in range(RandomTspSolver.TRY_TIMES):
+        try_times = 1000 * (int(len(travel_input.spots)/3) + 1)
+        for count in range(try_times):
             current_tour = random.sample(base_tour, len(base_tour))
             start_spot = TravelInputSpot()
             start_spot.spot_id = travel_input.start_spot_id
