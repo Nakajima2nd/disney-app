@@ -381,16 +381,22 @@ class WeatherInfo:
     天気情報のクラス。
     """
     def __init__(self):
-        self.chance_of_rain = 0   # 降水確率
+        self.date_str = ""
+        self.day_str = ""
+        self.weather_str = ""
         self.high_temperature = 0 # 最高気温
         self.low_temperature = 0  # 最低気温
+        self.chance_of_rain = 0  # 降水確率
         self.wind_speed = 0       # 風速
 
     def to_dict(self):
         return {
-            "chance_of_rain" : self.chance_of_rain,
-            "high-temperature": self.high_temperature,
-            "low-temperature": self.low_temperature,
+            "date-str": self.date_str,
+            "day-str": self.day_str,
+            "weather-str": self.weather_str,
+            "high-temp": self.high_temperature,
+            "low-temp": self.low_temperature,
+            "chance-of-rain": self.chance_of_rain,
             "wind-speed": self.wind_speed
         }
 
