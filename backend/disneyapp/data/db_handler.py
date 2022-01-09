@@ -41,4 +41,13 @@ class DBHandler:
                 result = cur.fetchall()
                 return result
 
-
+    def fetch_all_weather_info(self):
+        """
+        すべての天気情報をDBから取得する。
+        """
+        TABLE_NAME = "weather"
+        with psycopg2.connect(self.database_url, sslmode='require') as conn:
+            with conn.cursor(cursor_factory=DictCursor) as cur:
+                cur.execute(f"SELECT * FROM {TABLE_NAME} ORDER BY target_date")
+                result = cur.fetchall()
+                return result

@@ -3,6 +3,7 @@ from disneyapp.algorithm.models import TravelInput
 from disneyapp.algorithm.tsp_solver import RandomTspSolver
 from disneyapp.data.park_data_accessor import ParkDataAccessor
 from disneyapp.data.ticket_reservation_accesor import TicketReservationAccessor
+from disneyapp.data.weather_accessor import WeatherAccessor
 
 import copy, json
 from rest_framework.response import Response
@@ -53,7 +54,7 @@ def ticket_reservation(request):
 
 @api_view(["GET"])
 def debug(request):
-    return Response("Debug")
+    return Response("debug")
 
 
 def exec_search(json_data):
