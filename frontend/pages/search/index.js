@@ -3,7 +3,7 @@ import { Avatar, Box, Button, Card, MobileStepper, SwipeableDrawer, Typography }
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Loading } from '../../components/Loading'
-import { useGetSearchResult } from '../../hooks'
+import { useGetDevice, useGetSearchResult } from '../../hooks'
 import { ArrowRightAlt, DirectionsWalk, Room, KeyboardArrowRight, KeyboardArrowLeft } from '@material-ui/icons'
 import { hasWaitTime } from '../../utils'
 import Head from 'next/head'
@@ -104,6 +104,15 @@ const Text = styled(Typography)`
 
 const ErrorText = styled(Typography)`
   margin: 16px 0 0 0;
+`
+
+const OpenButton = styled(Button)`
+  position: fixed;
+  bottom: 80px;
+  left: 8px;
+  background-color: rgba(255, 255, 255, 1);
+  font-size: 0.9rem;
+  font-weight: bold;
 `
 
 const Puller = styled(Box)`
@@ -229,6 +238,7 @@ const BackButton = styled(Button)`
 `
 
 const Search = ({ query }) => {
+  const device = useGetDevice()
   const router = useRouter()
   const { searchResult, error } = useGetSearchResult(query)
   const [open, setOpen] = useState(false)
@@ -260,6 +270,10 @@ const Search = ({ query }) => {
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen)
+  }
+
+  const onClickOpen = () => {
+    setOpen(true)
   }
 
   const handleNextArrow = () => {
@@ -324,6 +338,15 @@ const Search = ({ query }) => {
         <CustomMap searchResult={searchResult} current={activeStep} />
       </MapWrap>
       <GlobalStyle />
+      {device === 'pc' &&
+        <OpenButton
+          onClick={onClickOpen}
+          variant="outlined"
+          color="secondary"
+        >
+          経路情報を表示
+        </OpenButton>
+      }
       <SwipeableDrawer
         anchor="bottom"
         open={open}
