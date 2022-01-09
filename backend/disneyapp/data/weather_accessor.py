@@ -18,13 +18,13 @@ class WeatherAccessor:
             weather_info.chance_of_rain = db_weather_info[5]
             weather_info.wind_speed = db_weather_info[6]
             weather_info_list.append(weather_info)
-        return [weather_info.to_dict() for weather_info in weather_info_list]
+        return weather_info_list
 
     @staticmethod
     def fetch_weather_info_dict():
         weather_info_list = WeatherAccessor.fetch_weather_info_list()
         weather_info_dict = {}
         for weather_info in weather_info_list:
-            date_str = weather_info["date-str"]
+            date_str = weather_info.date_str
             weather_info_dict[date_str] = weather_info
         return weather_info_dict

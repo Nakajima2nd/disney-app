@@ -1,5 +1,6 @@
 from disneyapp.data.db_handler import DBHandler
 from disneyapp.data.models import TicketReservationInfo
+from disneyapp.data.weather_accessor import WeatherAccessor
 import datetime
 
 
@@ -20,7 +21,7 @@ class TicketReservationAccessor:
         ticket_status_land_dict = {}
         last_update_time_dict = {}
         for db_result in db_result_list:
-            datetime_str = db_result[0]
+            datetime_str = str(db_result[0])
             type = db_result[1]
             can_reserve = db_result[2]
             last_update_time_dict[datetime_str] = db_result[3]
@@ -30,9 +31,12 @@ class TicketReservationAccessor:
                 ticket_status_land_dict[datetime_str] = can_reserve
         date_list = list(set(list(ticket_status_land_dict.keys()) + list(ticket_status_sea_dict.keys())))
         date_list.sort()
+        weather_info_dict = WeatherAccessor.fetch_weather_info_dict()
         for date in date_list:
             ticket_info = TicketReservationInfo()
             ticket_info.date_str = date
+            if date in weather_info_dict:
+                ticket_info.weather_info = weather_info_dict[date]
             ticket_info.last_update_str = last_update_time_dict[date]
             if date in ticket_status_sea_dict:
                 ticket_info.one_day_pass_sea = ticket_status_sea_dict[date]

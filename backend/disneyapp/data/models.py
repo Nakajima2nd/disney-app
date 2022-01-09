@@ -384,10 +384,10 @@ class WeatherInfo:
         self.date_str = ""
         self.day_str = ""
         self.weather_str = ""
-        self.high_temperature = 0 # 最高気温
-        self.low_temperature = 0  # 最低気温
-        self.chance_of_rain = 0  # 降水確率
-        self.wind_speed = 0       # 風速
+        self.high_temperature = -9999 # 最高気温
+        self.low_temperature = -9999  # 最低気温
+        self.chance_of_rain = -9999  # 降水確率
+        self.wind_speed = -9999       # 風速
 
     def to_dict(self):
         return {
