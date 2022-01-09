@@ -61,3 +61,18 @@ export const useGetSearchResult = (query) => {
     error: error
   }
 }
+
+export const useGetDevice = () => {
+  const [device, setDevice] = useState()
+  useEffect(() => {
+    const ua = navigator.userAgent.toLowerCase()
+    if (ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('android') > -1) {
+      setDevice('sp')
+    }
+    else {
+      setDevice('pc')
+    }
+  }, [])
+
+  return device
+}
