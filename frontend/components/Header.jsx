@@ -6,6 +6,9 @@ import { useRouter } from 'next/router'
 
 const CustomAppBar = styled(AppBar)`
   text-align: center;
+  max-width: 900px;
+  left: 50%;
+  transform: translate(-50%, 0);
 `
 
 const CustomToolbar = styled(Toolbar)`
@@ -26,6 +29,7 @@ const Dummy = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 900px;
   height: 56px;
   background: linear-gradient(rgba(237, 249, 255, 0), rgba(255, 255, 255, 0.8));
 `
