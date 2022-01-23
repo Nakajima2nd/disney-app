@@ -40,3 +40,44 @@ body {
   padding: 0 8px;
   font-size: 10px;
 }
+
+.fc .fc-button-primary.fc-prev-button, .fc .fc-button-primary.fc-next-button {
+  color: black;
+  background-color: unset;
+  border-color: transparent;
+}
+
+.fc .fc-button-primary.fc-prev-button:hover, .fc .fc-button-primary.fc-next-button:hover {
+  color: black;
+  background-color: unset;
+  border-color: transparent;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-prev-button:active, .fc .fc-button-primary:not(:disabled).fc-next-button:active {
+  color: black;
+  background-color: unset;
+  border-color: transparent;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-prev-button:active:focus, .fc .fc-button-primary:not(:disabled).fc-next-button:active:focus {
+  box-shadow: unset;
+}
+
+.fc .fc-button-primary.fc-prev-button:focus, .fc .fc-button-primary.fc-next-button:focus {
+  box-shadow: unset;
+}
+
+.fc-day-sat {
+  background-color: #eaf4ff;
+  color: blue;
+}
+
+.fc-day-sun {
+  background-color: #ffeaea;
+  color: red;
+}
+
+.holiday > .fc-event-title {
+  position: absolute;
+  bottom: 0;
+}
