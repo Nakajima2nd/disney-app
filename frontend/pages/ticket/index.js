@@ -4,7 +4,7 @@ import { FiberManualRecord } from '@material-ui/icons'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import allLocales from '@fullcalendar/core/locales-all'
-// import googleCalendarPlugin from '@fullcalendar/google-calendar'
+import googleCalendarPlugin from '@fullcalendar/google-calendar'
 
 const DescriptionList = styled(List)`
   margin: 16px 0 0;
@@ -58,7 +58,7 @@ const Ticket = () => {
       <FullCalendar
         plugins={[
           dayGridPlugin,
-          // googleCalendarPlugin
+          googleCalendarPlugin
         ]}
         initialView="dayGridMonth"
         locales={allLocales}
@@ -70,12 +70,14 @@ const Ticket = () => {
           end: 'next'
         }}
         dayCellContent={(e) => e.dayNumberText = e.dayNumberText.replace('日', '')}
-        // googleCalendarApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-        // events={{
-        //   googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com',
-        //   className: 'holiday',
-        //   display: 'background'
-        // }}
+        googleCalendarApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+        eventSources={[
+          {
+            googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com',
+            className: 'holiday',
+            display: 'background'
+          }
+        ]}
       />
     </CalendarWrap>
   </>)
