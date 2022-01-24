@@ -83,4 +83,9 @@ const Ticket = () => {
   </>)
 }
 
+export async function getServerSideProps() {
+  const data = 'aaa'
+  return { props: { data } }
+}
+
 export default Ticket
