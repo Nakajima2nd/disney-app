@@ -56,17 +56,17 @@ const SwitchButton = styled(Button)`
   flex-basis: 50%;
 `
 
-const About = styled(SwitchButton)`
+const Sea = styled(SwitchButton)`
   border-right: 1px solid;
   border-image: linear-gradient(to bottom, #fbfeff 20%, #d6d6d6 80%);
   border-image-slice: 1;
-`
+  `
 
-const Sea = styled(SwitchButton)`
+const Ticket = styled(SwitchButton)`
   border-right: 0px;
 `
 
-const Ticket = styled(SwitchButton)`
+const About = styled(SwitchButton)`
   border-right: 1px solid #d6d6d6;
   border-radius: 0;
 `
