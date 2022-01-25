@@ -1,10 +1,7 @@
 import styled from 'styled-components'
 import { Card, List, ListItem, ListItemIcon, Typography } from '@material-ui/core'
 import { FiberManualRecord } from '@material-ui/icons'
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import allLocales from '@fullcalendar/core/locales-all'
-import googleCalendarPlugin from '@fullcalendar/google-calendar'
+import dynamic from 'next/dynamic'
 
 const DescriptionList = styled(List)`
   margin: 16px 0 0;
@@ -30,6 +27,7 @@ const DescriptionListItemText = styled(Typography)`
 const CalendarWrap = styled(Card)`
   margin: 16px;
   padding: 16px 0 0;
+  height: 416px;
 `
 
 const Description = ({ list }) => {
@@ -51,41 +49,23 @@ const descriptionItems = [
   'カレンダーの◯をタップすると予約ページにいきます'
 ]
 
-const Ticket = () => {
+
+
+const Ticket = ({ query }) => {
+  const Calendar = dynamic(() => import('../../components/calendar/Calendar').then(module => module.Callendar), { ssr: false })
+
+  console.log(query)
   return (<>
     <Description list={descriptionItems} />
     <CalendarWrap>
-      <FullCalendar
-        plugins={[
-          dayGridPlugin,
-          googleCalendarPlugin
-        ]}
-        initialView="dayGridMonth"
-        locales={allLocales}
-        locale="ja"
-        height={400}
-        headerToolbar={{
-          start: 'prev',
-          center: 'title',
-          end: 'next'
-        }}
-        dayCellContent={(e) => e.dayNumberText = e.dayNumberText.replace('日', '')}
-        googleCalendarApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-        eventSources={[
-          {
-            googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com',
-            className: 'holiday',
-            display: 'background'
-          }
-        ]}
-      />
+      <Calendar />
     </CalendarWrap>
   </>)
 }
 
-export async function getStaticProps() {
-  const data = 'aaa'
-  return { props: { data } }
+export async function getServerSideProps(context) {
+  const query = context.query
+  return { props: { query } }
 }
 
 export default Ticket
