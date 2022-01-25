@@ -107,8 +107,8 @@ const ErrorText = styled(Typography)`
 `
 
 const OpenButton = styled(Button)`
-  position: fixed;
-  bottom: 80px;
+  position: absolute;
+  bottom: 76px;
   left: 8px;
   background-color: rgba(255, 255, 255, 1);
   font-size: 0.9rem;
