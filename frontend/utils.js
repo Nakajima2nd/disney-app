@@ -40,6 +40,23 @@ export const toCamelCaseObject = (obj) => {
   }
 }
 
+export const toCamelCaseArray = (arr) => {
+  return arr.map(ele => convert(ele))
+}
+
+export const isObject = (val) => Object.prototype.toString.call(val).slice(8, -1) === 'Object'
+
+export const convert = (obj) => {
+  return Object.keys(obj).reduce((acc, cur) => {
+    const key = toCamelCase(cur)
+    const value = isObject(obj[cur]) ? convert(obj[cur]) : obj[cur]
+    return {
+      ...acc,
+      [key]: value
+    }
+  }, {})
+}
+
 export const formatDateTime = (date) => {
   if (Object.prototype.toString.call(date).slice(8, -1) === 'Date') {
     return date.toLocaleTimeString().substring(0, date.toLocaleTimeString().length - 3)

@@ -3,7 +3,32 @@ import { assoc } from 'ramda'
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { searchInputState } from './atoms/searchInput';
-import { toCamelCaseObject, toKebabCaseObject } from './utils';
+import { toCamelCaseObject, toCamelCaseArray } from './utils';
+
+export const useGetTicketReservation = () => {
+  const [data, setData] = useState()
+  const [error, setError] = useState()
+  const fetch = async () => {
+    try {
+      const API_URL = process.env.NEXT_PUBLIC_API_ROOT + '/ticket-reservation'
+      const res = await axios.get(API_URL)
+      setData(toCamelCaseArray(res.data))
+    }
+    catch (error) {
+      console.log(error)
+      setError("何らかのエラー")
+    }
+  }
+  useEffect(() => {
+    if (!data && !error) {
+      fetch()
+    }
+  }, [data, error])
+  return {
+    data: data,
+    error: error
+  }
+}
 
 export const useGetSpotList = () => {
   const [spotList, setSpotList] = useState()
