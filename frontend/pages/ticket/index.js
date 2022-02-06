@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Card, List, ListItem, ListItemIcon, Typography } from '@material-ui/core'
+import { Box, Card, List, ListItem, ListItemIcon, Typography } from '@material-ui/core'
 import { FiberManualRecord } from '@material-ui/icons'
 import dynamic from 'next/dynamic'
 import { useGetTicketReservation } from '../../hooks'
@@ -31,7 +31,19 @@ const DescriptionListItemText = styled(Typography)`
 const CalendarWrap = styled(Card)`
   margin: 16px;
   padding: 16px 0 0;
-  height: 456px;
+  height: 484px;
+`
+
+const Head = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 56px;
+`
+
+const Title = styled(Typography)`
+  font-size: 1.2rem;
 `
 
 const Description = ({ list }) => {
@@ -86,6 +98,11 @@ const Ticket = ({ query }) => {
   return (<>
     <Description list={descriptionItems} />
     <CalendarWrap>
+      <Head>
+        <img src="/land.svg" />
+        <Title>ディズニーランド</Title>
+        <img src="/land.svg" />
+      </Head>
       <Calendar
         events={land}
         weather={weather}
@@ -93,6 +110,11 @@ const Ticket = ({ query }) => {
       />
     </CalendarWrap>
     <CalendarWrap>
+    <Head>
+        <img src="/sea.svg" />
+        <Title>ディズニーシー</Title>
+        <img src="/sea.svg" />
+      </Head>
       <Calendar
         events={sea}
         weather={weather}
