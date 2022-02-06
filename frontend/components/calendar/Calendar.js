@@ -2,8 +2,9 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import allLocales from '@fullcalendar/core/locales-all'
 import googleCalendarPlugin from '@fullcalendar/google-calendar'
+import { RadioButtonUnchecked } from '@material-ui/icons'
 
-export const Callendar = () => {
+export const Callendar = ({ events, weather, type }) => {
   return (
     <FullCalendar
       plugins={[
@@ -13,7 +14,7 @@ export const Callendar = () => {
       initialView="dayGridMonth"
       locales={allLocales}
       locale="ja"
-      height={400}
+      height={440}
       headerToolbar={{
         start: 'prev',
         center: 'title',
@@ -26,8 +27,33 @@ export const Callendar = () => {
           googleCalendarId: 'ja.japanese#holiday@group.v.calendar.google.com',
           className: 'holiday',
           display: 'background'
+        },
+        {
+          events: events,
+          className: type,
+          textColor: '#ff56e4'
+        },
+        {
+          events: weather,
+          display: 'background',
+          className: 'weather',
+          textColor: 'inherit',
+          backgroundColor: 'inherit',
         }
       ]}
+      eventClick={(info) => {
+        info.jsEvent.preventDefault()
+        if (info.event.extendedProps.name && info.event.url) {
+          window.open(info.event.url)
+        }
+      }}
+      eventContent={(arg) => {
+        if (arg.event.extendedProps.name === 'ticket') {
+          return (
+            <RadioButtonUnchecked />
+          )
+        }
+      }}
     />
   )
 }

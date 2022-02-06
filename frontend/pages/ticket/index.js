@@ -2,6 +2,10 @@ import styled from 'styled-components'
 import { Card, List, ListItem, ListItemIcon, Typography } from '@material-ui/core'
 import { FiberManualRecord } from '@material-ui/icons'
 import dynamic from 'next/dynamic'
+import { useGetTicketReservation } from '../../hooks'
+import { Loading } from '../../components/Loading'
+
+const baseUrl = 'https://reserve.tokyodisneyresort.jp/ticket/search/?parkTicketGroupCd=020&numOfAdult=2&numOfJunior=0&numOfChild=0&parkTicketSalesForm=1&useDays=1&route=1'
 
 const DescriptionList = styled(List)`
   margin: 16px 0 0;
@@ -27,7 +31,7 @@ const DescriptionListItemText = styled(Typography)`
 const CalendarWrap = styled(Card)`
   margin: 16px;
   padding: 16px 0 0;
-  height: 416px;
+  height: 456px;
 `
 
 const Description = ({ list }) => {
@@ -49,16 +53,51 @@ const descriptionItems = [
   'カレンダーの◯をタップすると予約ページにいきます'
 ]
 
-
-
 const Ticket = ({ query }) => {
   const Calendar = dynamic(() => import('../../components/calendar/Calendar').then(module => module.Callendar), { ssr: false })
+  const { data, error } = useGetTicketReservation()
 
-  console.log(query)
+  if (error) return <Text>{error}</Text>
+  if (!data) return <Loading />
+
+  const land = data.map(event => ({
+    start: event.dateStr,
+    sea: event.onedayPass.sea,
+    land: event.onedayPass.land,
+    name: 'ticket',
+    className: 'ticket',
+    url: `${baseUrl}&useDateFrom=${event.dateStr.split('-').join('')}&selectParkDay1=01`
+  })).filter(event => event.land)
+
+  const sea = data.map(event => ({
+    start: event.dateStr,
+    sea: event.onedayPass.sea,
+    land: event.onedayPass.land,
+    name: 'ticket',
+    className: 'ticket',
+    url: `${baseUrl}&useDateFrom=${event.dateStr.split('-').join('')}&selectParkDay1=02`
+  })).filter(event => event.sea)
+
+  const weather = data.map(({ weather }) => ({
+    start: weather.dateStr,
+    title: weather.weatherStr.substring(0, 1)
+  })).filter(w => w.start)
+
   return (<>
     <Description list={descriptionItems} />
     <CalendarWrap>
-      <Calendar />
+      <Calendar
+        events={land}
+        weather={weather}
+        type="land"
+      />
+    </CalendarWrap>
+    <CalendarWrap>
+      <Calendar
+        events={sea}
+        weather={weather}
+        type="sea"
+      />
     </CalendarWrap>
   </>)
 }
