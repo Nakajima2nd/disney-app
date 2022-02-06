@@ -72,6 +72,7 @@ const Ticket = ({ query }) => {
   if (error) return <Text>{error}</Text>
   if (!data) return <Loading />
 
+  console.log(data)
   const land = data.map(event => ({
     start: event.dateStr,
     sea: event.onedayPass.sea,
