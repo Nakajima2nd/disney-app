@@ -26,7 +26,7 @@ front-sh:
 # nodemodulesを手元にコピーする(エディターの補完を効かせるため)
 .PHONY: copy
 copy:
-	sudo docker cp disney-app-frontend-1:/code/node_modules ./frontend/
+	sudo docker cp disney-app_frontend_1:/code/node_modules ./frontend/
 
 .PHONY: test-backend
 test-backend:

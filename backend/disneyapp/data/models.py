@@ -414,8 +414,8 @@ class TicketReservationInfo:
 
     def to_dict(self):
         return {
-            "date_str" : self.date_str,
-            "last_update": self.last_update_str,
+            "date-str" : self.date_str,
+            "last-update": self.last_update_str,
             "oneday-pass": {
                 "sea": self.one_day_pass_sea,
                 "land": self.one_day_pass_land

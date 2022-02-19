@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { AppBar, Button, ButtonGroup, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Box, Button, Toolbar } from '@material-ui/core'
 import { useRecoilState } from 'recoil'
 import { searchInputState } from '../atoms/searchInput'
 import { useRouter } from 'next/router'
@@ -42,36 +42,60 @@ const Text = styled.p`
   font-weight: bold;
   color: #15859A;
   z-index: 2;
+  cursor: pointer;
 `
 
-const Logo = styled.img`
-  z-index: 2;
-`
-
-const SwitchButtons = styled(ButtonGroup)`
-  height: 36px;
-  min-height: 36px;
+const SwitchButtons = styled(Box)`
   background: linear-gradient(rgba(251, 254, 255, 1), rgba(255, 255, 255, 1));
+  display: flex;
+  flex-wrap: wrap;
+  color: #5f5f5f;
 `
 
-const About = styled(Button)`
+const SwitchButton = styled(Button)`
+  flex-basis: 50%;
+`
+
+const Sea = styled(SwitchButton)`
   border-right: 1px solid;
   border-image: linear-gradient(to bottom, #fbfeff 20%, #d6d6d6 80%);
   border-image-slice: 1;
+  `
+
+const Ticket = styled(SwitchButton)`
+  border-right: 0px;
 `
 
-const Sea = styled(Button)`
+const About = styled(SwitchButton)`
+  border-right: 1px solid #d6d6d6;
   border-radius: 0;
 `
 
 export const Header = () => {
   const router = useRouter()
   const [searchInput, setSearchInput] = useRecoilState(searchInputState)
-  const onClick = () => {
+  
+  const handleHome = () => {
     setSearchInput(null)
     router.push({
       pathname: '/',
     })
+  }
+
+  const handleButton = paths => e => {
+    const current = router.pathname
+    if (paths.includes(current)) {
+    }
+    else {
+      router.push({
+        pathname: paths[0],
+      })
+    }
+  }
+
+  const getColor = paths => {
+    const current = router.pathname
+    return paths.includes(current) ? 'primary' : 'inherit'
   }
 
   return (
@@ -81,13 +105,13 @@ export const Header = () => {
       elevation={1}
     >
       <CustomToolbar>
-        <Text onClick={onClick}>ディズニープラン</Text>
-        {/* <Logo src="/logo.png" onClick={onClick} /> */}
+        <Text onClick={handleHome}>ディズニープラン</Text>
       </CustomToolbar>
-      <Dummy/>
-      <SwitchButtons variant="text" fullWidth>
-        <About>はじめに</About>
-        <Sea color="primary">TDS計画ツール</Sea>
+      <Dummy />
+      <SwitchButtons>
+        <Sea onClick={handleButton(['/', '/search'])} color={getColor(['/', '/search'])}>TDS計画ツール</Sea>
+        <Ticket onClick={handleButton(['/ticket'])} color={getColor(['/ticket'])}>チケット予約ツール</Ticket>
+        <About onClick={handleButton(['/about'])} color={getColor(['/about'])}>このサイトについて</About>
       </SwitchButtons>
     </CustomAppBar>
   )

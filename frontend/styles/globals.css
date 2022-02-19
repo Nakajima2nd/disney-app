@@ -40,3 +40,76 @@ body {
   padding: 0 8px;
   font-size: 10px;
 }
+
+.fc .fc-button-primary.fc-prev-button, .fc .fc-button-primary.fc-next-button {
+  color: black;
+  background-color: unset;
+  border-color: transparent;
+}
+
+.fc .fc-button-primary.fc-prev-button:hover, .fc .fc-button-primary.fc-next-button:hover {
+  color: black;
+  background-color: unset;
+  border-color: transparent;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-prev-button:active, .fc .fc-button-primary:not(:disabled).fc-next-button:active {
+  color: black;
+  background-color: unset;
+  border-color: transparent;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-prev-button:active:focus, .fc .fc-button-primary:not(:disabled).fc-next-button:active:focus {
+  box-shadow: unset;
+}
+
+.fc .fc-button-primary.fc-prev-button:focus, .fc .fc-button-primary.fc-next-button:focus {
+  box-shadow: unset;
+}
+
+.fc-day-sat {
+  background-color: #eaf4ff;
+  color: blue;
+}
+
+.fc-day-sun {
+  background-color: #ffeaea;
+  color: red;
+}
+
+.holiday > .fc-event-title {
+  position: absolute;
+  bottom: 0;
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-start.ticket {
+  border: none;
+  background: unset;
+  background-color: unset;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-start.weather {
+  border: none;
+  background: unset;
+  background-color: unset;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.fc .fc-daygrid-day-bg .fc-bg-event.emphasis {
+  opacity: 1;
+}
+
+.fc .fc-daygrid-day-bg .fc-bg-event.weather {
+  /* background-image: url('/cloudy.svg'); */
+
+}

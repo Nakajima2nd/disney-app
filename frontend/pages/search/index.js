@@ -21,12 +21,8 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Wrap = styled(Box)`
-  height: calc(100% - 8px);
-  margin: 8px 0 0 0;
-`
-
 const CurrentPath = styled(Box)`
+  margin: 8px 0 0;
   height: 72px;
   padding: 8px 0 0 0;
   background: white;
@@ -107,8 +103,8 @@ const ErrorText = styled(Typography)`
 `
 
 const OpenButton = styled(Button)`
-  position: fixed;
-  bottom: 80px;
+  position: absolute;
+  bottom: 76px;
   left: 8px;
   background-color: rgba(255, 255, 255, 1);
   font-size: 0.9rem;
@@ -290,7 +286,7 @@ const Search = ({ query }) => {
   }
 
   return (
-    <Wrap>
+    <>
       <Head>
         <title>探索結果|TDS計画ツール|ディズニープラン</title>
         <meta property="og:title" content="探索結果|TDS計画ツール|ディズニープラン" />
@@ -413,7 +409,7 @@ const Search = ({ query }) => {
           </ButtonWrap>
         </Detail>
       </SwipeableDrawer>
-    </Wrap>
+    </>
   )
 }
 
