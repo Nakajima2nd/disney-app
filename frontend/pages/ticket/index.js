@@ -4,6 +4,7 @@ import { FiberManualRecord } from '@material-ui/icons'
 import dynamic from 'next/dynamic'
 import { useGetTicketReservation } from '../../hooks'
 import { Loading } from '../../components/Loading'
+import Head from 'next/head'
 
 const baseUrl = 'https://reserve.tokyodisneyresort.jp/ticket/search/?parkTicketGroupCd=020&numOfAdult=2&numOfJunior=0&numOfChild=0&parkTicketSalesForm=1&useDays=1&route=1'
 
@@ -34,7 +35,7 @@ const CalendarWrap = styled(Card)`
   height: 484px;
 `
 
-const Head = styled(Box)`
+const CalendarHead = styled(Box)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -42,7 +43,7 @@ const Head = styled(Box)`
   padding: 0 56px;
 `
 
-const Title = styled(Typography)`
+const CalendarTitle = styled(Typography)`
   font-size: 1.2rem;
 `
 
@@ -72,7 +73,6 @@ const Ticket = ({ query }) => {
   if (error) return <Text>{error}</Text>
   if (!data) return <Loading />
 
-  console.log(data)
   const land = data.map(event => ({
     start: event.dateStr,
     sea: event.onedayPass.sea,
@@ -93,33 +93,54 @@ const Ticket = ({ query }) => {
 
   const weather = data.map(({ weather }) => ({
     start: weather.dateStr,
-    title: weather.weatherStr.substring(0, 1)
+    title: weather.weatherStr.substring(0, 1),
+    img: ~weather.weatherStr.indexOf('雪')
+      ? '/snow.svg'
+      : ~weather.weatherStr.indexOf('雨')
+        ? '/rainy.svg'
+        : ~weather.weatherStr.indexOf('曇')
+          ? '/cloudy.svg'
+          : ~weather.weatherStr.indexOf('晴')
+            ? '/sunny.svg'
+            : null
   })).filter(w => w.start)
 
+  const emphasis = [{
+    start: query.date
+  }]
+
   return (<>
+    <Head>
+      <title>チケット予約|TDS計画ツール|ディズニープラン</title>
+      <meta property="og:title" content="チケット予約|TDS計画ツール|ディズニープラン" />
+      <meta property="og:description" content="ディズニーランド・シーを効率よくめぐる計画をたてるwebアプリです！リアルタイム待ち時間を考慮しています！" />
+      <meta property="og:image" content="/og.png" />
+    </Head>
     <Description list={descriptionItems} />
     <CalendarWrap>
-      <Head>
+      <CalendarHead>
         <img src="/land.svg" />
-        <Title>ディズニーランド</Title>
+        <CalendarTitle>ディズニーランド</CalendarTitle>
         <img src="/land.svg" />
-      </Head>
+      </CalendarHead>
       <Calendar
         events={land}
         weather={weather}
         type="land"
+        emphasis={query.type === 'land' ? emphasis : null}
       />
     </CalendarWrap>
     <CalendarWrap>
-    <Head>
+      <CalendarHead>
         <img src="/sea.svg" />
-        <Title>ディズニーシー</Title>
+        <CalendarTitle>ディズニーシー</CalendarTitle>
         <img src="/sea.svg" />
-      </Head>
+      </CalendarHead>
       <Calendar
         events={sea}
         weather={weather}
         type="sea"
+        emphasis={query.type === 'sea' ? emphasis : null}
       />
     </CalendarWrap>
   </>)

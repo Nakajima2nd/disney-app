@@ -104,3 +104,12 @@ body {
   top: 0;
   left: 0;
 }
+
+.fc .fc-daygrid-day-bg .fc-bg-event.emphasis {
+  opacity: 1;
+}
+
+.fc .fc-daygrid-day-bg .fc-bg-event.weather {
+  /* background-image: url('/cloudy.svg'); */
+
+}
