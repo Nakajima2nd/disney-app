@@ -4,7 +4,7 @@ import allLocales from '@fullcalendar/core/locales-all'
 import googleCalendarPlugin from '@fullcalendar/google-calendar'
 import { RadioButtonUnchecked } from '@material-ui/icons'
 
-export const Callendar = ({ events, weather, type }) => {
+export const Callendar = ({ events, weather, type, emphasis }) => {
   return (
     <FullCalendar
       plugins={[
@@ -39,6 +39,12 @@ export const Callendar = ({ events, weather, type }) => {
           className: 'weather',
           textColor: 'inherit',
           backgroundColor: 'inherit',
+        },
+        {
+          events: emphasis,
+          display: 'background',
+          className: 'emphasis',
+          backgroundColor: 'yellow',
         }
       ]}
       eventClick={(info) => {
@@ -54,6 +60,13 @@ export const Callendar = ({ events, weather, type }) => {
           )
         }
       }}
+      // eventContent={(arg) => {
+      //   if (arg.event.extendedProps.className === 'weather') {
+      //     return (
+      //       <img src={arg.event.extendedProps.url} />
+      //     )
+      //   }
+      // }}
     />
   )
 }
