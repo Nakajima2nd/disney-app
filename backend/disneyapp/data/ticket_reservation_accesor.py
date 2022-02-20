@@ -8,7 +8,7 @@ class TicketReservationAccessor:
     @staticmethod
     def fetch_ticket_status_list():
         """
-        現在時刻から1か月分のチケット販売情報およい付随情報を返す。
+        現在時刻から2か月分のチケット販売情報およい付随情報を返す。
         """
         ticket_status_list = []
         num_of_target_date = 60 # 何日分の情報を返すか
