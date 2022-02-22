@@ -8,10 +8,10 @@ class TicketReservationAccessor:
     @staticmethod
     def fetch_ticket_status_list():
         """
-        現在時刻から1か月分のチケット販売情報およい付随情報を返す。
+        現在時刻から2か月分のチケット販売情報およい付随情報を返す。
         """
         ticket_status_list = []
-        num_of_target_date = 30 # 何日分の情報を返すか
+        num_of_target_date = 60 # 何日分の情報を返すか
         db_handler = DBHandler()
         dt_now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
         dt_upto_time = dt_now + datetime.timedelta(days=num_of_target_date)
