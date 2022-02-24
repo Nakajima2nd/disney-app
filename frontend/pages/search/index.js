@@ -288,6 +288,7 @@ const Search = ({ query }) => {
   return (
     <>
       <Head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4896306900328304" crossorigin="anonymous"></script>
         <title>探索結果|TDS計画ツール|ディズニープラン</title>
         <meta property="og:title" content="探索結果|TDS計画ツール|ディズニープラン" />
         <meta property="og:description" content="ディズニーランド・シーを効率よくめぐる計画をたてるwebアプリです！リアルタイム待ち時間を考慮しています！" />
