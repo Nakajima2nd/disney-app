@@ -105,8 +105,12 @@ const Ticket = ({ query }) => {
             : null
   })).filter(w => w.start)
 
-  const emphasis = [{
-    start: query.date
+  const emphasisLand = [{
+    start: query.land
+  }]
+
+  const emphasisSea = [{
+    start: query.sea
   }]
 
   return (<>
@@ -128,7 +132,7 @@ const Ticket = ({ query }) => {
         events={land}
         weather={weather}
         type="land"
-        emphasis={query.type === 'land' ? emphasis : null}
+        emphasis={emphasisLand}
       />
     </CalendarWrap>
     <CalendarWrap>
@@ -141,7 +145,7 @@ const Ticket = ({ query }) => {
         events={sea}
         weather={weather}
         type="sea"
-        emphasis={query.type === 'sea' ? emphasis : null}
+        emphasis={emphasisSea}
       />
     </CalendarWrap>
   </>)
