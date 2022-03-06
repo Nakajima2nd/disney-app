@@ -13,7 +13,6 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Header } from '../components/Header'
 import { Box } from '@material-ui/core'
 import GoogleAnalytics from '../components/GoogleAnalytics'
-import GoogleAdsense from '../components/googleadsense'
 import { useRouter } from 'next/router';
 import { existsGaId, pageview } from '../components/gtag'
 
@@ -60,7 +59,6 @@ const MyApp = ({ Component, pageProps }) => {
             <RecoilRoot>
               <Header />
               <Wrap>
-                <GoogleAdsense />
                 <GoogleAnalytics />
                 <Component {...pageProps} />
               </Wrap>
