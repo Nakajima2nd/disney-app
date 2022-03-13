@@ -41,6 +41,30 @@ class DBHandler:
                 result = cur.fetchall()
                 return result
 
+    def fetch_restaurant_reservation_info(self):
+        """
+        レストラン予約情報をDBから取得する。
+        """
+        table_name = "drestaurant_status"
+        with psycopg2.connect(self.database_url, sslmode='require') as conn:
+            with conn.cursor(cursor_factory=DictCursor) as cur:
+                cur.execute(f"SELECT * FROM {table_name} ORDER BY target_date")
+                result = cur.fetchall()
+                return result
+
+    def fetch_restaurant_name_type_dict(self):
+        """
+        レストラン名称->typeの辞書を返却する。
+        """
+        table_name = "drestaurant_list"
+        name_type_dict = {}
+        with psycopg2.connect(self.database_url, sslmode='require') as conn:
+            with conn.cursor(cursor_factory=DictCursor) as cur:
+                cur.execute(f"SELECT * FROM {table_name}")
+                for row in cur:
+                    name_type_dict[row["restaurant_name"]] = row["type"]
+        return name_type_dict
+
     def fetch_all_weather_info(self):
         """
         すべての天気情報をDBから取得する。

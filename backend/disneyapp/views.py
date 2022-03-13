@@ -3,7 +3,7 @@ from disneyapp.algorithm.models import TravelInput
 from disneyapp.algorithm.tsp_solver import RandomTspSolver
 from disneyapp.data.park_data_accessor import ParkDataAccessor
 from disneyapp.data.ticket_reservation_accesor import TicketReservationAccessor
-from disneyapp.data.weather_accessor import WeatherAccessor
+from disneyapp.data.restaurant_reservation_accessor import RestaurantReservationAccessor
 
 import copy, json
 from rest_framework.response import Response
@@ -49,6 +49,11 @@ def business_hours(request):
 @api_view(['GET'])
 def ticket_reservation(request):
     result = TicketReservationAccessor.fetch_ticket_status_list()
+    return Response(result)
+
+@api_view(['GET'])
+def restaurant_reservation(request):
+    result = RestaurantReservationAccessor.fetch_restaurant_status_list()
     return Response(result)
 
 
