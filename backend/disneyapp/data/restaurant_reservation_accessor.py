@@ -23,7 +23,7 @@ class RestaurantReservationAccessor:
         return target_date_list
 
     @staticmethod
-    def fetch_restaurant_status_list():
+    def fetch_restaurant_status_list(type_str: str):
         """
         現在時刻から2か月分のレストランの空き状況を返す。
         """
@@ -52,6 +52,7 @@ class RestaurantReservationAccessor:
                                                               name=restaurant_name,
                                                               status=status)
                 restaurant_status_list.append(restaurant_status)
-        return [restaurant_status.to_dict() for restaurant_status in restaurant_status_list]
+        hotel_park_status_list = [restaurant_status.to_dict() for restaurant_status in restaurant_status_list]
+        return filter(lambda x:x["type-str"] == type_str, hotel_park_status_list)
 
 

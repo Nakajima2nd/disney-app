@@ -51,9 +51,16 @@ def ticket_reservation(request):
     result = TicketReservationAccessor.fetch_ticket_status_list()
     return Response(result)
 
+
 @api_view(['GET'])
-def restaurant_reservation(request):
-    result = RestaurantReservationAccessor.fetch_restaurant_status_list()
+def hotel_restaurant_reservation(request):
+    result = RestaurantReservationAccessor.fetch_restaurant_status_list(type_str="hotel")
+    return Response(result)
+
+
+@api_view(['GET'])
+def park_restaurant_reservation(request):
+    result = RestaurantReservationAccessor.fetch_restaurant_status_list(type_str="park")
     return Response(result)
 
 
