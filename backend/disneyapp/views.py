@@ -54,13 +54,19 @@ def ticket_reservation(request):
 
 @api_view(['GET'])
 def hotel_restaurant_reservation(request):
-    result = RestaurantReservationAccessor.fetch_restaurant_status_list(type_str="hotel")
+    key = None
+    if "key" in request.GET:
+        key = request.GET.get("key")
+    result = RestaurantReservationAccessor.fetch_restaurant_status_list(type_str="hotel", key=key)
     return Response(result)
 
 
 @api_view(['GET'])
 def park_restaurant_reservation(request):
-    result = RestaurantReservationAccessor.fetch_restaurant_status_list(type_str="park")
+    key = None
+    if "key" in request.GET:
+        key = request.GET.get("key")
+    result = RestaurantReservationAccessor.fetch_restaurant_status_list(type_str="park", key=key)
     return Response(result)
 
 
