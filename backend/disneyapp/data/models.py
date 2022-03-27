@@ -422,3 +422,22 @@ class TicketReservationInfo:
             },
             "weather" : self.weather_info.to_dict()
         }
+
+
+class RestaurantReservationInfo:
+    """
+    レストラン予約情報クラス。
+    """
+    def __init__(self, date_str, type_str, name, status):
+        self.date_str = date_str
+        self.type_str = type_str
+        self.name = name
+        self.status = status
+
+    def to_dict(self):
+        return {
+            "date-str": self.date_str,
+            "type-str": self.type_str,
+            "name": self.name,
+            "status": self.status
+        }
