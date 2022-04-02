@@ -109,7 +109,18 @@ body {
   opacity: 1;
 }
 
-.fc .fc-daygrid-day-bg .fc-bg-event.weather {
-  /* background-image: url('/cloudy.svg'); */
+.fc .fc-daygrid-day-bg .fc-bg-event.weather.cloudy {
+  background-image: url('/cloudy.svg');
+}
 
+.fc .fc-daygrid-day-bg .fc-bg-event.weather.snow {
+  background-image: url('/snow.svg');
+}
+
+.fc .fc-daygrid-day-bg .fc-bg-event.weather.rainy {
+  background-image: url('/rainy.svg');
+}
+
+.fc .fc-daygrid-day-bg .fc-bg-event.weather.sunny {
+  background-image: url('/sunny.svg');
 }

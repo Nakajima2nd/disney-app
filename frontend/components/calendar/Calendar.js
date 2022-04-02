@@ -34,9 +34,12 @@ export const Callendar = ({ events, weather, type, emphasis }) => {
           textColor: '#ff56e4'
         },
         {
-          events: weather,
+          events: weather.map(event => ({
+            title: event.title,
+            start: event.start,
+            className: `weather ${event.name}`
+          })),
           display: 'background',
-          className: 'weather',
           textColor: 'inherit',
           backgroundColor: 'inherit',
         },

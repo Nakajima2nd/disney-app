@@ -94,6 +94,15 @@ const Ticket = ({ query }) => {
   const weather = data.map(({ weather }) => ({
     start: weather.dateStr,
     title: weather.weatherStr.substring(0, 1),
+    name: ~weather.weatherStr.indexOf('雪')
+      ? 'snow'
+      : ~weather.weatherStr.indexOf('雨')
+        ? 'rainy'
+        : ~weather.weatherStr.indexOf('曇')
+          ? 'cloudy'
+          : ~weather.weatherStr.indexOf('晴')
+            ? 'sunny'
+            : null,
     img: ~weather.weatherStr.indexOf('雪')
       ? '/snow.svg'
       : ~weather.weatherStr.indexOf('雨')
