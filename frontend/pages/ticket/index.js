@@ -93,7 +93,15 @@ const Ticket = ({ query }) => {
 
   const weather = data.map(({ weather }) => ({
     start: weather.dateStr,
-    title: weather.weatherStr.substring(0, 1),
+    title: ~weather.weatherStr.indexOf('雪')
+      ? '雪'
+      : ~weather.weatherStr.indexOf('雨')
+        ? '雨'
+        : ~weather.weatherStr.indexOf('曇')
+          ? '曇'
+          : ~weather.weatherStr.indexOf('晴')
+            ? '晴'
+            : null,
     name: ~weather.weatherStr.indexOf('雪')
       ? 'snow'
       : ~weather.weatherStr.indexOf('雨')
@@ -102,15 +110,6 @@ const Ticket = ({ query }) => {
           ? 'cloudy'
           : ~weather.weatherStr.indexOf('晴')
             ? 'sunny'
-            : null,
-    img: ~weather.weatherStr.indexOf('雪')
-      ? '/snow.svg'
-      : ~weather.weatherStr.indexOf('雨')
-        ? '/rainy.svg'
-        : ~weather.weatherStr.indexOf('曇')
-          ? '/cloudy.svg'
-          : ~weather.weatherStr.indexOf('晴')
-            ? '/sunny.svg'
             : null
   })).filter(w => w.start)
 
