@@ -2,7 +2,7 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import allLocales from '@fullcalendar/core/locales-all'
 import googleCalendarPlugin from '@fullcalendar/google-calendar'
-import { RadioButtonUnchecked } from '@material-ui/icons'
+import { RadioButtonUnchecked, Close } from '@material-ui/icons'
 
 export const Callendar = ({ events, weather, type, emphasis }) => {
   return (
@@ -55,18 +55,16 @@ export const Callendar = ({ events, weather, type, emphasis }) => {
       }}
       eventContent={(arg) => {
         if (arg.event.extendedProps.name === 'ticket') {
-          return (
-            <RadioButtonUnchecked />
-          )
+          return arg.event.extendedProps.status ? <RadioButtonUnchecked /> : <Close />
         }
       }}
-      // eventContent={(arg) => {
-      //   if (arg.event.extendedProps.className === 'weather') {
-      //     return (
-      //       <img src={arg.event.extendedProps.url} />
-      //     )
-      //   }
-      // }}
+    // eventContent={(arg) => {
+    //   if (arg.event.extendedProps.className === 'weather') {
+    //     return (
+    //       <img src={arg.event.extendedProps.url} />
+    //     )
+    //   }
+    // }}
     />
   )
 }

@@ -73,23 +73,23 @@ const Ticket = ({ query }) => {
   if (error) return <Text>{error}</Text>
   if (!data) return <Loading />
 
+  // hookの中でやった方がいいか
   const land = data.map(event => ({
     start: event.dateStr,
-    sea: event.onedayPass.sea,
-    land: event.onedayPass.land,
+    status: event.onedayPass.land,
     name: 'ticket',
     className: 'ticket',
     url: `${baseUrl}&useDateFrom=${event.dateStr.split('-').join('')}&selectParkDay1=01`
-  })).filter(event => event.land)
+  }))
 
+  // hookの中でやった方がいいか
   const sea = data.map(event => ({
     start: event.dateStr,
-    sea: event.onedayPass.sea,
-    land: event.onedayPass.land,
+    status: event.onedayPass.sea,
     name: 'ticket',
     className: 'ticket',
     url: `${baseUrl}&useDateFrom=${event.dateStr.split('-').join('')}&selectParkDay1=02`
-  })).filter(event => event.sea)
+  }))
 
   const weather = data.map(({ weather }) => ({
     start: weather.dateStr,
