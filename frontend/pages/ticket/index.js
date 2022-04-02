@@ -73,27 +73,36 @@ const Ticket = ({ query }) => {
   if (error) return <Text>{error}</Text>
   if (!data) return <Loading />
 
+  // hookの中でやった方がいいか
   const land = data.map(event => ({
     start: event.dateStr,
-    sea: event.onedayPass.sea,
-    land: event.onedayPass.land,
+    status: event.onedayPass.land,
     name: 'ticket',
     className: 'ticket',
     url: `${baseUrl}&useDateFrom=${event.dateStr.split('-').join('')}&selectParkDay1=01`
-  })).filter(event => event.land)
+  }))
 
+  // hookの中でやった方がいいか
   const sea = data.map(event => ({
     start: event.dateStr,
-    sea: event.onedayPass.sea,
-    land: event.onedayPass.land,
+    status: event.onedayPass.sea,
     name: 'ticket',
     className: 'ticket',
     url: `${baseUrl}&useDateFrom=${event.dateStr.split('-').join('')}&selectParkDay1=02`
-  })).filter(event => event.sea)
+  }))
 
   const weather = data.map(({ weather }) => ({
     start: weather.dateStr,
     title: weather.weatherStr.substring(0, 1),
+    name: ~weather.weatherStr.indexOf('雪')
+      ? 'snow'
+      : ~weather.weatherStr.indexOf('雨')
+        ? 'rainy'
+        : ~weather.weatherStr.indexOf('曇')
+          ? 'cloudy'
+          : ~weather.weatherStr.indexOf('晴')
+            ? 'sunny'
+            : null,
     img: ~weather.weatherStr.indexOf('雪')
       ? '/snow.svg'
       : ~weather.weatherStr.indexOf('雨')
